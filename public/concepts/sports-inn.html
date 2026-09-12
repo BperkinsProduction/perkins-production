@@ -309,6 +309,11 @@
   .scoreform input:focus { outline: 3px solid rgba(194,37,48,0.35); border-color: var(--red); }
   .scoreform select { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); color: var(--ink); }
   .scoreform select:focus { outline: 3px solid rgba(194,37,48,0.35); border-color: var(--red); }
+  .scoregrid { display: grid; grid-template-columns: 64px 88px 88px; gap: 8px 10px; margin-top: 16px; align-items: center; }
+  .scoregrid .sg-h, .scoregrid .sg-l { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .scoregrid .sg-h { text-align: center; }
+  .scoregrid input { font: inherit; font-size: 18px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 4px; text-align: center; font-variant-numeric: tabular-nums; width: 100%; background: #FFF; color: var(--ink); }
+  .scoregrid input:focus { outline: 3px solid rgba(194,37,48,0.35); border-color: var(--red); }
   .noshow { display: flex; gap: 9px; align-items: center; font-size: 14px; color: var(--muted); margin-top: 14px; cursor: pointer; }
   .noshow input { width: 17px; height: 17px; accent-color: var(--red); cursor: pointer; }
   .notice { display: none; background: var(--sand); border-left: 4px solid var(--red); padding: 10px 14px; border-radius: 4px; margin-top: 14px; font-size: 14.5px; }
@@ -675,10 +680,14 @@
       <div class="panel" style="border-top: 4px solid var(--red);">
         <small style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; font-weight: 700; color: var(--muted);">Tonight &middot; Tuesday &middot; Coed A &middot; signed in as No Good Knees</small>
         <h3>You're the work team for the 6:00 match</h3>
-        <p style="font-size: 15px; color: var(--muted); margin: 4px 0 0; max-width: none;">BFF's vs Fireball on Court 1. Three games to 21, and you keep score right here: standings update on the spot. If a different team ended up working the game, pick them, and if the scheduled team never showed, tick the box: house rule takes a match's worth of games from them.</p>
+        <p style="font-size: 15px; color: var(--muted); margin: 4px 0 0; max-width: none;">BFF's vs Fireball on Court 1. Three games to 21. Type the points for each game and the games won come out on their own: standings update on the spot, points and all. If a different team ended up working the game, pick them, and if the scheduled team never showed, tick the box: house rule takes a match's worth of games from them.</p>
+        <div class="scoregrid">
+          <span></span><span class="sg-h">BFF's</span><span class="sg-h">Fireball</span>
+          <span class="sg-l">Game 1</span><input id="sc-g1a" type="number" min="0" max="40" placeholder="21"><input id="sc-g1b" type="number" min="0" max="40" placeholder="15">
+          <span class="sg-l">Game 2</span><input id="sc-g2a" type="number" min="0" max="40" placeholder="0"><input id="sc-g2b" type="number" min="0" max="40" placeholder="0">
+          <span class="sg-l">Game 3</span><input id="sc-g3a" type="number" min="0" max="40" placeholder="0"><input id="sc-g3b" type="number" min="0" max="40" placeholder="0">
+        </div>
         <div class="scoreform">
-          <div class="sf"><span>BFF's (games)</span><input id="sc-a" type="number" min="0" max="3" placeholder="0"></div>
-          <div class="sf"><span>Fireball (games)</span><input id="sc-b" type="number" min="0" max="3" placeholder="0"></div>
           <div class="sf"><span>Working team</span><select id="sc-ref"><option>No Good Knees</option><option>FTBS</option><option>Wicked D</option><option>Slow Down</option><option>Vintage &amp; Varsity</option></select></div>
           <button class="btn" type="button" id="sc-btn">Submit score</button>
         </div>
@@ -992,12 +1001,25 @@ Turbo McNasty Balls +late</textarea>
 
     var scBtn = document.getElementById("sc-btn");
     if (scBtn) scBtn.addEventListener("click", function () {
-      var a = document.getElementById("sc-a").value || "0";
-      var b = document.getElementById("sc-b").value || "0";
       var ref = document.getElementById("sc-ref").value;
       var noshow = document.getElementById("sc-noshow").checked;
       var n = document.getElementById("sc-notice");
-      var msg = "Score submitted: BFF's " + a + ", Fireball " + b + ". Worked by " + ref + ".";
+      n.classList.add("show");
+      var aWins = 0, bWins = 0, detail = [];
+      [["sc-g1a", "sc-g1b"], ["sc-g2a", "sc-g2b"], ["sc-g3a", "sc-g3b"]].forEach(function (pair) {
+        var av = document.getElementById(pair[0]).value;
+        var bv = document.getElementById(pair[1]).value;
+        if (av === "" || bv === "") return;
+        var an = parseInt(av, 10) || 0, bn = parseInt(bv, 10) || 0;
+        if (an === bn) return;
+        if (an > bn) aWins++; else bWins++;
+        detail.push(an + "-" + bn);
+      });
+      if (!detail.length) {
+        n.textContent = "Type the points for at least one game (ties don't count).";
+        return;
+      }
+      var msg = "Final: BFF's " + aWins + ", Fireball " + bWins + " (" + detail.join(", ") + "). Worked by " + ref + ".";
       if (noshow) msg += " The scheduled work team missed the shift and is docked 3 games in the standings, pending front desk approval.";
       msg += " Standings just updated for the whole league.";
       n.textContent = msg;
