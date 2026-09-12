@@ -501,9 +501,9 @@
       <h2>Six leagues, every level</h2>
       <p class="lede">From first-timers to tournament players. Blind draw leagues mix rosters every week, so you can join without a team.</p>
       <div class="grid">
-        <div class="card"><span class="night">Monday nights</span><h3>Ladies</h3><span class="fee"><b>$180</b> per team &middot; 8 matches + playoffs</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
-        <div class="card"><span class="night">Tuesday nights</span><h3>Coed A</h3><span class="fee"><b>$180</b> per team &middot; competitive</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
-        <div class="card"><span class="night">Wednesday nights</span><h3>Coed BB</h3><span class="fee"><b>$180</b> per team &middot; intermediate</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
+        <div class="card"><span class="night">Monday nights</span><h3>Ladies</h3><span class="fee"><b>$70</b> per player &middot; 8 matches + playoffs</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
+        <div class="card"><span class="night">Tuesday nights</span><h3>Coed A</h3><span class="fee"><b>$70</b> per player &middot; competitive</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
+        <div class="card"><span class="night">Wednesday nights</span><h3>Coed BB</h3><span class="fee"><b>$70</b> per player &middot; intermediate</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
         <div class="card"><span class="night">Thursday nights</span><h3>Blind BB</h3><span class="fee"><b>$30</b> per player &middot; no team needed</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
         <div class="card"><span class="night">Thursday nights</span><h3>Blind B</h3><span class="fee"><b>$30</b> per player &middot; no team needed</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
         <div class="card"><span class="night">Friday nights</span><h3>Blind C</h3><span class="fee"><b>$30</b> per player &middot; beginner friendly</span><div class="row"><a href="#volleyball">Schedule</a><a href="#volleyball">Standings</a></div></div>
@@ -654,7 +654,7 @@
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>Live schedules and standings on your phone</span></div>
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>Your team's page, calendar, and league chat</span></div>
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>A fair work-team rotation built automatically</span></div>
-        <p style="font-size: 13.5px; color: var(--muted); margin: 14px 0 0;">Team leagues: <b>$180 per team.</b> Blind draw: <b>$30 per player.</b> Sample prices for the mockup. Payment runs through Square checkout; the front desk can register walk-ups on the same form.</p>
+        <p style="font-size: 13.5px; color: var(--muted); margin: 14px 0 0;">Team leagues: <b>$70 per player.</b> Blind draw: <b>$30 per player.</b> Priority time window: <b>$20 per team.</b> Payment runs through Square checkout; the front desk can register walk-ups on the same form.</p>
       </div>
     </div>
   </section>
@@ -798,7 +798,7 @@
           <h3>League fees</h3>
           <div class="price">$30+</div>
           <div class="per">per player or team</div>
-          <ul><li>Blind draw: $30 per player</li><li>Team leagues: $180 per team</li><li>Priority time window: add $20</li><li>Paid online via Square</li></ul>
+          <ul><li>Team leagues: $70 per player</li><li>Blind draw: $30 per player</li><li>Priority time window: add $20 per team</li><li>Paid online via Square</li></ul>
           <a class="btn ghost" href="#volleyball">See leagues</a>
         </div>
       </div>
@@ -1258,8 +1258,8 @@ Turbo McNasty Balls +late</textarea>
         warn.textContent = msgs.join(" ");
         return msgs.length === 0;
       }
-      roster.addEventListener("change", checkRoster);
-      roster.addEventListener("input", checkRoster);
+      roster.addEventListener("change", function () { checkRoster(); jlUpdate(); });
+      roster.addEventListener("input", function () { checkRoster(); jlUpdate(); });
       var jlUpdate = function () {
         var blind = jlDiv.value.indexOf("Blind") !== -1;
         document.getElementById("jl-type-wrap").style.display = blind ? "none" : "";
@@ -1270,10 +1270,19 @@ Turbo McNasty Balls +late</textarea>
         var priority = !blind && type.indexOf("Register") === 0
           && document.getElementById("jl-window").value.indexOf("Priority") === 0;
         if (blind) { fee = "$30 per player, due now."; btn = "Sign waiver + pay $30 with Square"; }
-        else if (type.indexOf("Register") === 0 && priority) { fee = "$200 due now: $180 team fee plus $20 priority time window."; btn = "Sign waiver + pay $200 with Square"; }
-        else if (type.indexOf("Register") === 0) { fee = "$180 team fee, due now."; btn = "Sign waiver + pay $180 with Square"; }
-        else if (type.indexOf("Join") === 0) { fee = "No charge now. Your captain's $180 team fee covers the roster."; btn = "Sign waiver + join your team"; }
-        else { fee = "No charge until we place you on a team."; btn = "Sign waiver + join the free-agent list"; }
+        else if (type.indexOf("Register") === 0) {
+          var count = namedRows().length;
+          var total = count * 70 + (priority ? 20 : 0);
+          if (count === 0) {
+            fee = "$70 per player" + (priority ? ", plus $20 for the priority window" : "") + ". Add your roster below and the total updates.";
+            btn = "Sign waiver + pay with Square";
+          } else {
+            fee = count + (count === 1 ? " player" : " players") + " at $70 each" + (priority ? ", plus $20 priority window" : "") + " = $" + total + " due now. Or send each player their own $70 pay link.";
+            btn = "Sign waiver + pay $" + total + " with Square";
+          }
+        }
+        else if (type.indexOf("Join") === 0) { fee = "$70 for your spot on the roster, due now."; btn = "Sign waiver + pay $70 with Square"; }
+        else { fee = "No charge now. It's $70 once we place you on a team."; btn = "Sign waiver + join the free-agent list"; }
         document.getElementById("jl-fee").textContent = fee;
         document.getElementById("jl-btn").textContent = btn;
       };
