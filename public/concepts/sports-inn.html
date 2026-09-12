@@ -633,10 +633,9 @@
           <label for="jl-window">Game time window</label>
           <select id="jl-window">
             <option>Standard: we place you anywhere from 6:00 to 9:00</option>
-            <option>Priority early: 6:00 and 7:00 games, add $20</option>
-            <option>Priority late: 8:00 and 9:00 games, add $20</option>
+            <option>Prime time: 7:00 and 8:00 games, add $20</option>
           </select>
-          <p style="font-size: 12.5px; color: var(--muted); margin: 6px 0 0;">Priority windows are limited per night, first paid, first locked.</p>
+          <p style="font-size: 12.5px; color: var(--muted); margin: 6px 0 0;">Prime slots are limited per night, first paid, first locked.</p>
         </div>
         <div id="jl-code-wrap" style="display: none;">
           <label for="jl-code">Captain's code</label>
@@ -659,7 +658,7 @@
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>Live schedules and standings on your phone</span></div>
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>Your team's page, calendar, and league chat</span></div>
         <div class="matchrow" style="grid-template-columns: 1fr;"><span>A fair work-team rotation built automatically</span></div>
-        <p style="font-size: 13.5px; color: var(--muted); margin: 14px 0 0;">Team leagues: <b>$70 per player.</b> Blind draw: <b>$30 per player.</b> Priority time window: <b>$20 per team.</b> Payment runs through Square checkout; the front desk can register walk-ups on the same form.</p>
+        <p style="font-size: 13.5px; color: var(--muted); margin: 14px 0 0;">Team leagues: <b>$70 per player.</b> Blind draw: <b>$30 per player.</b> Prime time window (7:00 and 8:00 games): <b>$20 per team.</b> Payment runs through Square checkout; the front desk can register walk-ups on the same form.</p>
       </div>
     </div>
   </section>
@@ -810,7 +809,7 @@
           <h3>League fees</h3>
           <div class="price">$30+</div>
           <div class="per">per player or team</div>
-          <ul><li>Team leagues: $70 per player</li><li>Blind draw: $30 per player</li><li>Priority time window: add $20 per team</li><li>Paid online via Square</li></ul>
+          <ul><li>Team leagues: $70 per player</li><li>Blind draw: $30 per player</li><li>Prime time window (7:00 and 8:00): add $20 per team</li><li>Paid online via Square</li></ul>
           <a class="btn ghost" href="#volleyball">See leagues</a>
         </div>
       </div>
@@ -901,12 +900,12 @@ Social Dinkers
 Please Dink Responsibly
 Fireball
 Kann You Dig It
-BFF's +early
-Turbo McNasty Balls +late</textarea>
+BFF's +prime
+Turbo McNasty Balls +prime</textarea>
           <label for="adm-weeks">Weeks</label>
           <input id="adm-weeks" type="number" min="1" max="12" value="7">
           <button class="btn" type="button" id="adm-gen" style="margin-top: 18px;">Generate schedule</button>
-          <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;">Every team plays every week across courts 1 and 2, works a fair share of games, and never works a game while playing. Publishing pushes it to the league page, the calendar, and every My Team page. Blind draw leagues build the same way from a list of player names. An odd team count gets a rotating bye, and the bye team joins the working rotation. The same team is never put on both courts at once, and nobody works two games in a night unless the numbers force it. After the last week, the top 6 playoff bracket builds itself from the standings. Add <b>+early</b> or <b>+late</b> after a team that paid for a priority time window and the generator keeps their games there.</p>
+          <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;">Every team plays every week across courts 1 and 2, works a fair share of games, and never works a game while playing. Publishing pushes it to the league page, the calendar, and every My Team page. Blind draw leagues build the same way from a list of player names. An odd team count gets a rotating bye, and the bye team joins the working rotation. The same team is never put on both courts at once, and nobody works two games in a night unless the numbers force it. After the last week, the top 6 playoff bracket builds itself from the standings. Add <b>+prime</b> after a team that paid for the prime time window and the generator keeps their games at 7:00 and 8:00.</p>
         </div>
         <div class="panel">
           <h3 style="margin-bottom: 4px;">Generated schedule</h3>
@@ -1085,8 +1084,8 @@ Turbo McNasty Balls +late</textarea>
       var teams = document.getElementById("adm-teams").value
         .split("\n").map(function (s) { return s.trim(); }).filter(Boolean)
         .map(function (line) {
-          var m = line.match(/\s*\+(early|late)\s*$/i);
-          var name = line.replace(/\s*\+(early|late)\s*$/i, "").trim();
+          var m = line.match(/\s*\+(prime)\s*$/i);
+          var name = line.replace(/\s*\+(prime)\s*$/i, "").trim();
           if (m && name) pref[name] = m[1].toLowerCase();
           return name;
         }).filter(Boolean);
@@ -1127,18 +1126,19 @@ Turbo McNasty Balls +late</textarea>
       teams.forEach(function (t) { refCount[t] = 0; });
       for (var w = 0; w < weeks; w++) {
         var round = rounds[w % rounds.length];
-        var weekMatches = round.matches.slice().sort(function (a, b) {
-          function score(m) {
-            var s = 0;
-            [m[0], m[1]].forEach(function (t) {
-              if (pref[t] === "early") s++;
-              if (pref[t] === "late") s--;
-            });
-            return s;
-          }
-          return score(b) - score(a);
+        var slotList = slotsFor(round.matches.length);
+        var primeSlots = [], weekMatches = new Array(round.matches.length), rest = [];
+        slotList.forEach(function (s, i) {
+          if (s.time === "7:00" || s.time === "8:00") primeSlots.push(i);
         });
-        var slotList = slotsFor(weekMatches.length);
+        round.matches.forEach(function (m) {
+          var wantsPrime = pref[m[0]] === "prime" || pref[m[1]] === "prime";
+          if (wantsPrime && primeSlots.length) weekMatches[primeSlots.shift()] = m;
+          else rest.push(m);
+        });
+        for (var fi = 0; fi < weekMatches.length; fi++) {
+          if (!weekMatches[fi]) weekMatches[fi] = rest.shift();
+        }
         var playingAt = {};
         var refsAtTime = {};
         var refsTonight = {};
@@ -1262,8 +1262,8 @@ Turbo McNasty Balls +late</textarea>
         po.appendChild(pn);
         out.appendChild(po);
       }
-      var prefParts = teams.filter(function (t) { return pref[t]; }).map(function (t) { return t + " " + pref[t]; });
-      var prefNote = prefParts.length ? " \u00b7 priority windows: " + prefParts.join(", ") : "";
+      var prefParts = teams.filter(function (t) { return pref[t]; });
+      var prefNote = prefParts.length ? " \u00b7 prime time (7:00 and 8:00): " + prefParts.join(", ") : "";
       var parts = teams.map(function (t) { return t + " \u00d7" + refCount[t]; });
       sum.textContent = teams.length + " teams \u00b7 " + weeks + " weeks \u00b7 working shifts: " + parts.join(", ") + prefNote;
     }
@@ -1330,16 +1330,16 @@ Turbo McNasty Balls +late</textarea>
         document.getElementById("jl-code-wrap").style.display = (!blind && type.indexOf("Join") === 0) ? "" : "none";
         var fee, btn;
         var priority = !blind && type.indexOf("Register") === 0
-          && document.getElementById("jl-window").value.indexOf("Priority") === 0;
+          && document.getElementById("jl-window").value.indexOf("Prime") === 0;
         if (blind) { fee = "$30 per player, due now."; btn = "Sign waiver + pay $30 with Square"; }
         else if (type.indexOf("Register") === 0) {
           var count = namedRows().length;
           var total = count * 70 + (priority ? 20 : 0);
           if (count === 0) {
-            fee = "$70 per player" + (priority ? ", plus $20 for the priority window" : "") + ". Add your roster below and the total updates.";
+            fee = "$70 per player" + (priority ? ", plus $20 for the prime time window" : "") + ". Add your roster below and the total updates.";
             btn = "Sign waiver + pay with Square";
           } else {
-            fee = count + (count === 1 ? " player" : " players") + " at $70 each" + (priority ? ", plus $20 priority window" : "") + " = $" + total + " due now. Or send each player their own $70 pay link.";
+            fee = count + (count === 1 ? " player" : " players") + " at $70 each" + (priority ? ", plus $20 prime time window" : "") + " = $" + total + " due now. Or send each player their own $70 pay link.";
             btn = "Sign waiver + pay $" + total + " with Square";
           }
         }
@@ -1375,10 +1375,8 @@ Turbo McNasty Balls +late</textarea>
           }
         }
         var rosterNote = registering ? " with a roster of " + namedRows().length : "";
-        if (registering && document.getElementById("jl-window").value.indexOf("Priority") === 0) {
-          rosterNote += document.getElementById("jl-window").value.indexOf("early") !== -1
-            ? ". Your early window (6:00 and 7:00 games) is locked in"
-            : ". Your late window (8:00 and 9:00 games) is locked in";
+        if (registering && document.getElementById("jl-window").value.indexOf("Prime") === 0) {
+          rosterNote += ". Your prime time window (7:00 and 8:00 games) is locked in";
         }
         n.textContent = "Registration received for " + jlDiv.value.replace(" \u00b7 ", ", ") + rosterNote + ". In the real build you'd land on Square checkout right now, then get an instant email confirmation with your schedule.";
       });
