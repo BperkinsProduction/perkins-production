@@ -625,6 +625,13 @@
           <button class="btn ghost small" type="button" id="jl-add">+ Add player</button>
           <p class="rulewarn" id="jl-rulewarn"></p>
           <p style="font-size: 12.5px; color: var(--muted); margin: 8px 0 0;">Players are rated at the highest level league or tournament played in the past 36 months. Rosters lock after match 3; subs can be added through match 7.</p>
+          <label for="jl-window">Game time window</label>
+          <select id="jl-window">
+            <option>Standard: we place you anywhere from 6:00 to 9:00</option>
+            <option>Priority early: 6:00 and 7:00 games, add $30</option>
+            <option>Priority late: 8:00 and 9:00 games, add $30</option>
+          </select>
+          <p style="font-size: 12.5px; color: var(--muted); margin: 6px 0 0;">Priority windows are limited per night, first paid, first locked.</p>
         </div>
         <div id="jl-code-wrap" style="display: none;">
           <label for="jl-code">Captain's code</label>
@@ -791,7 +798,7 @@
           <h3>League fees</h3>
           <div class="price">$30+</div>
           <div class="per">per player or team</div>
-          <ul><li>Blind draw: $30 per player</li><li>Team leagues: $180 per team</li><li>Paid online via Square</li></ul>
+          <ul><li>Blind draw: $30 per player</li><li>Team leagues: $180 per team</li><li>Priority time window: add $30</li><li>Paid online via Square</li></ul>
           <a class="btn ghost" href="#volleyball">See leagues</a>
         </div>
       </div>
@@ -882,12 +889,12 @@ Social Dinkers
 Please Dink Responsibly
 Fireball
 Kann You Dig It
-BFF's
-Turbo McNasty Balls</textarea>
+BFF's +early
+Turbo McNasty Balls +late</textarea>
           <label for="adm-weeks">Weeks</label>
           <input id="adm-weeks" type="number" min="1" max="12" value="7">
           <button class="btn" type="button" id="adm-gen" style="margin-top: 18px;">Generate schedule</button>
-          <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;">Every team plays every week across courts 1 and 2, works a fair share of games, and never works a game while playing. Publishing pushes it to the league page, the calendar, and every My Team page. Blind draw leagues build the same way from a list of player names. An odd team count gets a rotating bye, and the bye team joins the working rotation. The same team is never put on both courts at once, and nobody works two games in a night unless the numbers force it. After the last week, the top 6 playoff bracket builds itself from the standings.</p>
+          <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0;">Every team plays every week across courts 1 and 2, works a fair share of games, and never works a game while playing. Publishing pushes it to the league page, the calendar, and every My Team page. Blind draw leagues build the same way from a list of player names. An odd team count gets a rotating bye, and the bye team joins the working rotation. The same team is never put on both courts at once, and nobody works two games in a night unless the numbers force it. After the last week, the top 6 playoff bracket builds itself from the standings. Add <b>+early</b> or <b>+late</b> after a team that paid for a priority time window and the generator keeps their games there.</p>
         </div>
         <div class="panel">
           <h3 style="margin-bottom: 4px;">Generated schedule</h3>
@@ -1012,8 +1019,15 @@ Turbo McNasty Balls</textarea>
       generateSchedule();
     }
     function generateSchedule() {
+      var pref = {};
       var teams = document.getElementById("adm-teams").value
-        .split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+        .split("\n").map(function (s) { return s.trim(); }).filter(Boolean)
+        .map(function (line) {
+          var m = line.match(/\s*\+(early|late)\s*$/i);
+          var name = line.replace(/\s*\+(early|late)\s*$/i, "").trim();
+          if (m && name) pref[name] = m[1].toLowerCase();
+          return name;
+        }).filter(Boolean);
       var weeks = Math.min(12, Math.max(1, parseInt(document.getElementById("adm-weeks").value, 10) || 8));
       var out = document.getElementById("adm-out");
       var sum = document.getElementById("adm-sum");
@@ -1051,11 +1065,22 @@ Turbo McNasty Balls</textarea>
       teams.forEach(function (t) { refCount[t] = 0; });
       for (var w = 0; w < weeks; w++) {
         var round = rounds[w % rounds.length];
-        var slotList = slotsFor(round.matches.length);
+        var weekMatches = round.matches.slice().sort(function (a, b) {
+          function score(m) {
+            var s = 0;
+            [m[0], m[1]].forEach(function (t) {
+              if (pref[t] === "early") s++;
+              if (pref[t] === "late") s--;
+            });
+            return s;
+          }
+          return score(b) - score(a);
+        });
+        var slotList = slotsFor(weekMatches.length);
         var playingAt = {};
         var refsAtTime = {};
         var refsTonight = {};
-        round.matches.forEach(function (m, idx) {
+        weekMatches.forEach(function (m, idx) {
           var slot = slotList[idx];
           if (!playingAt[slot.time]) playingAt[slot.time] = [];
           playingAt[slot.time].push(m[0], m[1]);
@@ -1077,7 +1102,7 @@ Turbo McNasty Balls</textarea>
         });
         thead.appendChild(hr); tbl.appendChild(thead);
         var tbody = document.createElement("tbody");
-        round.matches.forEach(function (m, idx) {
+        weekMatches.forEach(function (m, idx) {
           var slot = slotList[idx];
           var cands = teams.filter(function (t) {
             return t !== m[0] && t !== m[1]
@@ -1175,8 +1200,10 @@ Turbo McNasty Balls</textarea>
         po.appendChild(pn);
         out.appendChild(po);
       }
+      var prefParts = teams.filter(function (t) { return pref[t]; }).map(function (t) { return t + " " + pref[t]; });
+      var prefNote = prefParts.length ? " \u00b7 priority windows: " + prefParts.join(", ") : "";
       var parts = teams.map(function (t) { return t + " \u00d7" + refCount[t]; });
-      sum.textContent = teams.length + " teams \u00b7 " + weeks + " weeks \u00b7 working shifts: " + parts.join(", ");
+      sum.textContent = teams.length + " teams \u00b7 " + weeks + " weeks \u00b7 working shifts: " + parts.join(", ") + prefNote;
     }
 
     var jlDiv = document.getElementById("jl-division");
@@ -1240,7 +1267,10 @@ Turbo McNasty Balls</textarea>
         document.getElementById("jl-team-wrap").style.display = (!blind && type.indexOf("Register") === 0) ? "" : "none";
         document.getElementById("jl-code-wrap").style.display = (!blind && type.indexOf("Join") === 0) ? "" : "none";
         var fee, btn;
+        var priority = !blind && type.indexOf("Register") === 0
+          && document.getElementById("jl-window").value.indexOf("Priority") === 0;
         if (blind) { fee = "$30 per player, due now."; btn = "Sign waiver + pay $30 with Square"; }
+        else if (type.indexOf("Register") === 0 && priority) { fee = "$210 due now: $180 team fee plus $30 priority time window."; btn = "Sign waiver + pay $210 with Square"; }
         else if (type.indexOf("Register") === 0) { fee = "$180 team fee, due now."; btn = "Sign waiver + pay $180 with Square"; }
         else if (type.indexOf("Join") === 0) { fee = "No charge now. Your captain's $180 team fee covers the roster."; btn = "Sign waiver + join your team"; }
         else { fee = "No charge until we place you on a team."; btn = "Sign waiver + join the free-agent list"; }
@@ -1249,6 +1279,7 @@ Turbo McNasty Balls</textarea>
       };
       jlDiv.addEventListener("change", jlUpdate);
       jlType.addEventListener("change", jlUpdate);
+      document.getElementById("jl-window").addEventListener("change", jlUpdate);
       jlUpdate();
       document.getElementById("jl-btn").addEventListener("click", function () {
         var n = document.getElementById("jl-notice");
@@ -1273,6 +1304,11 @@ Turbo McNasty Balls</textarea>
           }
         }
         var rosterNote = registering ? " with a roster of " + namedRows().length : "";
+        if (registering && document.getElementById("jl-window").value.indexOf("Priority") === 0) {
+          rosterNote += document.getElementById("jl-window").value.indexOf("early") !== -1
+            ? ". Your early window (6:00 and 7:00 games) is locked in"
+            : ". Your late window (8:00 and 9:00 games) is locked in";
+        }
         n.textContent = "Registration received for " + jlDiv.value.replace(" \u00b7 ", ", ") + rosterNote + ". In the real build you'd land on Square checkout right now, then get an instant email confirmation with your schedule.";
       });
     }
