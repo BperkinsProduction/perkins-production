@@ -628,8 +628,8 @@
           <label for="jl-window">Game time window</label>
           <select id="jl-window">
             <option>Standard: we place you anywhere from 6:00 to 9:00</option>
-            <option>Priority early: 6:00 and 7:00 games, add $30</option>
-            <option>Priority late: 8:00 and 9:00 games, add $30</option>
+            <option>Priority early: 6:00 and 7:00 games, add $20</option>
+            <option>Priority late: 8:00 and 9:00 games, add $20</option>
           </select>
           <p style="font-size: 12.5px; color: var(--muted); margin: 6px 0 0;">Priority windows are limited per night, first paid, first locked.</p>
         </div>
@@ -798,7 +798,7 @@
           <h3>League fees</h3>
           <div class="price">$30+</div>
           <div class="per">per player or team</div>
-          <ul><li>Blind draw: $30 per player</li><li>Team leagues: $180 per team</li><li>Priority time window: add $30</li><li>Paid online via Square</li></ul>
+          <ul><li>Blind draw: $30 per player</li><li>Team leagues: $180 per team</li><li>Priority time window: add $20</li><li>Paid online via Square</li></ul>
           <a class="btn ghost" href="#volleyball">See leagues</a>
         </div>
       </div>
@@ -1270,7 +1270,7 @@ Turbo McNasty Balls +late</textarea>
         var priority = !blind && type.indexOf("Register") === 0
           && document.getElementById("jl-window").value.indexOf("Priority") === 0;
         if (blind) { fee = "$30 per player, due now."; btn = "Sign waiver + pay $30 with Square"; }
-        else if (type.indexOf("Register") === 0 && priority) { fee = "$210 due now: $180 team fee plus $30 priority time window."; btn = "Sign waiver + pay $210 with Square"; }
+        else if (type.indexOf("Register") === 0 && priority) { fee = "$200 due now: $180 team fee plus $20 priority time window."; btn = "Sign waiver + pay $200 with Square"; }
         else if (type.indexOf("Register") === 0) { fee = "$180 team fee, due now."; btn = "Sign waiver + pay $180 with Square"; }
         else if (type.indexOf("Join") === 0) { fee = "No charge now. Your captain's $180 team fee covers the roster."; btn = "Sign waiver + join your team"; }
         else { fee = "No charge until we place you on a team."; btn = "Sign waiver + join the free-agent list"; }
