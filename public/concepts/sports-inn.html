@@ -182,6 +182,9 @@
   .band-dark { background: var(--board); color: var(--board-ink); }
   .band-dark .eyebrow { color: var(--pink); }
   .band-dark .lede { color: var(--board-muted); }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; border: 1px solid var(--line); }
   .band-red { background: var(--red); color: #FFF; text-align: center; }
   .band-red.photo {
     background:
@@ -567,6 +570,30 @@
     </div>
   </section>
 
+  <section style="padding-bottom: 0;">
+    <div class="wrap">
+      <div class="eyebrow">The playoff picture</div>
+      <h2>If the season ended tonight</h2>
+      <p class="lede">Seeded straight from the standings above, so every score entered on the scoresheet can shuffle it. Top 6 play August 24, best of 3.</p>
+      <div class="panel">
+        <div class="bracket">
+          <div class="bcol"><h5>Quarterfinals &middot; 6:00</h5>
+            <div class="bmatch"><small>Court 1</small>#3 Turbo McNasty Balls vs #6 BFF's</div>
+            <div class="bmatch"><small>Court 2</small>#4 FTBS vs #5 Fireball</div>
+            <div class="bmatch bye"><small>First-round byes</small>#1 Wicked D and #2 Coconut Water</div>
+          </div>
+          <div class="bcol"><h5>Semifinals &middot; 7:00</h5>
+            <div class="bmatch"><small>Court 1</small>#1 Wicked D vs winner of #4/#5</div>
+            <div class="bmatch"><small>Court 2</small>#2 Coconut Water vs winner of #3/#6</div>
+          </div>
+          <div class="bcol"><h5>Championship &middot; 8:00</h5>
+            <div class="bmatch"><small>Court 1</small>Semifinal winners, for the title</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="eyebrow">How it works</div>
@@ -594,6 +621,20 @@
         <div class="card"><h3>Playoffs</h3><p>Top 6 teams make it, best of 3. Play at least 3 matches in the regular season to be eligible.</p></div>
         <div class="card"><h3>Rainouts</h3><p>Matches only cancel for unsafe conditions. Captains get an email or text one hour before the first match, and the rainout banner goes up here.</p></div>
       </div>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">Summer on the sand</div>
+      <h2>League nights look like this</h2>
+      <div class="gallery" style="margin-top: 22px;">
+        <img src="sports-inn/court-night-bw.jpg" alt="The real Sports Inn sand court under the lights at night" loading="lazy">
+        <img src="sports-inn/rally-dusk.jpg" alt="Players mid-rally at dusk" loading="lazy">
+        <img src="sports-inn/team-night.jpg" alt="A team celebrating under the string lights" loading="lazy">
+        <img src="sports-inn/dusk-court.jpg" alt="The net at sundown before first serve" loading="lazy">
+      </div>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">First shot: the real courts on Pine Drive. The rest set the mood until we shoot the real thing.</p>
     </div>
   </section>
 
