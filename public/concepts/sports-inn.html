@@ -183,6 +183,20 @@
   .band-dark .eyebrow { color: var(--pink); }
   .band-dark .lede { color: var(--board-muted); }
   .band-red { background: var(--red); color: #FFF; text-align: center; }
+  .band-red.photo {
+    background:
+      linear-gradient(rgba(26,12,10,0.30), rgba(140,20,28,0.80)),
+      url("sports-inn/dusk-court.jpg") center / cover no-repeat,
+      var(--red);
+  }
+  .pagehead-sand.texture {
+    background:
+      linear-gradient(rgba(251,247,237,0.62), rgba(251,247,237,0.30)),
+      url("sports-inn/sand-texture.jpg") center / cover no-repeat,
+      #E2D2AC;
+  }
+  .hero-dark .herovid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.55; }
+  @media (prefers-reduced-motion: reduce) { .hero-dark .herovid { display: none; } }
   .band-red h2 { color: #FFF; }
   .band-red p { color: #F6D7D4; max-width: 56ch; margin: 8px auto 26px; }
   .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 44px; align-items: center; }
@@ -388,6 +402,7 @@
 <!-- ============ HOME ============ -->
 <div class="page" id="page-home">
   <header class="hero-dark">
+    <video class="herovid" autoplay muted loop playsinline preload="metadata" src="sports-inn/hero-night.mp4" aria-hidden="true"></video>
     <div class="wrap">
       <span class="chip"><i>&#9679;</i> Staffed today 9am to 9pm &middot; ask about manager's specials</span>
       <h1>Every workout<br><span class="red">under one roof.</span></h1>
@@ -582,7 +597,7 @@
     </div>
   </section>
 
-  <section class="band-red">
+  <section class="band-red photo">
     <div class="wrap">
       <h2>Grab your spot on the sand</h2>
       <p>Leagues fill by the night. Registration for the 2027 season opens March 1, and the free-agent list is always open.</p>
@@ -593,7 +608,7 @@
 
 <!-- ============ SIGN UP ============ -->
 <div class="page" id="page-signup">
-  <header class="pagehead-sand">
+  <header class="pagehead-sand texture">
     <div class="court" aria-hidden="true"></div>
     <div class="wrap">
       <div class="eyebrow">Join a league</div>
@@ -1027,6 +1042,8 @@ Turbo McNasty Balls +prime</textarea>
       }
     }
 
+    var hv = document.querySelector(".hero-dark .herovid");
+    if (hv) { var hp = hv.play(); if (hp && hp.catch) hp.catch(function () {}); }
     var TONIGHT = [
       { time: "6:00", court: 1, a: "BFF's", b: "Fireball", work: "No Good Knees" },
       { time: "6:00", court: 2, a: "Turbo McNasty Balls", b: "Please Dink Responsibly", work: "FTBS" },
