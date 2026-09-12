@@ -680,15 +680,18 @@
       <div class="panel" style="border-top: 4px solid var(--red);">
         <small style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; font-weight: 700; color: var(--muted);">Tonight &middot; Tuesday &middot; Coed A &middot; signed in as No Good Knees</small>
         <h3>You're the work team for the 6:00 match</h3>
-        <p style="font-size: 15px; color: var(--muted); margin: 4px 0 0; max-width: none;">BFF's vs Fireball on Court 1. Three games to 21. Type the points for each game and the games won come out on their own: standings update on the spot, points and all. If a different team ended up working the game, pick them, and if the scheduled team never showed, tick the box: house rule takes a match's worth of games from them.</p>
+        <p style="font-size: 15px; color: var(--muted); margin: 4px 0 0; max-width: none;">You've got BFF's vs Fireball on Court 1, and every match tonight is in the list, since each time slot runs its own games on both courts. Pick a match, type the points for each game, and the games won come out on their own: standings update on the spot, points and all. If a different team ended up working the game, pick them, and if the scheduled team never showed, tick the box: house rule takes a match's worth of games from them.</p>
+        <div class="scoreform" style="margin-top: 14px;">
+          <div class="sf" style="flex: 1; min-width: 260px;"><span>Match</span><select id="sc-match" style="width: 100%; font-size: 15px;"></select></div>
+        </div>
         <div class="scoregrid">
-          <span></span><span class="sg-h">BFF's</span><span class="sg-h">Fireball</span>
+          <span></span><span class="sg-h" id="sc-ha">BFF's</span><span class="sg-h" id="sc-hb">Fireball</span>
           <span class="sg-l">Game 1</span><input id="sc-g1a" type="number" min="0" max="40" placeholder="21"><input id="sc-g1b" type="number" min="0" max="40" placeholder="15">
           <span class="sg-l">Game 2</span><input id="sc-g2a" type="number" min="0" max="40" placeholder="0"><input id="sc-g2b" type="number" min="0" max="40" placeholder="0">
           <span class="sg-l">Game 3</span><input id="sc-g3a" type="number" min="0" max="40" placeholder="0"><input id="sc-g3b" type="number" min="0" max="40" placeholder="0">
         </div>
         <div class="scoreform">
-          <div class="sf"><span>Working team</span><select id="sc-ref"><option>No Good Knees</option><option>FTBS</option><option>Wicked D</option><option>Slow Down</option><option>Vintage &amp; Varsity</option></select></div>
+          <div class="sf"><span>Working team</span><select id="sc-ref"></select></div>
           <button class="btn" type="button" id="sc-btn">Submit score</button>
         </div>
         <label class="noshow"><input type="checkbox" id="sc-noshow"> The scheduled work team didn't show up (they lose 3 games in the standings)</label>
@@ -999,6 +1002,42 @@ Turbo McNasty Balls +late</textarea>
       }
     }
 
+    var TONIGHT = [
+      { time: "6:00", court: 1, a: "BFF's", b: "Fireball", work: "No Good Knees" },
+      { time: "6:00", court: 2, a: "Turbo McNasty Balls", b: "Please Dink Responsibly", work: "FTBS" },
+      { time: "7:00", court: 1, a: "FTBS", b: "Wicked D", work: "BFF's" },
+      { time: "7:00", court: 2, a: "No Good Knees", b: "The ugly Bumpers", work: "Fireball" },
+      { time: "8:00", court: 1, a: "Slow Down", b: "Off In The Corner", work: "Please Dink Responsibly" },
+      { time: "8:00", court: 2, a: "Coconut Water", b: "Kann You Dig It", work: "The ugly Bumpers" },
+      { time: "9:00", court: 1, a: "Vintage & Varsity", b: "Social Dinkers", work: "Slow Down" }
+    ];
+    var ALL_TEAMS = ["Coconut Water", "Vintage & Varsity", "FTBS", "No Good Knees", "Slow Down", "Off In The Corner", "The ugly Bumpers", "Wicked D", "Social Dinkers", "Please Dink Responsibly", "Fireball", "Kann You Dig It", "BFF's", "Turbo McNasty Balls"];
+    var scMatch = document.getElementById("sc-match");
+    function currentMatch() { return TONIGHT[parseInt(scMatch.value, 10) || 0]; }
+    if (scMatch) {
+      TONIGHT.forEach(function (m, i) {
+        var o = document.createElement("option");
+        o.value = i;
+        o.textContent = m.time + " Court " + m.court + ": " + m.a + " vs " + m.b + (m.work === "No Good Knees" ? " (you work this one)" : "");
+        scMatch.appendChild(o);
+      });
+      var loadMatch = function () {
+        var m = currentMatch();
+        document.getElementById("sc-ha").textContent = m.a;
+        document.getElementById("sc-hb").textContent = m.b;
+        ["sc-g1a", "sc-g1b", "sc-g2a", "sc-g2b", "sc-g3a", "sc-g3b"].forEach(function (id) { document.getElementById(id).value = ""; });
+        var ref = document.getElementById("sc-ref");
+        ref.textContent = "";
+        ALL_TEAMS.filter(function (t) { return t !== m.a && t !== m.b; }).forEach(function (t) {
+          var o = document.createElement("option"); o.textContent = t; ref.appendChild(o);
+        });
+        ref.value = m.work;
+        document.getElementById("sc-noshow").checked = false;
+        document.getElementById("sc-notice").classList.remove("show");
+      };
+      scMatch.addEventListener("change", loadMatch);
+      loadMatch();
+    }
     var scBtn = document.getElementById("sc-btn");
     if (scBtn) scBtn.addEventListener("click", function () {
       var ref = document.getElementById("sc-ref").value;
@@ -1019,8 +1058,9 @@ Turbo McNasty Balls +late</textarea>
         n.textContent = "Type the points for at least one game (ties don't count).";
         return;
       }
-      var msg = "Final: BFF's " + aWins + ", Fireball " + bWins + " (" + detail.join(", ") + "). Worked by " + ref + ".";
-      if (noshow) msg += " The scheduled work team missed the shift and is docked 3 games in the standings, pending front desk approval.";
+      var m = currentMatch();
+      var msg = "Final for " + m.time + " Court " + m.court + ": " + m.a + " " + aWins + ", " + m.b + " " + bWins + " (" + detail.join(", ") + "). Worked by " + ref + ".";
+      if (noshow) msg += " " + m.work + " missed the scheduled work shift and is docked 3 games, pending front desk approval.";
       msg += " Standings just updated for the whole league.";
       n.textContent = msg;
       n.classList.add("show");
