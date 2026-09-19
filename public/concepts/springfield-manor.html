@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Springfield Manor Winery Distillery Brewery | A Design Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lav:       #8B78B8;
+    --lav-soft:  #B6A6D4;
+    --lav-pale:  #EDE7F5;
+    --plum:      #2A2138;
+    --plum-deep: #1C1526;
+    --limestone: #F6F2E8;
+    --cream:     #FFFDF8;
+    --vine:      #4C5F3C;
+    --vine-soft: #7D8F68;
+    --brass:     #C9A54E;
+    --brass-lt:  #E2C784;
+    --ink:       #2E2739;
+    --soft:      #6E6579;
+    --line:      #E3DACF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--limestone); color: var(--ink);
+    font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 300; line-height: 1.75; font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+
+  .concept-ribbon {
+    background: var(--plum-deep); color: #DCD3E8; text-align: center;
+    font-size: 12.5px; letter-spacing: 1.4px; padding: 9px 16px; line-height: 1.5;
+  }
+  .concept-ribbon b { color: var(--brass-lt); font-weight: 600; }
+
+  /* ---- brand band: typographic lockup, no borrowed logo ---- */
+  .brand-band {
+    background: var(--plum); text-align: center;
+    padding: 30px 20px 26px; border-bottom: 3px solid var(--brass);
+  }
+  .brand-band .mark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 5.2vw, 40px); font-weight: 400;
+    letter-spacing: 3px; color: var(--cream); line-height: 1.1;
+  }
+  .brand-band .sub {
+    margin-top: 9px; font-size: 10.5px; letter-spacing: 4.5px;
+    text-transform: uppercase; color: var(--lav-soft); font-weight: 500;
+  }
+  .brand-band .sprig { display: block; width: 26px; height: 26px; margin: 0 auto 10px; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .kicker {
+    font-size: 11.5px; letter-spacing: 3.4px; text-transform: uppercase;
+    color: var(--lav); font-weight: 600;
+  }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
+
+  /* ---------------- HERO: lavender rows at dusk, drawn in CSS + SVG ---------------- */
+  .hero {
+    position: relative; min-height: 92vh; display: flex; align-items: flex-end; overflow: hidden;
+    background:
+      radial-gradient(ellipse 120% 55% at 50% 104%, rgba(139,120,184,.55) 0%, rgba(139,120,184,.18) 46%, transparent 74%),
+      linear-gradient(to bottom, #150F1F 0%, #2A1F3C 34%, #4A3560 62%, #6B4E7E 82%, #8A6A93 100%);
+  }
+  .hero .stars { position: absolute; inset: 0 0 46% 0; opacity: .55; }
+  .hero .ridge { position: absolute; left: 0; right: 0; bottom: 30%; width: 100%; height: 26%; }
+  .hero .rows  { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34%; }
+  .hero .ridge svg, .hero .rows svg, .hero .stars svg { width: 100%; height: 100%; display: block; }
+  .hero .veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(21,15,31,.86) 0%, rgba(21,15,31,.3) 48%, rgba(21,15,31,0) 100%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2; width: 100%; max-width: 1040px;
+    margin: 0 auto; padding: 70px 26px 84px; color: var(--cream); text-align: center;
+  }
+  .hero .est {
+    font-size: 11.5px; letter-spacing: 4.5px; text-transform: uppercase;
+    color: var(--brass-lt); font-weight: 600; margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(40px, 7.4vw, 82px); line-height: 1.04;
+    text-wrap: balance; margin-bottom: 18px; letter-spacing: .5px;
+  }
+  .hero .tag {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(19px, 2.6vw, 26px); color: #EFE6F5; margin-bottom: 34px;
+  }
+  .hero-ctas { display: flex; gap: 13px; flex-wrap: wrap; justify-content: center; }
+  .hero .rise { opacity: 0; transform: translateY(22px); animation: rise 1.05s ease forwards; }
+  .hero .rise.d1 { animation-delay: .12s; } .hero .rise.d2 { animation-delay: .32s; }
+  .hero .rise.d3 { animation-delay: .52s; } .hero .rise.d4 { animation-delay: .76s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  .hero .caption {
+    position: absolute; right: 18px; bottom: 13px; z-index: 3;
+    font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: rgba(239,230,245,.6);
+  }
+
+  .btn {
+    display: inline-block; text-decoration: none; font-family: 'Jost', sans-serif;
+    font-size: 12.5px; letter-spacing: 2.4px; text-transform: uppercase; font-weight: 500;
+    padding: 15px 30px; border: 1px solid var(--brass); color: var(--brass-lt);
+    background: rgba(26,18,36,.4); border-radius: 2px;
+    transition: background .25s ease, color .25s ease;
+  }
+  .btn:hover { background: var(--brass); color: var(--plum-deep); }
+  .btn.solid { background: var(--brass); color: var(--plum-deep); border-color: var(--brass); }
+  .btn.solid:hover { background: var(--brass-lt); }
+  .btn.dark { border-color: var(--plum); color: var(--plum); background: transparent; }
+  .btn.dark:hover { background: var(--plum); color: var(--cream); }
+
+  section { padding: 84px 26px; }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  .narrow { max-width: 760px; margin: 0 auto; }
+
+  /* ---------------- RIGHT NOW BOARD: the one field that fixes everything ---------------- */
+  .nowband { background: var(--plum); color: var(--cream); padding: 0; }
+  .nowband .inner {
+    max-width: 1060px; margin: 0 auto; padding: 30px 26px;
+    display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
+  }
+  .nowband .pulse {
+    flex: 0 0 auto; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--brass-lt); box-shadow: 0 0 0 0 rgba(226,199,132,.7);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(226,199,132,.7); }
+    70%  { box-shadow: 0 0 0 14px rgba(226,199,132,0); }
+    100% { box-shadow: 0 0 0 0 rgba(226,199,132,0); }
+  }
+  .nowband .txt { flex: 1 1 340px; min-width: 260px; }
+  .nowband .lbl {
+    font-size: 10.5px; letter-spacing: 3.6px; text-transform: uppercase;
+    color: var(--lav-soft); font-weight: 600; margin-bottom: 5px;
+  }
+  .nowband .hl { font-family: 'Cormorant Garamond', serif; font-size: clamp(21px, 3vw, 29px); line-height: 1.25; }
+  .nowband .hl b { color: var(--brass-lt); font-weight: 400; font-style: italic; }
+  .nowband .note { font-size: 14px; color: #CFC5DC; margin-top: 6px; }
+
+  /* ---------------- INTRO ---------------- */
+  .intro { background: var(--cream); text-align: center; }
+  .intro .big {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(25px, 3.6vw, 38px);
+    line-height: 1.35; margin: 20px auto 0; max-width: 830px; text-wrap: balance;
+  }
+  .intro .body { margin-top: 22px; color: var(--soft); }
+  .rule { width: 62px; height: 2px; background: var(--brass); margin: 32px auto 0; }
+
+  /* ---------------- THE FOUR ---------------- */
+  .four { background: var(--limestone); }
+  .four-head { text-align: center; max-width: 720px; margin: 0 auto 52px; }
+  .four-head h2 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.15; margin: 14px 0 14px; }
+  .four-head p { color: var(--soft); }
+  .grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 22px; }
+  .card {
+    background: var(--cream); border: 1px solid var(--line); border-radius: 3px;
+    padding: 30px 26px 32px; position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--lav);
+  }
+  .card.d::before { background: var(--brass); }
+  .card.b::before { background: var(--vine-soft); }
+  .card.l::before { background: var(--lav-soft); }
+  .card .ico { width: 34px; height: 34px; margin-bottom: 16px; color: var(--lav); }
+  .card.d .ico { color: var(--brass); } .card.b .ico { color: var(--vine); } .card.l .ico { color: var(--lav-soft); }
+  .card h3 { font-size: 26px; margin-bottom: 4px; }
+  .card .cnt { font-size: 11px; letter-spacing: 2.6px; text-transform: uppercase; color: var(--soft); font-weight: 500; margin-bottom: 13px; }
+  .card p { font-size: 15.5px; color: var(--soft); line-height: 1.7; }
+  .card .medal {
+    margin-top: 15px; padding-top: 14px; border-top: 1px dashed var(--line);
+    font-size: 13px; color: var(--ink);
+  }
+  .card .medal b { color: var(--brass); font-weight: 600; }
+
+  /* ---------------- FILM / PHOTO PITCH ---------------- */
+  .film { background: var(--plum); color: var(--cream); }
+  .film-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 46px; align-items: center; }
+  .still {
+    position: relative; border-radius: 3px; min-height: 380px;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.028) 0 2px, transparent 2px 9px),
+      linear-gradient(150deg, #4A3560 0%, #6B4E7E 48%, #8B78B8 100%);
+    border: 1px solid rgba(226,199,132,.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .still .play {
+    width: 68px; height: 68px; border-radius: 50%; border: 1px solid rgba(226,199,132,.65);
+    display: flex; align-items: center; justify-content: center; background: rgba(21,15,31,.3);
+  }
+  .still .play span {
+    display: block; width: 0; height: 0;
+    border-left: 17px solid var(--brass-lt);
+    border-top: 11px solid transparent; border-bottom: 11px solid transparent;
+    margin-left: 5px;
+  }
+  .still .caption {
+    position: absolute; left: 16px; bottom: 13px;
+    font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: rgba(239,230,245,.66);
+  }
+  .film h2 { font-size: clamp(29px, 4.2vw, 44px); line-height: 1.15; margin: 14px 0 20px; }
+  .film p { color: #D3C9DF; margin-bottom: 15px; }
+  .film .fine { color: var(--brass-lt); font-size: 15.5px; }
+
+  /* ---------------- WEDDINGS ---------------- */
+  .wed { background: var(--cream); }
+  .wed-head { max-width: 760px; margin: 0 auto 50px; text-align: center; }
+  .wed-head h2 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.15; margin: 14px 0; }
+  .wed-head p { color: var(--soft); }
+  .two-rooms { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; margin-bottom: 40px; }
+  .room {
+    border: 1px solid var(--line); border-radius: 3px; overflow: hidden; background: var(--limestone);
+  }
+  .room .shot {
+    min-height: 210px; position: relative; display: flex; align-items: flex-end;
+    background:
+      repeating-linear-gradient(105deg, rgba(0,0,0,.03) 0 2px, transparent 2px 10px),
+      linear-gradient(160deg, #6B5A86 0%, #8B78B8 55%, #B6A6D4 100%);
+  }
+  .room.barn .shot { background:
+      repeating-linear-gradient(105deg, rgba(0,0,0,.035) 0 2px, transparent 2px 10px),
+      linear-gradient(160deg, #5A4633 0%, #8A6C47 55%, #B99368 100%); }
+  .room .shot p {
+    font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: rgba(255,253,248,.8); padding: 12px 16px;
+  }
+  .room .body { padding: 26px 24px 28px; }
+  .room h3 { font-size: 25px; margin-bottom: 10px; }
+  .room ul { list-style: none; margin-top: 14px; }
+  .room li { font-size: 15px; color: var(--soft); padding-left: 19px; position: relative; margin-bottom: 7px; }
+  .room li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 1px; background: var(--brass); }
+
+  .byo {
+    background: var(--lav-pale); border-left: 3px solid var(--lav);
+    padding: 28px 30px; border-radius: 2px;
+  }
+  .byo h3 { font-size: 25px; margin-bottom: 8px; }
+  .byo p { color: var(--soft); font-size: 16px; }
+  .byo b { color: var(--ink); font-weight: 500; }
+
+  /* ---------------- ESTATE FACTS ---------------- */
+  .estate { background: var(--vine); color: var(--cream); }
+  .estate .wrap { text-align: center; }
+  .estate h2 { font-size: clamp(29px, 4.2vw, 44px); margin: 14px 0 16px; line-height: 1.15; }
+  .estate .kicker { color: #CBD8BB; }
+  .estate .lead { color: #DDE5D2; max-width: 700px; margin: 0 auto 44px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px 20px; }
+  .fact .n {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5.6vw, 54px);
+    line-height: 1; color: var(--brass-lt);
+  }
+  .fact .l {
+    font-size: 11.5px; letter-spacing: 2.4px; text-transform: uppercase;
+    color: #DDE5D2; margin-top: 9px; font-weight: 500;
+  }
+  .estate .aside { margin-top: 46px; font-size: 15.5px; color: #DDE5D2; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 19px; }
+
+  /* ---------------- INN ---------------- */
+  .inn { background: var(--limestone); }
+  .inn-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 46px; align-items: center; }
+  .inn .shot {
+    min-height: 340px; border-radius: 3px; position: relative; display: flex; align-items: flex-end;
+    background:
+      repeating-linear-gradient(100deg, rgba(0,0,0,.03) 0 2px, transparent 2px 10px),
+      linear-gradient(165deg, #1C1526 0%, #3A2C4E 45%, #6B4E7E 100%);
+    border: 1px solid var(--line);
+  }
+  .inn .shot p {
+    font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: rgba(255,253,248,.75); padding: 13px 16px;
+  }
+  .inn h2 { font-size: clamp(29px, 4.2vw, 44px); line-height: 1.15; margin: 14px 0 18px; }
+  .inn p { color: var(--soft); margin-bottom: 14px; }
+
+  /* ---------------- VISIT ---------------- */
+  .visit { background: var(--cream); text-align: center; }
+  .visit h2 { font-size: clamp(29px, 4.2vw, 44px); margin: 14px 0 18px; }
+  .hours {
+    display: inline-block; text-align: left; margin: 26px auto 34px;
+    border: 1px solid var(--line); border-radius: 3px; padding: 26px 34px; background: var(--limestone);
+  }
+  .hours .row { display: flex; justify-content: space-between; gap: 40px; padding: 8px 0; font-size: 16px; }
+  .hours .row + .row { border-top: 1px dashed var(--line); }
+  .hours .d { font-weight: 500; }
+  .hours .t { color: var(--soft); }
+  .visit .fine { font-size: 14px; color: var(--soft); margin-top: 8px; }
+  .visit-ctas { display: flex; gap: 13px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+
+  /* ---------------- FOOTER ---------------- */
+  footer {
+    background: var(--plum-deep); color: #C6BCD4; text-align: center;
+    padding: 52px 26px 44px; font-size: 14.5px;
+  }
+  footer .fmark {
+    font-family: 'Cormorant Garamond', serif; font-size: 27px; letter-spacing: 2.5px;
+    color: var(--cream); margin-bottom: 6px;
+  }
+  footer .fsub { font-size: 10.5px; letter-spacing: 3.6px; text-transform: uppercase; color: var(--lav-soft); margin-bottom: 22px; }
+  footer p { margin-bottom: 7px; }
+  footer a { color: var(--brass-lt); }
+  footer .credit {
+    margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(198,188,212,.18);
+    font-size: 13px; color: #9C92AC;
+  }
+
+  @media (max-width: 860px) {
+    .film-grid, .inn-grid { grid-template-columns: 1fr; gap: 30px; }
+    .still { min-height: 280px; }
+    section { padding: 66px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .hero .rise { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept-ribbon">A <b>design concept</b> for Springfield Manor Winery Distillery Brewery, prepared by Perkins Production &middot; not the live website</div>
+
+<div class="brand-band">
+  <svg class="sprig" viewBox="0 0 24 24" fill="none" stroke="#B6A6D4" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+    <path d="M12 22V9"/><path d="M12 9c0-3 1.6-5.4 3.4-6.4C15.8 4.7 14.6 7.6 12 9z"/>
+    <path d="M12 12.5c-2.4-.5-4-2.2-4.4-4.2 2 .3 3.8 1.8 4.4 4.2z"/>
+    <path d="M12 16c2.3-.5 3.9-2.1 4.3-4.1-2 .3-3.7 1.8-4.3 4.1z"/>
+  </svg>
+  <div class="mark">SPRINGFIELD MANOR</div>
+  <div class="sub">Winery &middot; Distillery &middot; Brewery &middot; Lavender</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="stars" aria-hidden="true">
+    <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
+      <g fill="#FFFDF8">
+        <circle cx="120" cy="60" r="1.3"/><circle cx="310" cy="38" r="1"/><circle cx="470" cy="92" r="1.5"/>
+        <circle cx="640" cy="44" r="1"/><circle cx="800" cy="76" r="1.3"/><circle cx="960" cy="34" r="1.1"/>
+        <circle cx="1090" cy="88" r="1.4"/><circle cx="210" cy="140" r="1"/><circle cx="560" cy="160" r="1.1"/>
+        <circle cx="880" cy="148" r="1"/><circle cx="1010" cy="190" r="1.2"/><circle cx="390" cy="200" r="1"/>
+        <circle cx="700" cy="210" r="1.1"/><circle cx="150" cy="236" r="1"/>
+      </g>
+    </svg>
+  </div>
+  <div class="ridge" aria-hidden="true">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path d="M0 150 L90 108 L180 128 L280 74 L380 110 L480 62 L590 104 L700 58 L810 96 L910 68 L1020 106 L1110 84 L1200 118 L1200 200 L0 200 Z" fill="#1C1526" opacity=".85"/>
+      <path d="M0 176 L110 146 L230 166 L350 132 L470 158 L600 128 L730 156 L860 130 L990 160 L1110 140 L1200 164 L1200 200 L0 200 Z" fill="#150F1F" opacity=".92"/>
+    </svg>
+  </div>
+  <div class="rows" aria-hidden="true">
+    <svg viewBox="0 0 1200 240" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="lrow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8B78B8"/><stop offset="100%" stop-color="#4A3560"/>
+        </linearGradient>
+      </defs>
+      <g stroke="url(#lrow)" stroke-linecap="round" opacity=".95">
+        <path d="M600 4 L-40 240" stroke-width="7"/>
+        <path d="M600 4 L150 240" stroke-width="8"/>
+        <path d="M600 4 L340 240" stroke-width="9"/>
+        <path d="M600 4 L520 240" stroke-width="10"/>
+        <path d="M600 4 L690 240" stroke-width="10"/>
+        <path d="M600 4 L870 240" stroke-width="9"/>
+        <path d="M600 4 L1060 240" stroke-width="8"/>
+        <path d="M600 4 L1240 240" stroke-width="7"/>
+      </g>
+      <g fill="#B6A6D4" opacity=".5">
+        <circle cx="120" cy="196" r="3"/><circle cx="300" cy="212" r="3.4"/><circle cx="520" cy="224" r="3"/>
+        <circle cx="720" cy="220" r="3.2"/><circle cx="920" cy="206" r="3"/><circle cx="1080" cy="192" r="2.8"/>
+      </g>
+    </svg>
+  </div>
+  <div class="veil"></div>
+  <div class="hero-inner">
+    <p class="est rise d1">Thurmont, Maryland &middot; 130 acres on its own limestone aquifer</p>
+    <h1 class="rise d2">Come for a taste.<br>Stay for the evening.</h1>
+    <p class="tag rise d3">Maryland's first winery, distillery and brewery under one roof, standing in 2,600 lavender plants at the foot of Catoctin Mountain.</p>
+    <div class="hero-ctas rise d4">
+      <a class="btn solid" href="#visit">Plan your visit</a>
+      <a class="btn" href="#weddings">Weddings &amp; events</a>
+    </div>
+  </div>
+  <p class="caption">Dusk over the lavender rows, filmed by Perkins Production</p>
+</section>
+
+<!-- ============ RIGHT NOW BOARD ============ -->
+<div class="nowband">
+  <div class="inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <div class="txt">
+      <p class="lbl">Right now at the manor</p>
+      <p class="hl">The English lavender is in its <b>second bloom</b>, and the field is quieter and cooler than it is in June.</p>
+      <p class="note">One field on one screen, changed in about ten seconds. This banner is the whole point, and the note at the bottom of this page explains why.</p>
+    </div>
+    <a class="btn solid" href="#lavender" style="flex:0 0 auto">See the field</a>
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="narrow">
+    <p class="kicker">Farm to glass, all of it here</p>
+    <p class="big">Grapes, lavender, corn and hay grow on this ground. The water comes up through limestone under your feet. Everything in your glass was made within sight of where you are sitting.</p>
+    <p class="body">Springfield Manor takes its name from the Limestone Spring Water rising through the aquifer beneath the estate. Ten wines, eleven beers and a shelf of award winning spirits are produced on site, poured in a renovated barn with patio seating, indoor tasting bars and live music. There is nowhere else in Maryland where all three happen on the same farm.</p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<!-- ============ THE FOUR ============ -->
+<section class="four">
+  <div class="wrap">
+    <div class="four-head">
+      <p class="kicker">Four reasons people drive up Route 15</p>
+      <h2>The trifecta, and the field that made it famous</h2>
+      <p>Licensed as a winery, a distillery and a brewery. Most places manage one.</p>
+    </div>
+    <div class="grid4">
+
+      <div class="card reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+          <path d="M8 3h8l-1 7a3 3 0 0 1-6 0L8 3z"/><path d="M12 13v7"/><path d="M8.5 20h7"/>
+        </svg>
+        <h3>The Winery</h3>
+        <p class="cnt">Ten varietals &amp; blends</p>
+        <p>Produced on site and poured by the glass or the bottle, alongside sangria and, when it is warm, frozen sangria.</p>
+        <p class="medal">Farmhouse White, <b>voted Frederick's Best Wine</b></p>
+      </div>
+
+      <div class="card d reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 3h12"/><path d="M9 3v5.5L5 15v6h14v-6l-4-6.5V3"/><path d="M5 15h14"/>
+        </svg>
+        <h3>The Distillery</h3>
+        <p class="cnt">Licensed 2011 &middot; farm to bottle</p>
+        <p>Rye whiskey, bourbon, rum, vodka, grappa, brandy, and the lavender gin made from the field outside.</p>
+        <p class="medal">Lavender Gin: <b>Double Gold, Best of Class</b>, San Francisco World Spirits &middot; <b>Double Gold</b>, New York International</p>
+      </div>
+
+      <div class="card b reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 8h9v12H6z"/><path d="M15 11h2.5a1.5 1.5 0 0 1 1.5 1.5v3A1.5 1.5 0 0 1 17.5 17H15"/>
+          <path d="M8 8V5.5A2.5 2.5 0 0 1 10.5 3h0A2.5 2.5 0 0 1 13 5.5V8"/>
+        </svg>
+        <h3>The Brewery</h3>
+        <p class="cnt">Eleven craft beers on tap</p>
+        <p>Brewed on the farm in a 7 barrel brewhaus. IPAs, ales, porters, sours and seasonal specials.</p>
+        <p class="medal">Small plate menu and food trucks alongside</p>
+      </div>
+
+      <div class="card l reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 21V9"/><path d="M12 9c0-3.4 1.8-6 3.8-7C16.2 4.8 14.9 8 12 9z"/>
+          <path d="M12 13c-2.7-.6-4.5-2.5-5-4.8 2.3.4 4.3 2.1 5 4.8z"/>
+          <path d="M12 17c2.6-.6 4.4-2.4 4.9-4.6-2.3.3-4.2 2-4.9 4.6z"/>
+        </svg>
+        <h3>The Lavender</h3>
+        <p class="cnt">2,600 plants &middot; English &amp; French</p>
+        <p>English blooms mid June and again in September. French runs longer stemmed, including the intensely fragrant Edelweiss.</p>
+        <p class="medal">Home of the <b>Maryland Lavender Festival</b>, eight years running</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LAVENDER FIELD ============ -->
+<section class="inn" id="lavender">
+  <div class="wrap inn-grid">
+    <div class="shot reveal" aria-hidden="true"><p>The field in September, filmed by Perkins Production</p></div>
+    <div class="reveal">
+      <p class="kicker">Two blooms a year, not one</p>
+      <h2>The September field almost nobody knows about</h2>
+      <p>The English varieties bloom twice. The main bloom lands in mid June, which is when the festival runs and when 2,600 plants turn the hillside purple all at once. Then, quietly, they do it again in September.</p>
+      <p>The second bloom is less profuse, and many visitors prefer it for exactly that reason: cooler air, thinner crowds, and the whole field to yourself. It is the best kept secret on the farm.</p>
+      <p>On the finished site, the banner at the top of every page knows which bloom is happening and says so. In June it sells festival tickets. In September it invites people to walk a quiet field. Nobody has to remember to change it twice.</p>
+      <p><a class="btn dark" href="#visit">Hours and directions</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILM PITCH ============ -->
+<section class="film">
+  <div class="wrap film-grid">
+    <div class="still reveal">
+      <div class="play" aria-hidden="true"><span></span></div>
+      <p class="caption">Harvest at golden hour, filmed by Perkins Production</p>
+    </div>
+    <div class="reveal">
+      <p class="kicker">Now imagine it filmed</p>
+      <h2>A farm this photogenic should not be selling itself in text</h2>
+      <p>Every image panel on this page is deliberately empty. No stock photography, ever. Your lavender rows, your copper still, your barn with the lights on and a band playing, your fainting goats wandering past the tasting bar, all photographed and filmed here by Perkins Production.</p>
+      <p>The finished site opens on that footage: a drone lifting off the purple rows at dusk, gin coming off the still, a bride in the vineyard at golden hour. Three seconds of that outsells three paragraphs.</p>
+      <p class="fine"><b>Photography and video are not an add on here. They are the entire product.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WEDDINGS ============ -->
+<section class="wed" id="weddings">
+  <div class="wrap">
+    <div class="wed-head">
+      <p class="kicker">Voted Frederick's Best Wedding &amp; Event Venue</p>
+      <h2>A sophisticated ballroom and a rustic romantic barn</h2>
+      <p>Seating for 300 indoors, climate controlled year round, ten minutes off Route 15, with a vineyard and a mountain behind every photograph.</p>
+    </div>
+
+    <div class="two-rooms">
+      <div class="room reveal">
+        <div class="shot"><p>The ballroom, set for 300</p></div>
+        <div class="body">
+          <h3>The Ballroom</h3>
+          <p>Polished, climate controlled and built for a long evening.</p>
+          <ul>
+            <li>Seating for up to 300 guests</li>
+            <li>Expansive built in dance floor</li>
+            <li>Round and rectangular seating options</li>
+            <li>Bridal lounge and grooms lounge on site</li>
+          </ul>
+        </div>
+      </div>
+      <div class="room barn reveal">
+        <div class="shot"><p>The barn, rustic barnwood tables</p></div>
+        <div class="body">
+          <h3>The Barn</h3>
+          <p>Historic timber, string lights and the vineyard through the door.</p>
+          <ul>
+            <li>Rustic barnwood tables</li>
+            <li>Indoor and outdoor ceremony options</li>
+            <li>Vineyard rows as a natural backdrop</li>
+            <li>Year round with full climate control</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="byo reveal">
+      <h3>You bring the alcohol. We staff the bar.</h3>
+      <p>Clients provide their own beverages, which is a <b>considerable saving</b> over a venue that marks up every bottle. Bars are set up and staffed by our team. An experienced caterer builds a menu to suit your palate and your budget, and a professional staff runs the evening so you do not have to.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTATE ============ -->
+<section class="estate">
+  <div class="wrap">
+    <p class="kicker">The ground itself</p>
+    <h2>One hundred and thirty acres, and most of it is working</h2>
+    <p class="lead">This is a farm before it is a venue. That is why the wine tastes like somewhere.</p>
+    <div class="facts">
+      <div class="fact reveal"><p class="n">130</p><p class="l">Acres</p></div>
+      <div class="fact reveal"><p class="n">2,600</p><p class="l">Lavender plants</p></div>
+      <div class="fact reveal"><p class="n">35</p><p class="l">Beehives</p></div>
+      <div class="fact reveal"><p class="n">21</p><p class="l">Wines &amp; beers on site</p></div>
+      <div class="fact reveal"><p class="n">300</p><p class="l">Seats indoors</p></div>
+    </div>
+    <p class="aside">Hawks and falcons overhead, white tail deer at the treeline, the occasional black bear, and Buckeye and Linden trees carried over from Germany centuries ago.</p>
+  </div>
+</section>
+
+<!-- ============ INN ============ -->
+<section class="inn">
+  <div class="wrap inn-grid">
+    <div class="reveal">
+      <p class="kicker">The Inn at Springfield Manor</p>
+      <h2>Eight suites, and no reason to drive home</h2>
+      <p>Wander the lavender field or the vineyard, walk the mountain trails, then sit by a fire pit under a sky with no town in it.</p>
+      <p>The Inn is the reason a tasting becomes a weekend, and a wedding becomes two days instead of one afternoon. On the finished site it lives one click from every event page, because the guest who is already sold on the venue is the easiest room you will ever book.</p>
+      <p><a class="btn dark" href="#visit">Check availability</a></p>
+    </div>
+    <div class="shot reveal" aria-hidden="true"><p>A suite at the Inn, filmed by Perkins Production</p></div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="visit" id="visit">
+  <div class="narrow">
+    <p class="kicker">Come for a taste, stay for the experience</p>
+    <h2>Visit the manor</h2>
+    <div class="hours">
+      <div class="row"><span class="d">Friday</span><span class="t">5pm to 9pm</span></div>
+      <div class="row"><span class="d">Saturday</span><span class="t">12pm to 6pm</span></div>
+      <div class="row"><span class="d">Sunday</span><span class="t">12pm to 6pm</span></div>
+    </div>
+    <p class="fine">11836 Auburn Road, Thurmont, MD 21788 &middot; (301) 271-0099</p>
+    <p class="fine">Guests must be 21 or older. No outside food or beverage. Live music most weekends.</p>
+    <div class="visit-ctas">
+      <a class="btn dark" href="https://www.google.com/maps/search/?api=1&amp;query=Springfield+Manor+11836+Auburn+Rd+Thurmont+MD+21788" rel="noopener">Get directions</a>
+      <a class="btn dark" href="tel:+13012710099">Call (301) 271-0099</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fmark">SPRINGFIELD MANOR</div>
+  <div class="fsub">Winery &middot; Distillery &middot; Brewery &middot; Lavender</div>
+  <p>11836 Auburn Road, Thurmont, MD 21788 &middot; (301) 271-0099</p>
+  <p>Open Friday 5 to 9, Saturday and Sunday 12 to 6</p>
+  <p>Proud supporters of local schools, veterans groups, Habitat for Humanity, first responders, 4H and the Red Cross</p>
+  <p class="credit">Design concept by <a href="https://www.perkinsproduction.com">Perkins Production</a> &middot; Brice Perkins &middot; (240) 818-1955 &middot; brice@perkinsproduction.com</p>
+</footer>
+
+<script>
+  (function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var revealEls = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      revealEls.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { ro.observe(el); });
+    }
+  })();
+</script>
+
+</body>
+</html>
