@@ -364,6 +364,28 @@ html.scrub:not(.no-flight) #map{display:none}
 .svc button:hover .t{color:var(--brand)}
 @media (max-width: 900px){.svc-grid{grid-template-columns:1fr}.svc-grid .lead{position:static}}
 
+/* services: real photos from the practice's own shoot */
+.svc-photo{margin:32px 0 0;position:relative;aspect-ratio:6/5;border-radius:calc(var(--r) + 6px);overflow:hidden;box-shadow:0 30px 60px -40px rgba(15,46,58,.55);background:var(--mist)}
+.svc-shot{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .6s var(--ease)}
+.svc-shot.on{opacity:1}
+.svc-shot img,.svc-shot .svc-tile{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform 1.2s var(--ease)}
+.svc-shot.on img,.svc-shot.on .svc-tile{transform:none}
+.svc-shot figcaption{position:absolute;left:12px;bottom:12px;background:rgba(15,46,58,.72);color:#fff;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:7px}
+.svc-thumb{display:none}
+.svc.on .t{color:var(--brand)}
+.svc.on .go{transform:translateX(5px)}
+@media (max-width: 900px){
+  .svc-photo{display:none}
+  .svc button{grid-template-columns:72px 1fr auto}
+  .svc .i{display:none}
+  .svc-thumb{display:block;width:72px;height:60px;border-radius:10px;overflow:hidden;align-self:center;background:var(--mist)}
+  .svc-thumb img,.svc-thumb svg{width:100%;height:100%;object-fit:cover;display:block}
+  .svc button{align-items:center}
+}
+.fam-kid{display:flex;gap:14px;align-items:center;margin:0 0 1.6rem}
+.fam-kid img{width:112px;height:94px;object-fit:cover;border-radius:12px;box-shadow:0 14px 30px -18px rgba(15,46,58,.6)}
+.fam-kid figcaption{font-size:.92rem;color:var(--text-secondary);max-width:24ch}
+
 /* 8. family, a full-bleed photo */
 .family{position:relative;min-height:min(86vh,760px);display:grid;align-items:center;overflow:hidden}
 .family > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;transform:scale(1.08) translateY(calc(var(--par,0) * -30px))}
@@ -788,16 +810,17 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       <span class="kicker" data-reveal>Everything under one roof</span>
       <h2 id="sv-h" data-reveal style="--d:1">You shouldn&rsquo;t need four offices for one mouth.</h2>
       <p class="lede" data-reveal style="--d:2;margin-top:1.2rem">General dentistry, an oral surgeon, orthodontics and implants, all with the same team and the same records.</p>
+      <figure class="svc-photo" data-reveal style="--d:3" aria-live="off"><div class="svc-shot on" data-for="cosmetic-dentistry"><img src="assets/svc-cosmetic.jpg" alt="A patient smiling in the chair at Robinwood" width="600" height="500" loading="lazy"><figcaption>From Robinwood&rsquo;s own photos</figcaption></div><div class="svc-shot" data-for="orthodontics-and-invisalign"><img src="assets/svc-ortho.jpg" alt="A Robinwood dentist examining a young patient" width="600" height="500" loading="lazy"><figcaption>From Robinwood&rsquo;s own photos</figcaption></div><div class="svc-shot" data-for="oral-surgery"><img src="assets/svc-surgery.jpg" alt="A Robinwood dentist at work, wearing magnifying loupes" width="600" height="500" loading="lazy"><figcaption>From Robinwood&rsquo;s own photos</figcaption></div><div class="svc-shot" data-for="dental-implants"><img src="assets/svc-implants.jpg" alt="A Robinwood dentist explaining a treatment with a model" width="600" height="500" loading="lazy"><figcaption>From Robinwood&rsquo;s own photos</figcaption></div><div class="svc-shot" data-for="restorative-proceduresdentures"><img src="assets/svc-restore.jpg" alt="An actual Robinwood patient&rsquo;s restored smile" width="600" height="500" loading="lazy"><figcaption>An actual patient&rsquo;s result</figcaption></div><div class="svc-shot" data-for="endodontic-services"><img src="assets/svc-rootcanal.jpg" alt="A Robinwood patient in the chair beside his X-rays" width="600" height="500" loading="lazy"><figcaption>From Robinwood&rsquo;s own photos</figcaption></div><div class="svc-shot" data-for="sleep-apnea-snore-guards"><svg class="svc-tile" viewBox="0 0 600 500" role="img" aria-label="A crescent moon over the mountain" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F2E3A"/><stop offset="1" stop-color="#1d4e5f"/></linearGradient></defs><rect width="600" height="500" fill="url(#sky)"/><g fill="#a1dfe0" opacity=".85"><circle cx="90" cy="80" r="2"/><circle cx="170" cy="140" r="1.5"/><circle cx="250" cy="60" r="2"/><circle cx="520" cy="120" r="1.6"/><circle cx="470" cy="50" r="1.2"/><circle cx="330" cy="130" r="1.3"/><circle cx="560" cy="210" r="1.5"/></g><path d="M430 110a70 70 0 1 0 64 96 56 56 0 1 1-64-96z" fill="#F2F6F7"/><path d="M0 360 C80 330 140 300 210 312 S330 250 400 268 S520 300 600 280 V500 H0Z" fill="#2C5552"/><path d="M0 410 C100 380 190 370 280 384 S460 350 600 372 V500 H0Z" fill="#173F3D"/><g fill="none" stroke="#a1dfe0" stroke-opacity=".28" stroke-width="1.4"><path d="M0 385 C90 356 160 330 230 340 S350 282 420 298 S530 326 600 308"/><path d="M0 432 C110 404 200 396 290 408 S470 376 600 396"/></g></svg><figcaption>Assessed with an at-home sleep study</figcaption></div><div class="svc-shot" data-for="advanced-dental-technology"><img src="assets/svc-tech.jpg" alt="A Robinwood team member using the 3&#8209;D cone beam scanner" width="600" height="500" loading="lazy"><figcaption>Their 3&#8209;D cone beam scanner</figcaption></div></figure>
     </div>
     <ol class="svcs">
-      <li class="svc" data-reveal><button type="button" data-svc="cosmetic-dentistry"><span class="i">01</span><span><span class="t">Cosmetic Dentistry</span><span class="d">Whitening, porcelain veneers and tooth-colored fillings.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="orthodontics-and-invisalign"><span class="i">02</span><span><span class="t">Orthodontics and Invisalign</span><span class="d">Clear aligners or traditional braces. A free consultation tells you if Invisalign fits.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="oral-surgery"><span class="i">03</span><span><span class="t">Oral Surgery</span><span class="d">Wisdom teeth and extractions, with ways to manage anxiety and pain.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="dental-implants"><span class="i">04</span><span><span class="t">Dental Implants</span><span class="d">One tooth, a bridge, or a full arch, on titanium implants.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="restorative-proceduresdentures"><span class="i">05</span><span><span class="t">Restorations and Dentures</span><span class="d">Crowns, bridges, fillings and dentures, matched to your needs and budget.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="endodontic-services"><span class="i">06</span><span><span class="t">Root Canals</span><span class="d">Saving an injured tooth, often no more painful than a filling.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="sleep-apnea-snore-guards"><span class="i">07</span><span><span class="t">Sleep Apnea and Snore Guards</span><span class="d">A custom mouthpiece that can often replace a CPAP machine.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
-      <li class="svc" data-reveal><button type="button" data-svc="advanced-dental-technology"><span class="i">08</span><span><span class="t">Advanced Technology</span><span class="d">CEREC crowns in one visit, 3-D scans and digital X-rays.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="cosmetic-dentistry"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-cosmetic.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">01</span><span><span class="t">Cosmetic Dentistry</span><span class="d">Whitening, porcelain veneers and tooth-colored fillings.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="orthodontics-and-invisalign"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-ortho.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">02</span><span><span class="t">Orthodontics and Invisalign</span><span class="d">Clear aligners or traditional braces. A free consultation tells you if Invisalign fits.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="oral-surgery"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-surgery.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">03</span><span><span class="t">Oral Surgery</span><span class="d">Wisdom teeth and extractions, with ways to manage anxiety and pain.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="dental-implants"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-implants.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">04</span><span><span class="t">Dental Implants</span><span class="d">One tooth, a bridge, or a full arch, on titanium implants.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="restorative-proceduresdentures"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-restore.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">05</span><span><span class="t">Restorations and Dentures</span><span class="d">Crowns, bridges, fillings and dentures, matched to your needs and budget.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="endodontic-services"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-rootcanal.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">06</span><span><span class="t">Root Canals</span><span class="d">Saving an injured tooth, often no more painful than a filling.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="sleep-apnea-snore-guards"><span class="svc-thumb" aria-hidden="true"><svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice"><rect width="600" height="500" fill="#0F2E3A"/><path d="M430 110a70 70 0 1 0 64 96 56 56 0 1 1-64-96z" fill="#F2F6F7"/><path d="M0 360 C80 330 140 300 210 312 S330 250 400 268 S520 300 600 280 V500 H0Z" fill="#2C5552"/></svg></span><span class="i">07</span><span><span class="t">Sleep Apnea and Snore Guards</span><span class="d">A custom mouthpiece that can often replace a CPAP machine.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
+      <li class="svc" data-reveal><button type="button" data-svc="advanced-dental-technology"><span class="svc-thumb" aria-hidden="true"><img src="assets/svc-tech.jpg" alt="" loading="lazy" width="600" height="500"></span><span class="i">08</span><span><span class="t">Advanced Technology</span><span class="d">CEREC crowns in one visit, 3&#8209;D scans and digital X-rays.</span></span><span class="go" aria-hidden="true">&#8594;</span></button></li>
     </ol>
   </div>
 </section>
@@ -812,6 +835,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <p data-reveal style="--d:2;margin-top:1.2rem">At Robinwood Dental, we love kids and sympathize with busy parents. We can arrange family block appointments so that you and your children can all be seen at the same time without having to wait for one another.</p>
     <p data-reveal style="--d:3">We see children as young as 3 years old because baby teeth are important too. Primary teeth also guide the growth of permanent teeth.</p>
     <ul class="ticks" data-reveal style="--d:4"><li>Family block appointments</li><li>Children from age three</li></ul>
+    <figure class="fam-kid" data-reveal style="--d:4"><img src="assets/fam-kid.jpg" alt="A young Robinwood patient smiling in the dental chair" width="600" height="500" loading="lazy"><figcaption>A young patient at Robinwood, from the practice&rsquo;s own photos.</figcaption></figure>
     <a class="btn btn-book" href="#book" data-reveal style="--d:5">Book a visit</a>
   </div></div>
 </section>
@@ -1279,6 +1303,27 @@ body.addEventListener("click", function(e){
   if (back){ tipsIndex(opener); }
   if (cl){ reader.close(); }
 });
+
+/* ---------------------------------------------------------------- services: the photo follows the list */
+var svcRows = [].slice.call(document.querySelectorAll(".svcs .svc")), svcShots = [].slice.call(document.querySelectorAll(".svc-shot")), svcCur = -1, svcHover = false;
+function svcShow(i){
+  if (i === svcCur || i < 0) return; svcCur = i;
+  svcRows.forEach(function(r, j){ r.classList.toggle("on", j === i); });
+  svcShots.forEach(function(s, j){ s.classList.toggle("on", j === i); });
+}
+svcRows.forEach(function(r, i){
+  r.addEventListener("mouseenter", function(){ svcHover = true; svcShow(i); });
+  r.addEventListener("mouseleave", function(){ svcHover = false; });
+  r.addEventListener("focusin", function(){ svcShow(i); });
+});
+function svcScroll(){
+  if (svcHover || !svcRows.length) return;
+  var mid = innerHeight * 0.48, best = -1, bd = 1e9;
+  svcRows.forEach(function(r, i){ var b = r.getBoundingClientRect(); var d = Math.abs((b.top + b.bottom) / 2 - mid); if (d < bd){ bd = d; best = i; } });
+  var first = svcRows[0].getBoundingClientRect(); if (first.top > innerHeight) return;
+  svcShow(best);
+}
+addEventListener("scroll", svcScroll, { passive: true }); svcShow(0);
 
 /* ---------------------------------------------------------------- the message form (a concept: nothing is sent) */
 var msgf = document.getElementById("msg"), msgBtn = document.getElementById("msg-send");
