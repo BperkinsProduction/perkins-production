@@ -281,7 +281,7 @@ html:not(.js) [data-reveal]{opacity:1;transform:none}
 .hours dd{margin:0;font-weight:600}
 .office .acts{display:flex;flex-wrap:wrap;gap:10px}
 .office .acts .btn{min-height:44px;padding:0 1.1rem;font-size:.95rem}
-@media (max-width: 860px){.offices{grid-template-columns:1fr}.map{aspect-ratio:16/11}.pin{font-size:.78rem;padding:6px 10px}.pin small{display:none}#pin-h{transform:translate(-18%,calc(-100% - 12px))}#pin-m{transform:translate(-82%,calc(-100% - 12px))}.pin-gap{display:none}}
+@media (max-width: 860px){.offices{grid-template-columns:1fr}.map{aspect-ratio:16/11}.pin{font-size:.78rem;padding:6px 10px}.pin small{display:none}.map{margin-top:70px}.map .pin.office small{display:none}.map .pin.office{width:92px;padding:4px 4px 6px;border-radius:11px}.map .pin.office img{border-radius:7px;margin-bottom:4px}.map .pin.office b{font-size:.78rem}.map .pin.office::after{display:none}#pin-h{transform:translate(-18%,calc(-100% - 12px))}#pin-m{transform:translate(-82%,calc(-100% - 12px))}.pin-gap{display:none}}
 .hours dd{white-space:nowrap}
 @media (max-width: 560px){.doc h3{font-size:1.08rem}.doc q{font-size:.88rem}.doc{padding:10px 10px 16px}.hours{grid-template-columns:1fr;gap:0}.hours dd{margin-bottom:6px}}
 
@@ -298,7 +298,11 @@ html.scrub:not(.no-flight) #map{display:none}
 .fstage::after{bottom:0;height:12vh;background:linear-gradient(rgba(242,246,247,0),var(--canvas))}
 .flabels{position:absolute;inset:0;z-index:3;pointer-events:none}
 .fl{position:absolute;left:0;top:0;transform:translate(-50%,-150%);background:var(--panel);color:var(--ink);font:600 .88rem var(--body);padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 10px 24px -14px rgba(15,46,58,.55);opacity:0;will-change:transform,opacity}
-.fl[data-k="hagerstown"],.fl[data-k="middletown"]{background:var(--brand);color:#fff}
+.fl.office,.pin.office{padding:6px 6px 8px;border-radius:14px;white-space:normal;text-align:center;width:148px}
+.fl.office img,.pin.office img{display:block;width:100%;aspect-ratio:5/4;height:auto;object-fit:cover;border-radius:9px;margin-bottom:7px}
+.fl.office small,.pin.office small{display:block;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);line-height:1.3}
+.fl.office b,.pin.office b{display:block;font:600 .95rem/1.2 var(--body);color:var(--ink)}
+.fl.office::after,.pin.office::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--panel);transform:translateX(-50%) rotate(45deg);border-radius:0 0 3px 0}
 .fcap{position:absolute;left:max(6vw,32px);bottom:clamp(40px,9vh,90px);z-index:4;width:min(440px,80vw);text-align:left;text-shadow:var(--halo)}
 .fcap::before{content:"";position:absolute;inset:-34% -30% -30% -24%;z-index:-1;background:radial-gradient(closest-side,rgba(242,246,247,.9),rgba(242,246,247,.55) 60%,rgba(242,246,247,0));filter:blur(6px)}
 .fcap .mile{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px}
@@ -643,10 +647,10 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       <img class="fposter" src="assets/flight-poster.jpg" alt="" width="1600" height="900" loading="lazy">
       <video id="flightVideo" muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture></video>
       <div class="flabels" aria-hidden="true">
-        <span class="fl" data-k="hagerstown">Hagerstown</span>
+        <span class="fl office" data-k="hagerstown"><img src="assets/pin-hagerstown.jpg" alt="" width="320" height="256"><small>West of the mountain</small><b>Hagerstown</b></span>
         <span class="fl" data-k="boonsboro">Boonsboro</span>
         <span class="fl" data-k="turners_gap">Turner&rsquo;s Gap</span>
-        <span class="fl" data-k="middletown">Middletown</span>
+        <span class="fl office" data-k="middletown"><img src="assets/pin-middletown.jpg" alt="" width="320" height="256"><small>East of the mountain</small><b>Middletown</b></span>
       </div>
       <div class="fcap" aria-hidden="true">
         <span class="mile">Mile <b id="fmile">0.0</b> of 18.2</span>
@@ -663,8 +667,8 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
   <div class="map" id="map" data-reveal>
     <div class="ring" data-contour="ring" aria-hidden="true"></div>
     <img class="relief" id="relief" src="assets/relief-map.webp" alt="A 3D relief of South Mountain between the Hagerstown and Middletown valleys, with the old National Pike drawn in orange from one office to the other." loading="lazy" width="1920" height="1200">
-    <span class="pin" id="pin-h" style="left:12.85%;top:45.82%"><small>West of the mountain</small>Hagerstown</span>
-    <span class="pin" id="pin-m" style="left:87.11%;top:44.84%"><small>East of the mountain</small>Middletown</span>
+    <span class="pin office" id="pin-h" style="left:12.85%;top:45.82%"><img src="assets/pin-hagerstown.jpg" alt="" width="320" height="256" loading="lazy"><small>West of the mountain</small><b>Hagerstown</b></span>
+    <span class="pin office" id="pin-m" style="left:87.11%;top:44.84%"><img src="assets/pin-middletown.jpg" alt="" width="320" height="256" loading="lazy"><small>East of the mountain</small><b>Middletown</b></span>
   </div>
   <div class="wrap offices">
     <article class="office" data-reveal>
@@ -1084,7 +1088,7 @@ document.querySelectorAll(".track-btns button").forEach(function(b){
       labels.forEach(function(l){
         var q = f[l.dataset.k], x = ox + q[0] * dw, y = oy + q[1] * dh;
         var vis = q[2] > 0 ? Math.min(smooth(0.02, 0.08, x / W), smooth(0.02, 0.08, 1 - x / W), smooth(0.14, 0.22, y / H), smooth(0.08, 0.16, 1 - y / H)) : 0;
-        l.style.opacity = vis.toFixed(2); if (vis > 0) l.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(-50%,-150%)";
+        l.style.opacity = vis.toFixed(2); if (vis > 0) l.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) " + (l.classList.contains("office") ? "translate(-50%,calc(-100% - 34px))" : "translate(-50%,-150%)");
       });
     }
     if (fready){ var t = p * Math.max(0, fdur - 0.05); if (Math.abs(t - flast) > 1 / 48) fseek(t); }
