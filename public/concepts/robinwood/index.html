@@ -190,6 +190,23 @@ html:not(.js) [data-reveal]{opacity:1;transform:none}
 .divider svg{width:100%;height:100%;display:block}
 .divider path,.ring path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,0))}
 
+/* the reveal after the hero: both real buildings part out of the mist */
+.buildings{padding:clamp(40px,6vw,80px) 0 clamp(30px,4vw,50px);text-align:center;--r:0}
+.buildings .wrap > p{max-width:none}
+.bldgs{position:relative;width:min(1240px,calc(100vw - 40px));margin:clamp(24px,4vw,44px) auto 0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px)}
+.bldg{margin:0;text-align:left;--from:24%;transform:translateX(calc((1 - var(--r)) * var(--from)));opacity:calc(.3 + var(--r) * .7);filter:blur(calc((1 - var(--r)) * 7px));will-change:transform}
+.bldg.east{--from:-24%;z-index:1}
+.bldg .ph{border-radius:calc(var(--r-px,18px) + 4px);overflow:hidden;aspect-ratio:5/4;box-shadow:0 34px 70px -44px rgba(15,46,58,.6);background:var(--mist)}
+.bldg img{width:100%;height:100%;object-fit:cover;transform:scale(calc(1.08 - var(--r) * .08))}
+.bldg figcaption{padding:18px 6px 0;display:grid;gap:2px}
+.bldg .side{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.bldg b{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.15}
+.bldg figcaption > span:last-child{color:var(--text-secondary)}
+.bldg-mist{position:absolute;inset:-8% 20%;pointer-events:none;z-index:2;background:radial-gradient(closest-side,rgba(242,246,247,.95),rgba(242,246,247,.6) 55%,rgba(242,246,247,0));filter:blur(10px);opacity:calc(1 - var(--r) * 1.4)}
+.bldg-link{margin-top:clamp(20px,3vw,34px);font-weight:700}
+@media (max-width: 720px){.bldgs{grid-template-columns:1fr}.bldg{--from:-10%}.bldg.east{--from:10%}.bldg-mist{display:none}}
+@media (prefers-reduced-motion: reduce){.buildings{--r:1 !important}}
+
 /* 1. steady strip */
 .steady{padding:clamp(40px,6vw,70px) 0 clamp(70px,8vw,110px)}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line)}
@@ -502,6 +519,20 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href="tel:+12403139660">Call 240.313.9660</a></div>
   </div>
   <div class="fade"></div>
+</section>
+
+<!-- the reveal: both real buildings, parting out of the mist -->
+<section class="buildings" id="buildings" aria-labelledby="bd-h">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Our two offices</span>
+    <h2 id="bd-h" data-reveal style="--d:1">Pick the side of the mountain that&rsquo;s closer.</h2>
+  </div>
+  <div class="bldgs">
+    <figure class="bldg west"><div class="ph"><img src="assets/bldg-hagerstown.jpg" alt="The Robinwood Professional Center in Hagerstown, a two-story building with a red metal roof" width="1400" height="1120"></div><figcaption><span class="side">West of the mountain</span><b>Hagerstown</b><span>Robinwood Professional Center, 11110 Medical Campus Road</span></figcaption></figure>
+    <figure class="bldg east"><div class="ph"><img src="assets/bldg-middletown.jpg" alt="The Middletown office, a one-story building with blue siding, stone columns and the Robinwood tooth sign" width="1400" height="1120"></div><figcaption><span class="side">East of the mountain</span><b>Middletown</b><span>4310 Old National Pike</span></figcaption></figure>
+    <div class="bldg-mist" aria-hidden="true"></div>
+  </div>
+  <p class="wrap bldg-link" data-reveal><a href="#offices">Hours, directions, and the road between them</a></p>
 </section>
 
 <!-- 1. the steady strip -->
@@ -909,6 +940,20 @@ function drawLines(){
   }
 }
 addEventListener("scroll", drawLines, { passive: true });
+
+/* ---------------------------------------------------------------- the buildings part out of the mist */
+var bsec = document.getElementById("buildings"), bcards = [].slice.call(bsec.querySelectorAll(".bldg")), lastR = [-1, -1, -1];
+function partBuildings(){
+  var vals = bcards.map(function(c){
+    var r = reduce.matches ? 1 : clamp((innerHeight * 0.98 - c.getBoundingClientRect().top) / (innerHeight * 0.62), 0, 1);
+    return r * r * (3 - 2 * r);
+  });
+  vals.push(Math.min.apply(null, vals));
+  vals.forEach(function(v, i){
+    if (Math.abs(v - lastR[i]) > 0.003){ lastR[i] = v; (i < bcards.length ? bcards[i] : bsec).style.setProperty("--r", v.toFixed(3)); }
+  });
+}
+addEventListener("scroll", partBuildings, { passive: true }); addEventListener("resize", partBuildings); partBuildings();
 
 /* ---------------------------------------------------------------- the breath */
 var hold = document.getElementById("hold"), visit = document.getElementById("visit"), steps = [].slice.call(document.querySelectorAll("#steps .step"));
