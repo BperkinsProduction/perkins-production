@@ -77,47 +77,22 @@
   ],
   "redirects": [
     {
-      "source": "/sportsinn",
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])",
       "destination": "/concepts/sports-inn.html",
       "permanent": false
     },
     {
-      "source": "/sportsinn/",
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/",
       "destination": "/concepts/sports-inn.html",
       "permanent": false
     },
     {
-      "source": "/Sportsinn",
-      "destination": "/concepts/sports-inn.html",
-      "permanent": false
-    },
-    {
-      "source": "/SportsInn",
-      "destination": "/concepts/sports-inn.html",
-      "permanent": false
-    },
-    {
-      "source": "/sports-inn",
-      "destination": "/concepts/sports-inn.html",
-      "permanent": false
-    },
-    {
-      "source": "/sports-inn/",
-      "destination": "/concepts/sports-inn.html",
-      "permanent": false
-    },
-    {
-      "source": "/sportsinn/proposal",
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/:page(proposal|price|Proposal|Price)",
       "destination": "/concepts/sports-inn-proposal.html",
       "permanent": false
     },
     {
-      "source": "/sportsinn/proposal/",
-      "destination": "/concepts/sports-inn-proposal.html",
-      "permanent": false
-    },
-    {
-      "source": "/sportsinn/price",
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/:page(proposal|price|Proposal|Price)/",
       "destination": "/concepts/sports-inn-proposal.html",
       "permanent": false
     }
