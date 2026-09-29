@@ -110,6 +110,11 @@
       "source": "/concepts/sunbodies",
       "destination": "/concepts/sunbodies/",
       "permanent": false
+    },
+    {
+      "source": "/concepts/robinwood",
+      "destination": "/concepts/robinwood/",
+      "permanent": false
     }
   ]
 }
