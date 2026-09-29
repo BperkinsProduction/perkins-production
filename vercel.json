@@ -95,6 +95,21 @@
       "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/:page(proposal|price|Proposal|Price)/",
       "destination": "/concepts/sports-inn-proposal.html",
       "permanent": false
+    },
+    {
+      "source": "/:site([Ss][Uu][Nn]-?[Bb][Oo][Dd][Ii][Ee][Ss])",
+      "destination": "/concepts/sunbodies/",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Ss][Uu][Nn]-?[Bb][Oo][Dd][Ii][Ee][Ss])/",
+      "destination": "/concepts/sunbodies/",
+      "permanent": false
+    },
+    {
+      "source": "/concepts/sunbodies",
+      "destination": "/concepts/sunbodies/",
+      "permanent": false
     }
   ]
 }
