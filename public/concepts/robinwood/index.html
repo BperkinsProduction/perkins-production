@@ -285,6 +285,36 @@ html:not(.js) [data-reveal]{opacity:1;transform:none}
 .hours dd{white-space:nowrap}
 @media (max-width: 560px){.doc h3{font-size:1.08rem}.doc q{font-size:.88rem}.doc{padding:10px 10px 16px}.hours{grid-template-columns:1fr;gap:0}.hours dd{margin-bottom:6px}}
 
+/* the flight: Hagerstown to Middletown along the old National Pike, driven by scroll */
+.flight{display:none;position:relative;height:460vh;margin-top:clamp(10px,2vw,30px)}
+html.scrub:not(.no-flight) .flight{display:block}
+html.scrub:not(.no-flight) #map{display:none}
+.fstage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--canvas)}
+.fstage .fposter,.fstage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fstage video{opacity:0;transition:opacity .5s linear}
+.fstage.ready video{opacity:1}
+.fstage::before,.fstage::after{content:"";position:absolute;left:0;right:0;z-index:2;pointer-events:none}
+.fstage::before{top:0;height:16vh;background:linear-gradient(var(--canvas),rgba(242,246,247,0))}
+.fstage::after{bottom:0;height:12vh;background:linear-gradient(rgba(242,246,247,0),var(--canvas))}
+.flabels{position:absolute;inset:0;z-index:3;pointer-events:none}
+.fl{position:absolute;left:0;top:0;transform:translate(-50%,-150%);background:var(--panel);color:var(--ink);font:600 .88rem var(--body);padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 10px 24px -14px rgba(15,46,58,.55);opacity:0;will-change:transform,opacity}
+.fl[data-k="hagerstown"],.fl[data-k="middletown"]{background:var(--brand);color:#fff}
+.fcap{position:absolute;left:max(6vw,32px);bottom:clamp(40px,9vh,90px);z-index:4;width:min(440px,80vw);text-align:left;text-shadow:var(--halo)}
+.fcap::before{content:"";position:absolute;inset:-34% -30% -30% -24%;z-index:-1;background:radial-gradient(closest-side,rgba(242,246,247,.9),rgba(242,246,247,.55) 60%,rgba(242,246,247,0));filter:blur(6px)}
+.fcap .mile{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px}
+.fcap .mile b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.fstops{position:relative;min-height:6.4rem}
+.fstop{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(10px)}
+.fstop h3{font-size:clamp(2rem,3.4vw,3rem);font-weight:300;margin:0 0 .3rem}
+.fstop p{margin:0;font-weight:600;max-width:34ch}
+.ftrack{position:relative;height:2px;background:var(--line-strong);border-radius:2px;margin-top:18px}
+.ftrack i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);border-radius:2px}
+.ftrack span{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:var(--panel);box-shadow:inset 0 0 0 2px var(--brand);transform:translate(-50%,-50%)}
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+  html.scrub .flight{display:none}
+  html.scrub #map{display:block}
+}
+
 /* 5. dentists */
 .docs-head{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end;margin-bottom:44px}
 .docs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -607,6 +637,28 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <span class="kicker" data-reveal>Two offices</span>
     <h2 id="road-h" data-reveal style="--d:1">One road. Two offices.</h2>
     <p data-reveal style="--d:2">Middletown sits on the east side of South Mountain. Hagerstown sits on the west. The old National Pike crosses the mountain at Turner&rsquo;s Gap and joins them. Same team, same records, whichever side you&rsquo;re on.</p>
+  </div>
+  <div class="flight" id="flight" role="img" aria-label="A flight along the old National Pike, from the Hagerstown office over South Mountain at Turner's Gap to the Middletown office">
+    <div class="fstage" id="fstage">
+      <img class="fposter" src="assets/flight-poster.jpg" alt="" width="1600" height="900" loading="lazy">
+      <video id="flightVideo" muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture></video>
+      <div class="flabels" aria-hidden="true">
+        <span class="fl" data-k="hagerstown">Hagerstown</span>
+        <span class="fl" data-k="boonsboro">Boonsboro</span>
+        <span class="fl" data-k="turners_gap">Turner&rsquo;s Gap</span>
+        <span class="fl" data-k="middletown">Middletown</span>
+      </div>
+      <div class="fcap" aria-hidden="true">
+        <span class="mile">Mile <b id="fmile">0.0</b> of 18.2</span>
+        <div class="fstops">
+          <div class="fstop" data-at="0"><h3>Hagerstown</h3><p>West of the mountain. Our office in the Robinwood Professional Center.</p></div>
+          <div class="fstop" data-at="0.5575"><h3>Boonsboro</h3><p>Dr. Love grew up here, on the road between our two offices.</p></div>
+          <div class="fstop" data-at="0.6939"><h3>Turner&rsquo;s Gap</h3><p>The old National Pike crosses South Mountain here.</p></div>
+          <div class="fstop" data-at="1"><h3>Middletown</h3><p>East of the mountain. Our office on the Old National Pike.</p></div>
+        </div>
+        <div class="ftrack"><i id="fbar"></i><span style="left:0"></span><span style="left:55.75%"></span><span style="left:69.39%"></span><span style="left:100%"></span></div>
+      </div>
+    </div>
   </div>
   <div class="map" id="map" data-reveal>
     <div class="ring" data-contour="ring" aria-hidden="true"></div>
@@ -991,6 +1043,66 @@ var track = document.getElementById("track");
 document.querySelectorAll(".track-btns button").forEach(function(b){
   b.addEventListener("click", function(){ track.scrollBy({ left: +b.dataset.dir * Math.min(460, track.clientWidth * 0.8), behavior: reduce.matches ? "auto" : "smooth" }); });
 });
+
+/* ---------------------------------------------------------------- the flight along the Pike */
+(function(){
+  var fl = document.getElementById("flight"), st = document.getElementById("fstage"), fv = document.getElementById("flightVideo");
+  var mile = document.getElementById("fmile"), bar = document.getElementById("fbar");
+  var labels = [].slice.call(fl.querySelectorAll(".fl")), stops = [].slice.call(fl.querySelectorAll(".fstop")).map(function(e){ return { el: e, at: +e.dataset.at, op: -1 }; });
+  var data = null, fready = false, fdur = 0, fbusy = false, fpend = null, flast = -1, fstart = 0, fload = false;
+  var ftarget = 0, fshown = 0, frun = false, fprev = 0, lastMile = "", lastBar = -1;
+  function on(){ return root.classList.contains("scrub") && !root.classList.contains("no-flight"); }
+  function prog(){ var r = fl.getBoundingClientRect(), span = fl.offsetHeight - innerHeight; return span > 0 ? clamp(-r.top / span, 0, 1) : 0; }
+  function load(){
+    if (fload) return; fload = true;
+    Promise.all([fetch("assets/flight.json").then(function(r){ return r.json(); }), fetch("assets/flight.mp4").then(function(r){ if (!r.ok) throw 0; return r.blob(); })])
+    .then(function(res){
+      data = res[0]; fv.src = URL.createObjectURL(res[1]);
+      fv.addEventListener("loadeddata", function(){ fdur = fv.duration; fready = true; st.classList.add("ready"); fv.pause(); flast = -1; frender(fshown); }, { once: true });
+      fv.load();
+    }).catch(function(){ root.classList.add("no-flight"); });
+  }
+  function fseek(t){
+    if (fbusy){ fpend = t; if (performance.now() - fstart > 600) fbusy = false; else return; }
+    fbusy = true; fstart = performance.now(); flast = t; try { fv.currentTime = t; } catch(e){ fbusy = false; }
+  }
+  fv.addEventListener("seeked", function(){ fbusy = false; if (fpend !== null){ var t = fpend; fpend = null; if (Math.abs(t - flast) > 0.001) fseek(t); } });
+  fv.addEventListener("error", function(){ fbusy = false; root.classList.add("no-flight"); });
+  function frender(p){
+    var frac = smooth(0, 1, clamp((p - 0.06) / 0.86, 0, 1));
+    var m = (frac * 18.2).toFixed(1); if (m !== lastMile){ lastMile = m; mile.textContent = m; }
+    if (Math.abs(frac - lastBar) > 0.002){ lastBar = frac; bar.style.width = (frac * 100).toFixed(2) + "%"; }
+    var seen = Math.min(1, frac + 0.12 * Math.sin(Math.PI * frac)); /* the camera looks about 2.5 miles ahead of where it is */
+    stops.forEach(function(s){
+      var d = Math.abs(seen - s.at), op = s.at === 0 ? 1 - smooth(0.03, 0.09, frac) : s.at === 1 ? smooth(0.93, 0.985, frac) : 1 - smooth(0.035, 0.065, d);
+      if (Math.abs(op - s.op) > 0.01){ s.op = op; s.el.style.opacity = op.toFixed(2); s.el.style.transform = "translateY(" + ((1 - op) * 10).toFixed(1) + "px)"; }
+    });
+    if (data){
+      var n = data.frames.length, f = data.frames[Math.min(n - 1, Math.max(0, Math.round((isFinite(p) ? p : 0) * (n - 1))))], W = st.clientWidth, H = st.clientHeight;
+      if (!f){ console.warn('flight frame missing', p, n); return; }
+      var sc = Math.max(W / data.res[0], H / data.res[1]), dw = data.res[0] * sc, dh = data.res[1] * sc, ox = (W - dw) / 2, oy = (H - dh) / 2;
+      labels.forEach(function(l){
+        var q = f[l.dataset.k], x = ox + q[0] * dw, y = oy + q[1] * dh;
+        var vis = q[2] > 0 ? Math.min(smooth(0.02, 0.08, x / W), smooth(0.02, 0.08, 1 - x / W), smooth(0.14, 0.22, y / H), smooth(0.08, 0.16, 1 - y / H)) : 0;
+        l.style.opacity = vis.toFixed(2); if (vis > 0) l.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(-50%,-150%)";
+      });
+    }
+    if (fready){ var t = p * Math.max(0, fdur - 0.05); if (Math.abs(t - flast) > 1 / 48) fseek(t); }
+  }
+  function ftick(now){
+    var dt = Math.min(64, now - fprev); fprev = now;
+    fshown += (ftarget - fshown) * (1 - Math.pow(1 - 0.16, dt / 16.667));
+    if (Math.abs(ftarget - fshown) < 0.0004){ fshown = ftarget; frun = false; }
+    frender(fshown); if (frun) requestAnimationFrame(ftick);
+  }
+  function fscroll(){
+    if (!on()) return;
+    var r = fl.getBoundingClientRect(); if (r.top < innerHeight * 2.5) load();
+    if (r.bottom < -innerHeight || r.top > innerHeight * 1.5) return;
+    ftarget = prog(); if (!frun){ frun = true; fprev = performance.now(); requestAnimationFrame(ftick); }
+  }
+  addEventListener("scroll", fscroll, { passive: true }); addEventListener("resize", fscroll); fscroll();
+})();
 
 /* ---------------------------------------------------------------- the turning map */
 var map = document.getElementById("map"), relief = document.getElementById("relief"), pinH = document.getElementById("pin-h"), pinM = document.getElementById("pin-m");
