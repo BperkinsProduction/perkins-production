@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Robinwood Dental Center | Middletown and Hagerstown, Maryland</title>
-<meta name="description" content="Seven dentists, two offices, one team. Robinwood Dental Center has cared for families in Middletown and Hagerstown, Maryland since 2003. Book a visit or call 240.313.9660.">
+<meta name="description" content="Two offices, one team. Robinwood Dental Center has cared for families in Middletown and Hagerstown, Maryland since 2003. Book a visit or call 240.313.9660.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F2F6F7">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230280ad%22/%3E%3Cpath d=%22M6 21c4-6 7-9 10-9s6 3 10 9%22 fill=%22none%22 stroke=%22%23a1dfe0%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2224%22 cy=%2210%22 r=%222.6%22 fill=%22%23fb681a%22/%3E%3C/svg%3E">
@@ -334,9 +334,9 @@ html.scrub:not(.no-flight) #map{display:none}
 @media (max-width: 980px){.docs{grid-template-columns:repeat(2,1fr)}.docs .doc:nth-child(5){grid-column:auto}.docs-head{grid-template-columns:1fr}}
 
 /* 6. before and after */
-.smiles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.smiles{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 18px;margin-top:40px}
 .ba{--pos:50}
-.ba-frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:286/188;background:#ddd;box-shadow:0 18px 40px -30px rgba(15,46,58,.6)}
+.ba-frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:282/182;background:#ddd;box-shadow:0 18px 40px -30px rgba(15,46,58,.6)}
 .ba-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ba-before{clip-path:inset(0 calc(100% - var(--pos) * 1%) 0 0)}
 .ba-line{position:absolute;top:0;bottom:0;left:calc(var(--pos) * 1%);width:2px;background:#fff;transform:translateX(-1px);pointer-events:none}
@@ -424,6 +424,49 @@ html.scrub:not(.no-flight) #map{display:none}
 .done-note{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--accent-muted);font-weight:600}
 .hint{font-size:.88rem;color:var(--text-secondary);margin-top:10px}
 @media (max-width: 860px){.book-card{grid-template-columns:1fr}.progress{grid-auto-flow:column;grid-auto-columns:1fr;gap:4px}.progress li{font-size:0;justify-content:center}.fields{grid-template-columns:1fr}}
+
+/* good to know */
+.easy-grid{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.easy-grid li{display:flex;gap:14px;align-items:center;background:var(--panel);border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 0 var(--line);font-weight:600}
+.easy-grid svg{flex:none;width:34px;height:34px;padding:6px;border-radius:10px;background:rgba(161,223,224,.35);color:var(--brand)}
+@media (max-width: 900px){.easy-grid{grid-template-columns:1fr 1fr}}
+@media (max-width: 560px){.easy-grid{grid-template-columns:1fr}}
+/* the whole team */
+.docs-more{margin:26px 0 0;color:var(--text-secondary);font-size:1.02rem}
+.team{margin-top:22px;background:var(--panel);border-radius:calc(var(--r) + 2px);box-shadow:0 1px 0 var(--line)}
+.team summary{cursor:pointer;list-style:none;padding:20px 24px;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-size:1.35rem;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;min-height:44px}
+.team summary::-webkit-details-marker{display:none}
+.team summary::after{content:"+";margin-left:auto;font-family:var(--body);color:var(--brand);font-size:1.4rem;line-height:1}
+.team[open] summary::after{content:"\2212"}
+.team summary span{font-family:var(--body);font-size:.95rem;color:var(--text-secondary)}
+.team-cols{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;padding:4px 24px 26px}
+.team-cols h3{font-size:1.2rem;margin-bottom:10px;color:var(--brand)}
+.team-cols dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:.95rem}
+.team-cols dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding-top:3px}
+.team-cols dd{margin:0}
+@media (max-width: 800px){.team-cols{grid-template-columns:1fr}.team-cols dl{grid-template-columns:1fr;gap:2px}.team-cols dd{margin-bottom:8px}}
+/* forms and aftercare */
+.form-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,50px);margin-top:36px}
+.form-cols h3{font-size:1.3rem;margin-bottom:10px}
+.doclist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-strong)}
+.doclist li{border-bottom:1px solid var(--line)}
+.doclist a{display:flex;align-items:center;gap:14px;padding:14px 4px;min-height:48px;color:var(--ink);text-decoration:none;font-weight:600}
+.doclist a:hover{color:var(--link)}
+.doclist em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--text-secondary);border:1px solid var(--line-strong);border-radius:6px;padding:2px 6px}
+.doc-ico{flex:none;width:22px;height:26px;border-radius:3px 8px 3px 3px;background:linear-gradient(135deg,transparent 70%,rgba(2,128,173,.25) 70%),var(--panel);box-shadow:inset 0 0 0 1.5px var(--brand)}
+@media (max-width: 800px){.form-cols{grid-template-columns:1fr}}
+/* the message form */
+.msg{margin-top:22px;background:var(--panel);border-radius:calc(var(--r) + 10px);box-shadow:0 1px 0 var(--line);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,4vw,56px)}
+.msg h3{font-size:1.4rem;font-weight:300;margin-bottom:6px}
+.msg p{margin:0;color:var(--text-secondary)}
+.msg-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+.msg-fields label{display:grid;gap:6px;font-weight:600;font-size:.95rem}
+.msg-fields .wide{grid-column:1 / -1}
+.msg-fields input,.msg-fields textarea{font:inherit;padding:14px 16px;border-radius:12px;border:0;box-shadow:inset 0 0 0 1.5px var(--line-strong);background:var(--canvas);color:var(--ink);min-height:48px;resize:vertical}
+.msg-fields input:focus,.msg-fields textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--brand)}
+.msg-fields .btn{justify-self:start}
+.msg-done{grid-column:1 / -1;padding:12px 14px;border-radius:12px;background:var(--accent-muted);font-weight:600;color:var(--ink) !important}
+@media (max-width: 860px){.msg{grid-template-columns:1fr}.msg-fields{grid-template-columns:1fr}}
 
 /* 11. footer */
 .foot{background:var(--ink);color:#dbe7ea;padding:70px 0 40px;margin-top:0}
@@ -530,7 +573,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       </div>
       <div class="band b4" data-a="0.79" data-b="1">
         <h1 class="big" aria-label="Dentistry, at ease."><span class="w" style="--i:0">Dentistry,</span> <span class="w" style="--i:1">at</span> <span class="w" style="--i:2"><em>ease.</em></span></h1>
-        <p class="sub">Seven dentists. Two offices. Caring for families here since 2003.</p>
+        <p class="sub">One team. Two offices. Caring for families here since 2003.</p>
         <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href="tel:+12403139660">Call 240.313.9660</a></div>
       </div>
     </div>
@@ -549,7 +592,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
   <div class="copy">
     <span class="eyebrow">Middletown and Hagerstown, Maryland</span>
     <h1>Dentistry, at ease.</h1>
-    <p class="sub">Nervous about the dentist? You&rsquo;re not the only one. Seven dentists, two offices, and a team that explains every step before it happens.</p>
+    <p class="sub">Nervous about the dentist? You&rsquo;re not the only one. Two offices, one team, and dentists who explain every step before it happens.</p>
     <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href="tel:+12403139660">Call 240.313.9660</a></div>
   </div>
   <div class="fade"></div>
@@ -574,7 +617,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
   <div class="wrap">
     <div class="facts">
       <div class="fact" data-reveal style="--d:0"><span class="num" data-count="4.7" data-dec="1">4.7</span><span class="lbl">stars across about 712 Google reviews</span></div>
-      <div class="fact" data-reveal style="--d:1"><span class="num" data-count="7">7</span><span class="lbl">dentists and specialists</span></div>
+      <div class="fact" data-reveal style="--d:1"><span class="num" data-count="3">3</span><span class="lbl">languages spoken: English, Spanish and Portuguese</span></div>
       <div class="fact" data-reveal style="--d:2"><span class="num" data-count="2">2</span><span class="lbl">offices, 1 phone number</span></div>
       <div class="fact" data-reveal style="--d:3"><span class="num" data-count="2003" data-from="1990">2003</span><span class="lbl">Here since 2003</span></div>
     </div>
@@ -611,6 +654,15 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       </div>
       <p class="step-note">Step 2 is a proposed feature of the new site. Today&rsquo;s new patient forms are printable PDFs.</p>
     </div>
+  </div>
+</section>
+
+<!-- good to know: comfort and access -->
+<section class="sec easy" aria-labelledby="gk-h" style="padding-top:clamp(20px,3vw,40px)">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Good to know</span>
+    <h2 id="gk-h" data-reveal style="--d:1">The small things that make a visit easier.</h2>
+    <ul class="easy-grid"><li data-reveal style="--d:0"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Appointments seen promptly</span></li><li data-reveal style="--d:1"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>An emergency dentist available</span></li><li data-reveal style="--d:2"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6.5h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H10l-3.5 3v-3H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2z"/><path d="M19 9.5h.5a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5H19v2l-2.5-2"/></svg><span>Spanish and Portuguese spoken</span></li><li data-reveal style="--d:0"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="11" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg><span>TVs in the reception area and treatment rooms</span></li><li data-reveal style="--d:1"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4.8" r="1.6"/><path d="M11 7.5v5.5h5l2 5"/><path d="M11 10h4.5"/><path d="M8.2 11.2a5 5 0 1 0 6.9 6.3"/></svg><span>Wheelchair accessible</span></li><li data-reveal style="--d:2"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M10 16.5v-9h2.8a2.6 2.6 0 0 1 0 5.2H10"/></svg><span>Ample free parking</span></li><li data-reveal style="--d:0"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="14" rx="3"/><path d="M5 10.5h14M8.5 14.5h.01M15.5 14.5h.01M7.5 17.5v2M16.5 17.5v2"/></svg><span>On a bus route</span></li><li data-reveal style="--d:1"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12.5h5M9.5 16h5"/></svg><span>Dental insurance accepted and filed for you</span></li><li data-reveal style="--d:2"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12.5" rx="2.2"/><path d="M3 10h18M7 15h4"/></svg><span>CareCredit, with flexible and no-interest payment options</span></li></ul>
   </div>
 </section>
 
@@ -674,7 +726,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <article class="office" data-reveal>
       <span class="side">West of the mountain</span>
       <h3>Hagerstown</h3>
-      <address>11110 Medical Campus Road, Suite 148<br>Robinwood Professional Center<br>Hagerstown, MD 21742</address>
+      <address>11110 Medical Campus Road, Suite 148<br>Robinwood Professional Center, on the Meritus Health campus<br>Hagerstown, MD 21742</address>
       <dl class="hours"><dt>Monday to Thursday</dt><dd>7:00 am to 5:00 pm</dd><dt>Friday</dt><dd>7:00 am to 2:00 pm</dd></dl>
       <div class="acts"><a class="btn btn-book" href="#book" data-office="hagerstown">Book here</a><a class="btn btn-quiet" href="tel:+12403139660">Call</a><a class="btn btn-quiet" href="https://www.google.com/maps/search/?api=1&amp;query=11110+Medical+Campus+Road+Suite+148+Hagerstown+MD+21742" target="_blank" rel="noopener">Directions</a></div>
     </article>
@@ -692,7 +744,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
 <section class="sec" id="dentists" aria-labelledby="dd-h" style="padding-top:0">
   <div class="wrap">
     <div class="docs-head">
-      <div><span class="kicker" data-reveal>Your dentists</span><h2 id="dd-h" data-reveal style="--d:1">Seven dentists, one roof.</h2></div>
+      <div><span class="kicker" data-reveal>Your dentists</span><h2 id="dd-h" data-reveal style="--d:1">Meet your dentists.</h2></div>
       <p class="lede" data-reveal style="--d:2">Dr. Bandeff came home to practice where he grew up. Dr. Love grew up in Boonsboro, on the road between the two offices.</p>
     </div>
     <div class="docs">
@@ -704,6 +756,8 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       <button class="doc" data-bio="william-lizardo" data-img="lizardo" data-reveal style="--d:1"><span class="ph"><img src="assets/lizardo.jpg" alt="" loading="lazy" width="190" height="253"></span><span class="role">General dentistry</span><h3>William Lizardo, DDS</h3><q>I know the dental chair can be a stressful place yet it doesn&rsquo;t have to be.</q><span class="more">Read his story</span></button>
       <button class="doc" data-bio="chad-love" data-img="love" data-reveal style="--d:2"><span class="ph"><img src="assets/love.jpg" alt="" loading="lazy" width="190" height="253"></span><span class="role">General dentistry</span><h3>Chad Love, DDS</h3><q>Country roads have taken me back home to Washington County.</q><span class="more">Read his story</span></button>
     </div>
+    <p class="docs-more" data-reveal>Also on the Robinwood team: Dr. Nicole Lozon, Dr. Wandana Mistry, Dr. Mohammed Tofigh and Dr. Anika Vellore.</p>
+    <details class="team" data-reveal><summary>Meet the whole team <span>The hygienists, assistants and front desk you&rsquo;ll see, by first name</span></summary><div class="team-cols"><div><h3>Hagerstown</h3><dl><dt>Practice manager</dt><dd>Dawn</dd><dt>Clinical coordinator</dt><dd>Susan</dd><dt>Hygienists</dt><dd>Bobbi (supervisor), Amanda, Ashley, Brianne, Denise, Dilcia, Heather, Heather, Kelly, Kelly Anne, Lisa, Michelle, Natasha</dd><dt>Dental assistants</dt><dd>Avery, Britney, Brittany, Cait, Casey, Dana, Jenna, Kaitlin, Kyra, Michelle, Monica, Sammy, Sarah, Tyler</dd><dt>Orthodontic assistants</dt><dd>Gina (supervisor), Amanda, Tiffany</dd><dt>Front office</dt><dd>Elizabeth (supervisor), Craig, Dorothy, Katy, Lynne, Renee, Mary, Rachele, Sophia, Tracey, Trina, Hannah and Jess (orthodontics)</dd><dt>Patient coordinators</dt><dd>Bonnie, Dani, Linde, Sandy</dd><dt>Sterilization</dt><dd>Lisa, Ruthie</dd></dl></div><div><h3>Middletown</h3><dl><dt>Practice manager</dt><dd>Dawn</dd><dt>Hygienists</dt><dd>Hannah, Jenna, Stacey, Kylie</dd><dt>Dental assistants</dt><dd>Dana, Emily, Jenna, Kyra, Sophie</dd><dt>Front office</dt><dd>Cathy, Kelli, Lisa</dd></dl></div></div></details>
   </div>
 </section>
 
@@ -715,10 +769,14 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <span class="kicker" data-reveal>Before and after</span>
     <h2 id="ba-h" data-reveal style="--d:1">Real patients, real results.</h2>
     <div class="smiles">
-      <div class="ba" data-reveal style="--d:0"><div class="ba-frame"><img src="assets/ba-bill-after.jpg" alt="Case 1 after treatment" loading="lazy"><img class="ba-before" src="assets/ba-bill-before.jpg" alt="Case 1 before treatment" loading="lazy"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 1"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
-      <div class="ba" data-reveal style="--d:1"><div class="ba-frame"><img src="assets/ba-dan-after.jpg" alt="Case 2 after treatment" loading="lazy"><img class="ba-before" src="assets/ba-dan-before.jpg" alt="Case 2 before treatment" loading="lazy"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 2"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
-      <div class="ba" data-reveal style="--d:2"><div class="ba-frame"><img src="assets/ba-ken-after.jpg" alt="Case 3 after treatment" loading="lazy"><img class="ba-before" src="assets/ba-ken-before.jpg" alt="Case 3 before treatment" loading="lazy"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 3"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
-      <div class="ba" data-reveal style="--d:3"><div class="ba-frame"><img src="assets/ba-lee-after.jpg" alt="Case 4 after treatment" loading="lazy"><img class="ba-before" src="assets/ba-lee-before.jpg" alt="Case 4 before treatment" loading="lazy"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 4"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:0"><div class="ba-frame"><img src="assets/ba-bill-after.jpg" alt="Case 1 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-bill-before.jpg" alt="Case 1 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 1"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:1"><div class="ba-frame"><img src="assets/ba-dan-after.jpg" alt="Case 2 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-dan-before.jpg" alt="Case 2 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 2"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:2"><div class="ba-frame"><img src="assets/ba-ken-after.jpg" alt="Case 3 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-ken-before.jpg" alt="Case 3 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 3"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:3"><div class="ba-frame"><img src="assets/ba-lee-after.jpg" alt="Case 4 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-lee-before.jpg" alt="Case 4 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 4"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:0"><div class="ba-frame"><img src="assets/ba-angie-after.jpg" alt="Case 5 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-angie-before.jpg" alt="Case 5 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 5"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:1"><div class="ba-frame"><img src="assets/ba-jon-after.jpg" alt="Case 6 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-jon-before.jpg" alt="Case 6 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 6"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:2"><div class="ba-frame"><img src="assets/ba-lynn-after.jpg" alt="Case 7 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-lynn-before.jpg" alt="Case 7 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 7"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      <div class="ba" data-reveal style="--d:3"><div class="ba-frame"><img src="assets/ba-sara-after.jpg" alt="Case 8 after treatment" loading="lazy" width="282" height="182"><img class="ba-before" src="assets/ba-sara-before.jpg" alt="Case 8 before treatment" loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after, case 8"><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
     </div>
   </div>
 </section>
@@ -774,7 +832,20 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
       <details data-reveal><summary>Can you do a crown in one visit?</summary><div class="a"><p>Yes. CEREC lets us design, mill and fit a permanent crown while you wait.</p></div></details>
       <details data-reveal><summary>Am I a candidate for Invisalign?</summary><div class="a"><p>Probably. A free consultation answers it, including cases other offices have turned down.</p></div></details>
       <details data-reveal><summary>How young can my child start?</summary><div class="a"><p>From age three. Ask about family block appointments so everyone is seen together.</p></div></details>
-      <details data-reveal><summary>How do I pay?</summary><div class="a"><p>Major credit cards, and you can <a href="https://pay.balancecollect.com/m/robinwooddentalcenter" target="_blank" rel="noopener">pay your balance online</a> any time.</p></div></details>
+      <details data-reveal><summary>How do I pay?</summary><div class="a"><p>Visa, Mastercard, American Express and Discover. Financing is available through CareCredit, with flexible and no-interest payment options, and you can <a href="https://pay.balancecollect.com/m/robinwooddentalcenter" target="_blank" rel="noopener">pay your balance online</a> any time.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- forms and aftercare -->
+<section class="sec forms" id="forms" aria-labelledby="fo-h">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Forms and aftercare</span>
+    <h2 id="fo-h" data-reveal style="--d:1">Everything you&rsquo;ll need, before and after.</h2>
+    <p class="lede" data-reveal style="--d:2;margin-top:1rem">These are the practice&rsquo;s own forms and care sheets. Each opens as a PDF you can read on your phone or print.</p>
+    <div class="form-cols">
+      <div data-reveal><h3>Before your visit</h3><ul class="doclist"><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2019/10/New-Patient-Information-Form-2019-v3.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>New patient information form</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2018/05/REFERRAL-TO-RDC.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>Referral form</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2019/10/PreOpInstructions.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>Pre-op instructions</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/Complete-Sleep-Questions.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>Sleep apnea questionnaire</span><em>PDF</em></a></li></ul></div>
+      <div data-reveal style="--d:1"><h3>After your treatment</h3><ul class="doclist"><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/AFTER-CARE-Simple-Extractions-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After simple extractions</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/After-Care-for-Oral-Surgery-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After oral surgery</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/After-Ext-and-Insert-Dentures-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After extractions and new dentures</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/Dental-Implant-Surgery-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After dental implant surgery</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/Tissure-Graft-Surgery-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After gum grafting</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/Periodontal-Surgery-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>After periodontal surgery</span><em>PDF</em></a></li><li><a href="https://robinwooddentalcenter.com/wp-content/uploads/2016/02/TMJ-Care-2013.pdf" target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>TMJ care</span><em>PDF</em></a></li></ul></div>
     </div>
   </div>
 </section>
@@ -808,6 +879,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
         </div>
         <div class="pane" data-pane="3">
           <h3>Last step.</h3>
+          <p class="hint" style="margin:-6px 0 14px">The office calls you within 24 to 48 business hours to confirm. Want to come in today? Same-day visits are often available at <a href="tel:+12403139660">240.313.9660</a>.</p>
           <p class="summary" id="sum"></p>
           <div class="fields">
             <label>Your name<input name="n" autocomplete="name" required></label>
@@ -825,6 +897,16 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
         </div>
       </div>
     </form>
+    <form class="msg" id="msg" novalidate data-reveal>
+      <div><h3>Prefer to write?</h3><p>Send a question and the office will get back to you.</p></div>
+      <div class="msg-fields">
+        <label>Your name<input name="mn" autocomplete="name" required></label>
+        <label>Email or phone<input name="mc" autocomplete="email" required></label>
+        <label class="wide">Your question<textarea name="mm" rows="3" required></textarea></label>
+        <button class="btn btn-book" type="submit" id="msg-send" disabled>Send message</button>
+        <p class="msg-done" id="msg-done" hidden>This is a design concept. Nothing was sent.</p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -835,7 +917,7 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <div class="foot-grid">
       <div>
         <span class="logo-chip"><img src="assets/logo.png" alt="Robinwood Dental Center" width="358" height="44"></span>
-        <p style="margin-top:18px"><a href="tel:+12403139660">240.313.9660</a><br><a href="mailto:info@robinwooddentalcenter.com">info@robinwooddentalcenter.com</a></p>
+        <p style="margin-top:18px"><a href="tel:+12403139660">240.313.9660</a><br><a href="mailto:info@robinwooddentalcenter.com">info@robinwooddentalcenter.com</a><br>Fax 240.313.9661</p>
         <p><a href="https://www.instagram.com/robinwooddental/" target="_blank" rel="noopener">Instagram</a> &nbsp; <a href="https://www.facebook.com/robinwooddental/" target="_blank" rel="noopener">Facebook</a> &nbsp; <a href="https://pay.balancecollect.com/m/robinwooddentalcenter" target="_blank" rel="noopener">Pay online</a></p>
       </div>
       <div><h4>Middletown</h4><p>4310 Old National Pike<br>Middletown, MD 21769</p><p>Mon to Thu 8:00 am to 5:00 pm<br>Fri 8:00 am to 2:00 pm</p></div>
@@ -1198,11 +1280,16 @@ body.addEventListener("click", function(e){
   if (cl){ reader.close(); }
 });
 
+/* ---------------------------------------------------------------- the message form (a concept: nothing is sent) */
+var msgf = document.getElementById("msg"), msgBtn = document.getElementById("msg-send");
+msgf.addEventListener("input", function(){ msgBtn.disabled = !(msgf.mn.value.trim().length > 1 && msgf.mc.value.trim().length > 4 && msgf.mm.value.trim().length > 3); });
+msgf.addEventListener("submit", function(e){ e.preventDefault(); if (msgBtn.disabled) return; document.getElementById("msg-done").hidden = false; msgBtn.disabled = true; msgBtn.textContent = "Sent (concept)"; });
+
 /* ---------------------------------------------------------------- booking walkthrough (a concept: nothing is sent) */
 var form = document.getElementById("booker"), panes = [].slice.call(form.querySelectorAll(".pane")), prog = [].slice.call(form.querySelectorAll(".progress li"));
 var next = document.getElementById("next"), backBtn = document.getElementById("back"), stepI = 0;
 var S = { office: null, doc: null, day: null, time: null };
-var DOCS = [["First available", "Soonest time with any dentist"], ["Dr. Horman", "Owner, orthodontics"], ["Dr. Appleton", "General dentistry"], ["Dr. Cho", "General dentistry"], ["Dr. Bandeff", "Extractions, implants, cosmetic"], ["Dr. Tofigh", "Oral surgeon"], ["Dr. Lizardo", "General dentistry"], ["Dr. Love", "General dentistry"]];
+var DOCS = [["First available", "Soonest time with any dentist"], ["Dr. Horman", "Owner, orthodontics"], ["Dr. Appleton", "General dentistry"], ["Dr. Cho", "General dentistry"], ["Dr. Bandeff", "Extractions, implants, cosmetic"], ["Dr. Saeed Tofigh", "Oral surgeon"], ["Dr. Lizardo", "General dentistry"], ["Dr. Love", "General dentistry"], ["Dr. Lozon", "Dentist"], ["Dr. Mistry", "Dentist"], ["Dr. Mohammed Tofigh", "Dentist"], ["Dr. Vellore", "Dentist"]];
 var HOURS = { middletown: { mt: [8, 17], f: [8, 14] }, hagerstown: { mt: [7, 17], f: [7, 14] } };
 var docBox = document.getElementById("o-doc"), dayBox = document.getElementById("o-day"), timeBox = document.getElementById("o-time");
 DOCS.forEach(function(d){ var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.dataset.v = d[0]; b.setAttribute("aria-pressed", "false"); b.innerHTML = "<b>" + d[0] + "</b><span>" + d[1] + "</span>"; docBox.appendChild(b); });
