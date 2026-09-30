@@ -69,6 +69,12 @@ main,footer{position:relative;z-index:1}
 .nav.solid{background:rgba(26,15,6,.86)}
 .nav .brand{display:flex;flex:none}
 .nav .brand img{height:40px;width:auto}
+.nav.flying .brand img{opacity:0}
+.flyer{position:fixed;left:0;top:0;z-index:60;pointer-events:none;transform-origin:0 0;will-change:transform;visibility:hidden;opacity:0}
+.flyer.on{visibility:visible}
+.flyer img{position:absolute;inset:0;width:100%;height:100%}
+.flyer .l{opacity:calc(1 - var(--mix,0));filter:drop-shadow(0 10px 28px rgba(90,45,12,.32))}
+.flyer .d{opacity:var(--mix,0);filter:drop-shadow(0 8px 22px rgba(20,10,4,.45))}
 .nav nav{display:flex;gap:24px;margin-left:auto}
 .nav nav a{font-size:14.5px;font-weight:600;text-decoration:none;color:var(--cream-2);transition:color .25s var(--ease-out)}
 .nav nav a:hover{color:var(--cream)}
@@ -88,7 +94,7 @@ main,footer{position:relative;z-index:1}
 
 /* ---------- hero ---------- */
 .hero{position:relative;z-index:1}
-.scrub{position:relative;height:640vh}
+.scrub{position:relative;height:720vh}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#C9B28E}
 .poster,.poster-end,.stage video{position:absolute;inset:0;width:100%;height:100%;background:center/cover no-repeat}
 .poster-end{opacity:0}
@@ -487,6 +493,8 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <a class="btn btn-gold" href="#join">Claim $29</a>
 </header>
 
+<div class="flyer" id="flyer" aria-hidden="true"><img class="l" src="assets/logo-light.svg" alt="" width="1750" height="588"><img class="d" src="assets/logo-dark.svg" alt="" width="1750" height="588"></div>
+
 <main id="main" tabindex="-1">
 
   <section class="hero" id="top" aria-label="Golden hour, any hour">
@@ -497,23 +505,23 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <video id="hero" preload="none" muted playsinline disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
         <div class="scrim" aria-hidden="true"></div>
 
-        <div class="band b1" data-a="0" data-b="0.22">
+        <div class="band b1" data-a="0.045" data-b="0.26">
           <p class="eyebrow sub">Greencastle + Chambersburg, PA</p>
           <h1 class="fx-blur" data-split="blur" data-seed="11">Golden hour,|any hour.</h1>
           <p class="line sub">Two salons, sixteen rooms, open seven days a week.</p>
         </div>
 
-        <div class="band b2" data-a="0.24" data-b="0.48">
+        <div class="band b2" data-a="0.28" data-b="0.5">
           <h2 data-split="drift" data-seed="23">The lower the sun,|the deeper the bronze.</h2>
           <p class="line sub">Four levels, from an easy 20-minute base to a 7-minute superbed.</p>
         </div>
 
-        <div class="band b3" data-a="0.5" data-b="0.74">
+        <div class="band b3" data-a="0.52" data-b="0.75">
           <h2 data-split="weave" data-seed="37" data-spread="0.5">Spray tan, red light,|and a 24-hour gym.</h2>
           <p class="line sub">One membership. Choose $0 down or no commitment.</p>
         </div>
 
-        <div class="band settle" data-a="0.77" data-b="1" data-ramp="0.1">
+        <div class="band settle" data-a="0.78" data-b="1" data-ramp="0.1">
           <h2 data-split="rise" data-seed="41">Walk in pale.|Walk out *glowing.*</h2>
           <p class="line sub">Unlimited tanning is $29 a month right now, with a Sports Inn Fitness membership included.</p>
           <div class="ctas">
@@ -882,7 +890,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   const ring = $('#ring'), cue = $('#cue'), cueText = $('#cueText'), clockEl = $('#clock');
   const bands = $$('.band').map((el, i, arr) => ({
     el, a: +el.dataset.a, b: +el.dataset.b, ramp: el.dataset.ramp ? +el.dataset.ramp : null,
-    first: i === 0, last: i === arr.length - 1, op: -1, k: -1, on: null
+    first: +el.dataset.a === 0, last: i === arr.length - 1, op: -1, k: -1, on: null
   }));
 
   let target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true;
@@ -920,6 +928,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     const gone = p > 0.04;
     if (gone !== cue._gone) { cue._gone = gone; cue.classList.toggle('gone', gone); }
     updateClock(p, performance.now());
+    if (scrubOn) flySet(p / FLY_END);
   }
 
   let lastClock = '', lastClockAt = 0;
@@ -1038,6 +1047,74 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     loadRaf = requestAnimationFrame(loadRamp);
   }
 
+  /* ---------- the logo: big in the sky, then home to the menu bar ---------- */
+  const flyer = $('#flyer'), navEl = $('#nav'), navLogo = $('.nav .brand img');
+  const LOGO_RATIO = 1750 / 588;
+  const FLY_END = 0.065;
+  const fly = { on: false, geo: null, t: -1, req: 0, intro: 1, shownIntro: -1, landed: null };
+  const flyAllowed = () => !reduceMQ.matches && innerHeight >= 520;
+  const flyNow = () => scrubOn ? heroProgress() / FLY_END : scrollY / (innerHeight * 0.42);
+  function flyMeasure() {
+    const vw = innerWidth, vh = innerHeight;
+    const w0 = scrubOn ? Math.min(vw * 0.46, 760, vh * 0.27 * LOGO_RATIO) : Math.min(vw * 0.8, 440, vh * 0.2 * LOGO_RATIO);
+    const r = navLogo.getBoundingClientRect();
+    fly.geo = { w0, h0: w0 / LOGO_RATIO, sx: vw / 2, sy: vh * (scrubOn ? 0.385 : 0.24),
+      tx: r.left + r.width / 2, ty: r.top + r.height / 2, ts: r.width / w0 };
+    flyer.style.width = w0.toFixed(1) + 'px';
+    flyer.style.height = (w0 / LOGO_RATIO).toFixed(1) + 'px';
+    fly.t = -1;
+  }
+  function flySet(t) {
+    if (!fly.on || !fly.geo) return;
+    t = clamp(t, 0, 1);
+    fly.req = t;
+    const landed = t >= 1;
+    if (landed !== fly.landed) { fly.landed = landed; flyer.classList.toggle('on', !landed); navEl.classList.toggle('flying', !landed); }
+    if (landed) { fly.t = 1; return; }
+    if (Math.abs(t - fly.t) < 0.0004 && fly.intro === fly.shownIntro) return;
+    fly.t = t; fly.shownIntro = fly.intro;
+    const g = fly.geo;
+    const e = t * t * (3 - 2 * t);
+    const s = Math.pow(g.ts, e);
+    const w = g.w0 * s, h = g.h0 * s;
+    const cx = g.sx + (g.tx - g.sx) * e;
+    const cy = g.sy + (g.ty - g.sy) * e + (1 - fly.intro) * 22;
+    flyer.style.transform = 'translate3d(' + (cx - w / 2).toFixed(2) + 'px,' + (cy - h / 2).toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
+    flyer.style.setProperty('--mix', (scrubOn ? smoothstep(e, 0.72, 0.97) : 1).toFixed(3));
+    flyer.style.opacity = fly.intro.toFixed(3);
+  }
+  function flyApply() {
+    if (!flyAllowed()) {
+      fly.on = false; fly.landed = null;
+      flyer.classList.remove('on'); navEl.classList.remove('flying');
+      return;
+    }
+    fly.on = true; fly.landed = null;
+    flyMeasure();
+    flySet(flyNow());
+  }
+  function flyIntro() {
+    if (!fly.on || fly.req >= 1) return;
+    fly.intro = 0;
+    const t0 = performance.now();
+    const step = now => {
+      const k = clamp((now - t0) / 1100, 0, 1);
+      fly.intro = 1 - Math.pow(1 - k, 3);
+      flySet(fly.req);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  let flyRaf = null, flyResize = null;
+  addEventListener('scroll', () => {
+    if (!fly.on) return;
+    if (scrubOn) { if (!heroOnScreen) flySet(heroProgress() / FLY_END); return; }
+    if (flyRaf) return;
+    flyRaf = requestAnimationFrame(() => { flyRaf = null; flySet(flyNow()); });
+  }, { passive: true });
+  addEventListener('resize', () => { cancelAnimationFrame(flyResize); flyResize = requestAnimationFrame(flyApply); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(flyApply);
+
   const GATES = [
     '(max-width: 720px)',
     '(orientation: portrait) and (max-width: 1024px)',
@@ -1062,6 +1139,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   }
   function applyHeroMode() {
     if (GATES.some(q => matchMedia(q).matches)) disableScrub(); else enableScrub();
+    flyApply();
   }
   const MQLS = GATES.map(q => matchMedia(q));
   MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
@@ -1071,6 +1149,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     document.body.classList.add('pinned');
     $$('.reveal,.stagger,.timeline,.rays').forEach(el => el.classList.add('in'));
     setDialInstant(true);
+    flyApply();
   }
   function unpinFinalStates() {
     document.body.classList.remove('pinned');
@@ -1342,6 +1421,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   setLevel(0, false);
   if (reduceMQ.matches) pinToFinalStates();
   applyHeroMode();
+  flyIntro();
 })();
 </script>
 </body>
