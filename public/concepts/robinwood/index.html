@@ -119,7 +119,7 @@ p{margin:0 0 1em}
 }
 
 /* ------------------------------------------------ hero, scroll-driven */
-.hero-scrub{display:none;position:relative;height:560vh}
+.hero-scrub{display:none;position:relative;height:780vh}
 html.scrub .hero-scrub{display:block}
 html.scrub .hero-static{display:none}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#dfe7ea}
@@ -140,22 +140,35 @@ html.scrub .hero-static{display:none}
 .band .big em{font-style:normal;color:var(--brand)}
 .sunrise{display:block;width:72px;height:3px;border-radius:2px;background:var(--accent);margin:1.4rem 0 0}
 /* band 1: blur to sharp, settled on load */
-.b1 > *{animation:sharpen 1.6s var(--ease) both}
-.b1 > *:nth-child(2){animation-delay:.18s}.b1 > *:nth-child(3){animation-delay:.36s}.b1 > *:nth-child(4){animation-delay:.6s}
+.e-blur > *{animation:sharpen 1.6s var(--ease) both}
+.e-blur > *:nth-child(2){animation-delay:.18s}.e-blur > *:nth-child(3){animation-delay:.36s}.e-blur > *:nth-child(4){animation-delay:.6s}
 @keyframes sharpen{from{opacity:0;filter:blur(14px);transform:translateY(8px)}to{opacity:1;filter:blur(0);transform:none}}
 /* band 2: drift down, the way the camera sinks */
-.b2 blockquote{margin:0;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(2.2rem,4.2vw,4.3rem);line-height:1.1;letter-spacing:-.015em;transform:translateY(calc((var(--k) - 1) * 46px));filter:blur(calc((1 - var(--k)) * 6px))}
-.b2 .who{margin-top:1.4rem;transform:translateY(calc((var(--k) - 1) * 24px));opacity:var(--k)}
+.e-quote blockquote{margin:0;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(2.2rem,4.2vw,4.3rem);line-height:1.1;letter-spacing:-.015em;transform:translateY(calc((var(--k) - 1) * 46px));filter:blur(calc((1 - var(--k)) * 6px))}
+.e-quote .who{margin-top:1.4rem;transform:translateY(calc((var(--k) - 1) * 24px));opacity:var(--k)}
 /* band 3: the halves part, like the mist */
-.b3 .h1a,.b3 .h1b{display:block}
-.b3 .h1a{transform:translate(calc((1 - var(--k)) * 2.6rem),calc((1 - var(--k)) * .55em))}
-.b3 .h1b{transform:translate(calc((var(--k) - 1) * 2.6rem),calc((var(--k) - 1) * .55em));color:var(--brand)}
-.b3 .line{margin-top:1.3rem;opacity:clamp(0,calc(var(--k) * 2 - 1),1)}
+.e-part .h1a,.e-part .h1b{display:block}
+.e-part .h1a{transform:translate(calc((1 - var(--k)) * 2.6rem),calc((1 - var(--k)) * .55em))}
+.e-part .h1b{transform:translate(calc((var(--k) - 1) * 2.6rem),calc((var(--k) - 1) * .55em));color:var(--brand)}
+.e-part .line{margin-top:1.3rem;opacity:clamp(0,calc(var(--k) * 2 - 1),1)}
 /* band 4: word by word, then a staged settle */
-.b4 .big .w{display:inline-block;opacity:clamp(0,calc(var(--k) * var(--n) * 1.6 - var(--i)),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) * var(--n) * 1.6 - var(--i))),1) * .5em))}
-.b4 .sub{font-size:clamp(1.05rem,1.35vw,1.25rem);font-weight:600;max-width:34ch;margin:1.3rem 0 0;opacity:clamp(0,calc((var(--k) - .55) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .55) * 4),1) * 14px))}
-.b4 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.6rem;opacity:clamp(0,calc((var(--k) - .72) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .72) * 4),1) * 14px))}
-.b4 .ctas .btn{text-shadow:none}
+.e-words .big .w{display:inline-block;opacity:clamp(0,calc(var(--k) * var(--n) * 1.6 - var(--i)),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) * var(--n) * 1.6 - var(--i))),1) * .5em))}
+.e-words .sub{font-size:clamp(1.05rem,1.35vw,1.25rem);font-weight:600;max-width:34ch;margin:1.3rem 0 0;opacity:clamp(0,calc((var(--k) - .55) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .55) * 4),1) * 14px))}
+.e-words .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.6rem;opacity:clamp(0,calc((var(--k) - .72) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .72) * 4),1) * 14px))}
+.e-words .ctas .btn{text-shadow:none}
+/* story beats: a drift entrance, and the practice's own photos riding in beside the words */
+.e-drift > *{transform:translateY(calc((var(--k) - 1) * 34px));filter:blur(calc((1 - var(--k)) * 5px))}
+.e-drift .big{font-size:clamp(2.5rem,4.6vw,4.8rem)}
+.e-drift .line{margin-top:1.1rem;max-width:30ch;font-size:clamp(1.15rem,1.6vw,1.5rem)}
+.hcards{position:absolute;left:calc(100% + 5vw);top:-4vh;width:min(38vw,580px);height:62vh;pointer-events:none;text-shadow:none}
+.hcard{position:absolute;left:var(--x);top:var(--y);margin:0;width:clamp(180px,17vw,270px);aspect-ratio:6/5;border-radius:16px;overflow:hidden;background:var(--panel);border:5px solid var(--panel);box-shadow:0 34px 60px -30px rgba(15,46,58,.6);
+  --kk:clamp(0,calc(var(--k) * 1.7 - var(--s,0) * .28),1);opacity:var(--kk);transform:translateY(calc((1 - var(--kk)) * 70px)) rotate(calc(var(--r,0deg) * var(--kk))) scale(calc(.92 + var(--kk) * .08))}
+.hcard.big{width:clamp(240px,24vw,380px)}
+.hcard img{width:100%;height:100%;object-fit:cover;display:block;border-radius:11px}
+.hcard figcaption{position:absolute;left:10px;bottom:10px;background:var(--panel);color:var(--ink);font:600 .82rem var(--body);padding:5px 10px;border-radius:999px}
+.hcard figcaption small{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);font-weight:500}
+.hero-logo{display:inline-block;background:var(--panel);padding:10px 16px;border-radius:12px;margin-bottom:1.3rem;box-shadow:0 14px 30px -20px rgba(15,46,58,.45);opacity:clamp(0,calc(var(--k) * 3),1);transform:translateY(calc(clamp(0,calc(1 - var(--k) * 3),1) * 14px))}
+.hero-logo img{height:30px;width:auto;display:block}
 .scroll-cue{position:absolute;left:max(6vw,32px);bottom:34px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-shadow:var(--halo);opacity:var(--cue,1)}
 .scroll-cue i{display:block;width:1px;height:42px;background:linear-gradient(var(--ink),rgba(15,46,58,0));animation:cue 2.4s ease-in-out infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -610,21 +623,35 @@ dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
     <div class="scrim"></div>
     <div class="motes" aria-hidden="true"><i style="left:12%;top:62%;animation-delay:-2s"></i><i style="left:30%;top:74%;animation-delay:-7s"></i><i style="left:20%;top:40%;animation-delay:-11s"></i><i style="left:40%;top:56%;animation-delay:-15s"></i></div>
     <div class="bands">
-      <div class="band b1" data-a="0" data-b="0.22">
+      <div class="band b1 e-blur" data-a="0" data-b="0.12">
         <span class="eyebrow">Middletown and Hagerstown, Maryland</span>
         <p class="line">Nervous about the dentist?</p>
         <p class="big">You&rsquo;re not the only one.</p>
         <span class="sunrise" aria-hidden="true"></span>
       </div>
-      <div class="band b2" data-a="0.27" data-b="0.49">
+      <div class="band b2 e-drift" data-a="0.16" data-b="0.29">
+        <span class="eyebrow">Since November 2003</span>
+        <p class="big">Many of our patients have been with us since the day we opened.</p>
+        <div class="hcards" aria-hidden="true"><figure class="hcard big" style="--x:8%;--y:6%;--r:-2deg;--s:0"><img src="assets/svc-cosmetic.jpg" alt="" width="600" height="500"></figure></div>
+      </div>
+      <div class="band b3 e-quote" data-a="0.33" data-b="0.46">
         <blockquote>&ldquo;Everything was explained to me step&#8209;by&#8209;step.&rdquo;</blockquote>
         <p class="who mono">Diana M., Robinwood patient</p>
+        <div class="hcards" aria-hidden="true"><figure class="hcard big" style="--x:12%;--y:4%;--r:2deg;--s:0"><img src="assets/svc-implants.jpg" alt="" width="600" height="500"></figure></div>
       </div>
-      <div class="band b3" data-a="0.54" data-b="0.74">
+      <div class="band b4 e-drift" data-a="0.50" data-b="0.63">
+        <span class="eyebrow">Everything under one roof</span>
+        <p class="big">Braces, implants and surgery, without being sent across town.</p>
+        <p class="line">An oral surgeon and orthodontics in the same practice, so we rarely have to send anyone elsewhere.</p>
+        <div class="hcards" aria-hidden="true"><figure class="hcard" style="--x:0%;--y:0%;--r:-4deg;--s:0"><img src="assets/svc-ortho.jpg" alt="" width="600" height="500"></figure><figure class="hcard" style="--x:34%;--y:20%;--r:3deg;--s:1"><img src="assets/svc-surgery.jpg" alt="" width="600" height="500"></figure><figure class="hcard" style="--x:8%;--y:46%;--r:-1deg;--s:2"><img src="assets/svc-tech.jpg" alt="" width="600" height="500"></figure></div>
+      </div>
+      <div class="band b5 e-part" data-a="0.67" data-b="0.81">
         <p class="big"><span class="h1a">Two offices,</span><span class="h1b">one mountain apart.</span></p>
         <p class="line">Middletown and Hagerstown, joined by the old National Pike.</p>
+        <div class="hcards" aria-hidden="true"><figure class="hcard" style="--x:0%;--y:6%;--r:-3deg;--s:0"><img src="assets/bldg-hagerstown.jpg" alt="" width="600" height="500"><figcaption><small>West of the mountain</small>Hagerstown</figcaption></figure><figure class="hcard" style="--x:40%;--y:30%;--r:3deg;--s:1"><img src="assets/ppl-middletown.jpg" alt="" width="600" height="500"><figcaption><small>East of the mountain</small>Middletown</figcaption></figure></div>
       </div>
-      <div class="band b4" data-a="0.79" data-b="1">
+      <div class="band b6 e-words" data-a="0.85" data-b="1">
+        <span class="hero-logo"><img src="assets/logo.png" alt="Robinwood Dental Center" width="358" height="44"></span>
         <h1 class="big" aria-label="Dentistry, at ease."><span class="w" style="--i:0">Dentistry,</span> <span class="w" style="--i:1">at</span> <span class="w" style="--i:2"><em>ease.</em></span></h1>
         <p class="sub">One team. Two offices. Caring for families here since 2003.</p>
         <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href="tel:+12403139660">Call 240.313.9660</a></div>
@@ -1000,7 +1027,7 @@ var hero = document.getElementById("hero"), stage = document.getElementById("sta
 var bands = [].map.call(document.querySelectorAll(".band"), function(el){
   return { el: el, a: +el.dataset.a, b: +el.dataset.b, op: -1, k: -1 };
 });
-var b4 = document.querySelector(".b4 .big"); if (b4) b4.style.setProperty("--n", b4.querySelectorAll(".w").length);
+var b4 = document.querySelector(".e-words .big"); if (b4) b4.style.setProperty("--n", b4.querySelectorAll(".w").length);
 var mqs = window.__HERO_GATES.map(function(q){ return matchMedia(q); });
 function gated(){ return mqs.some(function(m){ return m.matches; }); }
 
@@ -1025,8 +1052,8 @@ video.addEventListener("error", function(){ seekBusy = false; pending = null; to
 
 function render(p){
   for (var i = 0; i < bands.length; i++){
-    var B = bands[i], fin = B.a === 0 ? 1 : smooth(B.a, B.a + 0.05, p), fout = B.b >= 1 ? 1 : 1 - smooth(B.b - 0.05, B.b, p);
-    var op = fin * fout, k = B.a === 0 ? 1 : smooth(B.a, B.a + (B.b - B.a) * 0.55, p);
+    var B = bands[i], fin = B.a === 0 ? 1 : smooth(B.a, B.a + 0.035, p), fout = B.b >= 1 ? 1 : 1 - smooth(B.b - 0.035, B.b, p);
+    var op = fin * fout, k = B.a === 0 ? 1 : smooth(B.a, B.a + (B.b - B.a) * 0.5, p);
     if (Math.abs(op - B.op) > 0.002){ B.op = op; B.el.style.opacity = op.toFixed(3); B.el.classList.toggle("on", op > 0.01); }
     if (Math.abs(k - B.k) > 0.002){ B.k = k; B.el.style.setProperty("--k", k.toFixed(3)); }
   }
