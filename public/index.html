@@ -973,6 +973,15 @@
         }
 
         /* Web design pricing row (inside main pricing grid) */
+        /* The Cinematic tier carries a rendered mockup so the premium option looks premium */
+        .cinematic-card { position: relative; overflow: hidden; }
+        .tier-shot {
+            margin: -2.5rem -2rem 1.2rem; padding: 1.5rem 0.8rem 0;
+            background: linear-gradient(180deg, rgba(201,169,110,0.07), rgba(10,10,10,0) 78%);
+            pointer-events: none;
+        }
+        .tier-shot img { display: block; width: 100%; height: auto; }
+
         .pricing-tabs {
             display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
             margin: -1rem auto 3rem;
@@ -1969,7 +1978,8 @@
             </ul>
             <a href="#contact" class="pricing-cta">Get Started</a>
         </div>
-        <div class="pricing-card scale-in" data-group="web">
+        <div class="pricing-card cinematic-card scale-in" data-group="web">
+            <div class="tier-shot" aria-hidden="true"><img src="/mockups/cinematic.png" alt="" loading="lazy" decoding="async"></div>
             <h3>Cinematic</h3>
             <div class="price">Custom</div>
             <div class="price-note">quoted per project</div>
