@@ -184,6 +184,19 @@
   .band-dark { background: var(--board); color: var(--board-ink); }
   .band-dark .eyebrow { color: var(--pink); }
   .band-dark .lede { color: var(--board-muted); }
+  model-viewer.courts3d {
+    width: 100%; height: 480px; border-radius: 6px; border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1B2130 0%, #0D0F14 100%);
+    --poster-color: transparent;
+  }
+  @media (max-width: 700px) { model-viewer.courts3d { height: 340px; } }
+  .hotspot {
+    background: var(--red); color: #FFF; border: 2px solid #FFF; border-radius: 999px;
+    font-family: "Barlow Condensed", Arial, sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em; font-size: 13px;
+    padding: 4px 12px; white-space: nowrap; cursor: default;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
   .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
   @media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
   .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; border: 1px solid var(--line); }
@@ -626,7 +639,27 @@
     </div>
   </section>
 
-  <section style="padding-top: 0;">
+  <section style="padding-top: 0; padding-bottom: 0;">
+    <div class="wrap">
+      <div class="eyebrow">Walk the courts</div>
+      <h2>Find your court before you get here</h2>
+      <p class="lede">Spin it, zoom it: both courts, the pavilion, and where to check in on league night. Built in 3D so first-timers know exactly where to go.</p>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+      <model-viewer class="courts3d" src="sports-inn/courts.glb" poster="sports-inn/courts-poster.jpg"
+        camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="8deg"
+        camera-orbit="40deg 65deg 48m" min-camera-orbit="auto 30deg 20m" max-camera-orbit="auto 80deg 70m"
+        interaction-prompt="once" shadow-intensity="0.6" exposure="1.1"
+        alt="Interactive 3D map of the Sports Inn sand volleyball courts">
+        <button class="hotspot" slot="hotspot-court1" data-position="-10.5 0.4 0" data-normal="0 1 0">Court 1</button>
+        <button class="hotspot" slot="hotspot-court2" data-position="10.5 0.4 0" data-normal="0 1 0">Court 2</button>
+        <button class="hotspot" slot="hotspot-checkin" data-position="0 2.6 12.5" data-normal="0 1 0">Check in here</button>
+        <button class="hotspot" slot="hotspot-pavilion" data-position="0 3.4 -13.5" data-normal="0 1 0">Pavilion</button>
+      </model-viewer>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Drag to spin, pinch or scroll to zoom. Modeled in Blender from the real layout on Pine Drive.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 48px;">
     <div class="wrap">
       <div class="eyebrow">Summer on the sand</div>
       <h2>League nights look like this</h2>
