@@ -207,6 +207,19 @@
             display: inline-block; opacity: var(--kw, 0);
             transform: translateY(calc((1 - var(--kw, 0)) * -26px));
         }
+        /* Giant opening: the boldest claim on the site gets the biggest type */
+        .sband-giant { justify-content: center; padding: 0 5vw 9vh; }
+        .sband-giant::before {
+            background: radial-gradient(ellipse 82% 60% at 50% 46%, rgba(5,5,10,0.64) 0%, rgba(5,5,10,0.4) 48%, rgba(5,5,10,0) 78%);
+        }
+        .sb-giant {
+            font-size: clamp(44px, 9.4vw, 160px); line-height: 0.98;
+            letter-spacing: -0.5px; max-width: 16ch;
+        }
+        .sb-giant.sb-gold { color: #D8BC82; }
+        @media (max-width: 720px), (orientation: portrait) {
+            .sb-giant { font-size: clamp(40px, 12.5vw, 76px); max-width: 92vw; }
+        }
         .sband-settle {
             --k1: clamp(0, calc(var(--k, 0) * 2.2), 1);
             --k2: clamp(0, calc((var(--k, 0) - 0.45) * 3), 1);
@@ -916,18 +929,36 @@
             text-transform: uppercase; color: var(--text-accent);
             margin-bottom: 2.5rem;
         }
+        /* The differentiator: a staircase of three huge lines, breaking the centered rhythm */
         .wd-moat {
-            text-align: center; max-width: 820px; margin: 0 auto 5rem;
-            padding: 3.5rem 2rem;
+            text-align: left; max-width: 1180px; margin: 1rem auto 6rem;
+            padding: 6rem 0 5.5rem;
             border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
         }
-        .wd-moat h3 { margin-bottom: 1.6rem; }
-        .wd-moat .moat-line {
+        .wd-moat h3 { text-align: left; margin-bottom: 0; }
+        .moat-lines { margin: 2rem 0 2.8rem; }
+        .moat-l {
+            margin: 0; overflow: hidden; padding: 0 0.15em 0.08em 0.04em;
             font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500;
-            font-size: clamp(1.9rem, 3.4vw, 2.9rem); line-height: 1.25;
-            color: var(--text-primary); margin: 0 0 1.4rem;
+            font-size: clamp(40px, 8.2vw, 138px); line-height: 1.02; color: #F1ECE1;
         }
-        .wd-moat p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.85; }
+        .moat-l:nth-child(2) { margin-left: min(9vw, 130px); }
+        .moat-l:nth-child(3) { margin-left: min(18vw, 260px); }
+        .moat-l > span { display: inline-block; transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1); }
+        .moat-js .moat-l > span { transform: translateY(108%); }
+        .moat-js .moat-l.in > span { transform: none; }
+        .moat-gold > span { color: #D8BC82; }
+        .moat-body {
+            max-width: 620px; margin-left: min(18vw, 260px);
+            color: var(--text-secondary); font-size: 1.1rem; line-height: 1.85;
+        }
+        @media (max-width: 768px) {
+            .wd-moat { padding: 4rem 0 3.5rem; }
+            .moat-l { font-size: 11vw; }
+            .moat-l:nth-child(2) { margin-left: 6vw; }
+            .moat-l:nth-child(3) { margin-left: 12vw; }
+            .moat-body { margin-left: 0; }
+        }
 
         /* Photo & Video reveal */
         .reveal-band { padding-bottom: 6rem; }
@@ -943,6 +974,44 @@
         .reveal-group[hidden] { display: none; }
         .reveal-group { animation: revealIn 0.7s ease both; }
         @keyframes revealIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+        /* Stat strip: big numerals stop the eye, and they are proof rather than adjectives */
+        .stat-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            max-width: 1100px; margin: 0.5rem auto 5.5rem;
+            border-top: 1px solid rgba(201,169,110,0.3); border-bottom: 1px solid rgba(201,169,110,0.3);
+        }
+        .stat { position: relative; padding: 2.8rem 1.2rem 2.5rem; text-align: center; }
+        .stat + .stat::before {
+            content: ''; position: absolute; left: 0; top: 24%; bottom: 24%; width: 1px; background: var(--border-subtle);
+        }
+        .stat-n {
+            font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
+            font-size: clamp(56px, 6.8vw, 108px); line-height: 1; color: var(--text-accent);
+            font-variant-numeric: lining-nums tabular-nums; letter-spacing: -1px;
+        }
+        .stat-l {
+            margin: 0.95rem auto 0; max-width: 17ch;
+            font-family: 'Josefin Slab', serif; font-size: 0.72rem; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--text-secondary); line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .stat-strip { grid-template-columns: repeat(2, 1fr); }
+            .stat:nth-child(3)::before { display: none; }
+            .stat:nth-child(n+3) { border-top: 1px solid var(--border-subtle); }
+        }
+
+        /* Cursor glow: a soft gold light that follows the pointer on desktop */
+        .cursor-glow {
+            position: fixed; left: 0; top: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px;
+            border-radius: 50%; pointer-events: none; z-index: 900;
+            background: radial-gradient(circle, rgba(201,169,110,0.14) 0%, rgba(201,169,110,0.05) 34%, rgba(201,169,110,0) 66%);
+            mix-blend-mode: screen; opacity: 0; transition: opacity 0.6s ease; will-change: transform;
+        }
+        .cursor-glow.on { opacity: 1; }
+        @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+            .cursor-glow { display: none; }
+        }
 
         /* Process timeline */
         .process-section h3 {
@@ -1412,11 +1481,11 @@
                     </figure>
                 </div>
             </div>
-            <div class="sband" data-band="0.03,0.12" data-entrance="approach">
-                <h2 class="sb-line">Most websites are forgettable.</h2>
+            <div class="sband sband-giant" data-band="0.03,0.12" data-entrance="words">
+                <h2 class="sb-line sb-giant" data-split>Most websites are forgettable.</h2>
             </div>
-            <div class="sband" data-band="0.13,0.22" data-entrance="words">
-                <h2 class="sb-line" data-split>Yours won't be.</h2>
+            <div class="sband sband-giant" data-band="0.13,0.22" data-entrance="words">
+                <h2 class="sb-line sb-giant sb-gold" data-split>Yours won't be.</h2>
             </div>
             <div class="sband sband-settle" data-band="0.92,1">
                 <h1 class="settle-name">PERKINS<br>PRODUCTION</h1>
@@ -1509,6 +1578,14 @@
         </div>
     </div>
 
+    <!-- By the numbers -->
+    <div class="stat-strip" aria-label="Perkins Production by the numbers">
+        <div class="stat"><div class="stat-n" data-count="4">4</div><div class="stat-l">Sites live</div></div>
+        <div class="stat"><div class="stat-n" data-count="0">0</div><div class="stat-l">Templates</div></div>
+        <div class="stat"><div class="stat-n" data-count="1">1</div><div class="stat-l">Person, start to finish</div></div>
+        <div class="stat"><div class="stat-n" data-count="63">63</div><div class="stat-l">Years of JFK 50 results, all moved over</div></div>
+    </div>
+
     <!-- What you get -->
     <div class="wd-what fade-in">
         <h3>What you get</h3>
@@ -1564,10 +1641,14 @@
     </div>
 
     <!-- The differentiator -->
-    <div class="wd-moat fade-in">
-        <h3>The thing nobody else offers</h3>
-        <p class="moat-line">I hand-code it. I host it. I shoot it.</p>
-        <p>Most web designers hand you a finished site and tell you to go find photos. I spend my days behind a camera, so the photography and film in your site are shot by me, on your property, in your light. Your site never looks like stock, because none of it is.</p>
+    <div class="wd-moat">
+        <h3 class="fade-in">The thing nobody else offers</h3>
+        <div class="moat-lines">
+            <p class="moat-l"><span>I hand-code it.</span></p>
+            <p class="moat-l"><span>I host it.</span></p>
+            <p class="moat-l moat-gold"><span>I shoot it.</span></p>
+        </div>
+        <p class="moat-body fade-in">Most web designers hand you a finished site and tell you to go find photos. I spend my days behind a camera, so the photography and film in your site are shot by me, on your property, in your light. Your site never looks like stock, because none of it is.</p>
     </div>
 
     <!-- Process -->
@@ -2689,6 +2770,70 @@
         }
     })();
 </script>
+
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <script>
+    // ===== MOAT LINES: each slides up out of its own line as it scrolls into view =====
+    (function () {
+        var lines = document.querySelectorAll('.moat-l');
+        if (!lines.length) return;
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) return;   // text simply stays visible
+        document.documentElement.classList.add('moat-js');
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+            });
+        }, { rootMargin: '0px 0px -18% 0px', threshold: 0.4 });
+        lines.forEach(function (l) { io.observe(l); });
+    })();
+
+    // ===== STAT STRIP: numerals count up once when they come into view =====
+    (function () {
+        var nums = document.querySelectorAll('.stat-n[data-count]');
+        if (!nums.length || !('IntersectionObserver' in window)) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;   // real numbers already in the HTML
+        function run(el) {
+            var n = parseInt(el.getAttribute('data-count'), 10);
+            if (!n) { el.textContent = '0'; return; }
+            var t0 = performance.now(), dur = 1400;
+            (function step(now) {
+                var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(n * e);
+                if (p < 1) requestAnimationFrame(step);
+            })(t0);
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
+            });
+        }, { threshold: 0.6 });
+        nums.forEach(function (el) { if (el.getAttribute('data-count') !== '0') el.textContent = '0'; io.observe(el); });
+    })();
+
+    // ===== CURSOR GLOW: eased follow, desktop pointers only, rests when still =====
+    (function () {
+        var g = document.querySelector('.cursor-glow');
+        if (!g) return;
+        if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var tx = 0, ty = 0, x = 0, y = 0, raf = null, last = 0;
+        function tick(now) {
+            var dt = Math.min(64, now - (last || now)); last = now;
+            var k = 1 - Math.pow(1 - 0.18, dt / 16.667);
+            x += (tx - x) * k; y += (ty - y) * k;
+            g.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+            if (Math.abs(tx - x) + Math.abs(ty - y) > 0.4) raf = requestAnimationFrame(tick);
+            else { raf = null; last = 0; }
+        }
+        addEventListener('pointermove', function (e) {
+            tx = e.clientX; ty = e.clientY;
+            if (!g.classList.contains('on')) { x = tx; y = ty; g.classList.add('on'); }
+            if (raf === null) raf = requestAnimationFrame(tick);
+        }, { passive: true });
+        addEventListener('mouseout', function (e) { if (!e.relatedTarget) g.classList.remove('on'); });
+    })();
+    </script>
 
     <!-- Vercel Web Analytics (static-site script; no npm package needed) -->
     <script defer src="/_vercel/insights/script.js"></script>
