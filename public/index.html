@@ -208,12 +208,13 @@
             transform: translateY(calc((1 - var(--kw, 0)) * -26px));
         }
         /* Giant opening: the boldest claim on the site gets the biggest type */
-        .sband-giant { justify-content: center; padding: 0 5vw 9vh; }
+        /* Sits at the top so it clears the wheel below it at every point in the scroll */
+        .sband-giant { justify-content: flex-start; padding: clamp(108px, 12vh, 150px) 5vw 0; }
         .sband-giant::before {
-            background: radial-gradient(ellipse 82% 60% at 50% 46%, rgba(5,5,10,0.64) 0%, rgba(5,5,10,0.4) 48%, rgba(5,5,10,0) 78%);
+            background: radial-gradient(ellipse 84% 44% at 50% 24%, rgba(5,5,10,0.6) 0%, rgba(5,5,10,0.36) 50%, rgba(5,5,10,0) 80%);
         }
         .sb-giant {
-            font-size: clamp(44px, 9.4vw, 160px); line-height: 0.98;
+            font-size: clamp(44px, min(9.4vw, 16.5vh), 160px); line-height: 0.98;
             letter-spacing: -0.5px; max-width: 16ch;
         }
         .sb-giant.sb-gold { color: #D8BC82; }
@@ -2491,7 +2492,7 @@
         }
 
         // The wheel: hub below the stage, cards ride the rim, one turn per site with a dwell to read
-        var WA = 0.22, WB = 0.84, geo = null, wheelOp = null, dotOn = -1;
+        var WA = 0.22, WB = 0.84, geo = null, wheelOp = null, wheelRise = null, dotOn = -1;
         var dots = [].slice.call(document.querySelectorAll('#wheel-dots i'));
         function wheelGeo() {
             if (geo) return geo;
@@ -2509,8 +2510,8 @@
             var omega = g.D * (k + smoothstep(fr, 0.35, 0.85));
             var rise = smoothstep(p, 0.12, 0.21), out = 1 - smoothstep(p, 0.92, 0.965);
             var vis = smoothstep(p, 0.22, 0.25) * out;
-            if (wheelOp === null || Math.abs(vis - wheelOp) > 0.006) {
-                wheelOp = vis;
+            if (wheelOp === null || Math.abs(vis - wheelOp) > 0.006 || Math.abs(rise - wheelRise) > 0.004) {
+                wheelOp = vis; wheelRise = rise;
                 wheel.style.opacity = ((0.35 + 0.65 * rise) * out).toFixed(3);
                 wheel.style.transform = 'translateY(' + ((1 - rise) * 22).toFixed(2) + 'vh)';
             }
@@ -2588,7 +2589,7 @@
             initHeroOnce();
             addEventListener('scroll', onScroll, { passive: true });
             bands.forEach(function (b) { b.op = -1; b.k = -1; });
-            geo = null; wheelOp = null; cards.forEach(function (c) { c.tf = null; c.op = null; c.pan = null; c.lop = null; });
+            geo = null; wheelOp = null; wheelRise = null; cards.forEach(function (c) { c.tf = null; c.op = null; c.pan = null; c.lop = null; });
             target = shown = heroProgress();
             render(shown);
         }
