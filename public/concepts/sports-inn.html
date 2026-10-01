@@ -643,17 +643,16 @@
     <div class="wrap">
       <div class="eyebrow">Walk the courts</div>
       <h2>Find your court before you get here</h2>
-      <p class="lede">Spin it, zoom it: both courts, the pavilion, and where to check in on league night. Built in 3D so first-timers know exactly where to go.</p>
+      <p class="lede">Spin it, zoom it: both courts share one sand pad with a center post, just like the real thing. Check in at the front desk inside. Built in 3D so first-timers know exactly where to go.</p>
       <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
       <model-viewer class="courts3d" src="sports-inn/courts.glb" poster="sports-inn/courts-poster.jpg"
         camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="8deg"
         camera-orbit="40deg 65deg 48m" min-camera-orbit="auto 30deg 20m" max-camera-orbit="auto 80deg 70m"
         interaction-prompt="once" shadow-intensity="0.6" exposure="1.1"
         alt="Interactive 3D map of the Sports Inn sand volleyball courts">
-        <button class="hotspot" slot="hotspot-court1" data-position="-10.5 0.4 0" data-normal="0 1 0">Court 1</button>
-        <button class="hotspot" slot="hotspot-court2" data-position="10.5 0.4 0" data-normal="0 1 0">Court 2</button>
-        <button class="hotspot" slot="hotspot-checkin" data-position="0 2.6 12.5" data-normal="0 1 0">Check in here</button>
-        <button class="hotspot" slot="hotspot-pavilion" data-position="0 3.4 -13.5" data-normal="0 1 0">Pavilion</button>
+        <button class="hotspot" slot="hotspot-court1" data-position="0 0.4 4.3" data-normal="0 1 0">Court 1</button>
+        <button class="hotspot" slot="hotspot-court2" data-position="0 0.4 -4.3" data-normal="0 1 0">Court 2</button>
+        <button class="hotspot" slot="hotspot-checkin" data-position="-19.4 3.6 0" data-normal="0 1 0">Check in at the front desk</button>
       </model-viewer>
       <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">Drag to spin, pinch or scroll to zoom. Modeled in Blender from the real layout on Pine Drive.</p>
     </div>
