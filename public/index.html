@@ -9,7 +9,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#0b1528">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.perkinsproduction.com/">
     <meta property="og:title" content="Perkins Production | Websites that move">
@@ -51,22 +51,23 @@
         :root {
             --bg-primary: #0a0a0a;
             --bg-secondary: #111111;
-            --bg-card: #1a1a1a;
-            --bg-card-hover: #222222;
+            --bg-card: rgba(12,20,36,0.55);
+            --bg-card-hover: rgba(18,30,52,0.7);
+            --bg-midnight: #05080f;
             --text-primary: #e8e8e8;
             --text-secondary: #999999;
             --text-accent: #c9a96e;
             --text-accent-light: #d4b87a;
-            --border-subtle: #2a2a2a;
+            --border-subtle: rgba(150,175,215,0.14);
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         /* Smooth scrolling is handled in JS (bounded duration); CSS smooth fights the scrub hero */
-        html { scroll-behavior: auto; }
+        html { scroll-behavior: auto; background-color: var(--bg-midnight); }
 
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            background-color: var(--bg-primary);
+            background: transparent;
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
@@ -77,11 +78,11 @@
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             padding: 1.2rem 2.5rem;
             display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(10,10,10,0.97), rgba(10,10,10,0.6));
+            background: linear-gradient(to bottom, rgba(7,12,24,0.88), rgba(7,12,24,0));
             transition: var(--transition);
         }
         nav.scrolled {
-            background: rgba(10,10,10,0.98);
+            background: rgba(8,14,27,0.86);
             padding: 0.8rem 2.5rem;
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-subtle);
@@ -117,7 +118,7 @@
             display: flex; flex-direction: column; gap: 0; min-width: 220px;
             position: absolute; top: calc(100% + 14px); left: 50%;
             padding: 8px 0; margin: 0; list-style: none;
-            background: rgba(10,10,10,0.98); border: 1px solid var(--border-subtle);
+            background: rgba(8,14,27,0.96); border: 1px solid var(--border-subtle);
             opacity: 0; visibility: hidden; transform: translate(-50%, -8px);
             transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
         }
@@ -154,11 +155,11 @@
         .hamburger span { width: 28px; height: 1px; background: var(--text-primary); transition: var(--transition); }
 
         /* ===== HERO ===== */
-        #home { position: relative; background: var(--bg-primary); padding: 0; }
+        #home { position: relative; background: transparent; padding: 0; }
         .classic-hero {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            position: relative; background: var(--bg-primary); overflow: hidden;
+            position: relative; background: transparent; overflow: hidden;
         }
         .classic-hero::before {
             content: ''; position: absolute; inset: 0;
@@ -169,7 +170,7 @@
         .scrub-wrap { display: block; height: 520vh; position: relative; }
         .scrub-stage {
             position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
-            background: var(--bg-primary);
+            background: transparent;
         }
         .scrub-stage video, .scrub-poster {
             position: absolute; inset: 0; width: 100%; height: 100%;
@@ -289,13 +290,13 @@
         }
         .wheel-card {
             position: absolute; left: 50%; top: 60%; width: min(48vw, 720px, calc(58vh * 1.6)); aspect-ratio: 16 / 10;
-            margin: 0; border-radius: 10px; overflow: hidden; background: #121212;
+            margin: 0; border-radius: 10px; overflow: hidden; background: #0e1526;
             border: 1px solid rgba(201,169,110,0.32); box-shadow: 0 30px 80px rgba(0,0,0,0.65);
             opacity: 0; will-change: transform, opacity;
         }
         .wheel-card .bar {
             position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 1;
-            background: #171717; border-bottom: 1px solid #262626;
+            background: #131c30; border-bottom: 1px solid #22304a;
             display: flex; align-items: center; gap: 6px; padding: 0 12px;
         }
         .wheel-card .bar i { width: 9px; height: 9px; border-radius: 50%; background: #3b3b3b; }
@@ -304,7 +305,7 @@
             margin-left: 10px; font-family: 'Josefin Slab', serif; font-size: 10px;
             letter-spacing: 2px; text-transform: uppercase; color: #777;
         }
-        .wheel-card .shot { position: absolute; top: 30px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #0f0f0f; }
+        .wheel-card .shot { position: absolute; top: 30px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #0b1120; }
         .wheel-card .shot img { display: block; width: 100%; height: auto; will-change: transform; }
         .wheel-card .card-link {
             position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end; justify-content: center;
@@ -366,7 +367,7 @@
         @keyframes kbDriftD { from { transform: scale(1.07) translate(0.7%,-1%); } to { transform: scale(1.01) translate(-0.7%,0.4%); } }
         #hero-veil {
             position: absolute; inset: 0; z-index: 0;
-            background: radial-gradient(ellipse at center, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.85) 60%, rgba(10,10,10,0.96) 100%);
+            background: radial-gradient(ellipse at center, rgba(5,9,18,0.7) 0%, rgba(5,9,18,0.84) 60%, rgba(5,9,18,0.95) 100%);
         }
         @media (prefers-reduced-motion: reduce) {
             .reel-slide { animation: none !important; transition: none; }
@@ -427,7 +428,7 @@
             color: var(--text-secondary); font-size: 1.1rem; font-style: italic;
             max-width: 600px; margin: 0 auto;
         }
-        .alt-bg { background: var(--bg-secondary); }
+        .alt-bg { background: rgba(140,170,220,0.025); border-top: 1px solid rgba(150,175,215,0.06); border-bottom: 1px solid rgba(150,175,215,0.06); }
 
         /* ===== WEDDINGS ===== */
         .category-intro {
@@ -503,7 +504,7 @@
         .section-cta a:hover { background: var(--text-accent); color: var(--bg-primary); }
 
         /* ===== WEDDING FILMS ===== */
-        #films { background: #070707; }
+        #films { background: rgba(2,4,9,0.45); }
         .films-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
@@ -527,7 +528,7 @@
         .film-play span {
             width: 62px; height: 62px; border-radius: 50%;
             border: 1px solid var(--text-accent);
-            background: rgba(10,10,10,0.55);
+            background: rgba(5,9,18,0.55);
             display: flex; align-items: center; justify-content: center;
             transition: var(--transition);
         }
@@ -674,7 +675,7 @@
         .booking-form textarea,
         .booking-form select {
             width: 100%; padding: 14px 18px;
-            background: var(--bg-primary); border: 1px solid var(--border-subtle);
+            background: rgba(4,8,16,0.7); border: 1px solid var(--border-subtle);
             color: var(--text-primary); font-family: 'Cormorant Garamond', serif;
             font-size: 1rem; transition: var(--transition);
         }
@@ -684,7 +685,7 @@
             outline: none; border-color: var(--text-accent);
         }
         .booking-form textarea { height: 130px; resize: vertical; }
-        .booking-form select option { background: var(--bg-primary); }
+        .booking-form select option { background: #0b1528; }
 
         .booking-form button {
             padding: 16px 50px; background: var(--text-accent);
@@ -708,7 +709,7 @@
         .contact-form input,
         .contact-form textarea {
             width: 100%; padding: 14px 18px;
-            background: var(--bg-primary); border: 1px solid var(--border-subtle);
+            background: rgba(4,8,16,0.7); border: 1px solid var(--border-subtle);
             color: var(--text-primary); font-family: 'Cormorant Garamond', serif;
             font-size: 1rem; transition: var(--transition);
         }
@@ -849,7 +850,7 @@
         }
         .portfolio-preview {
             width: 100%; aspect-ratio: 16/9; overflow: hidden;
-            background: var(--bg-primary); position: relative;
+            background: #070c18; position: relative;
         }
         .portfolio-preview iframe {
             width: 200%; height: 200%; border: none;
@@ -1014,6 +1015,38 @@
             .cursor-glow { display: none; }
         }
 
+        /* Midnight backdrop: fixed navy field behind everything, slow drifting light, fine grain */
+        .bg-field {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+            background: linear-gradient(165deg, #0e1c33 0%, #091324 45%, #05080f 100%);
+        }
+        .bg-glow { position: absolute; border-radius: 50%; will-change: transform; }
+        .bg-glow-a {
+            width: 78vmax; height: 78vmax; left: -22vmax; top: -30vmax;
+            background: radial-gradient(circle, rgba(201,169,110,0.20) 0%, rgba(201,169,110,0.06) 40%, rgba(201,169,110,0) 68%);
+            animation: bgDriftA 46s ease-in-out infinite alternate;
+        }
+        .bg-glow-b {
+            width: 70vmax; height: 70vmax; right: -24vmax; bottom: -32vmax;
+            background: radial-gradient(circle, rgba(37,96,170,0.34) 0%, rgba(37,96,170,0.10) 42%, rgba(37,96,170,0) 68%);
+            animation: bgDriftB 58s ease-in-out infinite alternate;
+        }
+        .bg-glow-c {
+            width: 54vmax; height: 54vmax; left: 30%; top: 38%;
+            background: radial-gradient(circle, rgba(30,120,120,0.16) 0%, rgba(30,120,120,0.05) 42%, rgba(30,120,120,0) 68%);
+            animation: bgDriftC 52s ease-in-out infinite alternate;
+        }
+        .bg-grain {
+            position: absolute; inset: 0; opacity: 0.07;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
+        @keyframes bgDriftA { from { transform: translate(0,0) scale(1); } to { transform: translate(9vmax,7vmax) scale(1.12); } }
+        @keyframes bgDriftB { from { transform: translate(0,0) scale(1.06); } to { transform: translate(-10vmax,-6vmax) scale(0.94); } }
+        @keyframes bgDriftC { from { transform: translate(0,0); } to { transform: translate(-12vmax,8vmax); } }
+        @media (prefers-reduced-motion: reduce) {
+            .bg-glow { animation: none; }
+        }
+
         /* Process timeline */
         .process-section h3 {
             text-align: center; font-family: 'Josefin Slab', serif;
@@ -1047,7 +1080,7 @@
         .cinematic-card { position: relative; overflow: hidden; }
         .tier-shot {
             margin: -2.5rem -2rem 1.2rem; padding: 1.5rem 0.8rem 0;
-            background: linear-gradient(180deg, rgba(201,169,110,0.07), rgba(10,10,10,0) 78%);
+            background: linear-gradient(180deg, rgba(201,169,110,0.07), rgba(5,9,18,0) 78%);
             pointer-events: none;
         }
         .tier-shot img { display: block; width: 100%; height: auto; }
@@ -1090,7 +1123,7 @@
 
         /* ===== FOOTER ===== */
         footer {
-            background: var(--bg-primary); padding: 3rem;
+            background: rgba(3,6,12,0.6); padding: 3rem;
             text-align: center; border-top: 1px solid var(--border-subtle);
         }
         .footer-logo svg { height: 45px; width: auto; opacity: 0.5; margin-bottom: 1.5rem; }
@@ -1127,7 +1160,7 @@
             .hamburger { display: flex; }
             .nav-links {
                 position: fixed; top: 0; right: -100%; height: 100vh; width: 100%;
-                background: var(--bg-primary); flex-direction: column;
+                background: rgba(6,11,22,0.98); flex-direction: column;
                 justify-content: center; align-items: center;
                 transition: var(--transition); gap: 2rem;
             }
@@ -1390,6 +1423,7 @@
     </style>
 </head>
 <body>
+<div class="bg-field" aria-hidden="true"><div class="bg-glow bg-glow-a"></div><div class="bg-glow bg-glow-b"></div><div class="bg-glow bg-glow-c"></div><div class="bg-grain"></div></div>
 <div class="scroll-progress" id="scroll-progress"></div>
 
 <!-- Navigation -->
