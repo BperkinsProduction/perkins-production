@@ -1,57 +1,29 @@
-    <!-- Portfolio -->
-    <div class="portfolio-grid">
-        <div class="portfolio-card featured fade-in">
+---
+import { getWorkCards } from '../../utils/work';
+import { text } from '../../utils/text';
+
+const sites = await getWorkCards();
+---
+<!-- Portfolio -->
+<div class="portfolio-grid">
+    {sites.map((site) => (
+        <div class:list={['portfolio-card', { featured: site.card.featured }, 'fade-in']}>
             <div class="portfolio-preview">
-                <img src="/deck/jfk-desktop.jpg" alt="The JFK 50 Mile website homepage" loading="lazy" decoding="async">
-                <a href="https://jfk50mile.org/" target="_blank" rel="noopener" class="preview-overlay">
+                <img src={site.shots.desktop} alt={site.card.alt} loading="lazy" decoding="async">
+                <a href={site.url} target="_blank" rel="noopener" class="preview-overlay">
                     <span>Visit Site</span>
                 </a>
             </div>
             <div class="portfolio-info">
-                <div class="portfolio-type">Events &amp; Athletics</div>
-                <h3>JFK 50 Mile</h3>
-                <p>The official website for America's oldest ultramarathon, run since 1963: course details, runner information, decades of race results, and event merchandise for the historic Washington County race.</p>
+                <div class="portfolio-type" set:html={text(site.category)} />
+                <h3 set:html={text(site.name)} />
+                <p set:html={text(site.card.description)} />
                 <div class="portfolio-tech">
-                    <span>Registration sold out</span>
-                    <span>Results back to 1963</span>
-                    <span>Race-day countdown</span>
+                    {site.card.tags.map((tag) => (
+                        <span set:html={text(tag)} />
+                    ))}
                 </div>
             </div>
         </div>
-        <div class="portfolio-card fade-in">
-            <div class="portfolio-preview">
-                <img src="/deck/shotgun-desktop.jpg" alt="The Shotgun Cup Series standings page" loading="lazy" decoding="async">
-                <a href="https://shotgun-cup-series.vercel.app/" target="_blank" rel="noopener" class="preview-overlay">
-                    <span>Visit Site</span>
-                </a>
-            </div>
-            <div class="portfolio-info">
-                <div class="portfolio-type">Sports &amp; Recreation</div>
-                <h3>Shotgun Cup Series</h3>
-                <p>A golf league platform with live season standings, leaderboards, player stats, and automatic scoring, built for competitive fun.</p>
-                <div class="portfolio-tech">
-                    <span>Live standings</span>
-                    <span>Automatic scoring</span>
-                    <span>Player stats</span>
-                </div>
-            </div>
-        </div>
-        <div class="portfolio-card fade-in">
-            <div class="portfolio-preview">
-                <img src="/deck/bot-desktop.jpg" alt="The Back on Track website homepage" loading="lazy" decoding="async">
-                <a href="https://backontrack-website.vercel.app/" target="_blank" rel="noopener" class="preview-overlay">
-                    <span>Visit Site</span>
-                </a>
-            </div>
-            <div class="portfolio-info">
-                <div class="portfolio-type">Nonprofit &amp; Community</div>
-                <h3>Back on Track</h3>
-                <p>A community track &amp; field series site with event schedules, results galleries, sponsor showcases, newsletters, and waiver downloads.</p>
-                <div class="portfolio-tech">
-                    <span>Results galleries</span>
-                    <span>Sponsor showcase</span>
-                    <span>Waivers and newsletters</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    ))}
+</div>

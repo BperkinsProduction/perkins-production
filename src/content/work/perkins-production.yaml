@@ -1,0 +1,16 @@
+# This site. Wheel only (it is the page you are on), and its card links down to the Work grid.
+name: Perkins Production
+category: This site
+url: https://www.perkinsproduction.com/
+shots:
+  desktop: /deck/perkins-desktop.jpg
+  mobile: /deck/perkins-mobile.jpg
+wheel:
+  order: 4
+  blurb: The site you're on right now. Hand-coded, hosted, and shot by one person.
+  alt: The Perkins Production website
+  bar: perkinsproduction.com
+  link:
+    href: "#webdesign"
+    label: Visit the work on this site
+    text: See the work

@@ -1,0 +1,19 @@
+name: Shotgun Cup Series
+category: Sports & Recreation
+url: https://shotgun-cup-series.vercel.app/
+shots:
+  desktop: /deck/shotgun-desktop.jpg
+  mobile: /deck/shotgun-mobile.jpg
+wheel:
+  order: 3
+  blurb: "A golf league that scores itself: live standings, leaderboards, and player stats."
+  alt: The Shotgun Cup Series website
+  bar: shotgun cup series
+card:
+  order: 2
+  alt: The Shotgun Cup Series standings page
+  description: A golf league platform with live season standings, leaderboards, player stats, and automatic scoring, built for competitive fun.
+  tags:
+    - Live standings
+    - Automatic scoring
+    - Player stats

@@ -1,0 +1,20 @@
+name: JFK 50 Mile
+category: Events & Athletics
+url: https://jfk50mile.org/
+shots:
+  desktop: /deck/jfk-desktop.jpg
+  mobile: /deck/jfk-mobile.jpg
+wheel:
+  order: 1
+  blurb: America's oldest ultramarathon. Results back to 1963, a live race-day countdown, and a registration that sold out.
+  alt: The JFK 50 Mile website
+  bar: jfk50mile.org
+card:
+  order: 1
+  featured: true
+  alt: The JFK 50 Mile website homepage
+  description: "The official website for America's oldest ultramarathon, run since 1963: course details, runner information, decades of race results, and event merchandise for the historic Washington County race."
+  tags:
+    - Registration sold out
+    - Results back to 1963
+    - Race-day countdown
