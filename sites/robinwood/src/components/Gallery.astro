@@ -1,0 +1,20 @@
+---
+import { cases } from "../data/gallery.js";
+---
+<div class="divider" data-contour="divider" aria-hidden="true"></div>
+
+<!-- 6. before and after -->
+<section class="sec" aria-labelledby="ba-h" style="padding-top:clamp(50px,7vw,90px)">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Before and after</span>
+    <h2 id="ba-h" data-reveal style="--d:1">Real patients, real results.</h2>
+    <div class="smiles">
+      {cases.map((c, i) => (
+        <div class="ba" data-reveal style={`--d:${i % 4}`}><div class="ba-frame"><img src={`assets/ba-${c.key}-after.jpg`} alt={`Case ${c.n} after treatment`} loading="lazy" width="282" height="182"><img class="ba-before" src={`assets/ba-${c.key}-before.jpg`} alt={`Case ${c.n} before treatment`} loading="lazy" width="282" height="182"><span class="ba-line"><b aria-hidden="true">&#8596;</b></span><span class="ba-tag b">Before</span><span class="ba-tag a">After</span><input type="range" min="0" max="100" value="50" aria-label={`Compare before and after, case ${c.n}`}><span class="ba-ring"></span></div><p class="ba-cap">Actual patient. Drag to compare.</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+  import "../scripts/before-after.js";
+</script>

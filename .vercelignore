@@ -1,0 +1,2 @@
+# Source projects build to public/ ahead of time; only their output is served.
+sites/

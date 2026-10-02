@@ -1,0 +1,19 @@
+---
+import { phone } from "../data/contact.js";
+---
+<!-- the static hero: phones, upright tablets, reduced motion, or no video -->
+<section class="hero-static" aria-label="Welcome">
+  <picture>
+    <source media="(orientation: portrait)" srcset="assets/hero-end-portrait.jpg">
+    <img src="assets/hero-end.jpg" alt="" width="1920" height="1080">
+  </picture>
+  <div class="scrim-v"></div>
+  <div class="copy">
+    <span class="logo-slot" aria-hidden="true"><img src="assets/logo-rw.svg" alt="" width="358" height="44"></span>
+    <span class="eyebrow">Middletown and Hagerstown, Maryland</span>
+    <h1>Dentistry, at ease.</h1>
+    <p class="sub">Nervous about the dentist? You&rsquo;re not the only one. Two offices, one team, and dentists who explain every step before it happens.</p>
+    <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href={`tel:${phone.tel}`}>Call {phone.display}</a></div>
+  </div>
+  <div class="fade"></div>
+</section>

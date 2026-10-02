@@ -1,0 +1,18 @@
+---
+import { faqs } from "../data/faq.js";
+---
+<!-- 9. questions nervous patients ask -->
+<section class="sec" id="questions" aria-labelledby="q-h">
+  <div class="wrap faq-grid">
+    <div>
+      <span class="kicker" data-reveal>Questions</span>
+      <h2 id="q-h" data-reveal style="--d:1">Questions nervous patients ask.</h2>
+      <p class="tips-link" data-reveal style="--d:2"><button class="btn btn-quiet" type="button" id="open-tips">Read the tips library, 33 articles</button></p>
+    </div>
+    <div class="faqs">
+      {faqs.map((f) => (
+        <details data-reveal><summary>{f.q}</summary><div class="a"><p set:html={f.a} /></div></details>
+      ))}
+    </div>
+  </div>
+</section>

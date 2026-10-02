@@ -1,0 +1,22 @@
+---
+import { dentists, otherDentists } from "../data/dentists.js";
+import { team } from "../data/team.js";
+---
+<!-- 5. your dentists -->
+<section class="sec" id="dentists" aria-labelledby="dd-h" style="padding-top:clamp(40px,5vw,70px)">
+  <div class="wrap">
+    <div class="docs-head">
+      <div><span class="kicker" data-reveal>Your dentists</span><h2 id="dd-h" data-reveal style="--d:1">Meet your dentists.</h2></div>
+      <p class="lede" data-reveal style="--d:2">Dr. Bandeff came home to practice where he grew up. Dr. Love grew up in Boonsboro, on the road between the two offices.</p>
+    </div>
+    <div class="docs">
+      {dentists.map((d, i) => (
+        <button class="doc" data-bio={d.bio} data-img={d.img} data-reveal style={`--d:${i % 4}`}><span class="ph"><img src={`assets/${d.img}.jpg`} alt="" loading="lazy" width="190" height="253"></span><span class="role">{d.role}</span><h3>{d.name}</h3><q>{d.quote}</q><span class="more">{d.more}</span></button>
+      ))}
+    </div>
+    <p class="docs-more" data-reveal>{otherDentists}</p>
+    <details class="team" data-reveal><summary>Meet the whole team <span>The hygienists, assistants and front desk you&rsquo;ll see, by first name</span></summary><div class="team-cols">{team.map((o) => (
+      <div><h3>{o.office}</h3><dl>{o.roles.map((r) => (<><dt>{r.role}</dt><dd>{r.names}</dd></>))}</dl></div>
+    ))}</div></details>
+  </div>
+</section>

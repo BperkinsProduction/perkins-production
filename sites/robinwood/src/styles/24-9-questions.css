@@ -1,0 +1,13 @@
+/* 9. questions */
+.faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(30px,6vw,90px)}
+.faqs details{border-bottom:1px solid var(--line)}
+.faqs details:first-child{border-top:1px solid var(--line-strong)}
+.faqs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 2px;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-size:1.4rem;min-height:44px}
+.faqs summary::-webkit-details-marker{display:none}
+.faqs summary::after{content:"";flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line-strong);background:linear-gradient(var(--ink),var(--ink)) center/12px 1.5px no-repeat,linear-gradient(var(--ink),var(--ink)) center/1.5px 12px no-repeat;transition:transform .35s var(--ease)}
+.faqs details[open] summary::after{transform:rotate(45deg)}
+.faqs .a{padding:0 2px 24px;color:var(--text-secondary);max-width:60ch}
+.faqs .a p{margin:0}
+.tips-link{margin-top:26px}
+@media (max-width: 900px){.faq-grid{grid-template-columns:1fr}}
+

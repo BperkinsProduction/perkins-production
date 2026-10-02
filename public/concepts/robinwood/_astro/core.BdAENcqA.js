@@ -1,0 +1,1 @@
+var e=document.documentElement,t=matchMedia(`(prefers-reduced-motion: reduce)`);function n(e,t,n){return e<t?t:e>n?n:e}function r(e,t,r){var i=n((r-e)/(t-e),0,1);return i*i*(3-2*i)}export{r as i,t as n,e as r,n as t};

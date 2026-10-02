@@ -1,0 +1,19 @@
+---
+import { contact, social, offices, visitLinks } from "../data/footer.js";
+---
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="logo-chip"><img src="assets/logo-rw.svg" alt="Robinwood Dental Center" width="358" height="44"></span>
+        <p style="margin-top:18px"><a href={contact.phone.href}>{contact.phone.label}</a><br><a href={`mailto:${contact.email}`}>{contact.email}</a><br>Fax {contact.fax}</p>
+        <p>{social.map((s, i) => <>{i > 0 && <> &nbsp; </>}<a href={s.href} target="_blank" rel="noopener">{s.label}</a></>)}</p>
+      </div>
+      {offices.map((o) => (
+        <div><h4>{o.name}</h4><p>{o.address.map((l, i) => <>{i > 0 && <br>}{l}</>)}</p><p>{o.hours.map((l, i) => <>{i > 0 && <br>}{l}</>)}</p></div>
+      ))}
+      <div><h4>Visit</h4><p>{visitLinks.map((l, i) => <>{i > 0 && <br>}<a href={l.href}>{l.label}</a></>)}</p></div>
+    </div>
+    <p class="disc">The landscape, rooms and people in this concept are illustrative. A real photo and video shoot of the practice replaces them. Design concept by Perkins Production, Frederick, Maryland. Not affiliated with or endorsed by Robinwood Dental Center.</p>
+  </div>
+</footer>

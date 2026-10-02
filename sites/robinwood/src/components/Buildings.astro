@@ -1,0 +1,20 @@
+---
+import { buildings } from "../data/buildings.js";
+---
+<!-- the reveal: both real buildings, parting out of the mist -->
+<section class="buildings" id="buildings" aria-labelledby="bd-h">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Our two offices</span>
+    <h2 id="bd-h" data-reveal style="--d:1">Pick the side of the mountain that&rsquo;s closer.</h2>
+  </div>
+  <div class="bldgs">
+    {buildings.map((b) => (
+      <figure class={`bldg ${b.cls}`}><div class="ph"><img src={b.img} alt={b.alt} width="1400" height="1120"></div><figcaption><span class="side">{b.side}</span><b>{b.town}</b><span>{b.address}</span></figcaption></figure>
+    ))}
+    <div class="bldg-mist" aria-hidden="true"></div>
+  </div>
+  <p class="wrap bldg-link" data-reveal><a href="#offices">Hours, directions, and the road between them</a></p>
+</section>
+<script>
+  import "../scripts/buildings.js";
+</script>

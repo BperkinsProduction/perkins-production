@@ -1,0 +1,24 @@
+---
+import { reviews } from "../data/reviews.js";
+---
+<div class="divider" data-contour="divider" aria-hidden="true"></div>
+
+<!-- 3. patients who were nervous too -->
+<section class="sec" aria-labelledby="rv-h" style="padding-top:clamp(50px,7vw,90px)">
+  <div class="wrap reviews-head">
+    <div>
+      <span class="kicker" data-reveal>Patients who were nervous too</span>
+      <h2 id="rv-h" data-reveal style="--d:1">In their words.</h2>
+    </div>
+    <div class="track-btns" data-reveal style="--d:2"><button type="button" data-dir="-1" aria-label="Previous reviews">&#8592;</button><button type="button" data-dir="1" aria-label="Next reviews">&#8594;</button></div>
+  </div>
+  <div class="track" id="track" tabindex="0" aria-label="Patient reviews">
+    {reviews.map((r, i) => (
+      <figure class="quote" data-reveal style={`--d:${i}`}><span class="mark" aria-hidden="true">&ldquo;</span><p>{r.quote}</p><figcaption class="who">{r.name}</figcaption></figure>
+    ))}
+  </div>
+  <div class="wrap"><p class="reviews-foot">4.7 stars across about 712 Google reviews. On the live site these come straight from Google.</p></div>
+</section>
+<script>
+  import "../scripts/reviews.js";
+</script>

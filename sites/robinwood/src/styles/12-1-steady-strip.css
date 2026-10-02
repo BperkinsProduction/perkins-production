@@ -1,0 +1,14 @@
+/* 1. steady strip */
+.steady{padding:clamp(40px,6vw,70px) 0 clamp(70px,8vw,110px)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line)}
+.fact{padding:28px 22px 26px;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact .num{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(2.6rem,4.6vw,4rem);line-height:1;color:var(--brand);display:block;margin-bottom:.5rem;font-variant-numeric:tabular-nums}
+.fact .lbl{font-weight:600;color:var(--text-secondary);font-size:1rem;line-height:1.4;display:block;max-width:22ch}
+.emerg{display:flex;gap:18px;align-items:center;margin-top:28px;padding:20px 24px;border-radius:var(--r);background:var(--panel);box-shadow:0 1px 0 var(--line),0 18px 40px -30px rgba(15,46,58,.35)}
+.emerg .dot{flex:none;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 6px rgba(2,128,173,.14);animation:pulse 2.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 11px rgba(2,128,173,0)}}
+.emerg p{margin:0;font-size:1.08rem}
+.emerg a{font-weight:700;white-space:nowrap}
+@media (max-width: 860px){.facts{grid-template-columns:1fr 1fr}.fact:nth-child(3){border-left:0;padding-left:0}.fact:nth-child(n+3){border-top:1px solid var(--line)}}
+

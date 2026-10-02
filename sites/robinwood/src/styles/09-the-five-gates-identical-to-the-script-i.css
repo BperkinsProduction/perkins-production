@@ -1,0 +1,6 @@
+/* the five gates, identical to the script in the head */
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+  html.scrub .hero-scrub{display:none}
+  html.scrub .hero-static{display:grid}
+}
+

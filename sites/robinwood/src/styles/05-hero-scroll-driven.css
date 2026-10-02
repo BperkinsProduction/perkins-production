@@ -1,0 +1,38 @@
+/* ------------------------------------------------ hero, scroll-driven */
+.hero-scrub{display:none;position:relative;height:380vh}
+html.scrub .hero-scrub{display:block}
+html.scrub .hero-static{display:none}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#dfe7ea}
+.stage .poster,.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.stage video{opacity:0;transition:opacity .5s linear}
+.stage.ready video{opacity:1}
+/* legibility layer 1: base scrim along the left, where the captions live */
+.scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(242,246,247,.74) 0%,rgba(242,246,247,.52) 32%,rgba(242,246,247,.16) 52%,rgba(242,246,247,0) 66%)}
+.stage-fade{position:absolute;inset:auto 0 0 0;height:22vh;background:linear-gradient(180deg,rgba(242,246,247,0),rgba(242,246,247,.9) 85%,var(--canvas));pointer-events:none;opacity:var(--fade,0)}
+.bands{position:absolute;left:max(6vw,32px);top:clamp(96px,19vh,200px);width:min(46vw,640px)}
+.band{position:absolute;left:0;top:0;width:100%;opacity:0;visibility:hidden;--k:0;text-shadow:var(--halo)}
+.band.on{visibility:visible}
+/* legibility layer 2: a soft cloud of mist behind each band */
+.band::before{content:"";position:absolute;inset:-12% -18% -16% -14%;z-index:-1;background:radial-gradient(closest-side,rgba(242,246,247,.72),rgba(242,246,247,.18) 80%,rgba(242,246,247,0));filter:blur(8px)}
+.band .eyebrow{font-family:var(--mono);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.85;margin-bottom:1.1rem;display:block}
+.band .line{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(1.4rem,2.2vw,2rem);line-height:1.2;margin-bottom:.4rem}
+.band .big{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(2.8rem,5.6vw,5.8rem);line-height:1.02;letter-spacing:-.02em;margin:0}
+.band .big em{font-style:normal;color:var(--brand)}
+.sunrise{display:block;width:72px;height:3px;border-radius:2px;background:var(--accent);margin:1.4rem 0 0}
+/* band 1: blur to sharp, settled on load */
+.e-blur > *{animation:sharpen 1.6s var(--ease) both}
+.e-blur > *:nth-child(2){animation-delay:.18s}.e-blur > *:nth-child(3){animation-delay:.36s}.e-blur > *:nth-child(4){animation-delay:.6s}
+@keyframes sharpen{from{opacity:0;filter:blur(14px);transform:translateY(8px)}to{opacity:1;filter:blur(0);transform:none}}
+/* band 2: drift down, the way the camera sinks */
+.e-quote blockquote{margin:0;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;font-size:clamp(2.2rem,4.2vw,4.3rem);line-height:1.1;letter-spacing:-.015em;transform:translateY(calc((var(--k) - 1) * 46px));filter:blur(calc((1 - var(--k)) * 6px))}
+.e-quote .who{margin-top:1.4rem;transform:translateY(calc((var(--k) - 1) * 24px));opacity:var(--k)}
+/* band 3: the halves part, like the mist */
+.e-part .h1a,.e-part .h1b{display:block}
+.e-part .h1a{transform:translate(calc((1 - var(--k)) * 2.6rem),calc((1 - var(--k)) * .55em))}
+.e-part .h1b{transform:translate(calc((var(--k) - 1) * 2.6rem),calc((var(--k) - 1) * .55em));color:var(--brand)}
+.e-part .line{margin-top:1.3rem;opacity:clamp(0,calc(var(--k) * 2 - 1),1)}
+/* band 4: word by word, then a staged settle */
+.e-words .big .w{display:inline-block;opacity:clamp(0,calc(var(--k) * var(--n) * 1.6 - var(--i)),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) * var(--n) * 1.6 - var(--i))),1) * .5em))}
+.e-words .sub{font-size:clamp(1.05rem,1.35vw,1.25rem);font-weight:600;max-width:34ch;margin:1.3rem 0 0;opacity:clamp(0,calc((var(--k) - .55) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .55) * 4),1) * 14px))}
+.e-words .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.6rem;opacity:clamp(0,calc((var(--k) - .72) * 4),1);transform:translateY(calc(clamp(0,calc(1 - (var(--k) - .72) * 4),1) * 14px))}
+.e-words .ctas .btn{text-shadow:none}

@@ -1,0 +1,75 @@
+---
+// The page shell: the head exactly as the hand-written page had it, every style file in its original order.
+import "../styles/00-base-tokens-reset-type.css";
+import "../styles/01-buttons-dark-ink-on-orange-5-2-1-white-o.css";
+import "../styles/02-fixed-environment-mist-and-the-mountain-.css";
+import "../styles/03-header.css";
+import "../styles/04-phones-a-steady-call-and-book-bar.css";
+import "../styles/05-hero-scroll-driven.css";
+import "../styles/06-story-beats-a-drift-entrance-and-the-pra.css";
+import "../styles/07-the-logo-big-on-the-opening-screen-then-.css";
+import "../styles/08-hero-static-phones-tablets-held-upright-.css";
+import "../styles/09-the-five-gates-identical-to-the-script-i.css";
+import "../styles/10-shared-section-rhythm-and-entrances.css";
+import "../styles/11-the-reveal-after-the-hero-both-real-buil.css";
+import "../styles/12-1-steady-strip.css";
+import "../styles/13-2-first-visit-with-the-breath.css";
+import "../styles/14-3-reviews-a-sideways-track.css";
+import "../styles/15-4-one-road-two-offices.css";
+import "../styles/16-the-flight-hagerstown-to-middletown-alon.css";
+import "../styles/17-5-dentists.css";
+import "../styles/18-6-before-and-after.css";
+import "../styles/19-7-services-a-numbered-list.css";
+import "../styles/20-services-real-photos-from-the-practice-s.css";
+import "../styles/21-inside-robinwood-two-rows-of-real-photos.css";
+import "../styles/22-services-big-photo-cards.css";
+import "../styles/23-8-family-a-full-bleed-photo.css";
+import "../styles/24-9-questions.css";
+import "../styles/25-10-book-a-visit.css";
+import "../styles/26-good-to-know.css";
+import "../styles/27-the-whole-team.css";
+import "../styles/28-forms-and-aftercare.css";
+import "../styles/29-the-message-form.css";
+import "../styles/30-11-footer.css";
+import "../styles/31-the-reader-bios-service-pages-articles.css";
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robinwood Dental Center | Middletown and Hagerstown, Maryland</title>
+<meta name="description" content="Two offices, one team. Robinwood Dental Center has cared for families in Middletown and Hagerstown, Maryland since 2003. Book a visit or call 240.313.9660.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2F6F7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230280ad%22/%3E%3Cpath d=%22M6 21c4-6 7-9 10-9s6 3 10 9%22 fill=%22none%22 stroke=%22%23a1dfe0%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2224%22 cy=%2210%22 r=%222.6%22 fill=%22%23fb681a%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..500,100,0&family=IBM+Plex+Mono:wght@400;500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-poster.jpg">
+<script type="application/ld+json" is:inline>
+{"@context":"https://schema.org","@type":"Dentist","name":"Robinwood Dental Center","telephone":"+1-240-313-9660","email":"info@robinwooddentalcenter.com","foundingDate":"2003-11","sameAs":["https://www.facebook.com/robinwooddental/","https://www.instagram.com/robinwooddental/"],
+"location":[
+{"@type":"Dentist","name":"Robinwood Dental Center, Middletown","telephone":"+1-240-313-9660","address":{"@type":"PostalAddress","streetAddress":"4310 Old National Pike","addressLocality":"Middletown","addressRegion":"MD","postalCode":"21769","addressCountry":"US"},"openingHours":["Mo-Th 08:00-17:00","Fr 08:00-14:00"]},
+{"@type":"Dentist","name":"Robinwood Dental Center, Hagerstown","telephone":"+1-240-313-9660","address":{"@type":"PostalAddress","streetAddress":"11110 Medical Campus Road, Suite 148","addressLocality":"Hagerstown","addressRegion":"MD","postalCode":"21742","addressCountry":"US"},"openingHours":["Mo-Th 07:00-17:00","Fr 07:00-14:00"]}]}
+</script>
+<script is:inline>
+/* Folder URLs need their trailing slash, or the relative asset paths point one level up. */
+if (!/\/$|\.html$/.test(location.pathname)) location.replace(location.pathname + "/" + location.search + location.hash);
+</script>
+<script is:inline>
+/* Decide the hero mode before first paint, so there is no flash of the wrong layout.
+   These five gates are identical, character for character, to the CSS gate further down. */
+(function(){
+  var G = ["(max-width: 720px)","(orientation: portrait) and (max-width: 1024px)","(orientation: portrait) and (pointer: coarse)","(orientation: landscape) and (pointer: coarse) and (max-height: 560px)","(prefers-reduced-motion: reduce)"];
+  window.__HERO_GATES = G;
+  var gated = G.some(function(q){ return matchMedia(q).matches; });
+  if (!gated) document.documentElement.classList.add("scrub");
+  document.documentElement.classList.add("js");
+})();
+</script>
+</head>
+<body>
+<slot />
+</body>
+</html>

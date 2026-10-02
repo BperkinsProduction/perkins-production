@@ -1,0 +1,16 @@
+{
+  "name": "robinwood-concept",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "stage": "astro preview --port 8771 --host 127.0.0.1",
+    "parity": "python3 parity.py tests/reference/original.html dist/index.html",
+    "test": "node tests/run-all.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}

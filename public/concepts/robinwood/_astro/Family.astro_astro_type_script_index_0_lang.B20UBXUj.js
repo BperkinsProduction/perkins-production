@@ -1,0 +1,1 @@
+import{n as e,t}from"./core.BdAENcqA.js";var n=document.getElementById(`family`),r=-9;function i(){if(!e.matches){var i=n.getBoundingClientRect();if(!(i.bottom<0||i.top>innerHeight)){var a=t((innerHeight-i.top)/(innerHeight+i.height),0,1);Math.abs(a-r)>.004&&(r=a,n.style.setProperty(`--par`,a.toFixed(3)))}}}addEventListener(`scroll`,i,{passive:!0});

@@ -1,0 +1,36 @@
+---
+import { navLinks } from "../data/nav.js";
+import { phone } from "../data/contact.js";
+---
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="env" aria-hidden="true">
+  <div class="env-lines" data-contour="env"></div>
+  <div class="env-mist m1"></div><div class="env-mist m2"></div><div class="env-mist m3"></div>
+</div>
+
+<header class="site-head" id="top">
+  <div class="bar">
+    <a class="logo" href="#top" aria-label="Robinwood Dental Center, home"><img src="assets/logo-rw.svg" alt="Robinwood Dental Center" width="358" height="44"></a>
+    <nav class="nav" aria-label="Main">
+      {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="head-cta">
+      <a class="tel" href={`tel:${phone.tel}`}>{phone.display}</a>
+      <a class="btn btn-book" href="#book">Book a visit</a>
+    </div>
+    <button class="menu-btn" aria-expanded="false" aria-controls="mnav">Menu</button>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Mobile">
+  {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+  <a class="btn btn-book" href="#book">Book a visit</a>
+</nav>
+
+<img class="logo-fly" src="assets/logo-rw.svg" alt="" aria-hidden="true" width="358" height="44">
+<script>
+  import "../scripts/logo-glide.js";
+  import "../scripts/header.js";
+  import "../scripts/reveal.js";
+  import "../scripts/contours.js";
+</script>
