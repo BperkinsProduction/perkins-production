@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import { pricingTiers } from '../data/pricing';
 import { text } from '../utils/text';
 ---
@@ -17,7 +18,7 @@ import { text } from '../utils/text';
     <div class="pricing-grid">
         {pricingTiers.map((tier) => (
             <div class:list={['pricing-card', { featured: tier.featured, 'cinematic-card': tier.shot }, 'scale-in']} data-group={tier.groups}>
-                {tier.shot && <div class="tier-shot" aria-hidden="true"><img src={tier.shot} alt="" loading="lazy" decoding="async"></div>}
+                {tier.shot && <div class="tier-shot" aria-hidden="true"><Picture src={tier.shot} formats={['avif', 'webp']} widths={[380, 570, 760]} sizes="(max-width: 768px) calc(100vw - 76px), (max-width: 1024px) 45vw, 260px" alt="" loading="lazy" decoding="async" /></div>}
                 <h3 set:html={text(tier.name)} />
                 <div class="price" set:html={text(tier.price)} />
                 <div class="price-note" set:html={text(tier.note)} />

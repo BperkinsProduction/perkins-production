@@ -21,7 +21,7 @@ const films = [
     <div class="films-grid">
         {films.map((film) => (
             <button type="button" class:list={['film-card', { 'film-featured': film.featured }, 'fade-in']} data-video={film.id} data-title={film.title} aria-label={film.play}>
-                <img src={`https://i.ytimg.com/vi/${film.id}/maxresdefault.jpg`} alt={film.alt} loading="lazy" onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${film.id}/hqdefault.jpg';`}>
+                <img src={`https://i.ytimg.com/vi/${film.id}/maxresdefault.jpg`} alt={film.alt} width="1280" height="720" loading="lazy" decoding="async" onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${film.id}/hqdefault.jpg';`}>
                 <div class="film-play"><span></span></div>
                 <div class="film-label" set:html={text(film.label)} />
             </button>
