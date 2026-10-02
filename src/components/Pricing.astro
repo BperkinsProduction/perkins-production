@@ -1,3 +1,7 @@
+---
+import { pricingTiers } from '../data/pricing';
+import { text } from '../utils/text';
+---
 <!-- Pricing -->
 <section id="pricing" class="alt-bg">
     <div class="section-header fade-in">
@@ -11,138 +15,20 @@
         <button type="button" class="pricing-tab" role="tab" aria-selected="false" data-group="video">Videography</button>
     </div>
     <div class="pricing-grid">
-        <div class="pricing-card scale-in" data-group="photo">
-            <h3>Portraits</h3>
-            <div class="price">$350</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>1-hour session</li>
-                <li>One location</li>
-                <li>25 edited digital images</li>
-                <li>Online gallery</li>
-                <li>Print release included</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="photo video">
-            <h3>Weddings</h3>
-            <div class="price">$3,500</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>Full-day photo &amp; video coverage</li>
-                <li>Cinematic wedding film</li>
-                <li>Second shooter available</li>
-                <li>400+ edited digital images</li>
-                <li>Online gallery &amp; print release</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="photo">
-            <h3>Headshots</h3>
-            <div class="price">$250</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>30-minute session</li>
-                <li>Studio or on-location</li>
-                <li>5 retouched images</li>
-                <li>LinkedIn &amp; web optimized</li>
-                <li>Quick turnaround</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="photo">
-            <h3>Events</h3>
-            <div class="price">$200</div>
-            <div class="price-note">starting at / per hour</div>
-            <ul class="features">
-                <li>Flexible hourly coverage</li>
-                <li>Corporate &amp; private events</li>
-                <li>All edited images delivered</li>
-                <li>Online gallery</li>
-                <li>Fast delivery</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="photo">
-            <h3>Engagements</h3>
-            <div class="price">$450</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>1-hour session</li>
-                <li>One or two locations</li>
-                <li>30 edited digital images</li>
-                <li>Save-the-date ready</li>
-                <li>Print release included</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="video">
-            <h3>Matterport 3D/VR</h3>
-            <div class="price">$350</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>Full property scan</li>
-                <li>Interactive 3D walkthrough</li>
-                <li>Hosted Matterport link</li>
-                <li>Floor plans available</li>
-                <li>Embed code for your site</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Book Now</a>
-        </div>
-
-        <div class="pricing-card scale-in" data-group="web">
-            <h3>Starter</h3>
-            <div class="price">$1,500</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>Up to 5 pages</li>
-                <li>Mobile-responsive design</li>
-                <li>Contact form</li>
-                <li>Basic SEO setup</li>
-                <li>Hosting &amp; domain setup</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Get Started</a>
-        </div>
-        <div class="pricing-card featured scale-in" data-group="web">
-            <h3>Business</h3>
-            <div class="price">$3,000</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>Up to 10 pages</li>
-                <li>Custom design &amp; branding</li>
-                <li>CMS integration</li>
-                <li>Advanced SEO &amp; analytics</li>
-                <li>30 days post-launch support</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Get Started</a>
-        </div>
-        <div class="pricing-card scale-in" data-group="web">
-            <h3>Premium</h3>
-            <div class="price">$5,000+</div>
-            <div class="price-note">starting at</div>
-            <ul class="features">
-                <li>Unlimited pages</li>
-                <li>E-commerce / booking system</li>
-                <li>Custom features &amp; integrations</li>
-                <li>Logo &amp; brand identity package</li>
-                <li>60 days support &amp; training</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Get Started</a>
-        </div>
-        <div class="pricing-card cinematic-card scale-in" data-group="web">
-            <div class="tier-shot" aria-hidden="true"><img src="/mockups/cinematic.png" alt="" loading="lazy" decoding="async"></div>
-            <h3>Cinematic</h3>
-            <div class="price">Custom</div>
-            <div class="price-note">quoted per project</div>
-            <ul class="features">
-                <li>A scroll-driven opening sequence, like this homepage</li>
-                <li>Photography and film shot on your property</li>
-                <li>Everything in Premium</li>
-                <li>For venues, restaurants, and brands that need to be felt</li>
-                <li>Built and shot by one person</li>
-            </ul>
-            <a href="#contact" class="pricing-cta">Start a Conversation</a>
-        </div>
+        {pricingTiers.map((tier) => (
+            <div class:list={['pricing-card', { featured: tier.featured, 'cinematic-card': tier.shot }, 'scale-in']} data-group={tier.groups}>
+                {tier.shot && <div class="tier-shot" aria-hidden="true"><img src={tier.shot} alt="" loading="lazy" decoding="async"></div>}
+                <h3 set:html={text(tier.name)} />
+                <div class="price" set:html={text(tier.price)} />
+                <div class="price-note" set:html={text(tier.note)} />
+                <ul class="features">
+                    {tier.features.map((f) => (
+                        <li set:html={text(f)} />
+                    ))}
+                </ul>
+                <a href="#contact" class="pricing-cta" set:html={text(tier.cta)} />
+            </div>
+        ))}
     </div>
     <p class="pricing-note fade-in">Every project is unique. Prices reflect starting rates: <a href="#contact" style="color: var(--text-accent); text-decoration: none;">reach out</a> for a custom quote tailored to your needs.</p>
 </section>

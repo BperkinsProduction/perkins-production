@@ -1,7 +1,16 @@
-    <!-- By the numbers -->
-    <div class="stat-strip" aria-label="Perkins Production by the numbers">
-        <div class="stat"><div class="stat-n" data-count="4">4</div><div class="stat-l">Sites live</div></div>
-        <div class="stat"><div class="stat-n" data-count="0">0</div><div class="stat-l">Templates</div></div>
-        <div class="stat"><div class="stat-n" data-count="1">1</div><div class="stat-l">Person, start to finish</div></div>
-        <div class="stat"><div class="stat-n" data-count="63">63</div><div class="stat-l">Years of JFK 50 results</div></div>
-    </div>
+---
+// The numbers are typed into the HTML so they read right without JS;
+// the count-up script animates from data-count.
+const stats = [
+    { n: 4, label: 'Sites live' },
+    { n: 0, label: 'Templates' },
+    { n: 1, label: 'Person, start to finish' },
+    { n: 63, label: 'Years of JFK 50 results' },
+];
+---
+<!-- By the numbers -->
+<div class="stat-strip" aria-label="Perkins Production by the numbers">
+    {stats.map((s) => (
+        <div class="stat"><div class="stat-n" data-count={s.n}>{s.n}</div><div class="stat-l">{s.label}</div></div>
+    ))}
+</div>

@@ -1,3 +1,6 @@
+---
+import PhotoSlot from './PhotoSlot.astro';
+---
 <!-- Portraits -->
 <section id="portraits">
     <div class="section-header fade-in">
@@ -9,48 +12,12 @@
         <p>Whether you need a professional headshot, senior portraits, family photos, or something creative, I work to make you feel comfortable and confident in front of the lens. The result: images that truly reflect who you are.</p>
     </div>
     <div class="photo-grid portrait-grid">
-        <div class="photo-item fade-in" data-slot="portrait-portrait">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Portrait
-            </div>
-            <button type="button" class="overlay" aria-label="View portrait photo" disabled><span>View</span></button>
-        </div>
-        <div class="photo-item fade-in" data-slot="portrait-headshot">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Headshot
-            </div>
-            <button type="button" class="overlay" aria-label="View headshot" disabled><span>View</span></button>
-        </div>
-        <div class="photo-item fade-in" data-slot="portrait-senior">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Senior
-            </div>
-            <button type="button" class="overlay" aria-label="View senior portrait" disabled><span>View</span></button>
-        </div>
-        <div class="photo-item fade-in" data-slot="portrait-family">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Family
-            </div>
-            <button type="button" class="overlay" aria-label="View family portrait" disabled><span>View</span></button>
-        </div>
-        <div class="photo-item fade-in" data-slot="portrait-creative">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Creative
-            </div>
-            <button type="button" class="overlay" aria-label="View creative portrait" disabled><span>View</span></button>
-        </div>
-        <div class="photo-item fade-in" data-slot="portrait-engagement">
-            <div class="photo-placeholder">
-                <svg viewBox="0 0 24 24" class="icon-camera"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Engagement
-            </div>
-            <button type="button" class="overlay" aria-label="View engagement portrait" disabled><span>View</span></button>
-        </div>
+        <PhotoSlot name="portrait-portrait" label="Portrait" view="View portrait photo" icon="person" />
+        <PhotoSlot name="portrait-headshot" label="Headshot" view="View headshot" icon="person" />
+        <PhotoSlot name="portrait-senior" label="Senior" view="View senior portrait" icon="person" />
+        <PhotoSlot name="portrait-family" label="Family" view="View family portrait" icon="person" />
+        <PhotoSlot name="portrait-creative" label="Creative" view="View creative portrait" icon="person" />
+        <PhotoSlot name="portrait-engagement" label="Engagement" view="View engagement portrait" icon="person" />
     </div>
     <div class="section-cta fade-in">
         <a href="#contact">Book a Portrait Session</a>
