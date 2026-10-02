@@ -1,0 +1,24 @@
+---
+// The tan cocktail: bronze, then mist, then glow. Steps come from cocktail in salon.ts.
+import { Image } from 'astro:assets';
+import Kicker from './Kicker.astro';
+import { photo } from '../lib/photos';
+import { cocktail } from '../data/salon';
+
+---
+<section class="block light" id="cocktail" aria-labelledby="ck-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>For weddings, prom, and vacation</Kicker>
+      <h2 class="h2" id="ck-h">Can't pick? Have a cocktail.</h2>
+      <p class="lede">Our favorite shortcut, straight from the regulars: bronze first, then mist.</p>
+    </div>
+    <div class="steps3 stagger">
+      {cocktail.map((s, i) => (
+        <>
+          <div class="step3" style={`--i:${i}`}><figure><Image src={photo(s.image)} alt={s.alt} widths={[400, 800, 1200]} sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" /></figure><p class="num">{s.num}</p><h3>{s.title}</h3><p>{s.body}</p></div>
+        </>
+      ))}
+    </div>
+  </div>
+</section>

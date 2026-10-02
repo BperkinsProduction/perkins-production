@@ -1,0 +1,22 @@
+---
+// Questions: the call links from locations and the answers from faq in salon.ts.
+import Kicker from './Kicker.astro';
+import { faq, locations } from '../data/salon';
+---
+<section class="block light" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <div class="faq-side reveal">
+      <Kicker>Good questions</Kicker>
+      <h2 class="h2" id="faq-h">Questions we hear at the desk.</h2>
+      <p class="lede">Anything else, just call. A real person picks up.</p>
+      <div class="calls">{locations.map((l) => <a href={`tel:${l.tel}`}>{l.name} {l.phone}</a>)}</div>
+    </div>
+    <div class="reveal">
+      {faq.map((item) => (
+        <>
+          <details class="qa"><summary>{item.q}<span class="pm" aria-hidden="true"></span></summary><p class="a">{item.a}</p></details>
+        </>
+      ))}
+    </div>
+  </div>
+</section>

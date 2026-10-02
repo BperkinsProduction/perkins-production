@@ -1,0 +1,38 @@
+---
+// Memberships: the monthly spotlight card and the rate board. Every price and
+// "about X a day" line is computed from the numbers in src/data/salon.ts.
+import Kicker from './Kicker.astro';
+import { plans, special, money, perDay } from '../data/salon';
+---
+<section class="block light" id="memberships" aria-labelledby="mem-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>Memberships</Kicker>
+      <h2 class="h2" id="mem-h">4 memberships, 1 low price.</h2>
+      <p class="lede">Every plan comes with tanning, a Sports Inn Fitness membership, and our 25% Super Saver discount. True unlimited, and you choose $0 down or no commitment.</p>
+    </div>
+    <div class="mem-grid">
+      <div class="spot reveal">
+        <p class="mono">This month</p>
+        <h3>Unlimited tanning.</h3>
+        <p class="big">{money(special.price)}<small>a month</small></p>
+        <p class="perday">That's about {perDay(special.price, 'words')} a day.</p>
+        <ul>
+          <li>Unlimited {special.level} tanning</li>
+          <li>A Sports Inn Fitness membership</li>
+          <li>25% Super Saver discount</li>
+          <li>$0 down or no commitment, your pick</li>
+        </ul>
+        <a class="btn btn-gold" href="#join" data-level={special.level}>Claim {money(special.price)} unlimited</a>
+      </div>
+      <div class="board stagger" role="list">
+        {plans.map((p, i) => (
+          <>
+            <div class:list={['row', { hot: p.hot }]} role="listitem" style={`--i:${i}`}><span class="sw" style={`background:${p.swatch}`} aria-hidden="true"></span><span class="nm">{p.name}<span class="ds">{p.desc}</span></span><span class="pr">{money(p.price)}<small>{'about ' + perDay(p.price) + ' a day'}</small></span></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p class="mem-foot reveal"><b>Just visiting, or not ready for monthly?</b> Day passes come in 1, 5, 10, and 20 day packages, with Sports Inn Fitness included. Ask at the desk.</p>
+  </div>
+</section>

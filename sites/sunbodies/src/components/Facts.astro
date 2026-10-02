@@ -1,0 +1,15 @@
+---
+// The scrolling ticker under the hero. The six facts repeat four times so the
+// loop never shows a gap; screen readers hear only the first set. The <> wrapper
+// puts each set on its own line, matching the original markup.
+import { facts } from '../data/salon';
+---
+<div class="facts" aria-label="Quick facts">
+  <div class="track">
+    {[0, 1, 2, 3].map((set) => (
+      <>
+      {facts.map((f) => <span aria-hidden={set > 0 ? 'true' : undefined}>{f}</span>)}
+      </>
+    ))}
+  </div>
+</div>

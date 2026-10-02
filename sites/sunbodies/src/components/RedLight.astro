@@ -1,0 +1,16 @@
+---
+// Red light: the copy, the fact pills from redLightFacts, and the glowing panel.
+import Kicker from './Kicker.astro';
+import { redLightFacts } from '../data/salon';
+---
+<section class="block redroom" id="redlight" aria-labelledby="rl-h">
+  <div class="wrap red-grid">
+    <div class="reveal">
+      <Kicker>Red light</Kicker>
+      <h2 class="h2" id="rl-h">Warm light. No UV.</h2>
+      <p class="lede">Red light won't tan you, and it's not meant to. It's a warm, quiet session that members add for how their skin looks and feels. Research on red light for skin is promising, and results come from regular sessions, so we'll never promise you miracles.</p>
+      <div class="rfacts">{redLightFacts.map((f) => <span>{f}</span>)}</div>
+    </div>
+    <div class="panel reveal" aria-hidden="true"><div class="leds"></div><div class="bloom"></div><p class="cap">Red light panel</p></div>
+  </div>
+</section>

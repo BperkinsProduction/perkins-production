@@ -1,0 +1,44 @@
+---
+// Reviews: the star score and the quote wall. The stars are drawn from
+// rating.score: whole stars, then one star clipped to the leftover fraction.
+import Kicker from './Kicker.astro';
+import { rating, reviews } from '../data/salon';
+
+const STAR = 'M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z';
+const whole = Math.floor(rating.score);
+// Width of the partial star in the 24-unit viewBox (4.3 leaves 0.3, so 7.2).
+const partWidth = Math.round((rating.score - whole) * 240) / 10;
+const stars = Array.from({ length: 5 }, (_, i) => (i < whole ? 'full' : i === whole && partWidth > 0 ? 'part' : 'empty'));
+---
+<section class="block dark" id="reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <div class="reviews-grid">
+      <div class="score reveal">
+        <Kicker>What regulars say</Kicker>
+        <h2 class="h2" id="rev-h">Clean, friendly, fast.</h2>
+        <p class="n" aria-hidden="true">{rating.score}</p>
+        <div class="stars" aria-hidden="true">
+          {stars.map((s) => (
+            <>
+              {s === 'full' ? (
+                <svg viewBox="0 0 24 24"><path fill="#EFA53C" d={STAR}/></svg>
+              ) : s === 'part' ? (
+                <svg viewBox="0 0 24 24"><defs><clipPath id="part"><rect x="0" y="0" width={partWidth} height="24"/></clipPath></defs><path fill="rgba(239,165,60,.25)" d={STAR}/><path fill="#EFA53C" clip-path="url(#part)" d={STAR}/></svg>
+              ) : (
+                <svg viewBox="0 0 24 24"><path fill="rgba(239,165,60,.25)" d={STAR}/></svg>
+              )}
+            </>
+          ))}
+        </div>
+        <p>{rating.score} out of 5 from {rating.count} reviews</p>
+      </div>
+      <div class="quotes stagger">
+        {reviews.map((r, i) => (
+          <>
+            <figure class:list={['quote', { wide: r.wide }]} style={`--i:${i}`}><blockquote>&ldquo;{r.quote}&rdquo;</blockquote><figcaption>{r.source}</figcaption></figure>
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

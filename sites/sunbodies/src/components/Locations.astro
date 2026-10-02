@@ -1,0 +1,29 @@
+---
+// Locations: one card per salon from locations in salon.ts. site.js fills
+// [data-status] and [data-hours] with today's live hours.
+import Kicker from './Kicker.astro';
+import { locations } from '../data/salon';
+---
+<section class="block dark" id="locations" aria-labelledby="loc-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>Two locations</Kicker>
+      <h2 class="h2" id="loc-h">Two salons. One membership.</h2>
+    </div>
+    <div class="locs stagger">
+      {locations.map((l, i) => (
+        <>
+          <article class="loc" style={`--i:${i}`}>
+            <span class="live status" data-status>Hours today</span>
+            <h3>{l.name}</h3>
+            <address>{l.street}<br>{l.city}</address>
+            <a class="tel" href={`tel:${l.tel}`}>{l.phone}</a>
+            <div class="hours" data-hours></div>
+            <a class="dir" href={l.maps} target="_blank" rel="noopener">Get directions</a>
+          </article>
+        </>
+      ))}
+    </div>
+    <p class="gym reveal"><b>Your membership works at the gym too.</b> Every plan includes Sports Inn Fitness in Greencastle, so you can train and tan on one card.</p>
+  </div>
+</section>

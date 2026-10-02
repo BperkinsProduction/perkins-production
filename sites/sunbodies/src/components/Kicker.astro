@@ -1,0 +1,5 @@
+---
+// The small label with the self-drawing horizon and half sun that opens each section.
+const { style } = Astro.props;
+---
+<p class="kicker" style={style}><slot name="before" /><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg><slot /></p>

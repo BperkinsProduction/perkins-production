@@ -1,0 +1,42 @@
+---
+// The level finder: a sunset dial plus a three-question quiz. The stop buttons
+// (#stops), the dial's tick marks (#ticks), and the result card (#result) start
+// empty on purpose; site.js builds them from the levels in salon.ts.
+import Kicker from './Kicker.astro';
+---
+<section class="block dark finder" id="levels" aria-labelledby="levels-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>The level finder</Kicker>
+      <h2 class="h2" id="levels-h">Pick your heat.</h2>
+      <p class="lede">Every level is true unlimited. Higher levels are stronger, so you need fewer minutes. Answer three quick questions and we'll set the sun for you, or drag it yourself.</p>
+    </div>
+    <div class="finder-grid">
+      <div class="reveal">
+        <div class="dial" id="dial">
+          <div class="sky s0 on"></div><div class="sky s1"></div><div class="sky s2"></div><div class="sky s3"></div><div class="sky s4"></div>
+          <svg viewBox="0 0 500 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs><clipPath id="above"><rect x="0" y="0" width="500" height="252"/></clipPath></defs>
+            <path class="arc" d="M60 252 A190 190 0 0 1 440 252"/>
+            <rect class="sea" x="0" y="252" width="500" height="78"/>
+            <line class="horizon" x1="0" y1="252" x2="500" y2="252"/>
+            <g id="ticks"></g>
+            <g clip-path="url(#above)"><g class="sun" id="dialSun"><circle class="halo" r="34"/><circle class="core" r="17"/></g></g>
+          </svg>
+          <div class="stops" role="radiogroup" aria-label="Choose a level" id="stops"></div>
+          <p class="hint" aria-hidden="true">Drag the sun</p>
+        </div>
+        <p class="legnote"><b>Legs lagging behind?</b> The Legacy leg tanner gives them 10 minutes of their own with 36 bronzing bulbs, without more UV on your upper body.</p>
+      </div>
+      <div class="reveal">
+        <div class="quiz" id="quiz">
+          <div class="q" role="radiogroup" aria-labelledby="q1l"><p class="qlab" id="q1l">How easily do you burn?</p><div class="opts" data-q="burn"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">I burn easy</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">Sometimes</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">Hardly ever</button></div></div>
+          <div class="q" role="radiogroup" aria-labelledby="q2l"><p class="qlab" id="q2l">What's it for?</p><div class="opts" data-q="goal"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">An everyday glow</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">A trip or big event</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">As dark as I can get</button></div></div>
+          <div class="q" role="radiogroup" aria-labelledby="q3l"><p class="qlab" id="q3l">How soon?</p><div class="opts" data-q="when"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">No rush</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">In a couple weeks</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">This weekend</button></div></div>
+          <p class="pick" id="pick" aria-live="polite">Answer all three and the sun sets itself.</p>
+        </div>
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>

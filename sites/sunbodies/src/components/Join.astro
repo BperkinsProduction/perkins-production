@@ -1,0 +1,35 @@
+---
+// The signup: the monthly offer and the hold-my-rate form. site.js draws the
+// rays, sets the background photo, and handles the submit.
+import Kicker from './Kicker.astro';
+import { special, money, levels, locations } from '../data/salon';
+const price = money(special.price);
+---
+<section class="join" id="join" aria-labelledby="join-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker style="color:var(--accent)"><svg slot="before" class="rays" id="rays" viewBox="-130 -130 260 260" aria-hidden="true"></svg>This month only</Kicker>
+      <h2 id="join-h">Claim unlimited for {price}.</h2>
+      <p class="lede">Unlimited tanning, a Sports Inn Fitness membership, and 25% Super Saver savings, for {price} a month. Choose $0 down or no commitment.</p>
+    </div>
+    <form class="form reveal" id="form" novalidate>
+      <div class="fields">
+        <div class="two">
+          <div class="field"><label for="fname">First name</label><input id="fname" name="fname" autocomplete="given-name" required placeholder="Your first name"></div>
+          <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="717-555-0100"></div>
+        </div>
+        <div class="two" style="margin-top:16px">
+          <div class="field"><label for="salon">Your salon</label><select id="salon" name="salon" required>{locations.map((l) => <option value={l.name}>{l.name}</option>)}</select></div>
+          <div class="field"><label for="level">Your level</label><select id="level" name="level">{levels.map((l) => <option>{l.lv}</option>)}<option>Not sure yet</option></select></div>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn btn-gold" type="submit">Hold my {price} rate</button>
+        <p class="fine" style="margin-top:12px">We'll only use your number about your visit. Concept preview: this form doesn't send anything yet.</p>
+      </div>
+      <div class="thanks" id="thanks" tabindex="-1">
+        <h3>You're set.</h3>
+        <p id="doneMsg"></p>
+      </div>
+    </form>
+  </div>
+</section>

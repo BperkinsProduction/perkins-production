@@ -1,0 +1,75 @@
+---
+// The sunset hero. On wide screens the video scrubs with the scroll and four
+// caption bands fade in and out (data-a and data-b are where each band starts
+// and ends, as a share of the scroll). In each data-split heading, | is a line
+// break and *word* is the gold accent word; site.js splits them into letters.
+// Phones and reduced-motion visitors get the static hero at the bottom instead.
+import { getImage } from 'astro:assets';
+import { money, special } from '../data/salon';
+import { asset } from '../lib/paths';
+import posterJpg from '../assets/hero-poster.jpg';
+import endingJpg from '../assets/hero-ending.jpg';
+import phoneJpg from '../assets/hero-phone.jpg';
+
+const poster = await getImage({ src: posterJpg, width: 1920, format: 'webp', quality: 80 });
+const ending = await getImage({ src: endingJpg, width: 1920, format: 'webp', quality: 80 });
+const phone = await getImage({ src: phoneJpg, width: 1152, format: 'webp', quality: 80 });
+
+// Byte size of public/assets/hero-scrub.mp4, used for the download progress ring. Update it if the video changes.
+const videoBytes = 5847695;
+const price = money(special.price);
+---
+<section class="hero" id="top" aria-label="Golden hour, any hour">
+  <div class="scrub" id="scrub">
+    <div class="stage" id="stage" data-video={asset('hero-scrub.mp4')} data-bytes={videoBytes} data-poster={poster.src} data-ending={ending.src}>
+      <div class="poster" id="poster" aria-hidden="true"></div>
+      <div class="poster-end" id="posterEnd" aria-hidden="true"></div>
+      <video id="hero" preload="none" muted playsinline disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div class="band b1" data-a="0.045" data-b="0.26">
+        <p class="eyebrow sub">Greencastle + Chambersburg, PA</p>
+        <h1 class="fx-blur" data-split="blur" data-seed="11">Golden hour,|any hour.</h1>
+        <p class="line sub">Two salons, sixteen rooms, open seven days a week.</p>
+      </div>
+
+      <div class="band b2" data-a="0.28" data-b="0.5">
+        <h2 data-split="drift" data-seed="23">The lower the sun,|the deeper the bronze.</h2>
+        <p class="line sub">Four levels, from an easy 20-minute base to a 7-minute superbed.</p>
+      </div>
+
+      <div class="band b3" data-a="0.52" data-b="0.75">
+        <h2 data-split="weave" data-seed="37" data-spread="0.5">Spray tan, red light,|and a 24-hour gym.</h2>
+        <p class="line sub">One membership. Choose $0 down or no commitment.</p>
+      </div>
+
+      <div class="band settle" data-a="0.78" data-b="1" data-ramp="0.1">
+        <h2 data-split="rise" data-seed="41">Walk in pale.|Walk out *glowing.*</h2>
+        <p class="line sub">Unlimited tanning is {price} a month right now, with a Sports Inn Fitness membership included.</p>
+        <div class="ctas">
+          <a class="btn btn-gold" href="#join">Claim {price} unlimited</a>
+          <a class="btn btn-ghost" href="#levels">Find your level</a>
+        </div>
+      </div>
+
+      <div class="hud chip" aria-hidden="true">Golden hour <b id="clock">5:30 PM</b></div>
+      <div class="cue" id="cue" aria-hidden="true">
+        <svg class="ring" id="ring" viewBox="0 0 48 48"><circle class="track" cx="24" cy="24" r="20" fill="none" stroke-width="3"/><circle class="bar" cx="24" cy="24" r="20" fill="none" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
+        <span id="cueText">Warming up the sunset</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="static-hero" id="staticHero" style={`--hero-phone:url(${phone.src});--hero-ending:url(${ending.src})`}>
+    <div class="bg" aria-hidden="true"></div>
+    <div class="copy">
+      <p class="mono" style="color:var(--cream);margin-bottom:14px">Greencastle + Chambersburg, PA</p>
+      <h1>Golden hour, any hour.</h1>
+      <p class="line">Unlimited tanning from {price} a month, with Sports Inn Fitness included. Walk in at either salon, seven days a week.</p>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#join">Claim {price} unlimited</a>
+        <a class="btn btn-ghost" href="#levels">Find your level</a>
+      </div>
+    </div>
+  </div>
+</section>

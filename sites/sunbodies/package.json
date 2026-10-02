@@ -1,0 +1,14 @@
+{
+  "name": "sunbodies-concept",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "publish-concept": "astro build && node scripts/publish.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  }
+}

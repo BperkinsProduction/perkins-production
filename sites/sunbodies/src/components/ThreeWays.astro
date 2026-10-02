@@ -1,0 +1,27 @@
+---
+// "Three ways to glow": one card per service in salon.ts. The <> wrapper keeps a
+// line break between cards, matching the original markup.
+import { Image } from 'astro:assets';
+import Kicker from './Kicker.astro';
+import { photo } from '../lib/photos';
+import { services } from '../data/salon';
+
+---
+<section class="block light" id="glow" aria-labelledby="glow-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>What we do</Kicker>
+      <h2 class="h2" id="glow-h">Three ways to glow.</h2>
+    </div>
+    <div class="ways stagger">
+      {services.map((s, i) => (
+        <>
+        <article class="way" style={`--i:${i}`}>
+          <figure><Image src={photo(s.image)} alt={s.alt} widths={[400, 800, 1200]} sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" /></figure>
+          <div class="body"><p class="tag">{s.tag}</p><h3>{s.title}</h3><p>{s.body}</p></div>
+        </article>
+        </>
+      ))}
+    </div>
+  </div>
+</section>
