@@ -21,8 +21,15 @@ npm test          # unit tests
 Where things live:
 
 - `src/pages/`: one file per page. `src/pages/index.astro` is the homepage.
-- `src/components/`, `src/layouts/`, `src/styles/`, `src/content/`: shared pieces,
-  page layouts, stylesheets and content collections, as the homepage gets split up.
+- `src/layouts/BaseLayout.astro`: the shared page shell (head, meta, fonts, analytics).
+- `src/components/`: the homepage sections (Nav, HeroWheel, WebDesign, Pricing, About,
+  Contact, Footer, ...). `SiteScripts.astro` holds the scroll engine and page scripts.
+- `src/styles/site.css`: the site stylesheet, inlined into each page at build time.
+- `src/content/work/`: one YAML file per portfolio site. These drive the hero wheel and
+  the Work grid. To add a site, drop its screenshots in `src/assets/deck/` and copy an
+  existing YAML file.
+- `src/data/pricing.ts`: pricing tiers.
+- `src/assets/`: images that Astro resizes and converts to AVIF/WebP at build time.
 - `public/`: copied into the build as-is. This is where the client concept pages
   (`public/concepts/`), the admin page (`public/admin.html`), images, videos,
   `robots.txt` and `sitemap.xml` live.
