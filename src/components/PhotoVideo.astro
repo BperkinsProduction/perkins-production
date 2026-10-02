@@ -1,0 +1,28 @@
+---
+import Weddings from './photo-video/Weddings.astro';
+import Films from './photo-video/Films.astro';
+import Portraits from './photo-video/Portraits.astro';
+import Matterport from './photo-video/Matterport.astro';
+---
+<!-- Photo & Video (collapsed by default) -->
+<section id="photo-video" class="reveal-band alt-bg">
+    <div class="section-header fade-in">
+        <h2>Photo &amp; Video</h2>
+        <div class="divider"></div>
+        <p>Weddings, portraits, film, and 3D tours, from the same person who builds your site</p>
+    </div>
+    <div class="reveal-intro fade-in">
+        <p>I still take a handful of weddings, portrait sessions, and films each year, and I scan spaces for interactive 3D tours. Most of that work now goes straight into the websites I build.</p>
+        <button type="button" class="reveal-btn" id="reveal-photo" aria-expanded="false" aria-controls="photo-video-group">See the photo, video, and 3D work</button>
+    </div>
+</section>
+
+<div id="photo-video-group" class="reveal-group" hidden>
+<Weddings />
+
+<Films />
+
+<Portraits />
+
+<Matterport />
+</div>

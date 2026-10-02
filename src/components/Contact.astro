@@ -1,0 +1,35 @@
+<!-- Contact -->
+<section id="contact">
+    <div class="section-header fade-in">
+        <h2>Get in Touch</h2>
+        <div class="divider"></div>
+        <p>Questions? Just want to say hello? I'd love to hear from you.</p>
+    </div>
+    <div class="contact-content fade-in">
+        <form class="contact-form" onsubmit="handleContact(event)">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <div class="form-row">
+                <label><span class="sr-only">Your name</span><input type="text" name="name" placeholder="Your Name" autocomplete="name" required></label>
+                <label><span class="sr-only">Your email</span><input type="email" name="email" placeholder="Your Email" autocomplete="email" required></label>
+            </div>
+            <label><span class="sr-only">Subject</span><input type="text" name="subject" placeholder="Subject"></label>
+            <label><span class="sr-only">Your message</span><textarea name="message" placeholder="Your message..." required></textarea></label>
+            <button type="submit">Send Message</button>
+            <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="contact-info">
+            <div class="contact-info-item">
+                <div class="label">Email</div>
+                <div class="value"><a href="mailto:brice@perkinsproduction.com">brice@perkinsproduction.com</a></div>
+            </div>
+            <div class="contact-info-item">
+                <div class="label">Based In</div>
+                <div class="value">Frederick, MD</div>
+            </div>
+            <div class="contact-info-item">
+                <div class="label">Phone</div>
+                <div class="value"><a href="tel:+12408181955">(240) 818-1955</a></div>
+            </div>
+        </div>
+    </div>
+</section>

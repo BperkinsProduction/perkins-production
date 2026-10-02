@@ -1,0 +1,87 @@
+---
+// Shared html/head shell. The homepage passes its own values; future pages
+// (case studies, blog posts) pass theirs and get the same fonts, icons and styles.
+import '../styles/site.css';
+
+interface Props {
+    title: string;
+    description: string;
+    /** Absolute canonical URL. Defaults to this page's URL on the site domain. */
+    canonical?: string;
+    ogType?: string;
+    ogTitle?: string;
+    ogDescription?: string;
+    /** Absolute URL of the share image */
+    ogImage?: string;
+    ogImageWidth?: number;
+    ogImageHeight?: number;
+    ogImageAlt?: string;
+    themeColor?: string;
+}
+
+const site = Astro.site ?? new URL('https://www.perkinsproduction.com');
+const {
+    title,
+    description,
+    canonical = new URL(Astro.url.pathname, site).href,
+    ogType = 'website',
+    ogTitle = title,
+    ogDescription = description,
+    ogImage = new URL('/og-image.png', site).href,
+    ogImageWidth = 1200,
+    ogImageHeight = 630,
+    ogImageAlt = title,
+    themeColor = '#0b1528',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="canonical" href={canonical}>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content={themeColor}>
+    <meta property="og:type" content={ogType}>
+    <meta property="og:url" content={canonical}>
+    <meta property="og:title" content={ogTitle}>
+    <meta property="og:description" content={ogDescription}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:image:width" content={ogImageWidth}>
+    <meta property="og:image:height" content={ogImageHeight}>
+    <meta property="og:image:alt" content={ogImageAlt}>
+    <meta name="twitter:card" content="summary_large_image">
+    <script is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Perkins Production",
+      "description": "Web design studio in Frederick, Maryland building hand-coded websites for local businesses, with photography, film, and Matterport 3D tours shot in house.",
+      "url": "https://www.perkinsproduction.com/",
+      "image": "https://www.perkinsproduction.com/og-image.png",
+      "telephone": "+1-240-818-1955",
+      "email": "brice@perkinsproduction.com",
+      "address": {"@type": "PostalAddress", "addressLocality": "Frederick", "addressRegion": "MD", "addressCountry": "US"},
+      "areaServed": ["Frederick MD", "Maryland", "Washington DC", "Northern Virginia"],
+      "founder": {"@type": "Person", "name": "Brice Perkins"},
+      "priceRange": "$$",
+      "knowsAbout": ["Web design", "Website development", "Photography", "Videography", "Matterport 3D tours"],
+      "sameAs": ["https://www.youtube.com/@briceperkins1396"]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <slot name="head" />
+</head>
+<body>
+<slot />
+
+    <!-- Vercel Web Analytics (static-site script; no npm package needed) -->
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
