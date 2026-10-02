@@ -1,8 +1,10 @@
 #!/bin/bash
 # Health check for perkinsproduction.com
-# Usage: bash scripts/health-check.sh
+# Usage: bash scripts/health-check.sh [site-url]
+# Defaults to production. Pass a Vercel preview URL to check a deploy before it goes live.
 
-SITE="https://www.perkinsproduction.com"
+SITE="${1:-https://www.perkinsproduction.com}"
+SITE="${SITE%/}"
 PASS=0
 FAIL=0
 
@@ -46,8 +48,17 @@ body=$(curl -s --max-time 15 "$SITE/")
 echo "$body" | grep -q "PERKINS" && ok=yes || ok=no
 check "Homepage content looks right" $ok
 
+# Astro may bundle page scripts into /_astro/*.js files, so search those too
+code="$body"
+for src in $(echo "$body" | grep -o '<script[^>]*src="/[^"]*"' | sed 's/.*src="\([^"]*\)"/\1/' | grep -v '^/_vercel/'); do
+    code="$code
+$(curl -s --max-time 15 "$SITE$src")"
+done
+
 [ "$(status_of "$SITE/admin.html")" = "200" ] && ok=yes || ok=no
 check "Admin page responds" $ok
+[ "$(status_of "$SITE/admin")" = "200" ] && ok=yes || ok=no
+check "Admin short link (/admin rewrite) responds" $ok
 [ "$(status_of "$SITE/api/auth")" = "401" ] && ok=yes || ok=no
 check "Admin API rejects anonymous access" $ok
 
@@ -63,9 +74,9 @@ for clip in wedding-featured wedding-details wedding-firstdance portrait-engagem
 done
 
 # Contact form wiring
-echo "$body" | grep -q "formsubmit.co/ajax" && ok=yes || ok=no
+echo "$code" | grep -q "formsubmit.co/ajax" && ok=yes || ok=no
 check "Contact form endpoint configured" $ok
-echo "$body" | grep -q "_autoresponse" && ok=yes || ok=no
+echo "$code" | grep -q "_autoresponse" && ok=yes || ok=no
 check "Auto-reply configured" $ok
 
 # SEO files
