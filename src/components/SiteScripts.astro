@@ -353,7 +353,7 @@
                 var ramp = Math.min(0.025, (band.b - band.a) * 0.35);
                 var k = Math.min(1, Math.max(0, (p - band.a) / ramp));
                 if (band.first) k = Math.max(k, loadK, p > 0 ? 1 : 0);
-                if (Math.abs(op - band.op) > 0.008) { band.op = op; band.el.style.opacity = op.toFixed(3); }
+                if (Math.abs(op - band.op) > 0.008) { band.op = op; band.el.style.opacity = op.toFixed(3); band.el.classList.toggle('live', op > 0.5); }
                 if (Math.abs(k - band.k) > 0.008) { band.k = k; band.el.style.setProperty('--k', k.toFixed(3)); }
             });
             var wantCue = p < 0.02;

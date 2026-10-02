@@ -206,10 +206,12 @@ nav.scrolled .nav-logo svg { height: 38px; }
     padding: 15px 42px; border: 1px solid var(--text-accent); color: var(--text-accent);
     font-family: 'Josefin Slab', serif; font-size: 0.8rem; letter-spacing: 4px;
     text-transform: uppercase; text-decoration: none; text-shadow: none;
-    pointer-events: auto; background: rgba(10,10,14,0.35);
+    pointer-events: none; background: rgba(10,10,14,0.35);
     transition: background 0.3s ease, color 0.3s ease;
     opacity: var(--k3, 0); transform: translateY(calc((1 - var(--k3, 0)) * 14px));
 }
+/* Only tappable once the closing band is showing, so it never steals taps from the wheel cards */
+.sband.live .settle-cta { pointer-events: auto; }
 .settle-cta:hover, .settle-cta:focus-visible { background: var(--text-accent); color: var(--bg-primary); outline: none; }
 .scrub-cue {
     position: absolute; bottom: 3.5vh; left: 50%; transform: translateX(-50%);
