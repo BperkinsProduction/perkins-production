@@ -1,4 +1,7 @@
 {
+  "framework": "astro",
+  "buildCommand": "astro build",
+  "outputDirectory": "dist",
   "functions": {
     "api/upload.js": {
       "maxDuration": 30,

@@ -4,3 +4,5 @@ node_modules/
 npm-debug.log*
 outreach-emails.md
 .claude/launch.json
+dist/
+.astro/
