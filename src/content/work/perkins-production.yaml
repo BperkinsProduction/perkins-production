@@ -3,8 +3,8 @@ name: Perkins Production
 category: This site
 url: https://www.perkinsproduction.com/
 shots:
-  desktop: /deck/perkins-desktop.jpg
-  mobile: /deck/perkins-mobile.jpg
+  desktop: ../../assets/deck/perkins-desktop.jpg
+  mobile: ../../assets/deck/perkins-mobile.jpg
 wheel:
   order: 4
   blurb: The site you're on right now. Hand-coded, hosted, and shot by one person.

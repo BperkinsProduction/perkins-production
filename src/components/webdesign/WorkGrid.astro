@@ -1,15 +1,23 @@
 ---
+import { Picture } from 'astro:assets';
 import { getWorkCards } from '../../utils/work';
 import { text } from '../../utils/text';
 
 const sites = await getWorkCards();
+
+// The preview box is 16:9 (21:9 when featured) and shows the top of the screenshot,
+// so only that top slice is shipped. Widths follow .portfolio-grid in site.css.
+const sizes = {
+    featured: '(max-width: 768px) calc(100vw - 48px), (max-width: 1196px) calc(100vw - 96px), 1100px',
+    card: '(max-width: 768px) calc(100vw - 48px), (max-width: 1196px) calc(50vw - 64px), 534px',
+};
 ---
 <!-- Portfolio -->
 <div class="portfolio-grid">
     {sites.map((site) => (
         <div class:list={['portfolio-card', { featured: site.card.featured }, 'fade-in']}>
             <div class="portfolio-preview">
-                <img src={site.shots.desktop} alt={site.card.alt} loading="lazy" decoding="async">
+                <Picture src={site.shots.desktop} formats={['avif', 'webp']} width={1600} height={900} fit="cover" position="top" widths={[480, 800, 1200, 1600]} sizes={site.card.featured ? sizes.featured : sizes.card} alt={site.card.alt} loading="lazy" decoding="async" />
                 <a href={site.url} target="_blank" rel="noopener" class="preview-overlay">
                     <span>Visit Site</span>
                 </a>

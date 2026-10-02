@@ -1,3 +1,6 @@
+import type { ImageMetadata } from 'astro';
+import cinematicShot from '../assets/mockups/cinematic.png';
+
 // Pricing tiers, in page order. "groups" are the tabs a card shows under
 // (web, photo, video); a card can sit under more than one.
 export interface PricingTier {
@@ -8,8 +11,8 @@ export interface PricingTier {
     features: string[];
     cta: string;
     featured?: boolean;
-    /** The Cinematic tier: wide card with a screenshot */
-    shot?: string;
+    /** The Cinematic tier: wide card with a screenshot (an image in src/assets/) */
+    shot?: ImageMetadata;
 }
 
 export const pricingTiers: PricingTier[] = [
@@ -145,7 +148,7 @@ export const pricingTiers: PricingTier[] = [
         price: 'Custom',
         note: 'quoted per project',
         groups: 'web',
-        shot: '/mockups/cinematic.png',
+        shot: cinematicShot,
         features: [
             'A scroll-driven opening sequence, like this homepage',
             'Photography and film shot on your property',
