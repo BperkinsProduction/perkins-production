@@ -2,8 +2,8 @@ name: Back on Track
 category: Nonprofit & Community
 url: https://backontrack-website.vercel.app/
 shots:
-  desktop: /deck/bot-desktop.jpg
-  mobile: /deck/bot-mobile.jpg
+  desktop: ../../assets/deck/bot-desktop.jpg
+  mobile: ../../assets/deck/bot-mobile.jpg
 wheel:
   order: 2
   blurb: A community track series with schedules, results galleries, sponsors, and waivers, all in one place.

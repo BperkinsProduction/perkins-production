@@ -6,15 +6,17 @@ import { z } from 'astro/zod';
 // Work grid both read from here, so a new site is one new file.
 const work = defineCollection({
     loader: glob({ pattern: '*.{yaml,yml}', base: './src/content/work' }),
-    schema: z.object({
+    schema: ({ image }) => z.object({
         name: z.string(),
         // Eyebrow above the name, e.g. "Events & Athletics"
         category: z.string(),
         url: z.string(),
-        // Screenshots in public/deck/. The wheel swaps to mobile on narrow or portrait screens.
+        // Screenshots in src/assets/deck/, written relative to this file
+        // (../../assets/deck/name-desktop.jpg). The build makes the small, fast
+        // copies. The wheel swaps to mobile on narrow or portrait screens.
         shots: z.object({
-            desktop: z.string(),
-            mobile: z.string(),
+            desktop: image(),
+            mobile: image(),
         }),
         // Hero wheel card. Leave out to keep the site off the wheel.
         wheel: z.object({

@@ -2,8 +2,8 @@ name: JFK 50 Mile
 category: Events & Athletics
 url: https://jfk50mile.org/
 shots:
-  desktop: /deck/jfk-desktop.jpg
-  mobile: /deck/jfk-mobile.jpg
+  desktop: ../../assets/deck/jfk-desktop.jpg
+  mobile: ../../assets/deck/jfk-mobile.jpg
 wheel:
   order: 1
   blurb: America's oldest ultramarathon. Results back to 1963, a live race-day countdown, and a registration that sold out.

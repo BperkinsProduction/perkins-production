@@ -1,9 +1,32 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Logo from './Logo.astro';
 import { getWheelSites } from '../utils/work';
 import { text } from '../utils/text';
 
 const sites = await getWheelSites();
+
+// Card widths: min(48vw, 720px) on desktop, about 52vw on phones (see .wheel-card in site.css)
+const MOBILE = '(max-width: 720px), (orientation: portrait)';
+const desktop = { widths: [480, 800, 1200, 1600], sizes: '(min-width: 1500px) 720px, 48vw' };
+const mobile = { widths: [320, 480, 640, 780], sizes: '52vw' };
+
+// One <source> srcset per format, smallest format first
+type Format = 'avif' | 'webp' | 'jpeg';
+async function sources(src: ImageMetadata, opts: { widths: number[]; sizes: string }, formats: Format[]) {
+    return Promise.all(formats.map(async (format) => {
+        const img = await getImage({ src, format, ...opts });
+        return { type: `image/${format}`, srcset: img.srcSet.attribute };
+    }));
+}
+
+const shots = await Promise.all(sites.map(async (site) => ({
+    // Mobile needs a jpeg source too, or old browsers would fall through to the desktop <img>
+    mobile: await sources(site.shots.mobile, mobile, ['avif', 'webp', 'jpeg']),
+    desktop: await sources(site.shots.desktop, desktop, ['avif', 'webp']),
+    img: await getImage({ src: site.shots.desktop, format: 'jpeg', width: 1200, ...desktop }),
+})));
 ---
 <!-- Hero -->
 <section id="home">
@@ -31,8 +54,9 @@ const sites = await getWheelSites();
                             <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span set:html={text(site.wheel.bar)} /></div>
                             <div class="shot">
                                 <picture>
-                                    <source media="(max-width: 720px), (orientation: portrait)" srcset={site.shots.mobile}>
-                                    <img src={site.shots.desktop} alt={site.wheel.alt} decoding="async">
+                                    {shots[i].mobile.map((s) => <source media={MOBILE} type={s.type} srcset={s.srcset} sizes={mobile.sizes} width={site.shots.mobile.width} height={site.shots.mobile.height}>)}
+                                    {shots[i].desktop.map((s) => <source type={s.type} srcset={s.srcset} sizes={desktop.sizes}>)}
+                                    <img src={shots[i].img.src} srcset={shots[i].img.srcSet.attribute} sizes={desktop.sizes} width={site.shots.desktop.width} height={site.shots.desktop.height} alt={site.wheel.alt} decoding="async" fetchpriority={i === 0 ? 'high' : undefined}>
                                 </picture>
                             </div>
                         </figure>

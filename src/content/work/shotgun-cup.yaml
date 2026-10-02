@@ -2,8 +2,8 @@ name: Shotgun Cup Series
 category: Sports & Recreation
 url: https://shotgun-cup-series.vercel.app/
 shots:
-  desktop: /deck/shotgun-desktop.jpg
-  mobile: /deck/shotgun-mobile.jpg
+  desktop: ../../assets/deck/shotgun-desktop.jpg
+  mobile: ../../assets/deck/shotgun-mobile.jpg
 wheel:
   order: 3
   blurb: "A golf league that scores itself: live standings, leaderboards, and player stats."
