@@ -1,0 +1,31 @@
+/* the reader: bios, service pages, articles */
+dialog.reader{border:0;padding:0;width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 40px);border-radius:22px;background:var(--panel);color:var(--ink);box-shadow:0 40px 100px -30px rgba(15,46,58,.6)}
+dialog.reader::backdrop{background:rgba(15,46,58,.42);backdrop-filter:blur(4px)}
+.reader-in{padding:clamp(24px,4vw,46px);overflow:auto;max-height:calc(100vh - 40px)}
+.reader-close{position:sticky;top:0;float:right;width:44px;height:44px;border-radius:50%;border:0;background:var(--canvas);font-size:1.3rem;cursor:pointer;color:var(--ink);margin:-8px -8px 0 10px}
+.reader h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:.4rem}
+.reader .sub{color:var(--text-secondary);font-size:1.1rem;margin-bottom:1.4rem}
+.reader h3{font-size:1.25rem;margin:1.6rem 0 .5rem}
+.reader ul{padding-left:1.2em}
+.reader .creds{list-style:none;padding:0;margin:1.4rem 0 0;border-top:1px solid var(--line)}
+.reader .creds li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.reader .head{display:flex;gap:20px;align-items:center;margin-bottom:1.2rem}
+.reader .head img{width:96px;height:112px;object-fit:cover;border-radius:12px}
+.tiplist{list-style:none;padding:0;margin:0;columns:2;column-gap:28px}
+.tiplist li{break-inside:avoid;border-bottom:1px solid var(--line)}
+.tiplist button{all:unset;cursor:pointer;display:block;padding:12px 0;font-weight:600;color:var(--link)}
+.tiplist button:hover{color:var(--ink)}
+.tiplist button:focus-visible{outline:3px solid var(--accent)}
+@media (max-width: 600px){.tiplist{columns:1}}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  [data-reveal]{opacity:1;transform:none}
+  .step{opacity:1;filter:none;transform:none}
+  .steps-mist,.visit-img::after{display:none}
+  .visit-img img{transform:none}
+  .family > img{transform:none}
+  .divider path,.ring path{stroke-dashoffset:0}
+  .breath{display:none}
+}

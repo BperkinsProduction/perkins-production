@@ -1,0 +1,13 @@
+---
+// The footer. The hours line comes from hoursLine in salon.ts.
+import { hoursLine } from '../data/salon';
+import { asset } from '../lib/paths';
+---
+<footer>
+  <div class="foot">
+    <img src={asset('logo-dark.svg')} alt="Sunbodies Tanning Salon" width="137" height="46" loading="lazy">
+    <p>Sunbodies Tanning Salon is a division of Sports Inn Fitness.<br>{hoursLine}</p>
+    <nav aria-label="Footer"><a href="#levels">Levels</a><a href="#memberships">Memberships</a><a href="#first-visit">First visit</a><a href="#faq">Questions</a><a href="#locations">Locations</a><a href="https://www.facebook.com/officialsunbodies" target="_blank" rel="noopener">Facebook</a></nav>
+    <p class="disc">The beach, rooms and people in this concept are illustrative and made with AI. A real photo and video shoot of both salons replaces them. Design concept by Perkins Production, Frederick, Maryland. This is not the official Sunbodies website, which lives at <a href="https://www.sunbodies.com">sunbodies.com</a>.</p>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+/* 7. services, a numbered list */
+.svc-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px)}
+.svc-grid .lead{position:sticky;top:110px;align-self:start}
+.svcs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-strong);counter-reset:s}
+.svc{border-bottom:1px solid var(--line)}
+.svc button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:baseline;width:100%;padding:22px 4px;cursor:pointer;min-height:44px}
+.svc button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.svc .i{font-family:var(--mono);font-size:.8rem;color:var(--brand)}
+.svc .t{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-size:1.55rem;line-height:1.2}
+.svc .d{display:block;font-family:var(--body);font-size:1rem;color:var(--text-secondary);margin-top:4px}
+.svc .go{font-size:1.3rem;color:var(--link);transition:transform .3s var(--ease)}
+.svc button:hover .go{transform:translateX(5px)}
+.svc button:hover .t{color:var(--brand)}
+@media (max-width: 900px){.svc-grid{grid-template-columns:1fr}.svc-grid .lead{position:static}}
+

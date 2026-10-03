@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -17,452 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Young+Serif&display=swap">
-<style>
-:root{
-  --dusk:#1E1309; --dusk-2:#2A1A0D; --dusk-3:#3A2413;
-  --sand:#F3E6CE; --sand-2:#FBF3E3;
-  --accent:#EFA53C; --accent-hover:#F6C26E; --accent-muted:rgba(239,165,60,.32);
-  --amber:#C08742; --ember:#C4531D;
-  --ink:#2B1809; --ink-2:#6A4A2B;
-  --cream:#FBEEDB; --cream-2:#D9BC92;
-  --red-deep:#1A0806; --red-glow:#E4462E; --red-soft:#E7B4A6;
-  --display:"Young Serif","Iowan Old Style",Georgia,serif;
-  --body:"Schibsted Grotesk","Avenir Next","Segoe UI",system-ui,sans-serif;
-  --mono:"Martian Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  --ease-out:cubic-bezier(.22,.8,.3,1);
-  --ease-io:cubic-bezier(.65,0,.35,1);
-  --tshadow:0 1px 2px rgba(20,10,4,.95),0 3px 12px rgba(20,10,4,.78),0 10px 44px rgba(20,10,4,.8);
-  --tshadow-light:0 0 2px rgba(250,238,215,.9),0 2px 16px rgba(250,238,215,.75),0 8px 40px rgba(250,238,215,.6);
-  --gutter:clamp(20px,6vw,88px);
-  --radius:18px;
-}
-*{box-sizing:border-box}
-html{overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{overflow-x:hidden;overflow-x:clip;margin:0;background:var(--dusk);color:var(--cream);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;opacity:0;animation:pagein .9s var(--ease-out) .05s forwards}
-@keyframes pagein{to{opacity:1}}
-img{display:block;max-width:100%;height:auto}
-a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.06;margin:0;text-wrap:balance;letter-spacing:.005em}
-p{margin:0}
-.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.skip{position:fixed;left:16px;top:-60px;z-index:100;background:var(--accent);color:var(--ink);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none;transition:top .3s var(--ease-out)}
-.skip:focus{top:16px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-.mono{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
-.kicker{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-bottom:18px}
-.kicker .hz{width:72px;height:16px;flex:none;overflow:visible}
-.hz path{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s var(--ease-io) .1s}
-.hz path+path{transition-delay:.55s}
-.in .hz path,.hz.in path{stroke-dashoffset:0}
-
-/* ---------- environment layer ---------- */
-.env{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.env .glow{position:absolute;inset:-30%;background:radial-gradient(40% 36% at 30% 35%,rgba(239,165,60,.16),transparent 70%),radial-gradient(34% 30% at 72% 68%,rgba(196,83,29,.14),transparent 70%);animation:drift 84s var(--ease-io) -20s infinite alternate}
-@keyframes drift{from{transform:translate3d(-4%,-3%,0) rotate(0)}to{transform:translate3d(5%,4%,0) rotate(8deg)}}
-.env .mote{position:absolute;width:var(--sz,26px);height:var(--sz,26px);border-radius:50%;background:radial-gradient(circle,rgba(246,194,110,.3) 0%,rgba(246,194,110,.12) 45%,rgba(246,194,110,0) 70%);opacity:0;animation:mote 26s linear infinite}
-@keyframes mote{0%{transform:translate3d(0,0,0);opacity:0}20%{opacity:.8}80%{opacity:.55}100%{transform:translate3d(60px,-340px,0);opacity:0}}
-.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
-main,footer{position:relative;z-index:1}
-
-/* ---------- nav ---------- */
-.nav{position:fixed;z-index:50;top:14px;left:50%;transform:translateX(-50%);width:min(1240px,calc(100% - 24px));display:flex;align-items:center;gap:22px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(26,15,6,.58);border:1px solid rgba(239,165,60,.18);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);transition:background .5s var(--ease-out)}
-.nav.solid{background:rgba(26,15,6,.86)}
-.nav .brand{display:flex;flex:none}
-.nav .brand img{height:40px;width:auto}
-.nav.flying .brand img{opacity:0}
-.flyer{position:fixed;left:0;top:0;z-index:60;pointer-events:none;transform-origin:0 0;will-change:transform;visibility:hidden;opacity:0}
-.flyer.on{visibility:visible}
-.flyer img{position:absolute;inset:0;width:100%;height:100%}
-.flyer .l{opacity:calc(1 - var(--mix,0));filter:drop-shadow(0 10px 28px rgba(90,45,12,.32))}
-.flyer .d{opacity:var(--mix,0);filter:drop-shadow(0 8px 22px rgba(20,10,4,.45))}
-.nav nav{display:flex;gap:24px;margin-left:auto}
-.nav nav a{font-size:14.5px;font-weight:600;text-decoration:none;color:var(--cream-2);transition:color .25s var(--ease-out)}
-.nav nav a:hover{color:var(--cream)}
-.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-2);white-space:nowrap}
-.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#8A7A68;flex:none}
-.live.open::before{background:#7CCB6B;box-shadow:0 0 0 0 rgba(124,203,107,.6);animation:ping 2.8s var(--ease-out) -.8s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(124,203,107,.55)}70%{box-shadow:0 0 0 8px rgba(124,203,107,0)}100%{box-shadow:0 0 0 0 rgba(124,203,107,0)}}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 15px/1 var(--body);text-decoration:none;border-radius:999px;padding:14px 24px;border:1.5px solid transparent;cursor:pointer;transition:transform .35s var(--ease-out),background .3s var(--ease-out),border-color .3s var(--ease-out),color .3s var(--ease-out);text-shadow:none}
-.btn:hover{transform:translateY(-2px)}
-.btn-gold{background:var(--accent);color:var(--ink)}
-.btn-gold:hover{background:var(--accent-hover)}
-.btn-ghost{border-color:rgba(251,238,219,.5);color:var(--cream)}
-.btn-ghost:hover{border-color:var(--cream)}
-.btn-ink{background:var(--ink);color:var(--sand-2)}
-.btn-ink:hover{background:#44260f}
-.nav .btn{padding:11px 18px;font-size:14px;flex:none}
-
-/* ---------- hero ---------- */
-.hero{position:relative;z-index:1}
-.scrub{position:relative;height:720vh}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#C9B28E}
-.poster,.poster-end,.stage video{position:absolute;inset:0;width:100%;height:100%;background:center/cover no-repeat}
-.poster-end{opacity:0}
-.stage video{object-fit:cover;opacity:0;transform:translateZ(0);will-change:transform;transition:opacity .8s var(--ease-out)}
-.stage.video-ready video{opacity:1}
-.stage .scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 62% 62% at 0% 100%,rgba(20,10,4,.58) 0%,rgba(20,10,4,.3) 50%,rgba(20,10,4,0) 80%),radial-gradient(ellipse 120% 90% at 50% 42%,rgba(20,10,4,0) 40%,rgba(20,10,4,.42) 100%),linear-gradient(180deg,rgba(20,10,4,.28),rgba(20,10,4,0) 16%)}
-.band{position:absolute;z-index:2;isolation:isolate;opacity:0;visibility:hidden;--k:0}
-.band.on{visibility:visible}
-.band::before{content:"";position:absolute;inset:var(--sy,-62%) var(--sx,-36%);z-index:-1;pointer-events:none;opacity:calc(.25 + .75*var(--k,1));background:radial-gradient(closest-side at var(--sat,50% 50%),rgba(20,10,4,var(--scrim,.62)) 0%,rgba(20,10,4,calc(var(--scrim,.62)*.92)) 52%,rgba(20,10,4,calc(var(--scrim,.62)*.55)) 76%,rgba(20,10,4,0) 100%)}
-.band h1,.band h2{font-size:clamp(42px,5.6vw,88px)}
-.band .line{margin-top:18px;font-size:clamp(16px,1.45vw,20px);font-weight:500;max-width:36ch;text-wrap:balance}
-.band .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
-.band .w{display:inline-block;white-space:nowrap}
-.band .c{display:inline-block}
-.b1{right:var(--gutter);top:18vh;width:min(600px,44vw);text-align:right;color:var(--ink)}
-.b1::before{background:radial-gradient(ellipse 62% 60% at 58% 50%,rgba(246,234,212,.5) 0%,rgba(246,234,212,.26) 48%,rgba(246,234,212,0) 76%)}
-.b1 h1,.b1 .line,.b1 .eyebrow{text-shadow:var(--tshadow-light)}
-.b1 .line{margin-left:auto}
-.b2,.b3,.settle{color:var(--cream);text-shadow:var(--tshadow)}
-.b2{left:var(--gutter);bottom:7vh;width:min(660px,48vw);--scrim:.68}
-.b2 h2,.b3 h2{font-size:clamp(34px,3.9vw,58px)}
-.b3{right:var(--gutter);top:18vh;width:min(660px,46vw);text-align:right;--scrim:.8;--sx:-26%;--sy:-58%}
-.b3 .line{margin-left:auto}
-.settle{left:var(--gutter);bottom:6vh;width:min(660px,47vw);--scrim:.72;--sx:-16%;--sy:-40%;--sat:50% 44%}
-.settle h2{font-size:clamp(38px,4.3vw,70px)}
-.settle .w.em{color:var(--accent)}
-.settle .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.settle .btn{text-shadow:none}
-.band .eyebrow,.band .line{color:inherit}
-.b2 .line,.b3 .line,.settle .line{color:#F4DFC0}
-
-/* entrances, all scrubbed off --k */
-.fx-blur{position:relative;display:block}
-.fx-blur .sharp{display:block;opacity:var(--k)}
-.fx-blur .soft{position:absolute;inset:0;filter:blur(12px);opacity:calc(1 - var(--k))}
-.b1 .sub{--kx:clamp(0,(var(--k) - .5)*2.4,1);opacity:var(--kx);transform:translateY(calc((1 - var(--kx))*12px))}
-.b2 .w{--kc:clamp(0,(var(--k) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-28px))}
-.b2 .sub,.b3 .sub{--kx:clamp(0,(var(--k) - .62)*3,1);opacity:var(--kx);transform:translateY(calc((1 - var(--kx))*10px))}
-.b3 .c{--kc:clamp(0,(var(--k) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*var(--jy,0px)))}
-.settle .w{--kc:clamp(0,(var(--k) - var(--th,0))*3.2,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*36px))}
-.settle .sub{--ks:clamp(0,(var(--k) - .66)*4,1);opacity:var(--ks);transform:translateY(calc((1 - var(--ks))*12px))}
-.settle .ctas{--kb:clamp(0,(var(--k) - .78)*5,1);opacity:var(--kb);transform:translateY(calc((1 - var(--kb))*12px))}
-
-.chip{background:rgba(26,14,6,.55);border:1px solid rgba(239,165,60,.28);border-radius:10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);text-shadow:0 1px 3px rgba(20,10,4,.85)}
-.hud{position:absolute;right:var(--gutter);bottom:4vh;padding:9px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);display:flex;gap:12px;align-items:baseline}
-.hud b{font-weight:500;color:var(--accent);font-variant-numeric:tabular-nums}
-.cue{position:absolute;left:50%;bottom:4vh;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--cream);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-shadow:var(--tshadow);transition:opacity .5s var(--ease-out)}
-.cue.gone{opacity:0}
-.ring{width:40px;height:40px;transform:rotate(-90deg)}
-.ring .track{stroke:rgba(251,238,219,.25)}
-.ring .bar{stroke:var(--cream);transition:stroke-dashoffset .2s linear}
-.chev{width:22px;height:22px;animation:bob 2.6s var(--ease-io) -.6s infinite}
-@keyframes bob{50%{transform:translateY(6px)}}
-@media (max-height:560px){.hud,.cue{display:none}}
-
-/* static hero (the five gates) */
-.static-hero{display:none;position:relative;min-height:100vh;min-height:100svh;padding:120px var(--gutter) 64px;background:#1E1309;color:var(--cream);align-items:end;overflow:hidden}
-.static-hero .bg{position:absolute;inset:0;background:center 38%/cover no-repeat}
-.static-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,4,.3) 0%,rgba(20,10,4,0) 22%,rgba(20,10,4,.1) 48%,rgba(20,10,4,.72) 78%,rgba(20,10,4,.9) 100%)}
-.static-hero .copy{position:relative;max-width:620px;text-shadow:var(--tshadow)}
-.static-hero h1{font-size:clamp(44px,11vw,84px)}
-.static-hero .line{margin-top:16px;font-size:17px;color:#F4DFC0;max-width:38ch}
-.static-hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.static-hero .copy>*{animation:rise 1s var(--ease-out) both}
-.static-hero .copy>*:nth-child(2){animation-delay:.12s}
-.static-hero .copy>*:nth-child(3){animation-delay:.24s}
-.static-hero .copy>*:nth-child(4){animation-delay:.36s}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@media (max-height:560px){.static-hero{padding-top:92px;padding-bottom:36px}.static-hero h1{font-size:44px}.static-hero .line{font-size:15px;margin-top:10px}.static-hero .ctas{margin-top:16px}}
-
-@media (max-width: 720px){.scrub{display:none}.static-hero{display:grid}.static-hero .bg{background-image:url(assets/hero-phone.jpg)}}
-@media (orientation: portrait) and (max-width: 1024px){.scrub{display:none}.static-hero{display:grid}.static-hero .bg{background-image:url(assets/hero-phone.jpg)}}
-@media (orientation: portrait) and (pointer: coarse){.scrub{display:none}.static-hero{display:grid}.static-hero .bg{background-image:url(assets/hero-phone.jpg)}}
-@media (orientation: landscape) and (pointer: coarse) and (max-height: 560px){.scrub{display:none}.static-hero{display:grid}.static-hero .bg{background-image:url(assets/hero-ending.jpg)}}
-@media (prefers-reduced-motion: reduce){.scrub{display:none}.static-hero{display:grid}.static-hero .bg{background-image:url(assets/hero-ending.jpg)}}
-@media (prefers-reduced-motion: reduce) and (orientation: portrait){.static-hero .bg{background-image:url(assets/hero-phone.jpg)}}
-
-/* ---------- shared section scaffolding ---------- */
-section.block{position:relative;padding:clamp(88px,11vw,150px) var(--gutter)}
-.wrap{max-width:1240px;margin:0 auto}
-.light{background:var(--sand);color:var(--ink)}
-.light .kicker{color:var(--ember)}
-.dark .kicker{color:var(--accent)}
-.h2{font-size:clamp(38px,5vw,68px)}
-.lede{font-size:clamp(17px,1.35vw,19px);max-width:56ch;margin-top:20px}
-.light .lede{color:var(--ink-2)}
-.dark .lede{color:var(--cream-2)}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
-.reveal.in{opacity:1;transform:none}
-.stagger>*{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out),background .3s var(--ease-out),border-color .3s var(--ease-out),box-shadow .3s var(--ease-out);transition-delay:calc(var(--i,0)*110ms)}
-.stagger.in>*{opacity:1;transform:none}
-.stagger.done>*{transition-delay:0s}
-
-/* ---------- facts strip ---------- */
-.facts{position:relative;z-index:1;border-block:1px solid rgba(239,165,60,.2);background:rgba(30,19,9,.72);overflow:hidden;padding:18px 0}
-.facts .track{display:flex;gap:0;width:max-content;animation:marq 60s linear infinite}
-.facts .track span{display:inline-flex;align-items:center;gap:22px;padding-right:22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-2);white-space:nowrap}
-.facts .track span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(239,165,60,.8)}
-@keyframes marq{to{transform:translateX(-50%)}}
-
-/* ---------- three ways ---------- */
-.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
-.way{background:var(--sand-2);border:1px solid rgba(43,24,9,.1);border-radius:var(--radius);overflow:hidden;display:grid;align-content:start}
-.way figure{margin:0;aspect-ratio:3/2;overflow:hidden}
-.way figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
-.way:hover figure img{transform:scale(1.04)}
-.way .body{padding:24px 26px 30px;display:grid;gap:10px}
-.way .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);font-weight:500}
-.way h3{font-size:26px}
-.way p{color:var(--ink-2);font-size:15.5px}
-
-/* ---------- level finder ---------- */
-.finder{background:linear-gradient(180deg,#24160A,#1E1309)}
-.finder-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:clamp(28px,4vw,56px);margin-top:52px;align-items:start}
-.quiz{display:grid;gap:22px}
-.q .qlab{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-2);margin-bottom:10px}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
-.opt{font:600 14.5px/1 var(--body);color:var(--cream);background:rgba(251,238,219,.05);border:1.5px solid rgba(239,165,60,.28);border-radius:999px;padding:11px 16px;cursor:pointer;transition:background .3s var(--ease-out),border-color .3s var(--ease-out),color .3s var(--ease-out)}
-.opt:hover{border-color:var(--accent)}
-.opt[aria-checked="true"]{background:var(--accent);border-color:var(--accent);color:var(--ink)}
-.pick{margin-top:6px;min-height:52px;font-size:16px;color:var(--cream-2)}
-.pick b{color:var(--cream);font-weight:600}
-.dial{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(239,165,60,.24);aspect-ratio:5/3.3;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.dial .sky{position:absolute;inset:0;opacity:0;transition:opacity .9s var(--ease-out)}
-.dial .sky.on{opacity:1}
-.sky.s0{background:linear-gradient(180deg,#F6E9CE 0%,#EBCB92 78%,#C9A76E 100%)}
-.sky.s1{background:linear-gradient(180deg,#EFCF92 0%,#E0A052 78%,#A87438 100%)}
-.sky.s2{background:linear-gradient(180deg,#D99546 0%,#BE6A2C 76%,#7E4418 100%)}
-.sky.s3{background:linear-gradient(180deg,#A64A25 0%,#7A2E15 72%,#3B170A 100%)}
-.sky.s4{background:radial-gradient(60% 40% at 80% 82%,rgba(239,140,70,.45),transparent 70%),linear-gradient(180deg,#3B2230 0%,#2A1520 60%,#160B09 100%)}
-.dial svg{position:absolute;inset:0;width:100%;height:100%}
-.dial .arc{fill:none;stroke:rgba(251,238,219,.55);stroke-width:1.4;stroke-dasharray:3 6}
-.dial .arc-draw{fill:none;stroke:rgba(251,238,219,.0)}
-.dial .horizon{stroke:rgba(251,238,219,.75);stroke-width:1.6}
-.dial .sea{fill:rgba(20,10,4,.38)}
-.dial .sun{transition:transform 1s var(--ease-out);cursor:grab}
-.dial .sun.drag{transition:none;cursor:grabbing}
-.dial .sun .core{fill:#FFD27A;stroke:rgba(196,83,29,.55);stroke-width:2}
-.dial .sun .halo{fill:rgba(255,196,110,.4)}
-.dial .tick{fill:rgba(251,238,219,.8)}
-.dial .stops{position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:space-between;gap:6px}
-.stop{flex:1 1 0;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cream);padding:9px 4px;border-radius:999px;background:rgba(26,14,6,.6);border:1px solid rgba(251,238,219,.28);cursor:pointer;white-space:nowrap;text-align:center;transition:background .3s var(--ease-out),color .3s var(--ease-out),border-color .3s var(--ease-out)}
-.stop:hover{border-color:var(--accent)}
-.stop[aria-checked="true"]{background:var(--accent);color:var(--ink);border-color:var(--accent)}
-.dial .hint{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(251,243,227,.72);padding:6px 9px;border-radius:999px;transition:opacity .6s var(--ease-out)}
-.dial.used .hint{opacity:0}
-.result{margin-top:22px;border-radius:20px;background:rgba(251,238,219,.04);border:1px solid rgba(239,165,60,.22);padding:26px 26px 28px;display:grid;gap:12px;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
-.result.swap{opacity:0;transform:translateY(8px)}
-.result .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.result .lv{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
-.result .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--accent);padding:5px 9px;border-radius:999px}
-.result h3{font-size:clamp(28px,2.6vw,36px)}
-.result .specs{display:flex;flex-wrap:wrap;gap:8px}
-.result .specs span{font-size:13.5px;color:var(--cream-2);border:1px solid rgba(251,238,219,.16);border-radius:999px;padding:6px 11px}
-.result .best{color:var(--cream-2);font-size:15.5px}
-.result .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:4px}
-.result .price b{font-family:var(--display);font-weight:400;font-size:40px;color:var(--cream);font-variant-numeric:tabular-nums}
-.result .price span{color:var(--cream-2);font-size:14px}
-.result .btn{justify-self:start;margin-top:6px}
-.legnote{margin-top:18px;font-size:14.5px;color:var(--cream-2)}
-.legnote b{color:var(--cream);font-weight:600}
-
-/* ---------- memberships ---------- */
-.mem-grid{display:grid;grid-template-columns:.9fr 1.3fr;gap:clamp(24px,4vw,56px);margin-top:52px;align-items:start}
-.spot{position:relative;border-radius:24px;overflow:hidden;background:var(--ink);color:var(--sand-2);padding:34px 32px 36px;display:grid;gap:14px}
-.spot::before{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(239,165,60,.55),rgba(239,165,60,0) 68%)}
-.spot::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(246,194,110,.4),rgba(246,194,110,0) 60%);opacity:0;animation:pulse 6s var(--ease-io) -2s infinite}
-@keyframes pulse{50%{opacity:1}}
-.spot>*{position:relative}
-.spot .mono{color:var(--accent)}
-.spot h3{font-size:clamp(30px,3vw,40px)}
-.spot .big{font-family:var(--display);font-size:clamp(72px,8vw,108px);line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
-.spot .big small{font-family:var(--body);font-size:16px;color:var(--cream-2);margin-left:6px}
-.spot ul{list-style:none;margin:6px 0 4px;padding:0;display:grid;gap:9px}
-.spot li{display:flex;gap:10px;align-items:baseline;font-size:15.5px;color:#EAD7B8}
-.spot li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--accent);transform:translateY(-2px)}
-.spot .btn{justify-self:start;margin-top:6px}
-.spot .perday{font-size:13.5px;color:var(--cream-2)}
-.board{border-radius:22px;background:var(--sand-2);border:1px solid rgba(43,24,9,.1);padding:10px 28px}
-.row{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px dashed rgba(43,24,9,.2)}
-.row:last-child{border-bottom:0}
-.row .sw{width:12px;height:12px;border-radius:50%;transform:translateY(1px)}
-.row .nm{font-weight:700;font-size:16.5px;color:var(--ink)}
-.row .ds{display:block;font-size:14px;color:var(--ink-2);font-weight:400;margin-top:3px}
-.row .pr{font-family:var(--display);font-size:24px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.row .pr small{display:block;font-family:var(--body);font-size:12.5px;color:var(--ink-2)}
-.row.hot .pr,.row.hot .nm{color:var(--ember)}
-.mem-foot{margin-top:18px;font-size:14.5px;color:var(--ink-2);max-width:70ch}
-.mem-foot b{color:var(--ink)}
-
-/* ---------- reviews ---------- */
-.reviews-grid{display:grid;grid-template-columns:.8fr 1.4fr;gap:clamp(28px,5vw,72px);align-items:start;margin-top:10px}
-.score{position:sticky;top:120px;display:grid;gap:10px}
-.score .n{font-family:var(--display);font-size:clamp(96px,11vw,150px);line-height:.85;color:var(--accent)}
-.stars{display:flex;gap:4px}
-.stars svg{width:24px;height:24px}
-.score p{color:var(--cream-2);font-size:15px}
-.quotes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.quote{margin:0;border-radius:20px;border:1px solid rgba(239,165,60,.2);background:rgba(251,238,219,.035);padding:26px 26px 24px;display:grid;gap:14px;align-content:space-between}
-.quote.wide{grid-column:1/-1}
-.quote blockquote{margin:0;font-family:var(--display);font-size:clamp(20px,1.8vw,25px);line-height:1.3;color:var(--cream)}
-.quote.wide blockquote{font-size:clamp(24px,2.4vw,34px)}
-.quote figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-2)}
-
-/* ---------- cocktail ---------- */
-.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;position:relative}
-.steps3 .link{position:absolute;left:8%;right:8%;top:calc(33.3% * .66);height:40px;pointer-events:none;overflow:visible}
-.step3{position:relative;display:grid;gap:14px}
-.step3 figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:var(--dusk-2)}
-.step3 figure img{width:100%;height:100%;object-fit:cover}
-.step3 .num{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ember);font-weight:500}
-.step3 h3{font-size:30px}
-.step3 p{color:var(--ink-2);font-size:15.5px}
-
-/* ---------- red light ---------- */
-.redroom{background:radial-gradient(70% 90% at 80% 20%,rgba(228,70,46,.26),transparent 62%),linear-gradient(180deg,#170605,var(--red-deep));color:#F7E1D8}
-.redroom .kicker{color:var(--red-glow)}
-.red-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
-.redroom .lede{color:var(--red-soft);max-width:52ch}
-.rfacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.rfacts span{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(228,70,46,.45);border-radius:999px;padding:9px 13px;color:#F7E1D8}
-.panel{position:relative;aspect-ratio:4/5;border-radius:26px;background:#140404;border:1px solid rgba(228,70,46,.3);overflow:hidden;display:grid;place-items:center}
-.panel .leds{width:72%;height:76%;border-radius:16px;background-image:radial-gradient(circle,#FF6A4A 0 2.4px,transparent 3.2px);background-size:16px 16px;background-color:#5C0F07;box-shadow:0 0 80px 18px rgba(228,70,46,.35)}
-.panel .bloom{position:absolute;inset:0;background:radial-gradient(50% 45% at 50% 50%,rgba(255,90,60,.5),transparent 70%);opacity:.55;animation:bloom 7s var(--ease-io) -3s infinite}
-@keyframes bloom{50%{opacity:1}}
-.panel .cap{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-soft)}
-
-/* ---------- first visit ---------- */
-.fv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;margin-top:52px}
-.timeline{position:relative;list-style:none;margin:0;padding:0 0 0 44px;display:grid;gap:34px}
-.timeline .path{position:absolute;left:11px;top:6px;bottom:6px;width:4px;overflow:visible}
-.timeline .path line{stroke:rgba(239,165,60,.25);stroke-width:2}
-.timeline .path .fill{stroke:var(--accent);stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease-io) .2s}
-.timeline.in .path .fill{stroke-dashoffset:0}
-.timeline li{position:relative}
-.timeline li::before{content:attr(data-n);position:absolute;left:-44px;top:-2px;width:26px;height:26px;border-radius:50%;background:var(--dusk);border:1.5px solid var(--accent);color:var(--accent);font:500 11px/23px var(--mono);text-align:center}
-.timeline h3{font-size:26px}
-.timeline p{color:var(--cream-2);margin-top:6px;max-width:44ch}
-.fv-side{display:grid;gap:18px}
-.fv-side figure{margin:0;border-radius:22px;overflow:hidden;aspect-ratio:16/10}
-.fv-side figure img{width:100%;height:100%;object-fit:cover;object-position:40% 30%}
-.note{border-radius:18px;border:1px solid rgba(239,165,60,.28);background:rgba(239,165,60,.08);padding:20px 22px;font-size:15px;color:var(--cream-2)}
-.note b{color:var(--cream);font-weight:600}
-
-/* ---------- faq ---------- */
-.faq-grid{display:grid;grid-template-columns:.8fr 1.3fr;gap:clamp(28px,5vw,72px);align-items:start}
-.faq-side{position:sticky;top:120px}
-.faq-side .lede{margin-top:16px}
-.faq-side .calls{display:grid;gap:8px;margin-top:22px}
-.faq-side .calls a{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid rgba(196,83,29,.4);justify-self:start;padding-bottom:2px;transition:border-color .3s var(--ease-out)}
-.faq-side .calls a:hover{border-color:var(--ember)}
-.qa{border-top:1px solid rgba(43,24,9,.16)}
-.qa:last-child{border-bottom:1px solid rgba(43,24,9,.16)}
-.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:22px 2px;font-weight:700;font-size:18px;color:var(--ink)}
-.qa summary::-webkit-details-marker{display:none}
-.qa summary .pm{flex:none;width:14px;height:14px;position:relative;transform:translateY(1px)}
-.qa summary .pm::before,.qa summary .pm::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:var(--ember);border-radius:2px;transition:transform .4s var(--ease-out)}
-.qa summary .pm::after{transform:rotate(90deg)}
-.qa[open] summary .pm::after{transform:rotate(0)}
-.qa .a{padding:0 2px 24px;color:var(--ink-2);max-width:62ch}
-.qa[open] .a{animation:rise .5s var(--ease-out) both}
-
-/* ---------- locations ---------- */
-.locs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:52px}
-.loc{border-radius:24px;background:rgba(251,238,219,.04);border:1px solid rgba(239,165,60,.22);padding:32px 30px;display:grid;gap:16px;align-content:start}
-.loc .status{justify-self:start}
-.loc h3{font-size:clamp(30px,3vw,40px)}
-.loc address{font-style:normal;color:var(--cream-2)}
-.loc .tel{font-family:var(--display);font-size:28px;color:var(--accent);text-decoration:none;justify-self:start;font-variant-numeric:tabular-nums}
-.loc .tel:hover{color:var(--accent-hover)}
-.hours{display:grid;gap:6px;border-top:1px solid rgba(239,165,60,.18);padding-top:16px;font-size:15px}
-.hours div{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.hours span:first-child{color:var(--cream-2)}
-.hours .today{color:var(--cream);font-weight:600}
-.loc .dir{justify-self:start;font-weight:700;font-size:15px;text-decoration:none;border-bottom:1.5px solid var(--accent-muted);padding-bottom:2px;transition:border-color .3s var(--ease-out)}
-.loc .dir:hover{border-color:var(--accent)}
-.gym{margin-top:22px;border-radius:20px;border:1px dashed rgba(239,165,60,.35);padding:20px 24px;color:var(--cream-2);font-size:15.5px}
-.gym b{color:var(--cream)}
-
-/* ---------- join ---------- */
-.join{position:relative;padding:clamp(110px,13vw,170px) var(--gutter);background:#1E1309 center/cover no-repeat;overflow:hidden}
-.join::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,10,4,.88) 0%,rgba(20,10,4,.62) 48%,rgba(20,10,4,.25) 100%),linear-gradient(0deg,rgba(20,10,4,.6),rgba(20,10,4,0) 40%)}
-.join .wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
-.join h2{font-size:clamp(44px,5.6vw,80px);text-shadow:var(--tshadow)}
-.join .lede{color:#F1DDBD;text-shadow:0 1px 3px rgba(20,10,4,.8)}
-.join .kicker{position:relative}
-.rays{position:absolute;left:-94px;top:-116px;width:260px;height:260px;pointer-events:none;overflow:visible}
-.rays path{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s var(--ease-io);transition-delay:calc(var(--r,0)*70ms)}
-.rays.in path{stroke-dashoffset:0}
-.form{border-radius:24px;background:rgba(26,14,6,.72);border:1px solid rgba(239,165,60,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:30px 28px;display:grid;gap:16px}
-.field{display:grid;gap:7px}
-.field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-2)}
-.field input,.field select{font:500 16px/1.2 var(--body);color:var(--cream);background:rgba(251,238,219,.06);border:1.5px solid rgba(251,238,219,.28);border-radius:12px;padding:13px 14px;transition:border-color .3s var(--ease-out),background .3s var(--ease-out);-webkit-appearance:none;appearance:none}
-.field select{background-image:linear-gradient(45deg,transparent 50%,var(--accent) 50%),linear-gradient(135deg,var(--accent) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat}
-.field select option{color:#1E1309}
-.field input:focus,.field select:focus{border-color:var(--accent);background-color:rgba(251,238,219,.1);outline:none}
-.field input::placeholder{color:rgba(217,188,146,.7)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form .btn{width:100%;margin-top:4px;padding:16px 24px}
-.form .fine{font-size:13px;color:var(--cream-2)}
-.form .err{color:#FFB199;font-size:14px;min-height:0}
-.thanks{display:none;gap:12px;text-align:left}
-.form.sent .fields{display:none}
-.form.sent .thanks{display:grid;animation:rise .7s var(--ease-out) both}
-.thanks h3{font-size:34px;color:var(--accent)}
-.thanks p{color:#F1DDBD}
-
-/* ---------- footer ---------- */
-footer{background:#170E06;border-top:1px solid rgba(239,165,60,.16);padding:56px var(--gutter) 44px;color:var(--cream-2);font-size:14.5px}
-.foot{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:28px 40px;align-items:start}
-.foot img{height:46px;width:auto}
-.foot nav{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:flex-end}
-.foot nav a{text-decoration:none;font-weight:600;color:var(--cream-2);transition:color .25s var(--ease-out)}
-.foot nav a:hover{color:var(--cream)}
-.disc{grid-column:1/-1;border-top:1px solid rgba(239,165,60,.12);padding-top:22px;font-size:13px;color:#A98D69;max-width:95ch}
-
-/* ---------- responsive ---------- */
-@media (max-width:1080px){
-  .nav nav{display:none}
-  .nav .live{margin-left:auto}
-}
-@media (max-width:980px){
-  .ways,.steps3{grid-template-columns:1fr 1fr}
-  .ways .way:last-child,.steps3 .step3:last-child{grid-column:1/-1}
-  .finder-grid,.mem-grid,.reviews-grid,.red-grid,.fv-grid,.faq-grid,.join .wrap{grid-template-columns:1fr}
-  .score,.faq-side{position:static}
-  .panel{aspect-ratio:16/10}
-  .steps3 .link{display:none}
-}
-@media (max-width:720px){
-  body{font-size:16px}
-  .nav{top:10px;gap:12px;padding:7px 8px 7px 14px}
-  .nav .brand img{height:34px}
-  .nav .live{display:none}
-  .nav .btn{margin-left:auto}
-  .ways,.steps3,.locs,.quotes,.two{grid-template-columns:1fr}
-  .ways .way:last-child,.steps3 .step3:last-child{grid-column:auto}
-  .quote.wide{grid-column:auto}
-  .row{grid-template-columns:auto 1fr;}
-  .row .pr{grid-column:2;text-align:left}
-  .board{padding:4px 20px}
-  .foot{grid-template-columns:1fr}
-  .foot nav{justify-content:flex-start}
-  .stop{font-size:10px;padding:9px 2px;letter-spacing:.04em}
-  .stop .lw{font-size:0}
-  .stop .lw::after{content:"L";font-size:10px}
-  .rays{display:none}
-}
-@media (pointer:coarse){
-  .btn,.opt,.stop{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-  .qa summary{min-height:44px}
-}
-
-/* ---------- reduced motion: final states, nothing moves ---------- */
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
-  body{opacity:1}
-  .reveal,.stagger>*{opacity:1;transform:none}
-  .hz path,.rays path,.timeline .path .fill{stroke-dashoffset:0}
-  .env .mote{display:none}
-  .facts .track{transform:none}
-}
-body.pinned .reveal,body.pinned .stagger>*{opacity:1;transform:none;transition:none}
-body.pinned .hz path,body.pinned .rays path,body.pinned .timeline .path .fill{stroke-dashoffset:0;transition:none}
-body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
-</style>
-</head>
+<link rel="stylesheet" href="/concepts/sunbodies/_astro/index.BxQ40Bww.css"></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
@@ -481,8 +36,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 </div>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Sunbodies Tanning Salon, back to top"><img src="assets/logo-dark.svg" alt="Sunbodies Tanning Salon" width="119" height="40"></a>
+
+  <header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Sunbodies Tanning Salon, back to top"><img src="/concepts/sunbodies/assets/logo-dark.svg" alt="Sunbodies Tanning Salon" width="119" height="40"></a>
   <nav aria-label="Main">
     <a href="#levels">Levels</a>
     <a href="#memberships">Memberships</a>
@@ -493,936 +49,378 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <a class="btn btn-gold" href="#join">Claim $29</a>
 </header>
 
-<div class="flyer" id="flyer" aria-hidden="true"><img class="l" src="assets/logo-light.svg" alt="" width="1750" height="588"><img class="d" src="assets/logo-dark.svg" alt="" width="1750" height="588"></div>
+<div class="flyer" id="flyer" aria-hidden="true"><img class="l" src="/concepts/sunbodies/assets/logo-light.svg" alt="" width="1750" height="588"><img class="d" src="/concepts/sunbodies/assets/logo-dark.svg" alt="" width="1750" height="588"></div>
 
-<main id="main" tabindex="-1">
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top" aria-label="Golden hour, any hour">
+  <div class="scrub" id="scrub">
+    <div class="stage" id="stage" data-video="/concepts/sunbodies/assets/hero-scrub.mp4" data-bytes="5847695" data-poster="/concepts/sunbodies/_astro/hero-poster.BRNjTpI__svB9V.webp" data-ending="/concepts/sunbodies/_astro/hero-ending.CSOsjwn9_Z1sr6pT.webp">
+      <div class="poster" id="poster" aria-hidden="true"></div>
+      <div class="poster-end" id="posterEnd" aria-hidden="true"></div>
+      <video id="hero" preload="none" muted playsinline disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+      <div class="scrim" aria-hidden="true"></div>
 
-  <section class="hero" id="top" aria-label="Golden hour, any hour">
-    <div class="scrub" id="scrub">
-      <div class="stage" id="stage">
-        <div class="poster" id="poster" aria-hidden="true"></div>
-        <div class="poster-end" id="posterEnd" aria-hidden="true"></div>
-        <video id="hero" preload="none" muted playsinline disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
-        <div class="scrim" aria-hidden="true"></div>
-
-        <div class="band b1" data-a="0.045" data-b="0.26">
-          <p class="eyebrow sub">Greencastle + Chambersburg, PA</p>
-          <h1 class="fx-blur" data-split="blur" data-seed="11">Golden hour,|any hour.</h1>
-          <p class="line sub">Two salons, sixteen rooms, open seven days a week.</p>
-        </div>
-
-        <div class="band b2" data-a="0.28" data-b="0.5">
-          <h2 data-split="drift" data-seed="23">The lower the sun,|the deeper the bronze.</h2>
-          <p class="line sub">Four levels, from an easy 20-minute base to a 7-minute superbed.</p>
-        </div>
-
-        <div class="band b3" data-a="0.52" data-b="0.75">
-          <h2 data-split="weave" data-seed="37" data-spread="0.5">Spray tan, red light,|and a 24-hour gym.</h2>
-          <p class="line sub">One membership. Choose $0 down or no commitment.</p>
-        </div>
-
-        <div class="band settle" data-a="0.78" data-b="1" data-ramp="0.1">
-          <h2 data-split="rise" data-seed="41">Walk in pale.|Walk out *glowing.*</h2>
-          <p class="line sub">Unlimited tanning is $29 a month right now, with a Sports Inn Fitness membership included.</p>
-          <div class="ctas">
-            <a class="btn btn-gold" href="#join">Claim $29 unlimited</a>
-            <a class="btn btn-ghost" href="#levels">Find your level</a>
-          </div>
-        </div>
-
-        <div class="hud chip" aria-hidden="true">Golden hour <b id="clock">5:30 PM</b></div>
-        <div class="cue" id="cue" aria-hidden="true">
-          <svg class="ring" id="ring" viewBox="0 0 48 48"><circle class="track" cx="24" cy="24" r="20" fill="none" stroke-width="3"/><circle class="bar" cx="24" cy="24" r="20" fill="none" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
-          <span id="cueText">Warming up the sunset</span>
-        </div>
+      <div class="band b1" data-a="0.045" data-b="0.26">
+        <p class="eyebrow sub">Greencastle + Chambersburg, PA</p>
+        <h1 class="fx-blur" data-split="blur" data-seed="11">Golden hour,|any hour.</h1>
+        <p class="line sub">Two salons, sixteen rooms, open seven days a week.</p>
       </div>
-    </div>
 
-    <div class="static-hero" id="staticHero">
-      <div class="bg" aria-hidden="true"></div>
-      <div class="copy">
-        <p class="mono" style="color:var(--cream);margin-bottom:14px">Greencastle + Chambersburg, PA</p>
-        <h1>Golden hour, any hour.</h1>
-        <p class="line">Unlimited tanning from $29 a month, with Sports Inn Fitness included. Walk in at either salon, seven days a week.</p>
+      <div class="band b2" data-a="0.28" data-b="0.5">
+        <h2 data-split="drift" data-seed="23">The lower the sun,|the deeper the bronze.</h2>
+        <p class="line sub">Four levels, from an easy 20-minute base to a 7-minute superbed.</p>
+      </div>
+
+      <div class="band b3" data-a="0.52" data-b="0.75">
+        <h2 data-split="weave" data-seed="37" data-spread="0.5">Spray tan, red light,|and a 24-hour gym.</h2>
+        <p class="line sub">One membership. Choose $0 down or no commitment.</p>
+      </div>
+
+      <div class="band settle" data-a="0.78" data-b="1" data-ramp="0.1">
+        <h2 data-split="rise" data-seed="41">Walk in pale.|Walk out *glowing.*</h2>
+        <p class="line sub">Unlimited tanning is $29 a month right now, with a Sports Inn Fitness membership included.</p>
         <div class="ctas">
           <a class="btn btn-gold" href="#join">Claim $29 unlimited</a>
           <a class="btn btn-ghost" href="#levels">Find your level</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <div class="facts" aria-label="Quick facts">
-    <div class="track">
-      <span>True unlimited</span><span>$0 down or no commitment</span><span>Sports Inn Fitness included</span><span>16 private rooms</span><span>Open 7 days</span><span>4.3 stars from 94 reviews</span>
-      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
-      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
-      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
+      <div class="hud chip" aria-hidden="true">Golden hour <b id="clock">5:30 PM</b></div>
+      <div class="cue" id="cue" aria-hidden="true">
+        <svg class="ring" id="ring" viewBox="0 0 48 48"><circle class="track" cx="24" cy="24" r="20" fill="none" stroke-width="3"></circle><circle class="bar" cx="24" cy="24" r="20" fill="none" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"></circle></svg>
+        <span id="cueText">Warming up the sunset</span>
+      </div>
     </div>
   </div>
 
-  <section class="block light" id="glow" aria-labelledby="glow-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>What we do</p>
-        <h2 class="h2" id="glow-h">Three ways to glow.</h2>
+  <div class="static-hero" id="staticHero" style="--hero-phone:url(/concepts/sunbodies/_astro/hero-phone.DzWUrg62_1VYdBq.webp);--hero-ending:url(/concepts/sunbodies/_astro/hero-ending.CSOsjwn9_Z1sr6pT.webp)">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="copy">
+      <p class="mono" style="color:var(--cream);margin-bottom:14px">Greencastle + Chambersburg, PA</p>
+      <h1>Golden hour, any hour.</h1>
+      <p class="line">Unlimited tanning from $29 a month, with Sports Inn Fitness included. Walk in at either salon, seven days a week.</p>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#join">Claim $29 unlimited</a>
+        <a class="btn btn-ghost" href="#levels">Find your level</a>
       </div>
-      <div class="ways stagger">
+    </div>
+  </div>
+</section>
+    <div class="facts" aria-label="Quick facts">
+  <div class="track">
+    
+      <span>True unlimited</span><span>$0 down or no commitment</span><span>Sports Inn Fitness included</span><span>16 private rooms</span><span>Open 7 days</span><span>4.3 stars from 94 reviews</span>
+      
+      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
+      
+      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
+      
+      <span aria-hidden="true">True unlimited</span><span aria-hidden="true">$0 down or no commitment</span><span aria-hidden="true">Sports Inn Fitness included</span><span aria-hidden="true">16 private rooms</span><span aria-hidden="true">Open 7 days</span><span aria-hidden="true">4.3 stars from 94 reviews</span>
+      
+  </div>
+</div>
+    <section class="block light" id="glow" aria-labelledby="glow-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>What we do</p>
+      <h2 class="h2" id="glow-h">Three ways to glow.</h2>
+    </div>
+    <div class="ways stagger">
+      
         <article class="way" style="--i:0">
-          <figure><img src="assets/glow-uv.jpg" alt="A tanning bed with its canopy open, glowing warm gold in a dim private room" width="1400" height="933" loading="lazy" decoding="async"></figure>
+          <figure>
+<img src="/concepts/sunbodies/_astro/glow-uv.BT_v8df0_Z1eHKFB.webp" srcset="/concepts/sunbodies/_astro/glow-uv.BT_v8df0_ZAxQ0d.webp 400w, /concepts/sunbodies/_astro/glow-uv.BT_v8df0_1T73Bk.webp 800w, /concepts/sunbodies/_astro/glow-uv.BT_v8df0_ZW8GOT.webp 1200w" alt="A tanning bed with its canopy open, glowing warm gold in a dim private room" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1400" height="934"></figure>
           <div class="body"><p class="tag">UV tanning</p><h3>Beds and booths</h3><p>Four levels of lay-down beds and stand-up booths, plus a Legacy leg tanner for legs that lag behind.</p></div>
         </article>
+        
         <article class="way" style="--i:1">
-          <figure><img src="assets/glow-mist.jpg" alt="A fine golden mist glowing in warm backlight" width="1400" height="933" loading="lazy" decoding="async"></figure>
+          <figure>
+<img src="/concepts/sunbodies/_astro/glow-mist.BMHQPm2-_2hBOm1.webp" srcset="/concepts/sunbodies/_astro/glow-mist.BMHQPm2-_Z1R0EYP.webp 400w, /concepts/sunbodies/_astro/glow-mist.BMHQPm2-_Av3h1.webp 800w, /concepts/sunbodies/_astro/glow-mist.BMHQPm2-_Z1O1t7q.webp 1200w" alt="A fine golden mist glowing in warm backlight" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1400" height="934"></figure>
           <div class="body"><p class="tag">Mystic spray tan</p><h3>No sun needed</h3><p>A fine, even mist in a private booth. Color shows in 4 to 6 hours and lasts up to 7 days, on any skin type.</p></div>
         </article>
+        
         <article class="way" style="--i:2">
-          <figure><img src="assets/glow-red.jpg" alt="A red light panel washing a quiet room in deep red" width="1400" height="933" loading="lazy" decoding="async"></figure>
-          <div class="body"><p class="tag">Red light</p><h3>No UV at all</h3><p>A warm, quiet light session that won't tan you. Members add it for how their skin looks and feels.</p></div>
+          <figure>
+<img src="/concepts/sunbodies/_astro/glow-red.CZ3AU7Ha_ZOyogJ.webp" srcset="/concepts/sunbodies/_astro/glow-red.CZ3AU7Ha_SN1ty.webp 400w, /concepts/sunbodies/_astro/glow-red.CZ3AU7Ha_Z1PtC7U.webp 800w, /concepts/sunbodies/_astro/glow-red.CZ3AU7Ha_Z2AlUD.webp 1200w" alt="A red light panel washing a quiet room in deep red" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1400" height="934"></figure>
+          <div class="body"><p class="tag">Red light</p><h3>No UV at all</h3><p>A warm, quiet light session that won&#39;t tan you. Members add it for how their skin looks and feels.</p></div>
         </article>
-      </div>
+        
     </div>
-  </section>
-
-  <section class="block dark finder" id="levels" aria-labelledby="levels-h">
-    <div class="wrap">
+  </div>
+</section>
+    <section class="block dark finder" id="levels" aria-labelledby="levels-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>The level finder</p>
+      <h2 class="h2" id="levels-h">Pick your heat.</h2>
+      <p class="lede">Every level is true unlimited. Higher levels are stronger, so you need fewer minutes. Answer three quick questions and we'll set the sun for you, or drag it yourself.</p>
+    </div>
+    <div class="finder-grid">
       <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>The level finder</p>
-        <h2 class="h2" id="levels-h">Pick your heat.</h2>
-        <p class="lede">Every level is true unlimited. Higher levels are stronger, so you need fewer minutes. Answer three quick questions and we'll set the sun for you, or drag it yourself.</p>
-      </div>
-      <div class="finder-grid">
-        <div class="reveal">
-          <div class="dial" id="dial">
-            <div class="sky s0 on"></div><div class="sky s1"></div><div class="sky s2"></div><div class="sky s3"></div><div class="sky s4"></div>
-            <svg viewBox="0 0 500 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <defs><clipPath id="above"><rect x="0" y="0" width="500" height="252"/></clipPath></defs>
-              <path class="arc" d="M60 252 A190 190 0 0 1 440 252"/>
-              <rect class="sea" x="0" y="252" width="500" height="78"/>
-              <line class="horizon" x1="0" y1="252" x2="500" y2="252"/>
-              <g id="ticks"></g>
-              <g clip-path="url(#above)"><g class="sun" id="dialSun"><circle class="halo" r="34"/><circle class="core" r="17"/></g></g>
-            </svg>
-            <div class="stops" role="radiogroup" aria-label="Choose a level" id="stops"></div>
-            <p class="hint" aria-hidden="true">Drag the sun</p>
-          </div>
-          <p class="legnote"><b>Legs lagging behind?</b> The Legacy leg tanner gives them 10 minutes of their own with 36 bronzing bulbs, without more UV on your upper body.</p>
+        <div class="dial" id="dial">
+          <div class="sky s0 on"></div><div class="sky s1"></div><div class="sky s2"></div><div class="sky s3"></div><div class="sky s4"></div>
+          <svg viewBox="0 0 500 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs><clipPath id="above"><rect x="0" y="0" width="500" height="252"></rect></clipPath></defs>
+            <path class="arc" d="M60 252 A190 190 0 0 1 440 252"></path>
+            <rect class="sea" x="0" y="252" width="500" height="78"></rect>
+            <line class="horizon" x1="0" y1="252" x2="500" y2="252"></line>
+            <g id="ticks"></g>
+            <g clip-path="url(#above)"><g class="sun" id="dialSun"><circle class="halo" r="34"></circle><circle class="core" r="17"></circle></g></g>
+          </svg>
+          <div class="stops" role="radiogroup" aria-label="Choose a level" id="stops"></div>
+          <p class="hint" aria-hidden="true">Drag the sun</p>
         </div>
-        <div class="reveal">
-          <div class="quiz" id="quiz">
-            <div class="q" role="radiogroup" aria-labelledby="q1l"><p class="qlab" id="q1l">How easily do you burn?</p><div class="opts" data-q="burn"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">I burn easy</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">Sometimes</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">Hardly ever</button></div></div>
-            <div class="q" role="radiogroup" aria-labelledby="q2l"><p class="qlab" id="q2l">What's it for?</p><div class="opts" data-q="goal"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">An everyday glow</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">A trip or big event</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">As dark as I can get</button></div></div>
-            <div class="q" role="radiogroup" aria-labelledby="q3l"><p class="qlab" id="q3l">How soon?</p><div class="opts" data-q="when"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">No rush</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">In a couple weeks</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">This weekend</button></div></div>
-            <p class="pick" id="pick" aria-live="polite">Answer all three and the sun sets itself.</p>
-          </div>
-          <div class="result" id="result" aria-live="polite"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block light" id="memberships" aria-labelledby="mem-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>Memberships</p>
-        <h2 class="h2" id="mem-h">4 memberships, 1 low price.</h2>
-        <p class="lede">Every plan comes with tanning, a Sports Inn Fitness membership, and our 25% Super Saver discount. True unlimited, and you choose $0 down or no commitment.</p>
-      </div>
-      <div class="mem-grid">
-        <div class="spot reveal">
-          <p class="mono">This month</p>
-          <h3>Unlimited tanning.</h3>
-          <p class="big">$29<small>a month</small></p>
-          <p class="perday">That's about 97 cents a day.</p>
-          <ul>
-            <li>Unlimited Level 1 tanning</li>
-            <li>A Sports Inn Fitness membership</li>
-            <li>25% Super Saver discount</li>
-            <li>$0 down or no commitment, your pick</li>
-          </ul>
-          <a class="btn btn-gold" href="#join" data-level="Level 1">Claim $29 unlimited</a>
-        </div>
-        <div class="board stagger" role="list">
-          <div class="row" role="listitem" style="--i:0"><span class="sw" style="background:#E6D3AE" aria-hidden="true"></span><span class="nm">Wellness<span class="ds">Easygoing tanning 1 to 2 times a week, the sauna, red light, and a spray tan before big events.</span></span><span class="pr">$14.99<small>about 50¢ a day</small></span></div>
-          <div class="row" role="listitem" style="--i:1"><span class="sw" style="background:#EBCB92" aria-hidden="true"></span><span class="nm">Level 1<span class="ds">Similar to outdoor sun. 20 minutes max.</span></span><span class="pr">$29<small>about 97¢ a day</small></span></div>
-          <div class="row" role="listitem" style="--i:2"><span class="sw" style="background:#E0A052" aria-hidden="true"></span><span class="nm">Level 2<span class="ds">30% hotter, with a high-pressure facial tanner. 20 minutes max.</span></span><span class="pr">$59<small>about $1.97 a day</small></span></div>
-          <div class="row" role="listitem" style="--i:3"><span class="sw" style="background:#BE6A2C" aria-hidden="true"></span><span class="nm">Level 3<span class="ds">Fast, intense bronzing in beds and booths. 10 to 12 minutes.</span></span><span class="pr">$89<small>about $2.97 a day</small></span></div>
-          <div class="row hot" role="listitem" style="--i:4"><span class="sw" style="background:#A64A25" aria-hidden="true"></span><span class="nm">Level 4<span class="ds">The superbed. Fastest, most intense bronzing. 7 to 10 minutes.</span></span><span class="pr">$109<small>about $3.63 a day</small></span></div>
-          <div class="row" role="listitem" style="--i:5"><span class="sw" style="background:#3B2230" aria-hidden="true"></span><span class="nm">Mystic spray<span class="ds">UV-free spray tan membership, Super Saver discount included.</span></span><span class="pr">$19.99<small>about 67¢ a day</small></span></div>
-        </div>
-      </div>
-      <p class="mem-foot reveal"><b>Just visiting, or not ready for monthly?</b> Day passes come in 1, 5, 10, and 20 day packages, with Sports Inn Fitness included. Ask at the desk.</p>
-    </div>
-  </section>
-
-  <section class="block dark" id="reviews" aria-labelledby="rev-h">
-    <div class="wrap">
-      <div class="reviews-grid">
-        <div class="score reveal">
-          <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>What regulars say</p>
-          <h2 class="h2" id="rev-h">Clean, friendly, fast.</h2>
-          <p class="n" aria-hidden="true">4.3</p>
-          <div class="stars" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>
-            <svg viewBox="0 0 24 24"><defs><clipPath id="part"><rect x="0" y="0" width="7.2" height="24"/></clipPath></defs><path fill="rgba(239,165,60,.25)" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/><path fill="#EFA53C" clip-path="url(#part)" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"/></svg>
-          </div>
-          <p>4.3 out of 5 from 94 reviews</p>
-        </div>
-        <div class="quotes stagger">
-          <figure class="quote wide" style="--i:0"><blockquote>&ldquo;Really clean rooms, clean beds, outstanding service!&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
-          <figure class="quote" style="--i:1"><blockquote>&ldquo;Staff is VERY friendly &amp; welcoming every single visit. I would not want to go anywhere else.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
-          <figure class="quote" style="--i:2"><blockquote>&ldquo;All the ladies I've met who work there are very courteous and take time to explain things clearly.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
-          <figure class="quote" style="--i:3"><blockquote>&ldquo;I have been a loyal client of Sunbodies for years. Very clean and everyone is very polite.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
-          <figure class="quote" style="--i:4"><blockquote>&ldquo;Great tanning results. Extremely clean.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block light" id="cocktail" aria-labelledby="ck-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>For weddings, prom, and vacation</p>
-        <h2 class="h2" id="ck-h">Can't pick? Have a cocktail.</h2>
-        <p class="lede">Our favorite shortcut, straight from the regulars: bronze first, then mist.</p>
-      </div>
-      <div class="steps3 stagger">
-        <div class="step3" style="--i:0"><figure><img src="assets/cocktail-bronze.jpg" alt="A superbed dome glowing gold in a private room" width="1200" height="800" loading="lazy" decoding="async"></figure><p class="num">Step 1</p><h3>Bronze.</h3><p>A Level 3 or Level 4 session, 7 to 12 minutes.</p></div>
-        <div class="step3" style="--i:1"><figure><img src="assets/cocktail-mist.jpg" alt="A fine tanning mist across a bronzed shoulder in warm light" width="1200" height="800" loading="lazy" decoding="async"></figure><p class="num">Step 2</p><h3>Mist.</h3><p>Slide straight into the Mystic booth.</p></div>
-        <div class="step3" style="--i:2"><figure><img src="assets/cocktail-glow.jpg" alt="A smiling woman glowing in golden evening light at a celebration" width="1200" height="800" loading="lazy" decoding="async"></figure><p class="num">Step 3</p><h3>Glow.</h3><p>Golden, even color in about 30 minutes.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block redroom" id="redlight" aria-labelledby="rl-h">
-    <div class="wrap red-grid">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>Red light</p>
-        <h2 class="h2" id="rl-h">Warm light. No UV.</h2>
-        <p class="lede">Red light won't tan you, and it's not meant to. It's a warm, quiet session that members add for how their skin looks and feels. Research on red light for skin is promising, and results come from regular sessions, so we'll never promise you miracles.</p>
-        <div class="rfacts"><span>UV-free</span><span>Included with Wellness</span><span>Pairs with any tanning plan</span></div>
-      </div>
-      <div class="panel reveal" aria-hidden="true"><div class="leds"></div><div class="bloom"></div><p class="cap">Red light panel</p></div>
-    </div>
-  </section>
-
-  <section class="block dark" id="first-visit" aria-labelledby="fv-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>Your first visit</p>
-        <h2 class="h2" id="fv-h">First time? Here's the whole thing.</h2>
-      </div>
-      <div class="fv-grid">
-        <ol class="timeline reveal" id="timeline">
-          <svg class="path" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="0" x2="2" y2="100"/><line class="fill" pathLength="1" x1="2" y1="0" x2="2" y2="100"/></svg>
-          <li data-n="1"><h3>Walk in.</h3><p>Stop by either salon. Bring a photo ID.</p></li>
-          <li data-n="2"><h3>Tell us how you burn.</h3><p>We'll match you to a level, or to a spray tan if you'd rather skip UV.</p></li>
-          <li data-n="3"><h3>Short and private.</h3><p>Your own room, goggles on, and a short first session. Wear whatever you're comfortable in.</p></li>
-          <li data-n="4"><h3>Build your color.</h3><p>Color builds over a few visits. Give your skin a day between sessions.</p></li>
-        </ol>
-        <div class="fv-side reveal">
-          <figure><img src="assets/first-visit.jpg" alt="A bronzed woman with her eyes closed, face tilted into warm golden light" width="1400" height="792" loading="lazy" decoding="async"></figure>
-          <p class="note"><b>Age rules.</b> UV tanning is 17 and up in Pennsylvania, and 17-year-olds need a parent's written OK. For prom, ask us about spray tans.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block light" id="faq" aria-labelledby="faq-h">
-    <div class="wrap faq-grid">
-      <div class="faq-side reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>Good questions</p>
-        <h2 class="h2" id="faq-h">Questions we hear at the desk.</h2>
-        <p class="lede">Anything else, just call. A real person picks up.</p>
-        <div class="calls"><a href="tel:+17175975586">Greencastle 717-597-5586</a><a href="tel:+17172645558">Chambersburg 717-264-5558</a></div>
+        <p class="legnote"><b>Legs lagging behind?</b> The Legacy leg tanner gives them 10 minutes of their own with 36 bronzing bulbs, without more UV on your upper body.</p>
       </div>
       <div class="reveal">
-        <details class="qa"><summary>I burn easy. Can I still tan?<span class="pm" aria-hidden="true"></span></summary><p class="a">Tell us at the desk. We'll start you low and short, or put you in the Mystic booth, which uses no UV at all.</p></details>
-        <details class="qa"><summary>Which bed should I pick?<span class="pm" aria-hidden="true"></span></summary><p class="a">Higher levels are stronger, so they need fewer minutes. Most people start at Level 1 or 2. Try the level finder above, or just ask us.</p></details>
-        <details class="qa"><summary>Will a spray tan make me look orange?<span class="pm" aria-hidden="true"></span></summary><p class="a">Not if we match your shade. Exfoliate and shave the day before, come in without lotion, deodorant, or makeup, and follow the poses in the booth. Color shows in 4 to 6 hours and lasts up to 7 days.</p></details>
-        <details class="qa"><summary>Am I locked into a contract?<span class="pm" aria-hidden="true"></span></summary><p class="a">You don't have to be. Every plan gives you the choice: $0 down, or no commitment at all.</p></details>
-        <details class="qa"><summary>Do I have to buy lotion?<span class="pm" aria-hidden="true"></span></summary><p class="a">No. Lotion helps your color and keeps skin from drying out, and we're glad to point you to a good one. It's your call.</p></details>
-        <details class="qa"><summary>How often should I tan?<span class="pm" aria-hidden="true"></span></summary><p class="a">Give your skin at least a day between UV sessions, and never tan to the point of burning. Unlimited means you set the schedule, not that more is better.</p></details>
-        <details class="qa"><summary>What do I wear?<span class="pm" aria-hidden="true"></span></summary><p class="a">The rooms are private, so wear whatever you're comfortable in. Goggles go on every time.</p></details>
-        <details class="qa"><summary>Does red light tan me?<span class="pm" aria-hidden="true"></span></summary><p class="a">No. Red light uses no UV and won't change your color.</p></details>
-        <details class="qa"><summary>Is the gym really included?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Every Sunbodies plan comes with a Sports Inn Fitness membership.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section class="block dark" id="locations" aria-labelledby="loc-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>Two locations</p>
-        <h2 class="h2" id="loc-h">Two salons. One membership.</h2>
-      </div>
-      <div class="locs stagger">
-        <article class="loc" style="--i:0">
-          <span class="live status" data-status>Hours today</span>
-          <h3>Greencastle</h3>
-          <address>13963 Molly Pitcher Hwy<br>Greencastle, PA 17225</address>
-          <a class="tel" href="tel:+17175975586">717-597-5586</a>
-          <div class="hours" data-hours></div>
-          <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Sunbodies+Tanning+Salon+13963+Molly+Pitcher+Hwy+Greencastle+PA+17225" target="_blank" rel="noopener">Get directions</a>
-        </article>
-        <article class="loc" style="--i:1">
-          <span class="live status" data-status>Hours today</span>
-          <h3>Chambersburg</h3>
-          <address>700 Lincoln Way West<br>Chambersburg, PA 17201</address>
-          <a class="tel" href="tel:+17172645558">717-264-5558</a>
-          <div class="hours" data-hours></div>
-          <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Sunbodies+Tanning+Salon+700+Lincoln+Way+West+Chambersburg+PA+17201" target="_blank" rel="noopener">Get directions</a>
-        </article>
-      </div>
-      <p class="gym reveal"><b>Your membership works at the gym too.</b> Every plan includes Sports Inn Fitness in Greencastle, so you can train and tan on one card.</p>
-    </div>
-  </section>
-
-  <section class="join" id="join" aria-labelledby="join-h">
-    <div class="wrap">
-      <div class="reveal">
-        <p class="kicker" style="color:var(--accent)"><svg class="rays" id="rays" viewBox="-130 -130 260 260" aria-hidden="true"></svg><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"/><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"/></svg>This month only</p>
-        <h2 id="join-h">Claim unlimited for $29.</h2>
-        <p class="lede">Unlimited tanning, a Sports Inn Fitness membership, and 25% Super Saver savings, for $29 a month. Choose $0 down or no commitment.</p>
-      </div>
-      <form class="form reveal" id="form" novalidate>
-        <div class="fields">
-          <div class="two">
-            <div class="field"><label for="fname">First name</label><input id="fname" name="fname" autocomplete="given-name" required placeholder="Your first name"></div>
-            <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="717-555-0100"></div>
-          </div>
-          <div class="two" style="margin-top:16px">
-            <div class="field"><label for="salon">Your salon</label><select id="salon" name="salon" required><option value="Greencastle">Greencastle</option><option value="Chambersburg">Chambersburg</option></select></div>
-            <div class="field"><label for="level">Your level</label><select id="level" name="level"><option>Level 1</option><option>Level 2</option><option>Level 3</option><option>Level 4</option><option>Mystic spray</option><option>Not sure yet</option></select></div>
-          </div>
-          <p class="err" id="err" role="alert"></p>
-          <button class="btn btn-gold" type="submit">Hold my $29 rate</button>
-          <p class="fine" style="margin-top:12px">We'll only use your number about your visit. Concept preview: this form doesn't send anything yet.</p>
+        <div class="quiz" id="quiz">
+          <div class="q" role="radiogroup" aria-labelledby="q1l"><p class="qlab" id="q1l">How easily do you burn?</p><div class="opts" data-q="burn"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">I burn easy</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">Sometimes</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">Hardly ever</button></div></div>
+          <div class="q" role="radiogroup" aria-labelledby="q2l"><p class="qlab" id="q2l">What's it for?</p><div class="opts" data-q="goal"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">An everyday glow</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">A trip or big event</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">As dark as I can get</button></div></div>
+          <div class="q" role="radiogroup" aria-labelledby="q3l"><p class="qlab" id="q3l">How soon?</p><div class="opts" data-q="when"><button class="opt" type="button" role="radio" aria-checked="false" data-v="0">No rush</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="1">In a couple weeks</button><button class="opt" type="button" role="radio" aria-checked="false" data-v="2">This weekend</button></div></div>
+          <p class="pick" id="pick" aria-live="polite">Answer all three and the sun sets itself.</p>
         </div>
-        <div class="thanks" id="thanks" tabindex="-1">
-          <h3>You're set.</h3>
-          <p id="doneMsg"></p>
-        </div>
-      </form>
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+    <section class="block light" id="memberships" aria-labelledby="mem-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>Memberships</p>
+      <h2 class="h2" id="mem-h">4 memberships, 1 low price.</h2>
+      <p class="lede">Every plan comes with tanning, a Sports Inn Fitness membership, and our 25% Super Saver discount. True unlimited, and you choose $0 down or no commitment.</p>
+    </div>
+    <div class="mem-grid">
+      <div class="spot reveal">
+        <p class="mono">This month</p>
+        <h3>Unlimited tanning.</h3>
+        <p class="big">$29<small>a month</small></p>
+        <p class="perday">That's about 97 cents a day.</p>
+        <ul>
+          <li>Unlimited Level 1 tanning</li>
+          <li>A Sports Inn Fitness membership</li>
+          <li>25% Super Saver discount</li>
+          <li>$0 down or no commitment, your pick</li>
+        </ul>
+        <a class="btn btn-gold" href="#join" data-level="Level 1">Claim $29 unlimited</a>
+      </div>
+      <div class="board stagger" role="list">
+        
+            <div class="row" role="listitem" style="--i:0"><span class="sw" style="background:#E6D3AE" aria-hidden="true"></span><span class="nm">Wellness<span class="ds">Easygoing tanning 1 to 2 times a week, the sauna, red light, and a spray tan before big events.</span></span><span class="pr">$14.99<small>about 50¢ a day</small></span></div>
+          
+            <div class="row" role="listitem" style="--i:1"><span class="sw" style="background:#EBCB92" aria-hidden="true"></span><span class="nm">Level 1<span class="ds">Similar to outdoor sun. 20 minutes max.</span></span><span class="pr">$29<small>about 97¢ a day</small></span></div>
+          
+            <div class="row" role="listitem" style="--i:2"><span class="sw" style="background:#E0A052" aria-hidden="true"></span><span class="nm">Level 2<span class="ds">30% hotter, with a high-pressure facial tanner. 20 minutes max.</span></span><span class="pr">$59<small>about $1.97 a day</small></span></div>
+          
+            <div class="row" role="listitem" style="--i:3"><span class="sw" style="background:#BE6A2C" aria-hidden="true"></span><span class="nm">Level 3<span class="ds">Fast, intense bronzing in beds and booths. 10 to 12 minutes.</span></span><span class="pr">$89<small>about $2.97 a day</small></span></div>
+          
+            <div class="row hot" role="listitem" style="--i:4"><span class="sw" style="background:#A64A25" aria-hidden="true"></span><span class="nm">Level 4<span class="ds">The superbed. Fastest, most intense bronzing. 7 to 10 minutes.</span></span><span class="pr">$109<small>about $3.63 a day</small></span></div>
+          
+            <div class="row" role="listitem" style="--i:5"><span class="sw" style="background:#3B2230" aria-hidden="true"></span><span class="nm">Mystic spray<span class="ds">UV-free spray tan membership, Super Saver discount included.</span></span><span class="pr">$19.99<small>about 67¢ a day</small></span></div>
+          
+      </div>
+    </div>
+    <p class="mem-foot reveal"><b>Just visiting, or not ready for monthly?</b> Day passes come in 1, 5, 10, and 20 day packages, with Sports Inn Fitness included. Ask at the desk.</p>
+  </div>
+</section>
+    <section class="block dark" id="reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <div class="reviews-grid">
+      <div class="score reveal">
+        <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>What regulars say</p>
+        <h2 class="h2" id="rev-h">Clean, friendly, fast.</h2>
+        <p class="n" aria-hidden="true">4.3</p>
+        <div class="stars" aria-hidden="true">
+          
+              <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path></svg>
+            
+              <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path></svg>
+            
+              <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path></svg>
+            
+              <svg viewBox="0 0 24 24"><path fill="#EFA53C" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path></svg>
+            
+              <svg viewBox="0 0 24 24"><defs><clipPath id="part"><rect x="0" y="0" width="7.2" height="24"></rect></clipPath></defs><path fill="rgba(239,165,60,.25)" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path><path fill="#EFA53C" clip-path="url(#part)" d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7L12 17.5 5.8 21.2l1.6-7L2 9.5l7.1-.6z"></path></svg>
+            
+        </div>
+        <p>4.3 out of 5 from 94 reviews</p>
+      </div>
+      <div class="quotes stagger">
+        
+            <figure class="quote wide" style="--i:0"><blockquote>&ldquo;Really clean rooms, clean beds, outstanding service!&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
+          
+            <figure class="quote" style="--i:1"><blockquote>&ldquo;Staff is VERY friendly &amp; welcoming every single visit. I would not want to go anywhere else.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
+          
+            <figure class="quote" style="--i:2"><blockquote>&ldquo;All the ladies I&#39;ve met who work there are very courteous and take time to explain things clearly.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
+          
+            <figure class="quote" style="--i:3"><blockquote>&ldquo;I have been a loyal client of Sunbodies for years. Very clean and everyone is very polite.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
+          
+            <figure class="quote" style="--i:4"><blockquote>&ldquo;Great tanning results. Extremely clean.&rdquo;</blockquote><figcaption>Facebook review</figcaption></figure>
+          
+      </div>
+    </div>
+  </div>
+</section>
+    <section class="block light" id="cocktail" aria-labelledby="ck-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>For weddings, prom, and vacation</p>
+      <h2 class="h2" id="ck-h">Can't pick? Have a cocktail.</h2>
+      <p class="lede">Our favorite shortcut, straight from the regulars: bronze first, then mist.</p>
+    </div>
+    <div class="steps3 stagger">
+      
+          <div class="step3" style="--i:0"><figure>
+<img src="/concepts/sunbodies/_astro/cocktail-bronze.C-9c8FSA_2g7F7G.webp" srcset="/concepts/sunbodies/_astro/cocktail-bronze.C-9c8FSA_2jUfpk.webp 400w, /concepts/sunbodies/_astro/cocktail-bronze.C-9c8FSA_2mDiqw.webp 800w, /concepts/sunbodies/_astro/cocktail-bronze.C-9c8FSA_2g7F7G.webp 1200w" alt="A superbed dome glowing gold in a private room" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1200" height="800"></figure><p class="num">Step 1</p><h3>Bronze.</h3><p>A Level 3 or Level 4 session, 7 to 12 minutes.</p></div>
+        
+          <div class="step3" style="--i:1"><figure>
+<img src="/concepts/sunbodies/_astro/cocktail-mist.hmo1YPua_oDQ1.webp" srcset="/concepts/sunbodies/_astro/cocktail-mist.hmo1YPua_Ze0Chj.webp 400w, /concepts/sunbodies/_astro/cocktail-mist.hmo1YPua_4dPaI.webp 800w, /concepts/sunbodies/_astro/cocktail-mist.hmo1YPua_oDQ1.webp 1200w" alt="A fine tanning mist across a bronzed shoulder in warm light" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1200" height="800"></figure><p class="num">Step 2</p><h3>Mist.</h3><p>Slide straight into the Mystic booth.</p></div>
+        
+          <div class="step3" style="--i:2"><figure>
+<img src="/concepts/sunbodies/_astro/cocktail-glow.ByDTxT4F_1sMCnn.webp" srcset="/concepts/sunbodies/_astro/cocktail-glow.ByDTxT4F_1rVbJ6.webp 400w, /concepts/sunbodies/_astro/cocktail-glow.ByDTxT4F_1KaEc8.webp 800w, /concepts/sunbodies/_astro/cocktail-glow.ByDTxT4F_1sMCnn.webp 1200w" alt="A smiling woman glowing in golden evening light at a celebration" sizes="(max-width: 720px) 100vw, (max-width: 980px) 50vw, 400px" loading="lazy" decoding="async" width="1200" height="800"></figure><p class="num">Step 3</p><h3>Glow.</h3><p>Golden, even color in about 30 minutes.</p></div>
+        
+    </div>
+  </div>
+</section>
+    <section class="block redroom" id="redlight" aria-labelledby="rl-h">
+  <div class="wrap red-grid">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>Red light</p>
+      <h2 class="h2" id="rl-h">Warm light. No UV.</h2>
+      <p class="lede">Red light won't tan you, and it's not meant to. It's a warm, quiet session that members add for how their skin looks and feels. Research on red light for skin is promising, and results come from regular sessions, so we'll never promise you miracles.</p>
+      <div class="rfacts"><span>UV-free</span><span>Included with Wellness</span><span>Pairs with any tanning plan</span></div>
+    </div>
+    <div class="panel reveal" aria-hidden="true"><div class="leds"></div><div class="bloom"></div><p class="cap">Red light panel</p></div>
+  </div>
+</section>
+    <section class="block dark" id="first-visit" aria-labelledby="fv-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>Your first visit</p>
+      <h2 class="h2" id="fv-h">First time? Here's the whole thing.</h2>
+    </div>
+    <div class="fv-grid">
+      <ol class="timeline reveal" id="timeline">
+        <svg class="path" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="0" x2="2" y2="100"></line><line class="fill" pathLength="1" x1="2" y1="0" x2="2" y2="100"></line></svg>
+        
+            <li data-n="1"><h3>Walk in.</h3><p>Stop by either salon. Bring a photo ID.</p></li>
+          
+            <li data-n="2"><h3>Tell us how you burn.</h3><p>We&#39;ll match you to a level, or to a spray tan if you&#39;d rather skip UV.</p></li>
+          
+            <li data-n="3"><h3>Short and private.</h3><p>Your own room, goggles on, and a short first session. Wear whatever you&#39;re comfortable in.</p></li>
+          
+            <li data-n="4"><h3>Build your color.</h3><p>Color builds over a few visits. Give your skin a day between sessions.</p></li>
+          
+      </ol>
+      <div class="fv-side reveal">
+        <figure>
+<img src="/concepts/sunbodies/_astro/first-visit.U_3jNQ2p_1tqbbu.webp" srcset="/concepts/sunbodies/_astro/first-visit.U_3jNQ2p_1u1Acy.webp 600w, /concepts/sunbodies/_astro/first-visit.U_3jNQ2p_Z1FyEEM.webp 900w, /concepts/sunbodies/_astro/first-visit.U_3jNQ2p_EDM7Y.webp 1200w" alt="A bronzed woman with her eyes closed, face tilted into warm golden light" sizes="(max-width: 980px) 100vw, 600px" loading="lazy" decoding="async" width="1400" height="792"></figure>
+        <p class="note"><b>Age rules.</b> UV tanning is 17 and up in Pennsylvania, and 17-year-olds need a parent's written OK. For prom, ask us about spray tans.</p>
+      </div>
+    </div>
+  </div>
+</section>
+    <section class="block light" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <div class="faq-side reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>Good questions</p>
+      <h2 class="h2" id="faq-h">Questions we hear at the desk.</h2>
+      <p class="lede">Anything else, just call. A real person picks up.</p>
+      <div class="calls"><a href="tel:+17175975586">Greencastle 717-597-5586</a><a href="tel:+17172645558">Chambersburg 717-264-5558</a></div>
+    </div>
+    <div class="reveal">
+      
+          <details class="qa"><summary>I burn easy. Can I still tan?<span class="pm" aria-hidden="true"></span></summary><p class="a">Tell us at the desk. We&#39;ll start you low and short, or put you in the Mystic booth, which uses no UV at all.</p></details>
+        
+          <details class="qa"><summary>Which bed should I pick?<span class="pm" aria-hidden="true"></span></summary><p class="a">Higher levels are stronger, so they need fewer minutes. Most people start at Level 1 or 2. Try the level finder above, or just ask us.</p></details>
+        
+          <details class="qa"><summary>Will a spray tan make me look orange?<span class="pm" aria-hidden="true"></span></summary><p class="a">Not if we match your shade. Exfoliate and shave the day before, come in without lotion, deodorant, or makeup, and follow the poses in the booth. Color shows in 4 to 6 hours and lasts up to 7 days.</p></details>
+        
+          <details class="qa"><summary>Am I locked into a contract?<span class="pm" aria-hidden="true"></span></summary><p class="a">You don&#39;t have to be. Every plan gives you the choice: $0 down, or no commitment at all.</p></details>
+        
+          <details class="qa"><summary>Do I have to buy lotion?<span class="pm" aria-hidden="true"></span></summary><p class="a">No. Lotion helps your color and keeps skin from drying out, and we&#39;re glad to point you to a good one. It&#39;s your call.</p></details>
+        
+          <details class="qa"><summary>How often should I tan?<span class="pm" aria-hidden="true"></span></summary><p class="a">Give your skin at least a day between UV sessions, and never tan to the point of burning. Unlimited means you set the schedule, not that more is better.</p></details>
+        
+          <details class="qa"><summary>What do I wear?<span class="pm" aria-hidden="true"></span></summary><p class="a">The rooms are private, so wear whatever you&#39;re comfortable in. Goggles go on every time.</p></details>
+        
+          <details class="qa"><summary>Does red light tan me?<span class="pm" aria-hidden="true"></span></summary><p class="a">No. Red light uses no UV and won&#39;t change your color.</p></details>
+        
+          <details class="qa"><summary>Is the gym really included?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Every Sunbodies plan comes with a Sports Inn Fitness membership.</p></details>
+        
+    </div>
+  </div>
+</section>
+    <section class="block dark" id="locations" aria-labelledby="loc-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker"><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>Two locations</p>
+      <h2 class="h2" id="loc-h">Two salons. One membership.</h2>
+    </div>
+    <div class="locs stagger">
+      
+          <article class="loc" style="--i:0">
+            <span class="live status" data-status>Hours today</span>
+            <h3>Greencastle</h3>
+            <address>13963 Molly Pitcher Hwy<br>Greencastle, PA 17225</address>
+            <a class="tel" href="tel:+17175975586">717-597-5586</a>
+            <div class="hours" data-hours></div>
+            <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Sunbodies+Tanning+Salon+13963+Molly+Pitcher+Hwy+Greencastle+PA+17225" target="_blank" rel="noopener">Get directions</a>
+          </article>
+        
+          <article class="loc" style="--i:1">
+            <span class="live status" data-status>Hours today</span>
+            <h3>Chambersburg</h3>
+            <address>700 Lincoln Way West<br>Chambersburg, PA 17201</address>
+            <a class="tel" href="tel:+17172645558">717-264-5558</a>
+            <div class="hours" data-hours></div>
+            <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Sunbodies+Tanning+Salon+700+Lincoln+Way+West+Chambersburg+PA+17201" target="_blank" rel="noopener">Get directions</a>
+          </article>
+        
+    </div>
+    <p class="gym reveal"><b>Your membership works at the gym too.</b> Every plan includes Sports Inn Fitness in Greencastle, so you can train and tan on one card.</p>
+  </div>
+</section>
+    <section class="join" id="join" aria-labelledby="join-h">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker" style="color:var(--accent)"><svg class="rays" id="rays" viewBox="-130 -130 260 260" aria-hidden="true"></svg><svg class="hz" viewBox="0 0 72 16" aria-hidden="true"><path pathLength="1" d="M1 12 H71"></path><path pathLength="1" d="M27 12 a9 9 0 0 1 18 0"></path></svg>This month only</p>
+      <h2 id="join-h">Claim unlimited for $29.</h2>
+      <p class="lede">Unlimited tanning, a Sports Inn Fitness membership, and 25% Super Saver savings, for $29 a month. Choose $0 down or no commitment.</p>
+    </div>
+    <form class="form reveal" id="form" novalidate>
+      <div class="fields">
+        <div class="two">
+          <div class="field"><label for="fname">First name</label><input id="fname" name="fname" autocomplete="given-name" required placeholder="Your first name"></div>
+          <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="717-555-0100"></div>
+        </div>
+        <div class="two" style="margin-top:16px">
+          <div class="field"><label for="salon">Your salon</label><select id="salon" name="salon" required><option value="Greencastle">Greencastle</option><option value="Chambersburg">Chambersburg</option></select></div>
+          <div class="field"><label for="level">Your level</label><select id="level" name="level"><option>Level 1</option><option>Level 2</option><option>Level 3</option><option>Level 4</option><option>Mystic spray</option><option>Not sure yet</option></select></div>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn btn-gold" type="submit">Hold my $29 rate</button>
+        <p class="fine" style="margin-top:12px">We'll only use your number about your visit. Concept preview: this form doesn't send anything yet.</p>
+      </div>
+      <div class="thanks" id="thanks" tabindex="-1">
+        <h3>You're set.</h3>
+        <p id="doneMsg"></p>
+      </div>
+    </form>
+  </div>
+</section>
+  </main>
 
-</main>
-
-<footer>
+  <footer>
   <div class="foot">
-    <img src="assets/logo-dark.svg" alt="Sunbodies Tanning Salon" width="137" height="46" loading="lazy">
+    <img src="/concepts/sunbodies/assets/logo-dark.svg" alt="Sunbodies Tanning Salon" width="137" height="46" loading="lazy">
     <p>Sunbodies Tanning Salon is a division of Sports Inn Fitness.<br>Mon to Fri 10 am to 7 pm, Sat 10 am to 4 pm, Sun noon to 4 pm.</p>
     <nav aria-label="Footer"><a href="#levels">Levels</a><a href="#memberships">Memberships</a><a href="#first-visit">First visit</a><a href="#faq">Questions</a><a href="#locations">Locations</a><a href="https://www.facebook.com/officialsunbodies" target="_blank" rel="noopener">Facebook</a></nav>
     <p class="disc">The beach, rooms and people in this concept are illustrative and made with AI. A real photo and video shoot of both salons replaces them. Design concept by Perkins Production, Frederick, Maryland. This is not the official Sunbodies website, which lives at <a href="https://www.sunbodies.com">sunbodies.com</a>.</p>
   </div>
 </footer>
 
-<script>
-(() => {
-  'use strict';
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-  const smoothstep = (p, e0, e1) => { const t = clamp((p - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); };
-  const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- text splitting (seeded, identical every load) ---------- */
-  function rng(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
-  function buildVisual(text, mode, seed, spread) {
-    const r = rng(seed);
-    const vis = document.createElement('span');
-    vis.setAttribute('aria-hidden', 'true');
-    const lines = text.split('|');
-    const words = [];
-    lines.forEach((ln, li) => {
-      ln.split(' ').forEach((raw, wi, arr) => {
-        const em = /^\*.*\*$/.test(raw);
-        const word = raw.replace(/\*/g, '');
-        const w = document.createElement('span');
-        w.className = 'w' + (em ? ' em' : '');
-        [...word].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.appendChild(c); });
-        vis.appendChild(w);
-        words.push(w);
-        if (wi < arr.length - 1) vis.appendChild(document.createTextNode(' '));
-      });
-      if (li < lines.length - 1) vis.appendChild(document.createElement('br'));
-    });
-    const chars = $$('.c', vis);
-    words.forEach((w, i) => {
-      if (mode === 'drift') w.style.setProperty('--th', (i / words.length * 0.55).toFixed(3));
-      if (mode === 'rise') w.style.setProperty('--th', (i / words.length * 0.5).toFixed(3));
-    });
-    if (mode === 'weave') {
-      chars.forEach((c, i) => {
-        c.style.setProperty('--th', (i / chars.length * (spread || 0.5) + r() * 0.06).toFixed(3));
-        c.style.setProperty('--jy', ((i % 2 ? 1 : -1) * (14 + r() * 10)).toFixed(1) + 'px');
-      });
-    }
-    return vis;
-  }
-  $$('[data-split]').forEach(el => {
-    const raw = el.textContent.trim();
-    const mode = el.dataset.split;
-    const seed = +el.dataset.seed || 7;
-    const spread = +el.dataset.spread || 0;
-    const plain = raw.replace(/\|/g, ' ').replace(/\*/g, '');
-    el.textContent = '';
-    const sr = document.createElement('span'); sr.className = 'sr'; sr.textContent = plain;
-    el.appendChild(sr);
-    if (mode === 'blur') {
-      const sharp = buildVisual(raw, mode, seed); sharp.classList.add('sharp');
-      const soft = buildVisual(raw, mode, seed); soft.classList.add('soft');
-      el.append(sharp, soft);
-    } else {
-      el.appendChild(buildVisual(raw, mode, seed, spread));
-    }
-  });
-
-  /* ---------- the scrub hero ---------- */
-  const VIDEO_URL = 'assets/hero-scrub.mp4';
-  const VIDEO_BYTES = 5847695;
-  const scrub = $('#scrub'), stage = $('#stage'), video = $('#hero');
-  const poster = $('#poster'), posterEnd = $('#posterEnd');
-  const ring = $('#ring'), cue = $('#cue'), cueText = $('#cueText'), clockEl = $('#clock');
-  const bands = $$('.band').map((el, i, arr) => ({
-    el, a: +el.dataset.a, b: +el.dataset.b, ramp: el.dataset.ramp ? +el.dataset.ramp : null,
-    first: +el.dataset.a === 0, last: i === arr.length - 1, op: -1, k: -1, on: null
-  }));
-
-  let target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true;
-  let loadK = 0, loadStart = 0, loadRaf = null;
-  let videoReady = false, videoFailed = false;
-
-  function heroProgress() {
-    const r = scrub.getBoundingClientRect();
-    const range = scrub.offsetHeight - innerHeight;
-    return range > 0 ? clamp(-r.top / range, 0, 1) : 0;
-  }
-
-  function updateCaptions(p) {
-    for (const band of bands) {
-      const len = band.b - band.a;
-      const f = Math.min(0.04, len / 4);
-      let op = (band.first ? 1 : smoothstep(p, band.a, band.a + f)) * (band.last ? 1 : 1 - smoothstep(p, band.b - f, band.b));
-      const ramp = band.ramp || Math.min(0.045, len * 0.35);
-      let k = clamp((p - band.a) / ramp, 0, 1);
-      if (band.first) k = Math.max(k, loadK);
-      if (Math.abs(op - band.op) > 0.004 || (op === 0) !== (band.op === 0) || (op === 1 && band.op !== 1)) {
-        band.op = op; band.el.style.opacity = op.toFixed(3);
-      }
-      if (Math.abs(k - band.k) > 0.008 || (k === 1 && band.k !== 1) || (k === 0 && band.k !== 0)) {
-        band.k = k; band.el.style.setProperty('--k', k.toFixed(3));
-      }
-      const on = op > 0.02;
-      if (on !== band.on) { band.on = on; band.el.classList.toggle('on', on); }
-    }
-    if (videoFailed || !videoReady) {
-      if (!posterEnd._bg && (videoFailed || p > 0.05)) { posterEnd._bg = 1; posterEnd.style.backgroundImage = "url('assets/hero-ending.jpg')"; }
-      const e = smoothstep(p, 0.15, 0.95);
-      if (Math.abs(e - (posterEnd._e ?? -1)) > 0.01 || (e === 1 && posterEnd._e !== 1)) { posterEnd._e = e; posterEnd.style.opacity = e.toFixed(3); }
-    }
-    const gone = p > 0.04;
-    if (gone !== cue._gone) { cue._gone = gone; cue.classList.toggle('gone', gone); }
-    updateClock(p, performance.now());
-    if (scrubOn) flySet(p / FLY_END);
-  }
-
-  let lastClock = '', lastClockAt = 0;
-  function updateClock(p, now) {
-    if (now - lastClockAt < 100) return;
-    const mins = Math.round(17 * 60 + 30 + p * 102);
-    const h = Math.floor(mins / 60), m = mins % 60;
-    const txt = (h > 12 ? h - 12 : h) + ':' + String(m).padStart(2, '0') + ' PM';
-    if (txt === lastClock) return;
-    lastClock = txt; lastClockAt = now; clockEl.textContent = txt;
-  }
-
-  let seekBusy = false, pendingTime = null;
-  function requestSeek(t) {
-    if (!videoReady || !video.duration) return;
-    if (seekBusy) { pendingTime = t; return; }
-    seekBusy = true;
-    video.currentTime = t;
-  }
-  video.addEventListener('seeked', () => {
-    seekBusy = false;
-    if (pendingTime !== null) { const t = pendingTime; pendingTime = null; requestSeek(t); }
-  });
-  video.addEventListener('error', () => { seekBusy = false; pendingTime = null; failVideo(); });
-
-  function tick(now) {
-    const dt = Math.min(100, now - (lastTick || now));
-    lastTick = now;
-    const k = 0.16;
-    shown += (target - shown) * (1 - Math.pow(1 - k, dt / 16.667));
-    if (Math.abs(target - shown) < 0.0005) { shown = target; rafId = null; lastTick = 0; }
-    else rafId = requestAnimationFrame(tick);
-    requestSeek(shown * (video.duration || 0) * 0.999);
-    updateCaptions(shown);
-  }
-  function onScroll() {
-    target = heroProgress();
-    if (rafId === null && heroOnScreen) rafId = requestAnimationFrame(tick);
-  }
-  new IntersectionObserver(es => { heroOnScreen = es[0].isIntersecting; if (heroOnScreen && scrubOn) onScroll(); }).observe(scrub);
-
-  function loadRamp(now) {
-    if (!loadStart) loadStart = now;
-    const t = clamp((now - loadStart) / 1500, 0, 1);
-    loadK = 1 - Math.pow(1 - t, 3);
-    updateCaptions(shown);
-    loadRaf = t < 1 ? requestAnimationFrame(loadRamp) : null;
-  }
-
-  function makeChevron() {
-    const ns = 'http://www.w3.org/2000/svg';
-    const s = document.createElementNS(ns, 'svg');
-    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'chev');
-    const p = document.createElementNS(ns, 'path');
-    p.setAttribute('d', 'M5 9l7 7 7-7'); p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#FBEEDB'); p.setAttribute('stroke-width', '2'); p.setAttribute('stroke-linecap', 'round'); p.setAttribute('stroke-linejoin', 'round');
-    s.appendChild(p); return s;
-  }
-  function settleCue(text) {
-    if (ring.isConnected) ring.replaceWith(makeChevron());
-    cueText.textContent = text;
-  }
-  function failVideo() {
-    if (videoFailed) return;
-    videoFailed = true;
-    stage.classList.add('video-failed');
-    video.removeAttribute('src');
-    video.style.display = 'none';
-    settleCue('Scroll to set the sun');
-    updateCaptions(heroProgress());
-  }
-
-  async function loadHeroBlob() {
-    const ctrl = new AbortController();
-    let watchdog = setTimeout(() => ctrl.abort(), 20000);
-    const res = await fetch(VIDEO_URL, { priority: 'low', signal: ctrl.signal });
-    if (!res.ok || !res.body) throw new Error('video ' + res.status);
-    const total = Number(res.headers.get('Content-Length')) || VIDEO_BYTES;
-    const reader = res.body.getReader();
-    const chunks = [];
-    let got = 0, lastRing = 0;
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      clearTimeout(watchdog);
-      watchdog = setTimeout(() => ctrl.abort(), 20000);
-      chunks.push(value);
-      got += value.length;
-      const frac = Math.min(1, got / total);
-      const now = performance.now();
-      if (now - lastRing > 100 || frac === 1) { lastRing = now; ring.style.setProperty('--ld', Math.round(126 * (1 - frac))); }
-    }
-    clearTimeout(watchdog);
-    ring.style.setProperty('--ld', 0);
-    video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
-    video.load();
-    video.addEventListener('loadeddata', () => {
-      videoReady = true;
-      requestSeek(heroProgress() * video.duration * 0.999);
-      stage.classList.add('video-ready');
-      posterEnd.style.opacity = '0';
-      settleCue('Scroll to set the sun');
-    }, { once: true });
-  }
-
-  let heroInit = false;
-  function initHeroOnce() {
-    if (heroInit) return;
-    heroInit = true;
-    poster.style.backgroundImage = "url('assets/hero-poster.jpg')";
-    let started = false;
-    const start = () => { if (started) return; started = true; loadHeroBlob().catch(failVideo); };
-    const img = new Image();
-    img.onload = start; img.onerror = start;
-    img.src = 'assets/hero-poster.jpg';
-    setTimeout(start, 4000);
-    loadRaf = requestAnimationFrame(loadRamp);
-  }
-
-  /* ---------- the logo: big in the sky, then home to the menu bar ---------- */
-  const flyer = $('#flyer'), navEl = $('#nav'), navLogo = $('.nav .brand img');
-  const LOGO_RATIO = 1750 / 588;
-  const FLY_END = 0.065;
-  const fly = { on: false, geo: null, t: -1, req: 0, intro: 1, shownIntro: -1, landed: null };
-  const flyAllowed = () => !reduceMQ.matches && innerHeight >= 520;
-  const flyNow = () => scrubOn ? heroProgress() / FLY_END : scrollY / (innerHeight * 0.42);
-  function flyMeasure() {
-    const vw = innerWidth, vh = innerHeight;
-    const w0 = scrubOn ? Math.min(vw * 0.46, 760, vh * 0.27 * LOGO_RATIO) : Math.min(vw * 0.8, 440, vh * 0.2 * LOGO_RATIO);
-    const r = navLogo.getBoundingClientRect();
-    fly.geo = { w0, h0: w0 / LOGO_RATIO, sx: vw / 2, sy: vh * (scrubOn ? 0.385 : 0.24),
-      tx: r.left + r.width / 2, ty: r.top + r.height / 2, ts: r.width / w0 };
-    flyer.style.width = w0.toFixed(1) + 'px';
-    flyer.style.height = (w0 / LOGO_RATIO).toFixed(1) + 'px';
-    fly.t = -1;
-  }
-  function flySet(t) {
-    if (!fly.on || !fly.geo) return;
-    t = clamp(t, 0, 1);
-    fly.req = t;
-    const landed = t >= 1;
-    if (landed !== fly.landed) { fly.landed = landed; flyer.classList.toggle('on', !landed); navEl.classList.toggle('flying', !landed); }
-    if (landed) { fly.t = 1; return; }
-    if (Math.abs(t - fly.t) < 0.0004 && fly.intro === fly.shownIntro) return;
-    fly.t = t; fly.shownIntro = fly.intro;
-    const g = fly.geo;
-    const e = t * t * (3 - 2 * t);
-    const s = Math.pow(g.ts, e);
-    const w = g.w0 * s, h = g.h0 * s;
-    const cx = g.sx + (g.tx - g.sx) * e;
-    const cy = g.sy + (g.ty - g.sy) * e + (1 - fly.intro) * 22;
-    flyer.style.transform = 'translate3d(' + (cx - w / 2).toFixed(2) + 'px,' + (cy - h / 2).toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
-    flyer.style.setProperty('--mix', (scrubOn ? smoothstep(e, 0.72, 0.97) : 1).toFixed(3));
-    flyer.style.opacity = fly.intro.toFixed(3);
-  }
-  function flyApply() {
-    if (!flyAllowed()) {
-      fly.on = false; fly.landed = null;
-      flyer.classList.remove('on'); navEl.classList.remove('flying');
-      return;
-    }
-    fly.on = true; fly.landed = null;
-    flyMeasure();
-    flySet(flyNow());
-  }
-  function flyIntro() {
-    if (!fly.on || fly.req >= 1) return;
-    fly.intro = 0;
-    const t0 = performance.now();
-    const step = now => {
-      const k = clamp((now - t0) / 1100, 0, 1);
-      fly.intro = 1 - Math.pow(1 - k, 3);
-      flySet(fly.req);
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-  let flyRaf = null, flyResize = null;
-  addEventListener('scroll', () => {
-    if (!fly.on) return;
-    if (scrubOn) { if (!heroOnScreen) flySet(heroProgress() / FLY_END); return; }
-    if (flyRaf) return;
-    flyRaf = requestAnimationFrame(() => { flyRaf = null; flySet(flyNow()); });
-  }, { passive: true });
-  addEventListener('resize', () => { cancelAnimationFrame(flyResize); flyResize = requestAnimationFrame(flyApply); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(flyApply);
-
-  const GATES = [
-    '(max-width: 720px)',
-    '(orientation: portrait) and (max-width: 1024px)',
-    '(orientation: portrait) and (pointer: coarse)',
-    '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
-    '(prefers-reduced-motion: reduce)'
-  ];
-  let scrubOn = false;
-  function enableScrub() {
-    if (scrubOn) return; scrubOn = true;
-    initHeroOnce();
-    addEventListener('scroll', onScroll, { passive: true });
-    bands.forEach(b => { b.op = -1; b.k = -1; b.on = null; });
-    unpinFinalStates();
-    updateCaptions(heroProgress());
-    onScroll();
-  }
-  function disableScrub() {
-    if (!scrubOn) return; scrubOn = false;
-    removeEventListener('scroll', onScroll);
-    if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
-  }
-  function applyHeroMode() {
-    if (GATES.some(q => matchMedia(q).matches)) disableScrub(); else enableScrub();
-    flyApply();
-  }
-  const MQLS = GATES.map(q => matchMedia(q));
-  MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
-
-  /* ---------- reduced motion, live in both directions ---------- */
-  function pinToFinalStates() {
-    document.body.classList.add('pinned');
-    $$('.reveal,.stagger,.timeline,.rays').forEach(el => el.classList.add('in'));
-    setDialInstant(true);
-    flyApply();
-  }
-  function unpinFinalStates() {
-    document.body.classList.remove('pinned');
-    setDialInstant(false);
-  }
-  reduceMQ.addEventListener('change', e => { if (e.matches) pinToFinalStates(); else applyHeroMode(); });
-
-  /* ---------- entrances ---------- */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target;
-      el.classList.add('in');
-      $$('.hz', el).forEach(h => h.classList.add('in'));
-      if (el.classList.contains('stagger')) {
-        const n = el.children.length;
-        setTimeout(() => el.classList.add('done'), 900 + n * 110);
-      }
-      io.unobserve(el);
-    });
-  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
-  $$('.reveal,.stagger,.timeline,.rays').forEach(el => io.observe(el));
-
-  /* ---------- nav ---------- */
-  const nav = $('#nav');
-  let navSolid = null;
-  function navState() {
-    const solid = scrollY > innerHeight * 0.6;
-    if (solid !== navSolid) { navSolid = solid; nav.classList.toggle('solid', solid); }
-  }
-  addEventListener('scroll', navState, { passive: true });
-  navState();
-
-  /* ---------- pause loops off-screen and on hidden tabs ---------- */
-  document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
-
-  /* ---------- live open status (America/New_York) ---------- */
-  const HOURS = { 0: [12, 16], 1: [10, 19], 2: [10, 19], 3: [10, 19], 4: [10, 19], 5: [10, 19], 6: [10, 16] };
-  const DAY = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const fmtH = h => h === 12 ? 'noon' : (h > 12 ? (h - 12) + ' pm' : h + ' am');
-  function nowNY() {
-    const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date());
-    const get = t => parts.find(p => p.type === t).value;
-    const wd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
-    return { wd, h: (+get('hour')) % 24, m: +get('minute') };
-  }
-  function status() {
-    const { wd, h, m } = nowNY();
-    const t = h + m / 60;
-    const [o, c] = HOURS[wd];
-    if (t >= o && t < c) return { open: true, text: 'Open now, closes at ' + fmtH(c), short: 'Open now until ' + fmtH(c), wd };
-    if (t < o) return { open: false, text: 'Closed, opens today at ' + fmtH(o), short: 'Opens today at ' + fmtH(o), wd };
-    const nd = (wd + 1) % 7;
-    return { open: false, text: 'Closed, opens tomorrow at ' + fmtH(HOURS[nd][0]), short: 'Opens tomorrow at ' + fmtH(HOURS[nd][0]), wd };
-  }
-  const rowsHTML = wd => [
-    ['Mon to Fri', '10 am to 7 pm', wd >= 1 && wd <= 5],
-    ['Saturday', '10 am to 4 pm', wd === 6],
-    ['Sunday', 'noon to 4 pm', wd === 0]
-  ];
-  let lastStatus = '';
-  function paintStatus() {
-    const s = status();
-    const key = s.text;
-    if (key === lastStatus) return;
-    lastStatus = key;
-    const navLive = $('#navLive');
-    navLive.textContent = s.short; navLive.classList.toggle('open', s.open);
-    $$('[data-status]').forEach(el => { el.textContent = s.text; el.classList.toggle('open', s.open); });
-    $$('[data-hours]').forEach(box => {
-      box.textContent = '';
-      rowsHTML(s.wd).forEach(([d, hrs, today]) => {
-        const row = document.createElement('div');
-        const a = document.createElement('span'); a.textContent = d;
-        const b = document.createElement('span'); b.textContent = hrs;
-        if (today) { row.className = 'today'; a.textContent = d + ' (today)'; }
-        row.append(a, b); box.appendChild(row);
-      });
-    });
-  }
-  paintStatus();
-  setInterval(() => { if (!document.hidden) paintStatus(); }, 60000);
-
-  /* ---------- the level finder: set your sun ---------- */
-  const LEVELS = [
-    { id: 'Level 1', lv: 'Level 1', name: 'Similar to outdoor sun.', badge: 'Most people start here', specs: ['32 lamps', '20 minutes max', 'Lay-down bed'], best: 'Best for first-timers and building a base.', price: '$29', per: 'a month, about 97 cents a day', ang: 90, label: 'Level 1' },
-    { id: 'Level 2', lv: 'Level 2', name: '30% hotter.', specs: ['32 stronger lamps', 'High-pressure facial tanner', '20 minutes max'], best: 'Best for a faster base and more color on your face.', price: '$59', per: 'a month, about $1.97 a day', ang: 62, label: 'Level 2' },
-    { id: 'Level 3', lv: 'Level 3', name: 'Fast, intense bronzing.', specs: ['Beds or 48-lamp stand-up booths', 'Facial tanner in the beds', '10 to 12 minutes'], best: 'Best for going darker and for stubborn tans.', price: '$89', per: 'a month, about $2.97 a day', ang: 36, label: 'Level 3' },
-    { id: 'Level 4', lv: 'Level 4', name: 'Fastest, most intense bronzing.', specs: ['The superbed', '46 bronzing lamps', '4 facial tanners', '7 to 10 minutes'], best: 'Best for the deepest color in the least time.', price: '$109', per: 'a month, about $3.63 a day', ang: 13, label: 'Level 4' },
-    { id: 'Mystic spray', lv: 'Mystic spray', name: 'No sun needed.', specs: ['UV-free spray', 'Color in 4 to 6 hours', 'Lasts up to 7 days'], best: 'Best for fair skin, prom, and events this weekend.', price: '$19.99', per: 'a month, about 67 cents a day', ang: -14, label: 'Mystic' }
-  ];
-  const CX = 250, CY = 252, R = 190;
-  const dial = $('#dial'), sun = $('#dialSun'), stopsBox = $('#stops'), result = $('#result');
-  const skies = $$('.sky', dial);
-  let current = 0, dialInstant = false;
-  function setDialInstant(v) { dialInstant = v; }
-  const pos = ang => { const a = ang * Math.PI / 180; return { x: CX + R * Math.cos(a), y: CY - R * Math.sin(a) }; };
-  const ticks = $('#ticks'), NS = 'http://www.w3.org/2000/svg';
-  LEVELS.forEach((L, i) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'stop'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
-    b.setAttribute('aria-label', L.lv); b.tabIndex = -1; b.dataset.i = i;
-    if (L.label.startsWith('Level')) { const lw = document.createElement('span'); lw.className = 'lw'; lw.textContent = 'Level '; b.append(lw, L.label.slice(6)); } else b.textContent = L.label;
-    b.addEventListener('click', () => { setLevel(i, true); b.focus(); });
-    stopsBox.appendChild(b);
-    if (L.ang > 0) {
-      const p = pos(L.ang), t = document.createElementNS(NS, 'circle');
-      t.setAttribute('class', 'tick'); t.setAttribute('r', '3.2'); t.setAttribute('cx', p.x.toFixed(1)); t.setAttribute('cy', p.y.toFixed(1));
-      ticks.appendChild(t);
-    }
-  });
-  const stopBtns = $$('.stop', stopsBox);
-  stopsBox.addEventListener('keydown', e => {
-    const k = e.key;
-    if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(k)) return;
-    e.preventDefault();
-    let n = current;
-    if (k === 'ArrowRight' || k === 'ArrowDown') n = Math.min(LEVELS.length - 1, current + 1);
-    if (k === 'ArrowLeft' || k === 'ArrowUp') n = Math.max(0, current - 1);
-    if (k === 'Home') n = 0; if (k === 'End') n = LEVELS.length - 1;
-    setLevel(n, true); stopBtns[n].focus();
-  });
-  function placeSun(ang) {
-    const p = pos(ang);
-    sun.style.transform = 'translate(' + p.x.toFixed(1) + 'px,' + p.y.toFixed(1) + 'px)';
-  }
-  function renderResult(i) {
-    const L = LEVELS[i];
-    result.textContent = '';
-    const top = document.createElement('div'); top.className = 'top';
-    const lv = document.createElement('span'); lv.className = 'lv'; lv.textContent = L.lv; top.appendChild(lv);
-    if (L.badge) { const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = L.badge; top.appendChild(bd); }
-    const h = document.createElement('h3'); h.textContent = L.name;
-    const specs = document.createElement('div'); specs.className = 'specs';
-    L.specs.forEach(s => { const sp = document.createElement('span'); sp.textContent = s; specs.appendChild(sp); });
-    const best = document.createElement('p'); best.className = 'best'; best.textContent = L.best;
-    const pr = document.createElement('p'); pr.className = 'price';
-    const b = document.createElement('b'); b.textContent = L.price;
-    const s = document.createElement('span'); s.textContent = L.per; pr.append(b, s);
-    const a = document.createElement('a'); a.className = 'btn btn-gold'; a.href = '#join'; a.dataset.level = L.id; a.textContent = 'Claim this level';
-    result.append(top, h, specs, best, pr, a);
-  }
-  let swapT = null;
-  function setLevel(i, animate) {
-    const changed = i !== current;
-    current = i;
-    placeSun(LEVELS[i].ang);
-    skies.forEach((s, n) => s.classList.toggle('on', n === i));
-    stopBtns.forEach((b, n) => { b.setAttribute('aria-checked', n === i ? 'true' : 'false'); b.tabIndex = n === i ? 0 : -1; });
-    if (animate) dial.classList.add('used');
-    if (!animate || dialInstant || reduceMQ.matches) { clearTimeout(swapT); result.classList.remove('swap'); renderResult(i); return; }
-    if (!changed && result.childElementCount) return;
-    result.classList.add('swap');
-    clearTimeout(swapT);
-    swapT = setTimeout(() => { renderResult(i); result.classList.remove('swap'); }, 260);
-  }
-  let dragging = false;
-  function angleFromEvent(e) {
-    const r = dial.getBoundingClientRect();
-    const scale = Math.max(r.width / 500, r.height / 330);
-    const ox = (r.width - 500 * scale) / 2, oy = (r.height - 330 * scale) / 2;
-    const x = (e.clientX - r.left - ox) / scale, y = (e.clientY - r.top - oy) / scale;
-    let ang = Math.atan2(CY - y, x - CX) * 180 / Math.PI;
-    if (ang < -90) ang = -14;
-    return clamp(ang, -14, 90);
-  }
-  function nearest(ang) {
-    let best = 0, d = 1e9;
-    LEVELS.forEach((L, n) => { const dd = Math.abs(L.ang - ang); if (dd < d) { d = dd; best = n; } });
-    return best;
-  }
-  function nearSun(e) {
-    const r = sun.getBoundingClientRect();
-    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    return Math.hypot(e.clientX - cx, e.clientY - cy) < Math.max(44, r.width * 0.9);
-  }
-  dial.addEventListener('pointerdown', e => {
-    if (e.target.closest('.stop')) return;
-    if (e.pointerType !== 'mouse' && !nearSun(e)) return;
-    dragging = true; dial.setPointerCapture(e.pointerId); sun.classList.add('drag');
-    dial.style.touchAction = 'none';
-    placeSun(angleFromEvent(e));
-  });
-  dial.addEventListener('pointermove', e => { if (dragging) placeSun(angleFromEvent(e)); });
-  const endDrag = e => {
-    if (!dragging) return;
-    dragging = false; sun.classList.remove('drag');
-    dial.style.touchAction = '';
-    setLevel(nearest(angleFromEvent(e)), true);
-  };
-  dial.addEventListener('pointerup', endDrag);
-  dial.addEventListener('pointercancel', endDrag);
-
-  const answers = {};
-  $$('.opts').forEach(group => {
-    const q = group.dataset.q;
-    const opts = $$('.opt', group);
-    opts.forEach(o => o.addEventListener('click', () => {
-      opts.forEach(x => x.setAttribute('aria-checked', x === o ? 'true' : 'false'));
-      answers[q] = +o.dataset.v;
-      recommend();
-    }));
-  });
-  const pick = $('#pick');
-  function recommend() {
-    const done = ['burn', 'goal', 'when'].every(k => k in answers);
-    if (!done) {
-      const left = ['burn', 'goal', 'when'].filter(k => !(k in answers)).length;
-      pick.textContent = left === 1 ? 'One more answer and the sun sets itself.' : 'Answer all three and the sun sets itself.';
-      return;
-    }
-    const { burn, goal, when } = answers;
-    let i, why;
-    if (when === 2) { i = 4; why = burn === 0 ? 'You burn easy and need color this weekend, so skip UV entirely.' : 'For color by this weekend, spray is the sure thing. Want more? Ask for the cocktail.'; }
-    else if (burn === 0) { i = 0; why = 'You burn easy, so start low and short and build from there.'; }
-    else {
-      i = Math.min(3, burn + (goal >= 1 ? 1 : 0) + (goal === 2 && burn === 2 ? 1 : 0));
-      why = ['', 'A little stronger than outdoor sun, with more color on your face.', 'Fast bronzing that gets you there in 10 to 12 minutes.', 'The superbed. The deepest color in the least time.'][i];
-    }
-    pick.textContent = '';
-    const b = document.createElement('b'); b.textContent = 'Our pick: ' + LEVELS[i].lv + '. ';
-    pick.append(b, document.createTextNode(why));
-    setLevel(i, true);
-  }
-
-  /* level picks carry into the form */
-  const levelSel = $('#level');
-  document.addEventListener('click', e => {
-    const a = e.target.closest('a[data-level]');
-    if (a) levelSel.value = a.dataset.level;
-  });
-
-  /* ---------- sunburst rays around the join headline ---------- */
-  (function drawRays() {
-    const svg = $('#rays'), ns = 'http://www.w3.org/2000/svg';
-    for (let n = 0; n < 9; n++) {
-      const a = (-20 - n * 17.5) * Math.PI / 180;
-      const r1 = 16, r2 = n % 2 ? 34 : 46;
-      const p = document.createElementNS(ns, 'path');
-      p.setAttribute('d', 'M' + (r1 * Math.cos(a)).toFixed(1) + ' ' + (r1 * Math.sin(a)).toFixed(1) + ' L' + (r2 * Math.cos(a)).toFixed(1) + ' ' + (r2 * Math.sin(a)).toFixed(1));
-      p.setAttribute('pathLength', '1');
-      p.style.setProperty('--r', n);
-      svg.appendChild(p);
-    }
-  })();
-
-  /* ---------- join form (concept preview: JS-only success state) ---------- */
-  const join = $('#join');
-  const joinBg = new IntersectionObserver(es => {
-    if (es[0].isIntersecting) { join.style.backgroundImage = "url('assets/hero-ending.jpg')"; joinBg.disconnect(); }
-  }, { rootMargin: '600px 0px' });
-  joinBg.observe(join);
-  const form = $('#form'), err = $('#err');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = $('#fname').value.trim();
-    const phone = $('#phone').value.replace(/\D/g, '');
-    if (!name) { err.textContent = 'Add your first name so we know who to look for.'; $('#fname').focus(); return; }
-    if (phone.length < 10) { err.textContent = 'Add a 10-digit mobile number so we can confirm your visit.'; $('#phone').focus(); return; }
-    err.textContent = '';
-    const salon = $('#salon').value;
-    $('#doneMsg').textContent = 'Thanks, ' + name + '. Stop by ' + salon + ' and mention the $29 rate. We’ll help you pick your level when you get there.';
-    form.classList.add('sent');
-    $('#thanks').focus();
-  });
-
-  /* ---------- start ---------- */
-  current = -1;
-  setLevel(0, false);
-  if (reduceMQ.matches) pinToFinalStates();
-  applyHeroMode();
-  flyIntro();
-})();
-</script>
-</body>
+<script type="module" src="/concepts/sunbodies/_astro/Base.astro_astro_type_script_index_0_lang.QDipWEZp.js"></script></body>
 </html>

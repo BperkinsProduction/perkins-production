@@ -1,0 +1,50 @@
+---
+import { beats } from "../data/story.js";
+import { phone } from "../data/contact.js";
+---
+<!-- the scroll-driven hero: fog lifts off South Mountain onto the valley -->
+<section class="hero-scrub" id="hero" aria-label="Welcome">
+  <div class="stage" id="stage">
+    <img class="poster" src="assets/hero-poster.jpg" alt="" width="1920" height="1080">
+    <video id="heroVideo" muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture></video>
+    <div class="scrim"></div>
+    <div class="motes" aria-hidden="true"><i style="left:12%;top:62%;animation-delay:-2s"></i><i style="left:30%;top:74%;animation-delay:-7s"></i><i style="left:20%;top:40%;animation-delay:-11s"></i><i style="left:40%;top:56%;animation-delay:-15s"></i></div>
+    <div class="bands">
+      {beats.map((beat) => (
+        <div class={`band ${beat.id} ${beat.entrance}`} data-a={beat.a} data-b={beat.b}>
+          {beat.id === "b6" ? (
+            <>
+              <span class="hero-logo"><img src="assets/logo-rw.svg" alt="Robinwood Dental Center" width="358" height="44"></span>
+              <h1 class="big" aria-label="Dentistry, at ease."><span class="w" style="--i:0">Dentistry,</span> <span class="w" style="--i:1">at</span> <span class="w" style="--i:2"><em>ease.</em></span></h1>
+              <p class="sub">One team. Two offices. Caring for families here since 2003.</p>
+              <div class="ctas"><a class="btn btn-book" href="#book">Book a visit</a><a class="btn btn-ghost" href={`tel:${phone.tel}`}>Call {phone.display}</a></div>
+            </>
+          ) : (
+            <>
+              {beat.logo && <span class="logo-slot" aria-hidden="true"><img src="assets/logo-rw.svg" alt="" width="358" height="44"></span>}
+              {beat.eyebrow && <span class="eyebrow">{beat.eyebrow}</span>}
+              {beat.quote && <blockquote>{beat.quote}</blockquote>}
+              {beat.who && <p class="who mono">{beat.who}</p>}
+              {beat.line && <p class="line">{beat.line}</p>}
+              {beat.big && <p class="big">{beat.big}</p>}
+              {beat.bigParts && <p class="big"><span class="h1a">{beat.bigParts[0]}</span><span class="h1b">{beat.bigParts[1]}</span></p>}
+              {beat.lineAfter && <p class="line">{beat.lineAfter}</p>}
+              {beat.sunrise && <span class="sunrise" aria-hidden="true"></span>}
+              {beat.cards && (
+                <div class="hcards" aria-hidden="true">{beat.cards.map((c) => (
+                  <figure class={c.size ? `hcard ${c.size}` : "hcard"} style={`--x:${c.x};--y:${c.y};--r:${c.r};--s:${c.s}`}><img src={c.img} alt="" width="600" height="500">{c.label && <figcaption><small>{c.side}</small>{c.label}</figcaption>}</figure>
+                ))}</div>
+              )}
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><i></i>Scroll</div>
+    <a class="skip-intro" href="#services">Skip the intro <span aria-hidden="true">&#8595;</span></a>
+    <div class="stage-fade"></div>
+  </div>
+</section>
+<script>
+  import "../scripts/hero.js";
+</script>

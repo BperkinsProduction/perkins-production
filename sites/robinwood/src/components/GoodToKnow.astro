@@ -1,0 +1,15 @@
+---
+import { comforts, icons } from "../data/comforts.js";
+---
+<!-- good to know: comfort and access -->
+<section class="sec easy" aria-labelledby="gk-h" style="padding-top:clamp(20px,3vw,40px)">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Good to know</span>
+    <h2 id="gk-h" data-reveal style="--d:1">The small things that make a visit easier.</h2>
+    <ul class="easy-grid">
+      {comforts.map((item, i) => (
+        <li data-reveal style={`--d:${i % 3}`}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={icons[item.icon]} /><span>{item.text}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>

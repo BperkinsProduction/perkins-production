@@ -1,0 +1,33 @@
+---
+import { steps, stepNote } from "../data/visit.js";
+---
+<!-- 2. what your first visit looks like -->
+<section class="sec" id="first-visit" aria-labelledby="fv-h" style="padding-top:clamp(30px,4vw,60px)">
+  <div class="wrap visit" id="visit">
+    <div class="visit-img" data-reveal><img src="assets/room.jpg" alt="A calm treatment room with a window onto a misty valley" loading="lazy" width="1920" height="1072"></div>
+    <div>
+      <span class="kicker" data-reveal>No surprises.</span>
+      <h2 id="fv-h" data-reveal style="--d:1">Here&rsquo;s exactly what happens.</h2>
+      <div class="breath" data-reveal style="--d:2">
+        <button class="hold" id="hold" type="button" aria-describedby="hold-help">
+          <svg viewBox="0 0 46 46" aria-hidden="true"><circle class="track" cx="23" cy="23" r="20" fill="none" stroke-width="2"/><circle class="core" cx="23" cy="23" r="15"/><circle class="prog" cx="23" cy="23" r="20" fill="none" stroke-width="3" stroke-linecap="round" pathLength="1"/></svg>
+          <span id="hold-label">Hold to take a breath</span>
+        </button>
+        <button class="showall" id="showall" type="button">Show all four steps</button>
+        <span class="sr" id="hold-help">Press and hold for four seconds, or hold the space bar, to reveal the four steps.</span>
+      </div>
+      <div class="steps-wrap">
+        <ol class="steps" id="steps">
+          {steps.map((text, i) => (
+            <li class="step"><span class="n">{i + 1}</span><p>{text}</p></li>
+          ))}
+        </ol>
+        <div class="steps-mist" aria-hidden="true"></div>
+      </div>
+      <p class="step-note">{stepNote}</p>
+    </div>
+  </div>
+</section>
+<script>
+  import "../scripts/breath.js";
+</script>

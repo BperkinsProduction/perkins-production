@@ -1,0 +1,6 @@
+/* good to know */
+.easy-grid{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.easy-grid li{display:flex;gap:14px;align-items:center;background:var(--panel);border-radius:var(--r);padding:18px 20px;box-shadow:0 1px 0 var(--line);font-weight:600}
+.easy-grid svg{flex:none;width:34px;height:34px;padding:6px;border-radius:10px;background:rgba(161,223,224,.35);color:var(--brand)}
+@media (max-width: 900px){.easy-grid{grid-template-columns:1fr 1fr}}
+@media (max-width: 560px){.easy-grid{grid-template-columns:1fr}}

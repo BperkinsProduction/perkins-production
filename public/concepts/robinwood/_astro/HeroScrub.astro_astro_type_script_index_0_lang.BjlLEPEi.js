@@ -1,0 +1,1 @@
+import"./hero.BaUBsqlD.js";

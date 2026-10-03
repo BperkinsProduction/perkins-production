@@ -1,0 +1,12 @@
+/* 8. family, a full-bleed photo */
+.family{position:relative;min-height:min(86vh,760px);display:grid;align-items:center;overflow:hidden}
+.family > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;transform:scale(1.08) translateY(calc(var(--par,0) * -30px))}
+.family .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(242,246,247,.95) 0%,rgba(242,246,247,.86) 34%,rgba(242,246,247,.2) 58%,rgba(242,246,247,0) 70%)}
+.family .copy{position:relative;width:var(--wrap);margin:auto;padding:80px 0}
+.family .copy > div{max-width:520px}
+.family p{font-size:1.1rem}
+.family .ticks{list-style:none;padding:0;margin:1.4rem 0 1.8rem;display:grid;gap:10px}
+.family .ticks li{display:flex;gap:12px;align-items:center;font-weight:700}
+.family .ticks li::before{content:"";width:22px;height:22px;flex:none;border-radius:50%;background:var(--mist) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M6 11.5l3.2 3L16 8' fill='none' stroke='%230F2E3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+@media (max-width: 860px){.family{min-height:0;display:block}.family > img{position:relative;height:56vw;transform:none}.family .veil{display:none}.family .copy{padding:34px 0 10px}}
+

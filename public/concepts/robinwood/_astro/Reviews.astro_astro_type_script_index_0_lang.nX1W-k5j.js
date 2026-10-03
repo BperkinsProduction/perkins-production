@@ -1,0 +1,1 @@
+import{n as e}from"./core.BdAENcqA.js";var t=document.getElementById(`track`);document.querySelectorAll(`.track-btns button`).forEach(function(n){n.addEventListener(`click`,function(){t.scrollBy({left:+n.dataset.dir*Math.min(460,t.clientWidth*.8),behavior:e.matches?`auto`:`smooth`})})});

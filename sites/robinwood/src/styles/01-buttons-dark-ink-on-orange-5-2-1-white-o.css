@@ -1,0 +1,9 @@
+/* buttons: dark ink on orange, 5.2:1. White on this orange fails. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:0 1.5rem;border-radius:999px;font:700 1rem/1 var(--body);text-decoration:none;border:0;cursor:pointer;transition:background .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn-book{background:var(--accent);color:var(--on-accent);box-shadow:0 8px 24px -10px rgba(251,104,26,.7)}
+.btn-book:hover{background:var(--accent-hover);color:var(--on-accent);transform:translateY(-1px)}
+.btn-ghost{background:rgba(251,253,253,.86);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-strong);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:var(--panel);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-quiet{background:transparent;color:var(--link);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.btn-quiet:hover{box-shadow:inset 0 0 0 1.5px var(--link);color:var(--ink)}
+

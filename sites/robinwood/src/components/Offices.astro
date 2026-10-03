@@ -1,0 +1,62 @@
+---
+import { offices, stops } from "../data/offices.js";
+
+const officeByKey = Object.fromEntries(offices.map((o) => [o.key, o]));
+
+// Progress dot position on the flight track: 0 stays "0", others become a percentage.
+const dotLeft = (at) => (at === 0 ? "0" : `${Math.round(at * 10000) / 100}%`);
+
+---
+<!-- 4. one road, two offices -->
+<section class="sec road" id="offices" aria-labelledby="road-h">
+  <div class="wrap intro">
+    <span class="kicker" data-reveal>Two offices</span>
+    <h2 id="road-h" data-reveal style="--d:1">One road. Two offices.</h2>
+    <p data-reveal style="--d:2">Middletown sits on the east side of South Mountain. Hagerstown sits on the west. The old National Pike crosses the mountain at Turner&rsquo;s Gap and joins them. Same team, same records, whichever side you&rsquo;re on.</p>
+  </div>
+  <div class="flight" id="flight" role="img" aria-label="A flight along the old National Pike, from the Hagerstown office over South Mountain at Turner's Gap to the Middletown office">
+    <div class="fstage" id="fstage">
+      <img class="fposter" src="assets/flight-poster.jpg" alt="" width="1600" height="900" loading="lazy">
+      <video id="flightVideo" muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture></video>
+      <div class="flabels" aria-hidden="true">
+        {stops.map((stop) => {
+          const office = officeByKey[stop.k];
+          return office
+            ? <span class="fl office" data-k={stop.k}><img src={office.photo} alt={office.photoAlt} width="320" height="256"><small>{office.side}</small><b>{office.name}</b></span>
+            : <span class="fl" data-k={stop.k}>{stop.title}</span>;
+        })}
+      </div>
+      <div class="fcap" aria-hidden="true">
+        <span class="mile">Mile <b id="fmile">0.0</b> of 18.2</span>
+        <div class="fstops">
+          {stops.map((stop) => (
+            <div class="fstop" data-at={stop.at}><h3>{stop.title}</h3><p>{stop.line}</p></div>
+          ))}
+        </div>
+        <div class="ftrack"><i id="fbar"></i>{stops.map((stop) => <span style={`left:${dotLeft(stop.at)}`}></span>)}</div>
+      </div>
+    </div>
+  </div>
+  <div class="map" id="map" data-reveal>
+    <div class="ring" data-contour="ring" aria-hidden="true"></div>
+    <img class="relief" id="relief" src="assets/relief-map.webp" alt="A 3D relief of South Mountain between the Hagerstown and Middletown valleys, with the old National Pike drawn in orange from one office to the other." loading="lazy" width="1920" height="1200">
+    {offices.map((o) => (
+      <span class="pin office" id={o.pin.id} style={`left:${o.pin.left};top:${o.pin.top}`}><img src={o.photo} alt={o.photoAlt} width="320" height="256" loading="lazy"><small>{o.side}</small><b>{o.name}</b></span>
+    ))}
+  </div>
+  <div class="wrap offices">
+    {offices.map((o, i) => (
+      <article class="office" data-reveal style={i ? `--d:${i}` : undefined}>
+        <span class="side">{o.side}</span>
+        <h3>{o.name}</h3>
+        <address>{o.address.map((line, n) => <>{n > 0 && <br>}{line}</>)}</address>
+        <dl class="hours">{o.hours.map((h) => <><dt>{h.days}</dt><dd>{h.time}</dd></>)}</dl>
+        <div class="acts"><a class="btn btn-book" href="#book" data-office={o.key}>Book here</a><a class="btn btn-quiet" href={`tel:${o.phone}`}>Call</a><a class="btn btn-quiet" href={o.directions} target="_blank" rel="noopener">Directions</a></div>
+      </article>
+    ))}
+  </div>
+</section>
+<script>
+  import "../scripts/flight.js";
+  import "../scripts/turning-map.js";
+</script>

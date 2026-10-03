@@ -1,0 +1,18 @@
+---
+import { services } from "../data/services.js";
+---
+<!-- 7. everything under one roof -->
+<section class="sec" id="services" aria-labelledby="sv-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="svc-head">
+      <div><span class="kicker" data-reveal>Everything under one roof</span>
+      <h2 id="sv-h" data-reveal style="--d:1">You shouldn&rsquo;t need four offices for one mouth.</h2></div>
+      <p class="lede" data-reveal style="--d:2">General dentistry, an oral surgeon, orthodontics and implants, all with the same team and the same records.</p>
+    </div>
+    <ul class="scards">
+      {services.map((s, i) => (
+        <li data-reveal style={`--d:${i % 2}`}><button type="button" class="scard" data-svc={s.slug}><span class="ph">{s.svg ? <Fragment set:html={s.svg} /> : <img src={s.photo} alt={s.alt} loading="lazy" width="600" height="500">}<em>{s.caption}</em></span><span class="tx"><span class="i">{String(i + 1).padStart(2, "0")}</span><span class="t">{s.title}</span><span class="d">{s.description}</span><span class="more">Read more <span aria-hidden="true">&#8594;</span></span></span></button></li>
+      ))}
+    </ul>
+  </div>
+</section>

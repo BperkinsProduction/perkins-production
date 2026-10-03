@@ -1,0 +1,68 @@
+---
+import { offices } from "../data/booking.js";
+import { phone } from "../data/contact.js";
+---
+<!-- 10. book a visit -->
+<section class="sec book" id="book" aria-labelledby="bk-h">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Book a visit</span>
+    <h2 id="bk-h" data-reveal style="--d:1">Ready when you are.</h2>
+    <p class="lede" data-reveal style="--d:2;margin-top:1rem">Pick an office, pick a dentist, pick a time.</p>
+    <form class="book-card" id="booker" novalidate data-reveal>
+      <ol class="progress" aria-label="Booking steps"><li class="cur">Office</li><li>Dentist</li><li>Day and time</li><li>Your details</li></ol>
+      <div>
+        <div class="pane cur" data-pane="0">
+          <h3>Which office?</h3>
+          <div class="opts" id="o-office">
+            {offices.map((o) => (
+              <button type="button" class="opt" data-v={o.v} aria-pressed="false"><b>{o.name}</b><span>{o.note}</span></button>
+            ))}
+          </div>
+        </div>
+        <div class="pane" data-pane="1">
+          <h3>Who would you like to see?</h3>
+          <div class="opts" id="o-doc"></div>
+          <p class="hint">The office confirms which dentists are in on the day you pick.</p>
+        </div>
+        <div class="pane" data-pane="2">
+          <h3>Pick a day and time.</h3>
+          <div class="days" id="o-day"></div>
+          <div class="times" id="o-time"></div>
+          <p class="hint">Times shown follow the office&rsquo;s hours. They are examples in this concept.</p>
+        </div>
+        <div class="pane" data-pane="3">
+          <h3>Last step.</h3>
+          <p class="hint" style="margin:-6px 0 14px">The office calls you within 24 to 48 business hours to confirm. Want to come in today? Same-day visits are often available at <a href={`tel:${phone.tel}`}>{phone.display}</a>.</p>
+          <p class="summary" id="sum"></p>
+          <div class="fields">
+            <label>Your name<input name="n" autocomplete="name" required></label>
+            <label>Phone<input name="p" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          </div>
+        </div>
+        <div class="pane" data-pane="4" id="done" tabindex="-1">
+          <h3>You&rsquo;re all set.</h3>
+          <p class="summary" id="sum2"></p>
+          <p class="done-note">This is a design concept. No appointment was made and nothing was sent.</p>
+        </div>
+        <div class="pane-foot">
+          <button type="button" class="btn btn-quiet" id="back" hidden>Back</button>
+          <button type="button" class="btn btn-book" id="next" disabled>Continue</button>
+        </div>
+      </div>
+    </form>
+    <form class="msg" id="msg" novalidate data-reveal>
+      <div><h3>Prefer to write?</h3><p>Send a question and the office will get back to you.</p></div>
+      <div class="msg-fields">
+        <label>Your name<input name="mn" autocomplete="name" required></label>
+        <label>Email or phone<input name="mc" autocomplete="email" required></label>
+        <label class="wide">Your question<textarea name="mm" rows="3" required></textarea></label>
+        <button class="btn btn-book" type="submit" id="msg-send" disabled>Send message</button>
+        <p class="msg-done" id="msg-done" hidden>This is a design concept. Nothing was sent.</p>
+      </div>
+    </form>
+  </div>
+</section>
+<script>
+  import "../scripts/message.js";
+  import "../scripts/booking.js";
+</script>

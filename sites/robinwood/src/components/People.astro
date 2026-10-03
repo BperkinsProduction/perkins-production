@@ -1,0 +1,17 @@
+---
+import { peopleRows } from "../data/people.js";
+---
+<!-- inside Robinwood: the practice's own photos -->
+<section class="people" id="people" aria-labelledby="pp-h">
+  <div class="wrap people-head">
+    <span class="kicker" data-reveal>Inside Robinwood</span>
+    <h2 id="pp-h" data-reveal style="--d:1">This is Robinwood.</h2>
+    <p class="lede" data-reveal style="--d:2">Every photo in this strip comes from the practice&rsquo;s own camera: their dentists, their hygienists, their patients and their two buildings.</p>
+  </div>
+  <div class="ppl-rows" aria-label="Photos from Robinwood Dental Center">{peopleRows.map((row, r) => (
+    <div class={`ppl-row r${r + 1}`}>{row.map((p) => (<figure><img src={p.src} alt={p.alt} loading="lazy" width="600" height="500"></figure>))}</div>
+  ))}</div>
+</section>
+<script>
+  import "../scripts/people.js";
+</script>

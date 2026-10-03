@@ -1,0 +1,32 @@
+:root{
+  --canvas:#F2F6F7; --panel:#FBFDFD; --ink:#0F2E3A; --text-secondary:#4A6570;
+  --brand:#0280ad; --link:#026e8a; --mist:#a1dfe0;
+  --accent:#fb681a; --accent-hover:#dd5410; --accent-muted:rgba(251,104,26,.16); --on-accent:#0F2E3A;
+  --line:rgba(15,46,58,.12); --line-strong:rgba(15,46,58,.22);
+  --halo:0 0 22px rgba(242,246,247,.95),0 0 6px rgba(242,246,247,.9),0 1px 1px rgba(242,246,247,.8);
+  --display:"Fraunces",Georgia,serif; --body:"Nunito Sans",system-ui,-apple-system,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --wrap:min(1180px,calc(100vw - 48px)); --ease:cubic-bezier(.22,.8,.24,1);
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font:400 1.075rem/1.65 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:var(--link);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:300;line-height:1.08;letter-spacing:-.01em;margin:0;color:var(--ink)}
+h2{font-size:clamp(2.1rem,4.4vw,3.6rem)}
+h3{font-size:1.45rem;font-weight:500}
+p{margin:0 0 1em}
+.wrap{width:var(--wrap);margin-inline:auto}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.kicker{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin-bottom:1rem;display:block}
+.lede{font-size:1.2rem;color:var(--text-secondary);max-width:40ch}
+[hidden]{display:none !important}
+.btn:disabled{opacity:.42;cursor:not-allowed;box-shadow:none;transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-80px;z-index:100;background:var(--ink);color:#fff;padding:12px 18px;border-radius:10px;transition:top .2s}
+.skip:focus{top:16px;color:#fff}
+

@@ -1,0 +1,34 @@
+/* the flight: Hagerstown to Middletown along the old National Pike, driven by scroll */
+.flight{display:none;position:relative;height:240vh;margin-top:clamp(10px,2vw,30px)}
+html.scrub:not(.no-flight) .flight{display:block}
+html.scrub:not(.no-flight) #map{display:none}
+.fstage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--canvas)}
+.fstage .fposter,.fstage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fstage video{opacity:0;transition:opacity .5s linear}
+.fstage.ready video{opacity:1}
+.fstage::before,.fstage::after{content:"";position:absolute;left:0;right:0;z-index:2;pointer-events:none}
+.fstage::before{top:0;height:16vh;background:linear-gradient(var(--canvas),rgba(242,246,247,0))}
+.fstage::after{bottom:0;height:12vh;background:linear-gradient(rgba(242,246,247,0),var(--canvas))}
+.flabels{position:absolute;inset:0;z-index:3;pointer-events:none}
+.fl{position:absolute;left:0;top:0;transform:translate(-50%,-150%);background:var(--panel);color:var(--ink);font:600 .88rem var(--body);padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 10px 24px -14px rgba(15,46,58,.55);opacity:0;will-change:transform,opacity}
+.fl.office,.pin.office{padding:6px 6px 8px;border-radius:14px;white-space:normal;text-align:center;width:148px}
+.fl.office img,.pin.office img{display:block;width:100%;aspect-ratio:5/4;height:auto;object-fit:cover;border-radius:9px;margin-bottom:7px}
+.fl.office small,.pin.office small{display:block;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);line-height:1.3}
+.fl.office b,.pin.office b{display:block;font:600 .95rem/1.2 var(--body);color:var(--ink)}
+.fl.office::after,.pin.office::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--panel);transform:translateX(-50%) rotate(45deg);border-radius:0 0 3px 0}
+.fcap{position:absolute;left:max(6vw,32px);bottom:clamp(40px,9vh,90px);z-index:4;width:min(440px,80vw);text-align:left;text-shadow:var(--halo)}
+.fcap::before{content:"";position:absolute;inset:-34% -30% -30% -24%;z-index:-1;background:radial-gradient(closest-side,rgba(242,246,247,.9),rgba(242,246,247,.55) 60%,rgba(242,246,247,0));filter:blur(6px)}
+.fcap .mile{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px}
+.fcap .mile b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.fstops{position:relative;min-height:6.4rem}
+.fstop{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(10px)}
+.fstop h3{font-size:clamp(2rem,3.4vw,3rem);font-weight:300;margin:0 0 .3rem}
+.fstop p{margin:0;font-weight:600;max-width:34ch}
+.ftrack{position:relative;height:2px;background:var(--line-strong);border-radius:2px;margin-top:18px}
+.ftrack i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);border-radius:2px}
+.ftrack span{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:var(--panel);box-shadow:inset 0 0 0 2px var(--brand);transform:translate(-50%,-50%)}
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
+  html.scrub .flight{display:none}
+  html.scrub #map{display:block}
+}
+

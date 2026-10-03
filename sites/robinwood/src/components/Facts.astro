@@ -1,0 +1,17 @@
+---
+import { facts, emergency } from "../data/facts.js";
+---
+<!-- 1. the steady strip -->
+<section class="steady" aria-label="At a glance">
+  <div class="wrap">
+    <div class="facts">
+      {facts.map((f, i) => (
+        <div class="fact" data-reveal style={`--d:${i}`}><span class="num" data-count={f.value} data-from={f.from} data-dec={f.dec}>{f.value}</span><span class="lbl">{f.label}</span></div>
+      ))}
+    </div>
+    <div class="emerg" data-reveal>
+      <span class="dot" aria-hidden="true"></span>
+      <p>{emergency.text} <a href={emergency.phoneHref}>{emergency.phoneLabel}</a>.</p>
+    </div>
+  </div>
+</section>

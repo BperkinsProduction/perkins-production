@@ -1,0 +1,11 @@
+/* ------------------------------------------------ shared section rhythm and entrances */
+section{position:relative}
+section[id]{scroll-margin-top:84px}
+.sec{padding:clamp(80px,11vw,150px) 0}
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--d,0) * 110ms)}
+[data-reveal].in{opacity:1;transform:none}
+html:not(.js) [data-reveal]{opacity:1;transform:none}
+.divider{height:clamp(70px,9vw,120px);color:var(--brand);opacity:.5;overflow:hidden}
+.divider svg{width:100%;height:100%;display:block}
+.divider path,.ring path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,0))}
+

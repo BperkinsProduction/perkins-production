@@ -1,0 +1,16 @@
+---
+import { formGroups } from "../data/forms.js";
+---
+<!-- forms and aftercare -->
+<section class="sec forms" id="forms" aria-labelledby="fo-h">
+  <div class="wrap">
+    <span class="kicker" data-reveal>Forms and aftercare</span>
+    <h2 id="fo-h" data-reveal style="--d:1">Everything you&rsquo;ll need, before and after.</h2>
+    <p class="lede" data-reveal style="--d:2;margin-top:1rem">These are the practice&rsquo;s own forms and care sheets. Each opens as a PDF you can read on your phone or print.</p>
+    <div class="form-cols">
+      {formGroups.map((g, i) => (
+        <div data-reveal style={i ? `--d:${i}` : undefined}><h3>{g.heading}</h3><ul class="doclist">{g.docs.map((d) => <li><a href={d.url} target="_blank" rel="noopener"><span class="doc-ico" aria-hidden="true"></span><span>{d.title}</span><em>PDF</em></a></li>)}</ul></div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+/* 10. book a visit */
+.book{background:linear-gradient(180deg,rgba(161,223,224,0),rgba(161,223,224,.28) 30%,rgba(161,223,224,.28));}
+.book-card{background:var(--panel);border-radius:calc(var(--r) + 10px);box-shadow:0 1px 0 var(--line),0 40px 80px -50px rgba(15,46,58,.55);padding:clamp(26px,4vw,52px);margin-top:40px;display:grid;grid-template-columns:220px 1fr;gap:clamp(24px,4vw,56px)}
+.progress{list-style:none;margin:0;padding:0;display:grid;gap:6px;align-content:start;counter-reset:p}
+.progress li{display:flex;gap:12px;align-items:center;padding:10px 0;color:var(--text-secondary);font-weight:600}
+.progress li::before{counter-increment:p;content:counter(p);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:500 .8rem var(--mono);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.progress li.cur{color:var(--ink)}
+.progress li.cur::before{background:var(--ink);color:#fff;box-shadow:none}
+.progress li.done::before{background:var(--mist);color:var(--ink);box-shadow:none}
+.pane{display:none}
+.pane.cur{display:block;animation:pane .5s var(--ease)}
+@keyframes pane{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane h3{font-size:1.7rem;font-weight:300;margin-bottom:18px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;border-radius:14px;padding:16px 18px;box-shadow:inset 0 0 0 1.5px var(--line-strong);background:var(--canvas);min-height:48px;transition:box-shadow .2s,background .2s}
+.opt:hover{box-shadow:inset 0 0 0 1.5px var(--brand)}
+.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.opt[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--brand);background:rgba(161,223,224,.28)}
+.opt b{display:block;font-size:1.05rem}
+.opt span{display:block;font-size:.88rem;color:var(--text-secondary)}
+.days{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin}
+.day{flex:none;width:78px;text-align:center;padding:12px 6px}
+.day span{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.day b{font-family:var(--display);font-size:1.6rem;font-weight:300}
+.times{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.time{padding:12px 16px;font-weight:700}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fields label{display:grid;gap:6px;font-weight:600;font-size:.95rem}
+.fields input{font:inherit;padding:14px 16px;border-radius:12px;border:0;box-shadow:inset 0 0 0 1.5px var(--line-strong);background:var(--canvas);color:var(--ink);min-height:48px}
+.fields input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--brand)}
+.pane-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.summary{background:var(--canvas);border-radius:14px;padding:16px 18px;margin:0 0 18px;font-weight:600}
+.done-note{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--accent-muted);font-weight:600}
+.hint{font-size:.88rem;color:var(--text-secondary);margin-top:10px}
+@media (max-width: 860px){.book-card{grid-template-columns:1fr}.progress{grid-auto-flow:column;grid-auto-columns:1fr;gap:4px}.progress li{font-size:0;justify-content:center}.fields{grid-template-columns:1fr}}
+

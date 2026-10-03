@@ -1,0 +1,9 @@
+/* phones: a steady call and book bar */
+.dock{display:none}
+@media (max-width: 720px){
+  .dock{display:flex;position:fixed;inset:auto 0 0 0;z-index:38;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(242,246,247,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -1px 0 var(--line);transform:translateY(110%);transition:transform .35s var(--ease)}
+  .dock.show{transform:none}
+  .dock .btn{flex:1}
+  body{padding-bottom:76px}
+}
+

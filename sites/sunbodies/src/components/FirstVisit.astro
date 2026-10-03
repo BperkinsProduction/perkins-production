@@ -1,0 +1,30 @@
+---
+// First visit: the numbered timeline from firstVisit in salon.ts, the photo, and the age rules.
+import { Image } from 'astro:assets';
+import Kicker from './Kicker.astro';
+import { photo } from '../lib/photos';
+import { firstVisit } from '../data/salon';
+
+---
+<section class="block dark" id="first-visit" aria-labelledby="fv-h">
+  <div class="wrap">
+    <div class="reveal">
+      <Kicker>Your first visit</Kicker>
+      <h2 class="h2" id="fv-h">First time? Here's the whole thing.</h2>
+    </div>
+    <div class="fv-grid">
+      <ol class="timeline reveal" id="timeline">
+        <svg class="path" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="0" x2="2" y2="100"/><line class="fill" pathLength="1" x1="2" y1="0" x2="2" y2="100"/></svg>
+        {firstVisit.map((step, i) => (
+          <>
+            <li data-n={i + 1}><h3>{step.title}</h3><p>{step.body}</p></li>
+          </>
+        ))}
+      </ol>
+      <div class="fv-side reveal">
+        <figure><Image src={photo('first-visit.jpg')} alt="A bronzed woman with her eyes closed, face tilted into warm golden light" widths={[600, 900, 1200]} sizes="(max-width: 980px) 100vw, 600px" loading="lazy" decoding="async" /></figure>
+        <p class="note"><b>Age rules.</b> UV tanning is 17 and up in Pennsylvania, and 17-year-olds need a parent's written OK. For prom, ask us about spray tans.</p>
+      </div>
+    </div>
+  </div>
+</section>

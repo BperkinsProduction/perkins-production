@@ -1,0 +1,11 @@
+/* inside Robinwood: two rows of real photos that drift as you scroll */
+.people{padding:clamp(60px,8vw,110px) 0 clamp(40px,5vw,70px);overflow:hidden;--p:0}
+.people-head{text-align:center;margin-bottom:clamp(28px,4vw,48px)}
+.people-head .lede{margin:1rem auto 0;max-width:46ch}
+.ppl-rows{display:grid;gap:18px}
+.ppl-row{display:flex;gap:18px;width:max-content;will-change:transform}
+.ppl-row.r1{transform:translateX(calc(-6% + var(--p) * -140px));margin-left:4vw}
+.ppl-row.r2{transform:translateX(calc(-14% + var(--p) * 140px))}
+.ppl-row figure{margin:0;width:clamp(210px,23vw,330px);aspect-ratio:6/5;border-radius:18px;overflow:hidden;box-shadow:0 24px 50px -34px rgba(15,46,58,.6);background:var(--mist)}
+.ppl-row img{width:100%;height:100%;object-fit:cover;display:block}
+@media (prefers-reduced-motion: reduce){.ppl-row.r1,.ppl-row.r2{transform:none}}

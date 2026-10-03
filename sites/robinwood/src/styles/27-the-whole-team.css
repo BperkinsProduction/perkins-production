@@ -1,0 +1,14 @@
+/* the whole team */
+.docs-more{margin:26px 0 0;color:var(--text-secondary);font-size:1.02rem}
+.team{margin-top:22px;background:var(--panel);border-radius:calc(var(--r) + 2px);box-shadow:0 1px 0 var(--line)}
+.team summary{cursor:pointer;list-style:none;padding:20px 24px;font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 0;font-size:1.35rem;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;min-height:44px}
+.team summary::-webkit-details-marker{display:none}
+.team summary::after{content:"+";margin-left:auto;font-family:var(--body);color:var(--brand);font-size:1.4rem;line-height:1}
+.team[open] summary::after{content:"\2212"}
+.team summary span{font-family:var(--body);font-size:.95rem;color:var(--text-secondary)}
+.team-cols{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;padding:4px 24px 26px}
+.team-cols h3{font-size:1.2rem;margin-bottom:10px;color:var(--brand)}
+.team-cols dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:.95rem}
+.team-cols dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);padding-top:3px}
+.team-cols dd{margin:0}
+@media (max-width: 800px){.team-cols{grid-template-columns:1fr}.team-cols dl{grid-template-columns:1fr;gap:2px}.team-cols dd{margin-bottom:8px}}

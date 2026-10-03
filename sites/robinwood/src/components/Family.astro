@@ -1,0 +1,20 @@
+---
+const ticks = ["Family block appointments", "Children from age three"];
+---
+<!-- 8. bring the whole family -->
+<section class="family" id="family" aria-labelledby="fm-h">
+  <img src="assets/family.jpg" alt="A mother and her young son sitting together by a window in a bright waiting room" loading="lazy" width="1920" height="1072">
+  <div class="veil"></div>
+  <div class="copy"><div>
+    <span class="kicker" data-reveal>Bring the whole family.</span>
+    <h2 id="fm-h" data-reveal style="--d:1">Everyone in one visit.</h2>
+    <p data-reveal style="--d:2;margin-top:1.2rem">At Robinwood Dental, we love kids and sympathize with busy parents. We can arrange family block appointments so that you and your children can all be seen at the same time without having to wait for one another.</p>
+    <p data-reveal style="--d:3">We see children as young as 3 years old because baby teeth are important too. Primary teeth also guide the growth of permanent teeth.</p>
+    <ul class="ticks" data-reveal style="--d:4">{ticks.map((t) => <li>{t}</li>)}</ul>
+    <figure class="fam-kid" data-reveal style="--d:4"><img src="assets/fam-kid.jpg" alt="A young Robinwood patient smiling in the dental chair" width="600" height="500" loading="lazy"><figcaption>A young patient at Robinwood, from the practice&rsquo;s own photos.</figcaption></figure>
+    <a class="btn btn-book" href="#book" data-reveal style="--d:5">Book a visit</a>
+  </div></div>
+</section>
+<script>
+  import "../scripts/family.js";
+</script>

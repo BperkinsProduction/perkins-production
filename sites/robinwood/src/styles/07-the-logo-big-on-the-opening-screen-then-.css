@@ -1,0 +1,21 @@
+/* the logo: big on the opening screen, then it glides up into the header */
+:root{--lw:min(44vw,700px)}
+.logo-slot{display:block;width:var(--lw);aspect-ratio:358/44;margin:0 0 clamp(26px,4vh,44px);visibility:hidden}
+.logo-slot img{width:100%;height:auto;display:block}
+.band.b1 > :not(.logo-slot){translate:0 calc(var(--lt,0) * -1 * (var(--lw) * .1229 + clamp(26px,4vh,44px)))}
+.logo-fly{position:fixed;left:0;top:0;z-index:45;pointer-events:none;height:auto;transform-origin:0 0;will-change:transform,width;display:none}
+html.logo-anim .logo-fly{display:block}
+html.logo-anim:not(.logo-docked) .site-head .logo img{opacity:0}
+html.logo-docked .logo-fly{display:none}
+.site-head .logo img{transition:opacity .2s linear}
+@media (max-width: 720px){:root{--lw:min(78vw,420px)}}
+@media (prefers-reduced-motion: reduce){.logo-slot{visibility:visible}.band.b1 > :not(.logo-slot){translate:none}}
+.skip-intro{position:absolute;right:max(4vw,24px);bottom:28px;z-index:5;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:rgba(251,253,253,.86);color:var(--ink);font:700 .92rem var(--body);text-decoration:none;box-shadow:inset 0 0 0 1.5px var(--line-strong);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:clamp(0,calc((1 - var(--fade,0)) * 1),1)}
+.skip-intro:hover{background:var(--panel);box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.scroll-cue{position:absolute;left:max(6vw,32px);bottom:34px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-shadow:var(--halo);opacity:var(--cue,1)}
+.scroll-cue i{display:block;width:1px;height:42px;background:linear-gradient(var(--ink),rgba(15,46,58,0));animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.motes{position:absolute;inset:0;pointer-events:none}
+.motes i{position:absolute;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.8);filter:blur(1.5px);animation:mote 18s linear infinite;opacity:0}
+@keyframes mote{0%{opacity:0;transform:translate3d(0,0,0)}15%{opacity:.8}85%{opacity:.6}100%{opacity:0;transform:translate3d(60px,-120px,0)}}
+
