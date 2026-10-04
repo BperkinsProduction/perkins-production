@@ -501,19 +501,27 @@ import { levels, planById, money, perDay, HOURS, hoursRows, special } from '../d
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     return Math.hypot(e.clientX - cx, e.clientY - cy) < Math.max(44, r.width * 0.9);
   }
+  let dragAng = null;
+  // Safari decides at touchstart whether a touch scrolls the page, so a touch that
+  // lands on the sun has to cancel scrolling right there or the drag never starts.
+  dial.addEventListener('touchstart', e => {
+    if (e.touches.length === 1 && !e.target.closest('.stop') && nearSun(e.touches[0])) e.preventDefault();
+  }, { passive: false });
+  dial.addEventListener('touchmove', e => { if (dragging) e.preventDefault(); }, { passive: false });
   dial.addEventListener('pointerdown', e => {
     if (e.target.closest('.stop')) return;
     if (e.pointerType !== 'mouse' && !nearSun(e)) return;
     dragging = true; dial.setPointerCapture(e.pointerId); sun.classList.add('drag');
-    dial.style.touchAction = 'none';
-    placeSun(angleFromEvent(e));
+    dragAng = angleFromEvent(e);
+    placeSun(dragAng);
   });
-  dial.addEventListener('pointermove', e => { if (dragging) placeSun(angleFromEvent(e)); });
+  dial.addEventListener('pointermove', e => { if (dragging) { dragAng = angleFromEvent(e); placeSun(dragAng); } });
   const endDrag = e => {
     if (!dragging) return;
     dragging = false; sun.classList.remove('drag');
-    dial.style.touchAction = '';
-    setLevel(nearest(angleFromEvent(e)), true);
+    // A cancelled pointer reports no usable position, so settle where the sun last was.
+    if (e.type !== 'pointercancel') dragAng = angleFromEvent(e);
+    setLevel(nearest(dragAng), true);
   };
   dial.addEventListener('pointerup', endDrag);
   dial.addEventListener('pointercancel', endDrag);
