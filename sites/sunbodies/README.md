@@ -14,10 +14,10 @@ Everything about the salon is in one file: `src/data/salon.ts`.
 
 - `src/components/`: one file per section of the page, in the order listed in `src/pages/index.astro`.
 - `src/styles/global.css`: all the styling.
-- `src/scripts/site.js`: the sunset scroll, the flying logo, the level finder, the live hours, and the form.
+- `src/scripts/site.js`: the level finder, the live hours, the menu bar logo, and the form.
 - `src/assets/`: photos. Astro turns them into small WebP copies sized for each screen.
-- `public/assets/`: files used as-is (the sunset video, the logos, the link-preview image).
-- `LEGACY-index.html`: the original hand-built page, kept for reference.
+- `public/assets/`: files used as-is (the logos and the link-preview image).
+- `LEGACY-index.html`: the original hand-built page, kept for reference. It is the older sunset-video design.
 
 ## Preview, build, publish
 
@@ -31,3 +31,7 @@ Work in a copy that lives outside iCloud (a git worktree), not in the Documents 
 ## Turning this into the real sunbodies.com
 
 In `astro.config.mjs`, set `site` to `https://www.sunbodies.com` and `base` to `/`, remove the `robots` noindex line and the concept line in the footer, and deploy it as its own site.
+
+## The look
+
+Sunny yellow and red from the building sign, a chunky sign-painter display face (Bowlby One), and Figtree for text. The opening is the real logo on a slowly turning sunburst with the gym bundle as the headline: no beach, no stock imagery. Colors and fonts are the variables at the top of `src/styles/global.css`.

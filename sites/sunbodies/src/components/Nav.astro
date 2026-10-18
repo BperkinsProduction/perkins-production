@@ -1,10 +1,11 @@
 ---
-// The floating pill menu, plus the big logo that flies up into it as the hero scrolls.
+// The sticker-style menu bar. The small logo stays hidden while the big hero logo
+// is on screen, then slides in (site.js toggles the logo-in class).
 import { money, special } from '../data/salon';
 import { asset } from '../lib/paths';
 ---
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Sunbodies Tanning Salon, back to top"><img src={asset('logo-dark.svg')} alt="Sunbodies Tanning Salon" width="119" height="40"></a>
+  <a class="brand" href="#top" aria-label="Sunbodies Tanning Salon, back to top"><img src={asset('logo-light.svg')} alt="Sunbodies Tanning Salon" width="119" height="40"></a>
   <nav aria-label="Main">
     <a href="#levels">Levels</a>
     <a href="#memberships">Memberships</a>
@@ -14,5 +15,3 @@ import { asset } from '../lib/paths';
   <span class="live" id="navLive" aria-live="polite">Hours today</span>
   <a class="btn btn-gold" href="#join">Claim {money(special.price)}</a>
 </header>
-
-<div class="flyer" id="flyer" aria-hidden="true"><img class="l" src={asset('logo-light.svg')} alt="" width="1750" height="588"><img class="d" src={asset('logo-dark.svg')} alt="" width="1750" height="588"></div>

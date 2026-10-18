@@ -5,335 +5,19 @@ import { levels, planById, money, perDay, HOURS, hoursRows, special } from '../d
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-  const smoothstep = (p, e0, e1) => { const t = clamp((p - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); };
   const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
-
-  /* ---------- text splitting (seeded, identical every load) ---------- */
-  function rng(seed) { let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
-  function buildVisual(text, mode, seed, spread) {
-    const r = rng(seed);
-    const vis = document.createElement('span');
-    vis.setAttribute('aria-hidden', 'true');
-    const lines = text.split('|');
-    const words = [];
-    lines.forEach((ln, li) => {
-      ln.split(' ').forEach((raw, wi, arr) => {
-        const em = /^\*.*\*$/.test(raw);
-        const word = raw.replace(/\*/g, '');
-        const w = document.createElement('span');
-        w.className = 'w' + (em ? ' em' : '');
-        [...word].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.appendChild(c); });
-        vis.appendChild(w);
-        words.push(w);
-        if (wi < arr.length - 1) vis.appendChild(document.createTextNode(' '));
-      });
-      if (li < lines.length - 1) vis.appendChild(document.createElement('br'));
-    });
-    const chars = $$('.c', vis);
-    words.forEach((w, i) => {
-      if (mode === 'drift') w.style.setProperty('--th', (i / words.length * 0.55).toFixed(3));
-      if (mode === 'rise') w.style.setProperty('--th', (i / words.length * 0.5).toFixed(3));
-    });
-    if (mode === 'weave') {
-      chars.forEach((c, i) => {
-        c.style.setProperty('--th', (i / chars.length * (spread || 0.5) + r() * 0.06).toFixed(3));
-        c.style.setProperty('--jy', ((i % 2 ? 1 : -1) * (14 + r() * 10)).toFixed(1) + 'px');
-      });
-    }
-    return vis;
-  }
-  $$('[data-split]').forEach(el => {
-    const raw = el.textContent.trim();
-    const mode = el.dataset.split;
-    const seed = +el.dataset.seed || 7;
-    const spread = +el.dataset.spread || 0;
-    const plain = raw.replace(/\|/g, ' ').replace(/\*/g, '');
-    el.textContent = '';
-    const sr = document.createElement('span'); sr.className = 'sr'; sr.textContent = plain;
-    el.appendChild(sr);
-    if (mode === 'blur') {
-      const sharp = buildVisual(raw, mode, seed); sharp.classList.add('sharp');
-      const soft = buildVisual(raw, mode, seed); soft.classList.add('soft');
-      el.append(sharp, soft);
-    } else {
-      el.appendChild(buildVisual(raw, mode, seed, spread));
-    }
-  });
-
-  /* ---------- the scrub hero ---------- */
-  const scrub = $('#scrub'), stage = $('#stage'), video = $('#hero');
-  const VIDEO_URL = stage.dataset.video, VIDEO_BYTES = +stage.dataset.bytes || 0;
-  const POSTER_URL = stage.dataset.poster, ENDING_URL = stage.dataset.ending;
-  const poster = $('#poster'), posterEnd = $('#posterEnd');
-  const ring = $('#ring'), cue = $('#cue'), cueText = $('#cueText'), clockEl = $('#clock');
-  const bands = $$('.band').map((el, i, arr) => ({
-    el, a: +el.dataset.a, b: +el.dataset.b, ramp: el.dataset.ramp ? +el.dataset.ramp : null,
-    first: +el.dataset.a === 0, last: i === arr.length - 1, op: -1, k: -1, on: null
-  }));
-
-  let target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true;
-  let loadK = 0, loadStart = 0, loadRaf = null;
-  let videoReady = false, videoFailed = false;
-
-  function heroProgress() {
-    const r = scrub.getBoundingClientRect();
-    const range = scrub.offsetHeight - innerHeight;
-    return range > 0 ? clamp(-r.top / range, 0, 1) : 0;
-  }
-
-  function updateCaptions(p) {
-    for (const band of bands) {
-      const len = band.b - band.a;
-      const f = Math.min(0.04, len / 4);
-      let op = (band.first ? 1 : smoothstep(p, band.a, band.a + f)) * (band.last ? 1 : 1 - smoothstep(p, band.b - f, band.b));
-      const ramp = band.ramp || Math.min(0.045, len * 0.35);
-      let k = clamp((p - band.a) / ramp, 0, 1);
-      if (band.first) k = Math.max(k, loadK);
-      if (Math.abs(op - band.op) > 0.004 || (op === 0) !== (band.op === 0) || (op === 1 && band.op !== 1)) {
-        band.op = op; band.el.style.opacity = op.toFixed(3);
-      }
-      if (Math.abs(k - band.k) > 0.008 || (k === 1 && band.k !== 1) || (k === 0 && band.k !== 0)) {
-        band.k = k; band.el.style.setProperty('--k', k.toFixed(3));
-      }
-      const on = op > 0.02;
-      if (on !== band.on) { band.on = on; band.el.classList.toggle('on', on); }
-    }
-    if (videoFailed || !videoReady) {
-      if (!posterEnd._bg && (videoFailed || p > 0.05)) { posterEnd._bg = 1; posterEnd.style.backgroundImage = "url('" + ENDING_URL + "')"; }
-      const e = smoothstep(p, 0.15, 0.95);
-      if (Math.abs(e - (posterEnd._e ?? -1)) > 0.01 || (e === 1 && posterEnd._e !== 1)) { posterEnd._e = e; posterEnd.style.opacity = e.toFixed(3); }
-    }
-    const gone = p > 0.04;
-    if (gone !== cue._gone) { cue._gone = gone; cue.classList.toggle('gone', gone); }
-    updateClock(p, performance.now());
-    if (scrubOn) flySet(p / FLY_END);
-  }
-
-  let lastClock = '', lastClockAt = 0;
-  function updateClock(p, now) {
-    if (now - lastClockAt < 100) return;
-    const mins = Math.round(17 * 60 + 30 + p * 102);
-    const h = Math.floor(mins / 60), m = mins % 60;
-    const txt = (h > 12 ? h - 12 : h) + ':' + String(m).padStart(2, '0') + ' PM';
-    if (txt === lastClock) return;
-    lastClock = txt; lastClockAt = now; clockEl.textContent = txt;
-  }
-
-  let seekBusy = false, pendingTime = null;
-  function requestSeek(t) {
-    if (!videoReady || !video.duration) return;
-    if (seekBusy) { pendingTime = t; return; }
-    seekBusy = true;
-    video.currentTime = t;
-  }
-  video.addEventListener('seeked', () => {
-    seekBusy = false;
-    if (pendingTime !== null) { const t = pendingTime; pendingTime = null; requestSeek(t); }
-  });
-  video.addEventListener('error', () => { seekBusy = false; pendingTime = null; failVideo(); });
-
-  function tick(now) {
-    const dt = Math.min(100, now - (lastTick || now));
-    lastTick = now;
-    const k = 0.16;
-    shown += (target - shown) * (1 - Math.pow(1 - k, dt / 16.667));
-    if (Math.abs(target - shown) < 0.0005) { shown = target; rafId = null; lastTick = 0; }
-    else rafId = requestAnimationFrame(tick);
-    requestSeek(shown * (video.duration || 0) * 0.999);
-    updateCaptions(shown);
-  }
-  function onScroll() {
-    target = heroProgress();
-    if (rafId === null && heroOnScreen) rafId = requestAnimationFrame(tick);
-  }
-  new IntersectionObserver(es => { heroOnScreen = es[0].isIntersecting; if (heroOnScreen && scrubOn) onScroll(); }).observe(scrub);
-
-  function loadRamp(now) {
-    if (!loadStart) loadStart = now;
-    const t = clamp((now - loadStart) / 1500, 0, 1);
-    loadK = 1 - Math.pow(1 - t, 3);
-    updateCaptions(shown);
-    loadRaf = t < 1 ? requestAnimationFrame(loadRamp) : null;
-  }
-
-  function makeChevron() {
-    const ns = 'http://www.w3.org/2000/svg';
-    const s = document.createElementNS(ns, 'svg');
-    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'chev');
-    const p = document.createElementNS(ns, 'path');
-    p.setAttribute('d', 'M5 9l7 7 7-7'); p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#FBEEDB'); p.setAttribute('stroke-width', '2'); p.setAttribute('stroke-linecap', 'round'); p.setAttribute('stroke-linejoin', 'round');
-    s.appendChild(p); return s;
-  }
-  function settleCue(text) {
-    if (ring.isConnected) ring.replaceWith(makeChevron());
-    cueText.textContent = text;
-  }
-  function failVideo() {
-    if (videoFailed) return;
-    videoFailed = true;
-    stage.classList.add('video-failed');
-    video.removeAttribute('src');
-    video.style.display = 'none';
-    settleCue('Scroll to set the sun');
-    updateCaptions(heroProgress());
-  }
-
-  async function loadHeroBlob() {
-    const ctrl = new AbortController();
-    let watchdog = setTimeout(() => ctrl.abort(), 20000);
-    const res = await fetch(VIDEO_URL, { priority: 'low', signal: ctrl.signal });
-    if (!res.ok || !res.body) throw new Error('video ' + res.status);
-    const total = Number(res.headers.get('Content-Length')) || VIDEO_BYTES;
-    const reader = res.body.getReader();
-    const chunks = [];
-    let got = 0, lastRing = 0;
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      clearTimeout(watchdog);
-      watchdog = setTimeout(() => ctrl.abort(), 20000);
-      chunks.push(value);
-      got += value.length;
-      const frac = Math.min(1, got / total);
-      const now = performance.now();
-      if (now - lastRing > 100 || frac === 1) { lastRing = now; ring.style.setProperty('--ld', Math.round(126 * (1 - frac))); }
-    }
-    clearTimeout(watchdog);
-    ring.style.setProperty('--ld', 0);
-    video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
-    video.load();
-    video.addEventListener('loadeddata', () => {
-      videoReady = true;
-      requestSeek(heroProgress() * video.duration * 0.999);
-      stage.classList.add('video-ready');
-      posterEnd.style.opacity = '0';
-      settleCue('Scroll to set the sun');
-    }, { once: true });
-  }
-
-  let heroInit = false;
-  function initHeroOnce() {
-    if (heroInit) return;
-    heroInit = true;
-    poster.style.backgroundImage = "url('" + POSTER_URL + "')";
-    let started = false;
-    const start = () => { if (started) return; started = true; loadHeroBlob().catch(failVideo); };
-    const img = new Image();
-    img.onload = start; img.onerror = start;
-    img.src = POSTER_URL;
-    setTimeout(start, 4000);
-    loadRaf = requestAnimationFrame(loadRamp);
-  }
-
-  /* ---------- the logo: big in the sky, then home to the menu bar ---------- */
-  const flyer = $('#flyer'), navEl = $('#nav'), navLogo = $('.nav .brand img');
-  const LOGO_RATIO = 1750 / 588;
-  const FLY_END = 0.065;
-  const fly = { on: false, geo: null, t: -1, req: 0, intro: 1, shownIntro: -1, landed: null };
-  const flyAllowed = () => !reduceMQ.matches && innerHeight >= 520;
-  const flyNow = () => scrubOn ? heroProgress() / FLY_END : scrollY / (innerHeight * 0.42);
-  function flyMeasure() {
-    const vw = innerWidth, vh = innerHeight;
-    const w0 = scrubOn ? Math.min(vw * 0.46, 760, vh * 0.27 * LOGO_RATIO) : Math.min(vw * 0.8, 440, vh * 0.2 * LOGO_RATIO);
-    const r = navLogo.getBoundingClientRect();
-    fly.geo = { w0, h0: w0 / LOGO_RATIO, sx: vw / 2, sy: vh * (scrubOn ? 0.385 : 0.24),
-      tx: r.left + r.width / 2, ty: r.top + r.height / 2, ts: r.width / w0 };
-    flyer.style.width = w0.toFixed(1) + 'px';
-    flyer.style.height = (w0 / LOGO_RATIO).toFixed(1) + 'px';
-    fly.t = -1;
-  }
-  function flySet(t) {
-    if (!fly.on || !fly.geo) return;
-    t = clamp(t, 0, 1);
-    fly.req = t;
-    const landed = t >= 1;
-    if (landed !== fly.landed) { fly.landed = landed; flyer.classList.toggle('on', !landed); navEl.classList.toggle('flying', !landed); }
-    if (landed) { fly.t = 1; return; }
-    if (Math.abs(t - fly.t) < 0.0004 && fly.intro === fly.shownIntro) return;
-    fly.t = t; fly.shownIntro = fly.intro;
-    const g = fly.geo;
-    const e = t * t * (3 - 2 * t);
-    const s = Math.pow(g.ts, e);
-    const w = g.w0 * s, h = g.h0 * s;
-    const cx = g.sx + (g.tx - g.sx) * e;
-    const cy = g.sy + (g.ty - g.sy) * e + (1 - fly.intro) * 22;
-    flyer.style.transform = 'translate3d(' + (cx - w / 2).toFixed(2) + 'px,' + (cy - h / 2).toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
-    flyer.style.setProperty('--mix', (scrubOn ? smoothstep(e, 0.72, 0.97) : 1).toFixed(3));
-    flyer.style.opacity = fly.intro.toFixed(3);
-  }
-  function flyApply() {
-    if (!flyAllowed()) {
-      fly.on = false; fly.landed = null;
-      flyer.classList.remove('on'); navEl.classList.remove('flying');
-      return;
-    }
-    fly.on = true; fly.landed = null;
-    flyMeasure();
-    flySet(flyNow());
-  }
-  function flyIntro() {
-    if (!fly.on || fly.req >= 1) return;
-    fly.intro = 0;
-    const t0 = performance.now();
-    const step = now => {
-      const k = clamp((now - t0) / 1100, 0, 1);
-      fly.intro = 1 - Math.pow(1 - k, 3);
-      flySet(fly.req);
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-  let flyRaf = null, flyResize = null;
-  addEventListener('scroll', () => {
-    if (!fly.on) return;
-    if (scrubOn) { if (!heroOnScreen) flySet(heroProgress() / FLY_END); return; }
-    if (flyRaf) return;
-    flyRaf = requestAnimationFrame(() => { flyRaf = null; flySet(flyNow()); });
-  }, { passive: true });
-  addEventListener('resize', () => { cancelAnimationFrame(flyResize); flyResize = requestAnimationFrame(flyApply); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(flyApply);
-
-  const GATES = [
-    '(max-width: 720px)',
-    '(orientation: portrait) and (max-width: 1024px)',
-    '(orientation: portrait) and (pointer: coarse)',
-    '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
-    '(prefers-reduced-motion: reduce)'
-  ];
-  let scrubOn = false;
-  function enableScrub() {
-    if (scrubOn) return; scrubOn = true;
-    initHeroOnce();
-    addEventListener('scroll', onScroll, { passive: true });
-    bands.forEach(b => { b.op = -1; b.k = -1; b.on = null; });
-    unpinFinalStates();
-    updateCaptions(heroProgress());
-    onScroll();
-  }
-  function disableScrub() {
-    if (!scrubOn) return; scrubOn = false;
-    removeEventListener('scroll', onScroll);
-    if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
-  }
-  function applyHeroMode() {
-    if (GATES.some(q => matchMedia(q).matches)) disableScrub(); else enableScrub();
-    flyApply();
-  }
-  const MQLS = GATES.map(q => matchMedia(q));
-  MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
 
   /* ---------- reduced motion, live in both directions ---------- */
   function pinToFinalStates() {
     document.body.classList.add('pinned');
     $$('.reveal,.stagger,.timeline,.rays').forEach(el => el.classList.add('in'));
     setDialInstant(true);
-    flyApply();
   }
   function unpinFinalStates() {
     document.body.classList.remove('pinned');
     setDialInstant(false);
   }
-  reduceMQ.addEventListener('change', e => { if (e.matches) pinToFinalStates(); else applyHeroMode(); });
+  reduceMQ.addEventListener('change', e => { if (e.matches) pinToFinalStates(); else unpinFinalStates(); });
 
   /* ---------- entrances ---------- */
   const io = new IntersectionObserver(entries => {
@@ -351,15 +35,13 @@ import { levels, planById, money, perDay, HOURS, hoursRows, special } from '../d
   }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
   $$('.reveal,.stagger,.timeline,.rays').forEach(el => io.observe(el));
 
-  /* ---------- nav ---------- */
-  const nav = $('#nav');
-  let navSolid = null;
-  function navState() {
-    const solid = scrollY > innerHeight * 0.6;
-    if (solid !== navSolid) { navSolid = solid; nav.classList.toggle('solid', solid); }
+  /* ---------- nav: the small logo shows once the big hero logo is gone ---------- */
+  const nav = $('#nav'), heroLogo = $('#heroLogo');
+  if (heroLogo) {
+    new IntersectionObserver(es => nav.classList.toggle('logo-in', !es[0].isIntersecting), { rootMargin: '-72px 0px 0px 0px' }).observe(heroLogo);
+  } else {
+    nav.classList.add('logo-in');
   }
-  addEventListener('scroll', navState, { passive: true });
-  navState();
 
   /* ---------- pause loops off-screen and on hidden tabs ---------- */
   document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
@@ -580,11 +262,6 @@ import { levels, planById, money, perDay, HOURS, hoursRows, special } from '../d
   })();
 
   /* ---------- join form (concept preview: JS-only success state) ---------- */
-  const join = $('#join');
-  const joinBg = new IntersectionObserver(es => {
-    if (es[0].isIntersecting) { join.style.backgroundImage = "url('" + ENDING_URL + "')"; joinBg.disconnect(); }
-  }, { rootMargin: '600px 0px' });
-  joinBg.observe(join);
   const form = $('#form'), err = $('#err');
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -603,6 +280,4 @@ import { levels, planById, money, perDay, HOURS, hoursRows, special } from '../d
   current = -1;
   setLevel(0, false);
   if (reduceMQ.matches) pinToFinalStates();
-  applyHeroMode();
-  flyIntro();
 })();
