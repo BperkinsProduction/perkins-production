@@ -158,4 +158,48 @@ export const pricingTiers: PricingTier[] = [
         ],
         cta: 'Start a Conversation',
     },
+    // Monthly care for a site the client already has, or one Brice built.
+    // Keep It Fresh matches the offer page at /keep-it-fresh.html.
+    {
+        name: 'Keep It Fresh',
+        price: '$49',
+        note: 'per month / no contract',
+        groups: 'care',
+        features: [
+            'What\'s broken on your site, fixed in week one',
+            'Up to 1 hour of changes a month',
+            'Holiday hours and seasonal updates on time',
+            'Your Google listing kept matching your site',
+            'A monthly check and a short note from me',
+        ],
+        cta: 'Start Fresh',
+    },
+    {
+        name: 'Keep It Growing',
+        price: '$99',
+        note: 'per month / no contract',
+        groups: 'care',
+        features: [
+            'Everything in Keep It Fresh',
+            'Up to 3 hours of changes a month',
+            'Changes live the next business day',
+            'A new post on your Google listing every month',
+            'A monthly report: who found you, and how',
+        ],
+        cta: 'Start Growing',
+    },
+    {
+        name: 'Keep It Rolling',
+        price: '$249',
+        note: 'per month / no contract',
+        groups: 'care',
+        features: [
+            'Everything in Keep It Growing',
+            'A photo and video visit every season',
+            'New photos on your site and Google after each visit',
+            'One short video a month for social',
+            'First in line on my calendar',
+        ],
+        cta: 'Start Rolling',
+    },
 ];
