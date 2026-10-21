@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Keep It Fresh · Perkins Production</title>
+<meta name="description" content="Keep the website you have. Perkins Production keeps it right every month for $49.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-card: #1a1a1a;
+    --bg-card-hover: #222222;
+    --text-primary: #f2efe9;
+    --text-secondary: #b4b0a8;
+    --text-accent: #c9a96e;
+    --text-accent-light: #d4b87a;
+    --border-subtle: #2a2a2a;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg-primary); }
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+.page { max-width: 900px; margin: 0 auto; padding: 4rem 3rem 3rem; }
+
+header.top { text-align: center; margin-bottom: 3rem; }
+header.top svg { height: 90px; width: auto; margin-bottom: 2.5rem; }
+.eyebrow {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 0.75rem;
+}
+header.top h1 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+header.top .divider { width: 60px; height: 1px; background: var(--text-accent); margin: 0 auto 1.5rem; }
+header.top p {
+    color: var(--text-secondary);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.price {
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--text-accent);
+    padding: 2rem 1.5rem 1.75rem;
+    margin: 0 auto 3.5rem;
+    max-width: 520px;
+    break-inside: avoid;
+}
+.price .amount {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 4.2rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--text-accent);
+}
+.price .per {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0.6rem 0 0.9rem;
+}
+.price .terms { font-size: 1rem; }
+.price .compare {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+}
+
+h2 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--text-accent);
+    margin-bottom: 0.25rem;
+}
+.included { margin-bottom: 3rem; }
+.items { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+.item { padding: 1rem 0; border-bottom: 1px solid var(--border-subtle); break-inside: avoid; }
+.item .name { font-weight: 500; }
+.item .what { color: var(--text-secondary); font-size: 1rem; }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.pair > div { break-inside: avoid; }
+
+.sample {
+    background: var(--bg-card);
+    border-left: 1px solid var(--text-accent);
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+.sample .subject {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+.sample p { margin-bottom: 0.6rem; }
+.sample .label {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-right: 0.35rem;
+}
+.sample .sign {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    margin: 0;
+}
+.caption {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.terms-list { list-style: none; margin-top: 0.25rem; }
+.terms-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 1rem;
+}
+.terms-list li:last-child { border-bottom: none; }
+
+.start { text-align: center; margin-bottom: 3rem; break-inside: avoid; }
+.start h3 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.start .divider { width: 60px; height: 1px; background: var(--text-accent); margin: 0 auto 1.25rem; }
+.start p { max-width: 620px; margin: 0 auto 1.75rem; }
+.buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+.buttons a {
+    display: inline-block;
+    padding: 12px 36px;
+    border: 1px solid var(--text-accent);
+    color: var(--text-accent);
+    text-decoration: none;
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+.buttons a:hover { background: var(--text-accent); color: var(--bg-primary); }
+.buttons a.solid { background: var(--text-accent); color: var(--bg-primary); font-weight: 500; }
+.buttons a.solid:hover { background: var(--text-accent-light); }
+
+footer { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-subtle); }
+footer p {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+@media screen and (max-width: 768px) {
+    .page { padding: 2.5rem 1.25rem 2rem; }
+    header.top svg { height: 64px; margin-bottom: 1.75rem; }
+    header.top h1 { font-size: 1.8rem; letter-spacing: 4px; }
+    .price .amount { font-size: 3.6rem; }
+    .items, .pair { grid-template-columns: 1fr; }
+    .pair { gap: 2.5rem; }
+    .buttons a { width: 100%; text-align: center; }
+}
+@media print {
+    html { font-size: 10.5px; }
+    .page { padding: 1.25rem 2.5rem; max-width: none; }
+    header.top { margin-bottom: 1.25rem; }
+    header.top svg { height: 50px; margin-bottom: 1rem; }
+    .price { margin-bottom: 1.5rem; padding: 1rem; }
+    .included, .pair { margin-bottom: 1.5rem; }
+    .item { padding: 0.5rem 0; }
+    .terms-list li { padding: 0.5rem 0; }
+    .start { margin-bottom: 1.25rem; }
+    .start h3 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+    .start .divider { margin-bottom: 0.75rem; }
+    .start p { margin-bottom: 0; }
+    .buttons { display: none; }
+    footer { padding-top: 1rem; }
+    @page { margin: 0; }
+    a { color: var(--text-accent); text-decoration: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<header class="top">
+    <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkins Production"><defs><linearGradient id="gGfresh" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b87a"/><stop offset="50%" stop-color="#c9a96e"/><stop offset="100%" stop-color="#b8944f"/></linearGradient></defs><g transform="translate(20,40)"><g stroke="url(#gGfresh)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="40" y="35" width="120" height="82" rx="6"/><circle cx="100" cy="41.5" r="0.9" fill="url(#gGfresh)" stroke="none"/><rect x="46" y="47" width="108" height="64" rx="3" opacity="0.45"/><g opacity="0.7"><rect x="49.5" y="51" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="57" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="63" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="69" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="75" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="81" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="87" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="93" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="99" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="105" width="4.5" height="3.2" rx="0.6"/></g><circle cx="105" cy="79" r="24"/><circle cx="105" cy="79" r="18" opacity="0.85"/><circle cx="105" cy="79" r="12" opacity="0.7"/><circle cx="105" cy="79" r="5"/><path d="M102.6 76.2L102.6 81.8L107.4 79Z" fill="url(#gGfresh)" stroke="url(#gGfresh)" stroke-width="0.6"/><path d="M88 70A22 22 0 0 1 99 60" stroke="#fff" stroke-width="1.2" opacity="0.5"/><line x1="36" y1="120" x2="164" y2="120"/><path d="M36 120L164 120L172 138Q172 142 168 142L32 142Q28 142 28 138Z"/><line x1="50" y1="126" x2="150" y2="126" opacity="0.35"/><line x1="48" y1="130" x2="152" y2="130" opacity="0.35"/><rect x="86" y="134.5" width="28" height="4" rx="1" opacity="0.55"/><line x1="92" y1="142" x2="108" y2="142" opacity="0.6" stroke-width="1.8"/></g></g><g transform="translate(240,0)"><text x="0" y="120" font-family="Cormorant Garamond,Georgia,serif" font-size="84" font-weight="600" letter-spacing="2" fill="#e8e8e8">PERKINS</text><line x1="0" y1="140" x2="420" y2="140" stroke="url(#gGfresh)" stroke-width="1.2"/><text x="0" y="180" font-family="Cormorant Garamond,Georgia,serif" font-size="22" font-weight="400" letter-spacing="14" fill="#999">PRODUCTION</text><line x1="0" y1="208" x2="20" y2="208" stroke="url(#gGfresh)" stroke-width="1.5"/><text x="30" y="212" font-family="Josefin Slab,Georgia,serif" font-size="11" font-weight="400" letter-spacing="3.5" fill="#666">PHOTO + VIDEO + DESIGN</text></g></svg>
+    <div class="eyebrow">Website care</div>
+    <h1>Keep It Fresh</h1>
+    <div class="divider"></div>
+    <p>Keep the website you have. I'll keep it right, every month.</p>
+</header>
+
+<div class="price">
+    <div class="amount">$49</div>
+    <div class="per">A month</div>
+    <div class="terms">No contract. Cancel with one text.</div>
+    <div class="compare">Most agency care plans start around $100 a month.</div>
+</div>
+
+<section class="included">
+    <h2>What you get</h2>
+    <div class="items">
+        <div class="item">
+            <div class="name">The first week fix</div>
+            <div class="what">I start with the problems I already found on your site, like a phone number people can't tap or a page that breaks on a phone, and fix them in week one.</div>
+        </div>
+        <div class="item">
+            <div class="name">Changes when you need them</div>
+            <div class="what">New hours, a new price, a new photo. Text me and it's live within two business days. Up to an hour of changes a month is included.</div>
+        </div>
+        <div class="item">
+            <div class="name">Seasons on time</div>
+            <div class="what">Holiday hours, the fall menu, the summer event. Up before it matters, down after, so nobody finds June on your homepage in October.</div>
+        </div>
+        <div class="item">
+            <div class="name">Google kept straight</div>
+            <div class="what">Your Google listing matches your site: hours, holiday hours, phone number, photos. It's what most people see before they ever click.</div>
+        </div>
+        <div class="item">
+            <div class="name">The monthly check</div>
+            <div class="what">Once a month I go through the whole site on a phone and a computer. Every link, every form, every phone number.</div>
+        </div>
+        <div class="item">
+            <div class="name">A short note from me</div>
+            <div class="what">A few lines each month on what I checked, what I fixed, and anything you should know about. No jargon.</div>
+        </div>
+    </div>
+</section>
+
+<div class="pair">
+    <div>
+        <h2>The monthly note</h2>
+        <div class="sample">
+            <div class="subject">Your November check</div>
+            <p><span class="label">Checked</span> All 12 pages on a phone and a computer, the contact form, and both phone numbers.</p>
+            <p><span class="label">Fixed</span> Thanksgiving hours are up on the site and on Google. Swapped in the new storefront photo you sent.</p>
+            <p><span class="label">Heads up</span> Your domain renews in January. It's set to renew on its own, so you're covered.</p>
+            <p class="sign">Brice</p>
+        </div>
+        <p class="caption">A sample. Yours names your own pages.</p>
+    </div>
+    <div>
+        <h2>The plain terms</h2>
+        <ul class="terms-list">
+            <li>Works with the site you already have: Wix, Squarespace, GoDaddy, WordPress, or something older.</li>
+            <li>You own everything, same as today. I just need a login.</li>
+            <li>Bigger jobs, like a new page, get a price before I start. No surprise bills.</li>
+            <li>Billed monthly. Cancel anytime by text or email.</li>
+        </ul>
+    </div>
+</div>
+
+<section class="start">
+    <h3>Getting started</h3>
+    <div class="divider"></div>
+    <p>Text or email me "keep it fresh." I'll need a login to your website and manager access on your Google listing, and I'll walk you through both in about ten minutes.</p>
+    <div class="buttons">
+        <a class="solid" href="sms:+12408181955">Text Brice</a>
+        <a href="mailto:Brice@perkinsproduction.com?subject=Keep%20it%20fresh">Email Brice</a>
+    </div>
+</section>
+
+<footer>
+    <p>Perkins Production · Frederick, Maryland · (240) 818-1955 · brice@perkinsproduction.com</p>
+</footer>
+
+</div>
+</body>
+</html>

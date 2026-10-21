@@ -118,6 +118,26 @@
       "source": "/concepts/robinwood",
       "destination": "/concepts/robinwood/",
       "permanent": false
+    },
+    {
+      "source": "/:site([Ff][Rr][Ee][Ss][Hh])",
+      "destination": "/keep-it-fresh.html",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Ff][Rr][Ee][Ss][Hh])/",
+      "destination": "/keep-it-fresh.html",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Kk][Ee][Ee][Pp]-?[Ii][Tt]-?[Ff][Rr][Ee][Ss][Hh])",
+      "destination": "/keep-it-fresh.html",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Kk][Ee][Ee][Pp]-?[Ii][Tt]-?[Ff][Rr][Ee][Ss][Hh])/",
+      "destination": "/keep-it-fresh.html",
+      "permanent": false
     }
   ]
 }
