@@ -100,6 +100,16 @@
       "permanent": false
     },
     {
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/:page(plan|Plan|PLAN|fix|Fix)",
+      "destination": "/concepts/sports-inn-plan.html",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Ss][Pp][Oo][Rr][Tt][Ss]-?[Ii][Nn][Nn])/:page(plan|Plan|PLAN|fix|Fix)/",
+      "destination": "/concepts/sports-inn-plan.html",
+      "permanent": false
+    },
+    {
       "source": "/:site([Ss][Uu][Nn]-?[Bb][Oo][Dd][Ii][Ee][Ss])",
       "destination": "/concepts/sunbodies/",
       "permanent": false
