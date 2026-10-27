@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Walker's Overlook | Walkersville, Maryland</title>
+<meta name="description" content="Walker's Overlook, a farm wedding venue in Walkersville, Maryland. Concept preview by Perkins Production.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="farm/walkers/d/000.webp?v=202610010910" media="(min-width: 760px)">
+<link rel="preload" as="image" href="farm/walkers/m/000.webp?v=202610010910" media="(max-width: 759px)">
+<style>
+:root { --bg: #efe8dc; --surface: #e6ddcd; --ink: #33251a; --muted: #6b5d4f; --accent: #5f7552; --accent2: #a9884f; --rule: rgba(51,37,26,.16); --btn-ink: #f4efe6; --hero-cue: #4a3a2c;
+  --display: 'Cormorant Garamond', Georgia, serif; --body: 'Lora', Georgia, serif; --label: 'Lora', Georgia, serif; --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1.05rem; line-height: 1.7; }
+img, video, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+.label { font-family: var(--label); font-size: .74rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.12; margin: 0; letter-spacing: .005em; }
+h2 { font-size: clamp(2.3rem, 5vw, 3.6rem); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero: the logo reveal */
+.hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; background: #000; }
+.hero video, .hero .poster, .hero picture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-bottom { position: relative; z-index: 1; padding: 0 24px 34px; text-align: center; color: var(--hero-cue, #f6f1e8); opacity: 0; transition: opacity 1s var(--ease); }
+.hero.done .hero-bottom { opacity: 1; }
+.hero-cue { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; font-family: var(--label); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: inherit; opacity: .85; }
+.hero-cue i { width: 1px; height: 34px; background: currentColor; transform-origin: top; animation: cue 2.2s var(--ease) infinite; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+.intro { text-align: center; padding: 6.5rem 0 1rem; }
+.intro h2 { margin: .6rem 0 1rem; }
+.intro p { color: var(--muted); max-width: 46ch; margin: 0 auto; font-size: 1.12rem; }
+.intro p.sub { margin-top: .9rem; font-size: .98rem; font-style: italic; }
+.rule { width: 60px; height: 1px; background: var(--accent); margin: 1.6rem auto 0; }
+
+/* The scroll-through farm */
+.walk { position: relative; height: 640vh; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.caps { position: absolute; left: max(24px, 4vw); bottom: max(28px, 6vh); width: min(430px, calc(100% - 48px)); }
+.cap { position: absolute; left: 0; bottom: 0; width: 100%; opacity: 0; padding: 22px 24px 20px; background: color-mix(in srgb, var(--bg) 88%, transparent); border-left: 2px solid var(--accent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transform: translateY(var(--ty, 12px)); }
+.cap h3 { font-size: 1.6rem; margin: 6px 0 6px; }
+.cap p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.6; }
+.rail { position: absolute; right: max(18px, 3vw); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; }
+.rail i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--accent); transition: background .4s var(--ease), transform .4s var(--ease); }
+.rail i.on { background: var(--accent); transform: scale(1.25); }
+.loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--label); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); transition: opacity .6s; }
+.stills { display: none; }
+
+/* Guest count planner */
+.guests { padding: 7rem 0 5rem; text-align: center; }
+.guests > .wrap > p { color: var(--muted); margin: .9rem auto 0; max-width: 44ch; }
+.picker { display: inline-flex; gap: 0; margin: 2.2rem 0 1.6rem; border: 1px solid var(--accent); }
+.picker button { font: 500 .95rem var(--label); letter-spacing: .12em; padding: 12px 22px; min-width: 76px; border: 0; background: transparent; color: var(--ink); cursor: pointer; transition: background .4s var(--ease), color .4s var(--ease); }
+.picker button + button { border-left: 1px solid var(--accent); }
+.picker button[aria-checked="true"] { background: var(--accent); color: var(--btn-ink); }
+.picker button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.plan { position: relative; aspect-ratio: 1600 / 720; max-width: 1120px; margin: 0 auto; }
+.plan img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .7s var(--ease); }
+.plan img.on { opacity: 1; }
+.plan-note h3 { font-size: 1.7rem; margin-top: 1.2rem; }
+.plan-note p { color: var(--muted); margin: .3rem 0 0; }
+.fine { font-size: .82rem; color: var(--muted); margin-top: 1.4rem !important; opacity: .85; }
+
+/* Simple is best */
+.simple { padding: 5rem 0 6rem; text-align: center; border-top: 1px solid var(--rule); }
+.simple p { color: var(--muted); max-width: 52ch; margin: 1rem auto 0; }
+.simple .prices { font-family: var(--display); font-size: 1.35rem; color: var(--ink); margin-top: 1.4rem; line-height: 1.6; }
+.btn { display: inline-block; margin-top: 2rem; padding: 15px 34px; border: 1px solid var(--accent); color: var(--ink); text-decoration: none; font-family: var(--label); font-size: .78rem; letter-spacing: .26em; text-transform: uppercase; transition: background .4s var(--ease), color .4s var(--ease); }
+.btn:hover { background: var(--accent); color: var(--btn-ink); }
+footer { border-top: 1px solid var(--rule); padding: 2.4rem 24px 3rem; text-align: center; font-size: .86rem; color: var(--muted); }
+footer .sister { display: block; margin-bottom: .8rem; font-family: var(--display); font-size: 1.15rem; color: var(--ink); }
+footer .sister a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+@media screen and (max-width: 759px) {
+  .walk { height: 560vh; }
+  .caps { left: 16px; right: 16px; width: auto; bottom: 22px; }
+  .cap { padding: 18px 18px 16px; }
+  .cap h3 { font-size: 1.4rem; }
+  .rail { right: 10px; gap: 11px; }
+  .picker button { padding: 11px 14px; min-width: 0; }
+  .guests { padding: 5rem 0 4rem; }
+  .plan { aspect-ratio: 1600 / 900; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .walk { height: auto; }
+  .stage { display: none; }
+  .stills { display: grid; gap: 28px; padding: 2rem 24px 1rem; max-width: 1120px; margin: 0 auto; }
+  .stills figure { margin: 0; }
+  .stills figcaption h3 { font-size: 1.5rem; margin-top: .7rem; }
+  .stills figcaption p { margin: .2rem 0 0; color: var(--muted); }
+  .hero-cue i { animation: none; }
+  .plan img { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <picture><source media="(max-aspect-ratio: 3/2)" srcset="farm/walkers/logo-poster-tall.jpg?v=202610010910"><img class="poster" src="farm/walkers/logo-poster.jpg?v=202610010910" alt=""></picture>
+  <video id="logo" muted playsinline preload="auto" aria-label="Walker's Overlook logo"></video>
+  <div></div>
+  <div class="hero-bottom">
+    <h1 class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Walker's Overlook</h1>
+    <a class="hero-cue" href="#walk-intro">Walk the farm<i></i></a>
+  </div>
+</header>
+
+<section class="intro wrap" id="walk-intro">
+  <div class="label">Walkersville, Maryland</div>
+  <h2>Walk the farm</h2>
+  <p>A family farm on Woodsboro Pike with a colonial house, an old walnut tree, and a grand tent on a real hardwood floor.</p>
+  <p class="sub">Scroll, and the day plays out across the property: from the drive to the last dance.</p>
+  <div class="rule"></div>
+</section>
+
+<section class="walk" id="walk" aria-label="A scroll-through miniature of the farm">
+  <div class="stage" id="stage">
+    <canvas id="farm" role="img" aria-label="Miniature model of Walker's Overlook"></canvas>
+    <div class="loading" id="loading">Setting the table</div>
+    <div class="caps" id="caps"><div class="cap"><div class="label">1 of 6</div><h3>Walker's Overlook</h3><p>Walkersville, Maryland. Rolling countryside on every side.</p></div><div class="cap"><div class="label">2 of 6</div><h3>Down the tree-lined drive</h3><p>Past the vintage car that's been in the family for generations.</p></div><div class="cap"><div class="label">3 of 6</div><h3>The colonial house</h3><p>A bridal suite upstairs with light for days, and the famous mancave downstairs.</p></div><div class="cap"><div class="label">4 of 6</div><h3>Vows under the old walnut tree</h3><p>Maryland farmland behind you, everyone you love in front of you.</p></div><div class="cap"><div class="label">5 of 6</div><h3>The grand tent</h3><p>Cocktails on the flagstone patio, then dinner and dancing for up to 275.</p></div><div class="cap"><div class="label">6 of 6</div><h3>Until the last dance</h3><p>Twelve hours of the farm, start to finish. The lights stay on.</p></div></div>
+    <div class="rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="stills"><figure><img loading="lazy" src="farm/walkers/d/010.webp?v=202610010910" alt="Walker's Overlook" width="1280" height="720"><figcaption><h3>Walker's Overlook</h3><p>Walkersville, Maryland. Rolling countryside on every side.</p></figcaption></figure><figure><img loading="lazy" src="farm/walkers/d/036.webp?v=202610010910" alt="Down the tree-lined drive" width="1280" height="720"><figcaption><h3>Down the tree-lined drive</h3><p>Past the vintage car that's been in the family for generations.</p></figcaption></figure><figure><img loading="lazy" src="farm/walkers/d/059.webp?v=202610010910" alt="The colonial house" width="1280" height="720"><figcaption><h3>The colonial house</h3><p>A bridal suite upstairs with light for days, and the famous mancave downstairs.</p></figcaption></figure><figure><img loading="lazy" src="farm/walkers/d/083.webp?v=202610010910" alt="Vows under the old walnut tree" width="1280" height="720"><figcaption><h3>Vows under the old walnut tree</h3><p>Maryland farmland behind you, everyone you love in front of you.</p></figcaption></figure><figure><img loading="lazy" src="farm/walkers/d/106.webp?v=202610010910" alt="The grand tent" width="1280" height="720"><figcaption><h3>The grand tent</h3><p>Cocktails on the flagstone patio, then dinner and dancing for up to 275.</p></figcaption></figure><figure><img loading="lazy" src="farm/walkers/d/119.webp?v=202610010910" alt="Until the last dance" width="1280" height="720"><figcaption><h3>Until the last dance</h3><p>Twelve hours of the farm, start to finish. The lights stay on.</p></figcaption></figure></div>
+</section>
+
+<section class="guests" id="guests">
+  <div class="wrap">
+    <div class="label">The tent, your way</div>
+    <h2>How many are you inviting?</h2>
+    <p>Tap a number to see the tent set for your guest list.</p>
+    <div class="picker" role="radiogroup" aria-label="Guest count"><button type="button" role="radio" aria-checked="false">100</button><button type="button" role="radio" aria-checked="false">150</button><button type="button" role="radio" aria-checked="false">200</button><button type="button" role="radio" aria-checked="false">275</button></div>
+    <div class="plan"><img data-src="farm/walkers/plan-100.webp?v=202610010910" alt="The tent set with 13 tables of 8 for 100 guests" width="1600" height="720"><img data-src="farm/walkers/plan-150.webp?v=202610010910" alt="The tent set with 19 tables of 8 for 150 guests" width="1600" height="720"><img data-src="farm/walkers/plan-200.webp?v=202610010910" alt="The tent set with 20 tables of 10 for 200 guests" width="1600" height="720"><img data-src="farm/walkers/plan-275.webp?v=202610010910" alt="The tent set with 28 tables of 10 for 275 guests" width="1600" height="720"></div>
+    <div class="plan-note" aria-live="polite"><h3 id="plan-h"></h3><p id="plan-p"></p></div>
+    <p class="fine">Illustrative layout on round tables. The real floor plan gets set with your coordinator.</p>
+  </div>
+</section>
+
+<section class="simple">
+  <div class="wrap">
+    <div class="label">Simple is best</div>
+    <h2>One fee. Twelve hours. Everything.</h2>
+    <p>Ceremony and reception sites, dressing suites, the grounds, all tables and chairs, and a day-of coordinator, included.</p>
+    <div class="prices">Saturday $9,500 &middot; Friday $8,000 &middot; Sunday $7,000 &middot; Monday to Thursday $6,000</div>
+    <a class="btn" href="#top">Check your date</a>
+  </div>
+</section>
+
+<footer>
+  <span class="sister">Sister venue: <a href="dulanys-farm.html">Dulany's Overlook</a>, Frederick</span>
+  8939 Woodsboro Pike, Walkersville, MD 21793<br>
+  Concept preview by Perkins Production. Building positions are approximate until we walk the property.
+</footer>
+
+<script>
+(function () {
+  var CFG = {"ver": "202610010910", "key": "walkers", "frames": 120, "bg": "#efe8dc", "stops": [[1, 22], [62, 74], [108, 120], [156, 168], [204, 214], [236, 240]], "counts": [[100, "13 tables of 8", "Plenty of room to spread out, with space left for a lounge."], [150, "19 tables of 8", "Every table close to the dance floor."], [200, "20 tables of 10", "A full, lively tent with room to move."], [275, "28 tables of 10", "The whole tent, every seat filled."]]};
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Logo reveal: play once, then hold on the final frame
+  var hero = document.querySelector('.hero'), vid = document.getElementById('logo');
+  var tall = matchMedia('(max-aspect-ratio: 3/2)').matches;
+  vid.poster = 'farm/' + CFG.key + '/logo-poster' + (tall ? '-tall' : '') + '.jpg?v=' + CFG.ver;
+  vid.src = 'farm/' + CFG.key + '/logo' + (tall ? '-tall' : '') + '.mp4?v=' + CFG.ver;
+  function heroDone() { hero.classList.add('done'); }
+  if (reduce || !vid.play) { vid.remove(); heroDone(); }
+  else {
+    // if the browser will not autoplay (low power mode, data saver), fall back to the finished logo still
+    var started = false, fallback = function () { if (!started) { vid.remove(); heroDone(); } };
+    vid.addEventListener('playing', function () { started = true; });
+    vid.addEventListener('ended', heroDone);
+    var pr = vid.play(); if (pr && pr.catch) pr.catch(fallback);
+    setTimeout(fallback, 2000);
+    setTimeout(heroDone, 4600);
+  }
+
+  // Guest count picker
+  var btns = [].slice.call(document.querySelectorAll('.picker button'));
+  var imgs = [].slice.call(document.querySelectorAll('.plan img'));
+  function pick(i) {
+    btns.forEach(function (b, k) { b.setAttribute('aria-checked', k === i ? 'true' : 'false'); b.tabIndex = k === i ? 0 : -1; });
+    imgs.forEach(function (im, k) { if (k === i && !im.src) im.src = im.dataset.src; im.classList.toggle('on', k === i); });
+    document.getElementById('plan-h').textContent = CFG.counts[i][0] + ' guests: ' + CFG.counts[i][1];
+    document.getElementById('plan-p').textContent = CFG.counts[i][2];
+  }
+  btns.forEach(function (b, i) {
+    b.addEventListener('click', function () { pick(i); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+      if (d) { e.preventDefault(); var j = (i + d + btns.length) % btns.length; pick(j); btns[j].focus(); }
+    });
+  });
+  pick(Math.min(1, btns.length - 1));
+  new IntersectionObserver(function (es, ob) {
+    if (es[0].isIntersecting) { imgs.forEach(function (im) { if (!im.src) im.src = im.dataset.src; }); ob.disconnect(); }
+  }, { rootMargin: '600px' }).observe(document.getElementById('guests'));
+
+  if (reduce) return;
+
+  // Scroll-through farm: draw the frame that matches how far you have scrolled
+  var N = CFG.frames, wrap = document.getElementById('walk'), canvas = document.getElementById('farm');
+  var ctx = canvas.getContext('2d'), set = innerWidth < 760 ? 'm' : 'd';
+  var frames = new Array(N), loaded = 0;
+  var tries = {};
+  function load(i) {
+    if (frames[i]) return;
+    var im = new Image(); frames[i] = im; im.decoding = 'async';
+    im.onerror = function () { frames[i] = null; tries[i] = (tries[i] || 0) + 1; if (tries[i] < 4) setTimeout(function () { load(i); }, 600 * tries[i]); };
+    im.onload = function () { im.ok = true; loaded++; redraw(); if (loaded > 6) document.getElementById('loading').style.opacity = 0; };
+    im.src = 'farm/' + CFG.key + '/' + set + '/' + String(i).padStart(3, '0') + '.webp?v=' + CFG.ver;
+  }
+  // the stops first, then a coarse pass, then everything
+  load(0); CFG.stops.forEach(function (s) { load(Math.round((s[0] - 1) / 239 * (N - 1))); });
+  var order = []; [8, 4, 2, 1].forEach(function (st) { for (var i = 0; i < N; i += st) order.push(i); });
+  var q = 0; (function next() { var b = 0; while (q < order.length && b < 6) { if (!frames[order[q]]) { load(order[q]); b++; } q++; } if (q < order.length) setTimeout(next, 120); })();
+
+  // repaint once per frame while downloads land, so a stopped page catches up to the right picture
+  var redrawQueued = false;
+  function redraw() { if (redrawQueued) return; redrawQueued = true; requestAnimationFrame(function () { redrawQueued = false; draw(true); }); }
+  var W = 0, H = 0, dpr = 1;
+  function size() { dpr = Math.min(2, devicePixelRatio || 1); W = canvas.clientWidth; H = canvas.clientHeight; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); draw(true); }
+  var shownIdx = 0, lastDrawn = -1;
+  function best(i) { for (var d = 0; d < N; d++) { if (frames[i - d] && frames[i - d].ok) return frames[i - d]; if (frames[i + d] && frames[i + d].ok) return frames[i + d]; } return null; }
+  function draw(force) {
+    var idx = Math.round(shownIdx); if (!force && idx === lastDrawn) return;
+    var im = best(idx); if (!im) return; lastDrawn = idx;
+    var iw = im.naturalWidth, ih = im.naturalHeight;
+    var contain = Math.min(W / iw, H / ih), cover = Math.max(W / iw, H / ih);
+    var s = Math.min(cover, contain * (W < H ? 1.5 : 1.25));
+    var dw = iw * s, dh = ih * s, dx = (W - dw) / 2, dy = (H - dh) / (W < H ? 2.6 : 2);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = CFG.bg; ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(im, dx, dy, dw, dh);
+    // soften the top and bottom edges of the picture into the page
+    var fh = Math.min(dh * 0.14, 90);
+    [[dy, dy + fh], [dy + dh, dy + dh - fh]].forEach(function (e) {
+      var g = ctx.createLinearGradient(0, e[0], 0, e[1]); g.addColorStop(0, CFG.bg); g.addColorStop(1, CFG.bg + '00');
+      ctx.fillStyle = g; ctx.fillRect(0, Math.min(e[0], e[1]) - 1, W, fh + 2);
+    });
+  }
+  var caps = [].slice.call(document.querySelectorAll('.cap')), dots = [].slice.call(document.querySelectorAll('.rail i'));
+  function sstep(a, b, t) { t = Math.min(1, Math.max(0, (t - a) / (b - a))); return t * t * (3 - 2 * t); }
+  function captions(p) {
+    var f = 1 + p * 239, on = 0;
+    CFG.stops.forEach(function (s, i) {
+      var a = s[0] - 10, b = s[1] + 10;
+      var op = i === 0 ? 1 - sstep(s[1] + 2, b + 4, f) : (i === CFG.stops.length - 1 ? sstep(a - 6, s[0], f) : sstep(a, s[0], f) * (1 - sstep(s[1], b, f)));
+      caps[i].style.opacity = op.toFixed(3); caps[i].style.setProperty('--ty', ((1 - op) * 12).toFixed(1) + 'px');
+      caps[i].setAttribute('aria-hidden', op < .5 ? 'true' : 'false');
+      if (f >= s[0] - 18) on = i;
+    });
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === on); });
+  }
+  function progress() { var r = wrap.offsetHeight - innerHeight; return r > 0 ? Math.min(1, Math.max(0, (scrollY - wrap.offsetTop) / r)) : 0; }
+  var target = 0, shownP = 0, raf = null, last = 0;
+  function tick(now) {
+    var dt = Math.min(100, now - (last || now)); last = now;
+    shownP += (target - shownP) * (1 - Math.pow(1 - .2, dt / 16.667));
+    if (Math.abs(target - shownP) < .0004) { shownP = target; raf = null; last = 0; } else raf = requestAnimationFrame(tick);
+    shownIdx = shownP * (N - 1); draw(false); captions(shownP);
+  }
+  function onScroll() { target = progress(); if (raf === null) raf = requestAnimationFrame(tick); }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', function () { size(); onScroll(); }, { passive: true });
+  size(); target = shownP = progress(); shownIdx = shownP * (N - 1); draw(true); captions(shownP);
+})();
+</script>
+</body>
+</html>
