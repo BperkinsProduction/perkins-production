@@ -4,168 +4,524 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>The Overlooks Website Proposal</title>
+<title>The Overlooks Proposal · Perkins Production</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Josefin+Slab:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --canvas: #0B0A09; --surface: #141210; --surface-2: #1A1714;
-    --ink: #F4EFE7; --muted: #B7ADA0;
-    --gold: #C8A86A; --gold-bright: #DDC084; --gold-ink: #17120B;
-    --rule: rgba(228, 207, 170, 0.17);
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--canvas); color: var(--ink); font-family: "Manrope", "Helvetica Neue", Arial, sans-serif; font-weight: 400; line-height: 1.65; font-size: 16.5px; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 90px; }
-  header { text-align: center; padding: 58px 0 30px; border-bottom: 1px solid var(--rule); }
-  .brand { font-family: "Cormorant Garamond", Georgia, serif; font-size: 26px; letter-spacing: 5px; font-weight: 600; }
-  .brand small { display: block; font-family: "Josefin Slab", serif; font-size: 10px; letter-spacing: 4px; color: var(--gold); margin-top: 4px; }
-  .doc-type { font-family: "Josefin Slab", serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 22px; }
-  .title-block { text-align: center; padding: 52px 0 8px; }
-  h1 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(36px, 6vw, 54px); line-height: 1.1; margin: 0 0 18px; }
-  h1 em { font-style: italic; color: var(--gold-bright); }
-  .promise { color: var(--muted); max-width: 54ch; margin: 0 auto 34px; font-size: 17px; }
-  .parties { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); margin-bottom: 34px; }
-  .parties b { display: block; font-family: "Josefin Slab", serif; font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
-  .cta { display: inline-block; background: var(--gold); color: var(--gold-ink); text-decoration: none; font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; padding: 15px 34px; border-radius: 2px; }
-  .cta:hover { background: var(--gold-bright); }
-  section { margin-top: 74px; }
-  .sec-head { display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 8px; }
-  .sec-head .num { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; color: var(--gold); font-weight: 600; }
-  .sec-head .label { font-family: "Josefin Slab", serif; font-size: 11.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
-  h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(26px, 4vw, 34px); margin: 18px 0 16px; }
-  .bullets { list-style: none; margin: 0; padding: 0; }
-  .bullets li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--muted); }
-  .bullets li::before { content: "\2726"; color: var(--gold); flex-shrink: 0; }
-  .cards { display: grid; gap: 16px; margin-top: 10px; }
-  .card { background: var(--surface); border: 1px solid var(--rule); padding: 26px 28px; }
-  .card .tag { font-family: "Josefin Slab", serif; font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .card h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 24px; margin: 0 0 10px; }
-  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
-  .cost { width: 100%; border-collapse: collapse; margin-top: 10px; }
-  .cost td { padding: 14px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 15.5px; }
-  .cost td:first-child { font-weight: 600; white-space: nowrap; padding-right: 20px; }
-  .cost td:last-child { color: var(--muted); }
-  .cost .gold { color: var(--gold-bright); }
-  .value { display: grid; gap: 14px; margin-top: 10px; }
-  .v { background: var(--surface); border-left: 2px solid var(--gold); padding: 18px 22px; }
-  .v b { display: block; font-family: "Cormorant Garamond", Georgia, serif; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .v span { color: var(--muted); font-size: 15px; }
-  .timeline { list-style: none; margin: 10px 0 0; padding: 0; }
-  .timeline li { display: flex; gap: 18px; padding: 13px 0; border-bottom: 1px solid var(--rule); }
-  .timeline .wk { font-family: "Josefin Slab", serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); flex-shrink: 0; width: 110px; padding-top: 3px; }
-  .timeline .what { color: var(--muted); font-size: 15.5px; }
-  .next { text-align: center; margin-top: 84px; background: var(--surface-2); border: 1px solid var(--rule); padding: 46px 30px; }
-  .next h2 { margin-top: 0; }
-  .next p { color: var(--muted); max-width: 52ch; margin: 0 auto 26px; }
-  footer { text-align: center; margin-top: 60px; color: var(--muted); font-size: 12.5px; letter-spacing: 1px; }
-  footer .b { font-family: "Cormorant Garamond", Georgia, serif; font-size: 17px; letter-spacing: 3px; color: var(--ink); }
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-card: #1a1a1a;
+    --bg-card-hover: #222222;
+    --text-primary: #f2efe9;
+    --text-secondary: #b4b0a8;
+    --text-accent: #c9a96e;
+    --text-accent-light: #d4b87a;
+    --border-subtle: #2a2a2a;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg-primary); scroll-behavior: smooth; }
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+section { padding: 7rem 3rem; }
+section.alt-bg { background: var(--bg-secondary); }
+.inner { max-width: 900px; margin: 0 auto; }
+
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-header h2 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.section-header .divider {
+    width: 60px; height: 1px;
+    background: var(--text-accent);
+    margin: 0 auto 1.5rem;
+}
+.section-header p {
+    color: var(--text-secondary);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Cover */
+.cover { text-align: center; padding: 8rem 3rem 7rem; }
+.cover svg { height: 110px; width: auto; margin-bottom: 3.5rem; }
+.cover .kicker {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 1.25rem;
+}
+.cover h1 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.cover .divider { width: 60px; height: 1px; background: var(--text-accent); margin: 0 auto 1.5rem; }
+.cover .prepared {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 1.3rem;
+    max-width: 560px;
+    margin: 0 auto;
+}
+.cover .date {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 2.5rem;
+}
+
+/* Overview prose */
+.prose { max-width: 680px; margin: 0 auto; }
+.prose p { margin-bottom: 1.25rem; font-size: 1.15rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose .pull {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-accent);
+    border-left: 1px solid var(--text-accent);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.5;
+}
+
+/* Scope cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 2rem;
+    transition: var(--transition);
+    break-inside: avoid;
+}
+.card:hover { background: var(--bg-card-hover); border-color: var(--text-accent); }
+.card h3 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 0.85rem;
+}
+.card p { color: var(--text-primary); }
+.card .quiet { color: var(--text-secondary); font-style: italic; font-size: 1rem; margin-top: 0.5rem; }
+
+/* Investment tiers */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: stretch; }
+.tier {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    break-inside: avoid;
+}
+.tier:hover { border-color: var(--text-accent); }
+.tier.recommended { border-color: var(--text-accent); position: relative; }
+.tier .badge {
+    position: absolute;
+    top: -0.7rem; left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-accent);
+    color: var(--bg-primary);
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    white-space: nowrap;
+}
+.tier h3 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.tier .price {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-accent);
+    margin-bottom: 0.25rem;
+}
+.tier .per { color: var(--text-secondary); font-style: italic; font-size: 1rem; margin-bottom: 1.5rem; }
+.tier ul { list-style: none; text-align: left; margin-top: auto; }
+.tier li {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+.tier li:first-child { border-top: none; }
+.tier li::before { content: '+'; color: var(--text-accent); margin-right: 0.6rem; }
+
+.tier-note {
+    max-width: 680px;
+    margin: 2.5rem auto 0;
+    text-align: center;
+    color: var(--text-secondary);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.25rem;
+}
+
+/* Math block */
+.math {
+    max-width: 680px;
+    margin: 3rem auto 0;
+    background: var(--bg-card);
+    border-left: 1px solid var(--text-accent);
+    padding: 2rem 2.25rem;
+    break-inside: avoid;
+}
+.math h3 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    margin-bottom: 1rem;
+}
+.math p { color: var(--text-secondary); margin-bottom: 0.85rem; }
+.math p:last-child { margin-bottom: 0; }
+.math strong { color: var(--text-primary); font-weight: 500; }
+
+/* Timeline */
+.steps { max-width: 680px; margin: 0 auto; }
+.step {
+    display: flex;
+    gap: 1.75rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    break-inside: avoid;
+}
+.step:last-child { border-bottom: none; }
+.step .num {
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-accent);
+    min-width: 2.25rem;
+    text-align: right;
+}
+.step h3 {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+.step p { color: var(--text-secondary); }
+
+/* Terms */
+.terms { max-width: 680px; margin: 0 auto; }
+.terms p { color: var(--text-secondary); margin-bottom: 1rem; }
+.terms strong { color: var(--text-primary); font-weight: 500; }
+
+/* CTA */
+.section-cta { text-align: center; }
+.section-cta a {
+    display: inline-block;
+    padding: 12px 36px;
+    border: 1px solid var(--text-accent);
+    color: var(--text-accent);
+    text-decoration: none;
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: var(--transition);
+    margin: 0 0.4rem 0.75rem;
+}
+.section-cta a:hover { background: var(--text-accent); color: var(--bg-primary); }
+.section-cta .or {
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3.5rem 3rem;
+    border-top: 1px solid var(--border-subtle);
+}
+footer svg { height: 45px; width: auto; opacity: 0.5; margin-bottom: 0.75rem; }
+footer p {
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+@media screen and (max-width: 768px) {
+    section, .cover { padding: 4rem 1.5rem; }
+    .cover h1 { font-size: 2rem; letter-spacing: 4px; }
+    .section-header h2 { font-size: 1.8rem; letter-spacing: 4px; }
+    .prose .pull { font-size: 1.3rem; }
+}
+@media print {
+    html { font-size: 13px; }
+    section, .cover { padding: 3rem 2.5rem; }
+    .section-header { margin-bottom: 2.5rem; }
+    @page { margin: 0; }
+    a { color: var(--text-accent); text-decoration: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <div class="brand">PERKINS<small>PRODUCTION &middot; PHOTO + VIDEO + DESIGN</small></div>
-  <div class="doc-type">Website Proposal &middot; September 2026</div>
-</header>
-
-<div class="title-block">
-  <h1>One home for <em>The Overlooks</em></h1>
-  <p class="promise">A cinematic website for Walker's Overlook and Dulany's Overlook: opening on film, built for the phones couples plan on, and designed to turn daydreams into booked dates.</p>
-  <div class="parties">
-    <div><b>Prepared for</b>Mark H. Lynch &middot; The Overlooks, Walkersville MD</div>
-    <div><b>Prepared by</b>Brice Perkins &middot; Perkins Production</div>
-  </div>
-  <a class="cta" href="/concepts/overlooks.html">View the working concept</a>
+<div class="cover">
+    <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkins Production"><defs><linearGradient id="gGprop" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b87a"/><stop offset="50%" stop-color="#c9a96e"/><stop offset="100%" stop-color="#b8944f"/></linearGradient></defs><g transform="translate(20,40)"><g stroke="url(#gGprop)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="40" y="35" width="120" height="82" rx="6"/><circle cx="100" cy="41.5" r="0.9" fill="url(#gGprop)" stroke="none"/><rect x="46" y="47" width="108" height="64" rx="3" opacity="0.45"/><g opacity="0.7"><rect x="49.5" y="51" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="57" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="63" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="69" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="75" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="81" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="87" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="93" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="99" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="105" width="4.5" height="3.2" rx="0.6"/></g><circle cx="105" cy="79" r="24"/><circle cx="105" cy="79" r="18" opacity="0.85"/><circle cx="105" cy="79" r="12" opacity="0.7"/><circle cx="105" cy="79" r="5"/><path d="M102.6 76.2L102.6 81.8L107.4 79Z" fill="url(#gGprop)" stroke="url(#gGprop)" stroke-width="0.6"/><path d="M88 70A22 22 0 0 1 99 60" stroke="#fff" stroke-width="1.2" opacity="0.5"/><line x1="36" y1="120" x2="164" y2="120"/><path d="M36 120L164 120L172 138Q172 142 168 142L32 142Q28 142 28 138Z"/><line x1="50" y1="126" x2="150" y2="126" opacity="0.35"/><line x1="48" y1="130" x2="152" y2="130" opacity="0.35"/><rect x="86" y="134.5" width="28" height="4" rx="1" opacity="0.55"/><line x1="92" y1="142" x2="108" y2="142" opacity="0.6" stroke-width="1.8"/></g></g><g transform="translate(240,0)"><text x="0" y="120" font-family="Cormorant Garamond,Georgia,serif" font-size="84" font-weight="600" letter-spacing="2" fill="#e8e8e8">PERKINS</text><line x1="0" y1="140" x2="420" y2="140" stroke="url(#gGprop)" stroke-width="1.2"/><text x="0" y="180" font-family="Cormorant Garamond,Georgia,serif" font-size="22" font-weight="400" letter-spacing="14" fill="#999">PRODUCTION</text><line x1="0" y1="208" x2="20" y2="208" stroke="url(#gGprop)" stroke-width="1.5"/><text x="30" y="212" font-family="Josefin Slab,Georgia,serif" font-size="11" font-weight="400" letter-spacing="3.5" fill="#666">PHOTO + VIDEO + DESIGN</text></g></svg>
+    <div class="kicker">A Proposal For Mark Lynch</div>
+    <h1>Three Venues, Three Sites</h1>
+    <div class="divider"></div>
+    <p class="prepared">Walker's Overlook and Dulany's Overlook, finally separated, each on the address you already own. Plus the Hagerstown venue when the partnership is ready.</p>
+    <p class="date">October 28, 2026</p>
 </div>
 
-<section>
-  <div class="sec-head"><span class="num">01</span><span class="label">Where the current site falls short</span></div>
-  <h2>Two remarkable venues, one website from 2011</h2>
-  <ul class="bullets">
-    <li>The design predates the smartphones couples now shop venues on; photos render small and dated on the screens that matter most.</li>
-    <li>Nothing on the site moves: no film of the properties, even though film is how couples fall for a venue before they ever visit.</li>
-    <li>The details that book weddings, the walnut tree, the rose garden or woodland choice, the mancave, the vintage car, are buried in paragraphs or missing entirely.</li>
-    <li>Inquiries arrive through a generic form with no date-first flow, and couples get no instant reply while they are still excited.</li>
-    <li>The footer credits the website builder instead of carrying your brand.</li>
-  </ul>
-</section>
+<section class="alt-bg">
+    <div class="inner">
+        <div class="section-header">
+            <h2>The Idea</h2>
+            <div class="divider"></div>
+            <p>You already told me what this is for.</p>
+        </div>
+        <div class="prose">
+            <p>On the phone you said the website and social stuff needs some love, so you could be busier. That is the whole job, and it is the only thing I am measuring this against.</p>
 
-<section>
-  <div class="sec-head"><span class="num">02</span><span class="label">What you get</span></div>
-  <h2>Three pages, fresh film, one simple system</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="tag">The website</div>
-      <h3>The Overlooks, told whole</h3>
-      <p>A cinematic front door plus a full page for each farm: Walker's and Dulany's, each telling its own story. Your logo, your reviews, your transparent pricing, and a Check Your Date flow that emails you instantly and sends the couple a warm reply the moment they ask. You have already seen the direction; the concept is a working preview of exactly this.</p>
+            <p class="pull">"We are busy, which is good, but we also know that a lot of our social media and website stuff needs a lot of love. It needs some love so we could be busier."</p>
+
+            <p>You are not starting from a weak spot. Both farms are booked, Dulany's and Walker's are running neck and neck this year, and couples are finding you through Instagram and through Google. What they are not doing is finding you through the website. By your own count, about seven out of every ten inquiries come from somewhere else. That gap is the opportunity, and it is the number I want to move.</p>
+
+            <p>Right now Walker's and Dulany's share one address and one story, and they are not one story. Walker's is a tent for 275 on a hardwood floor, a walnut tree to stand under, a stone colonial house, and the mancave. Dulany's is a barn for 200, a rose garden or the woodland, a barn bar, and 170 acres around it. Those are two completely different weddings. A couple choosing between them should feel that difference in about four seconds, and right now they cannot.</p>
+
+            <p>So here is the plan. Two sites, on the two addresses you already own, each telling its own farm's story with its own photographs and its own inquiry form landing in your inbox. Eight coordinators who handle everything, said out loud instead of buried. And when the Hagerstown partnership is ready, it gets its own site, standing completely on its own, exactly the way you described it.</p>
+        </div>
     </div>
-    <div class="card">
-      <div class="tag">Shot on your farms</div>
-      <h3>Golden-hour film and photography</h3>
-      <p>I photograph and film weddings for a living. Both Maryland properties get a dedicated shoot: cinematic hero film, fresh galleries, the drone view down the tree-lined drive. Everything on the site belongs to your farms and no one else's.</p>
-    </div>
-    <div class="card">
-      <div class="tag">Optional</div>
-      <h3>Matterport 3D tours</h3>
-      <p>Couples walk the farmhouse, the barn, and the suites from their couch, the same technology I deliver for commercial clients. Especially powerful for out-of-state couples comparing venues from afar.</p>
-    </div>
-    <div class="card">
-      <div class="tag">Yours to run</div>
-      <h3>A simple admin page</h3>
-      <p>Change pricing, swap photos, update dates yourself, no webmaster required. The same setup my other clients use, including America's oldest ultramarathon.</p>
-    </div>
-  </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="num">03</span><span class="label">What it costs</span></div>
-  <h2>Almost nothing to run</h2>
-  <table class="cost">
-    <tbody>
-      <tr><td>Design + build</td><td><span class="gold">Perkins Production</span> &middot; quoted after we walk the properties together</td></tr>
-      <tr><td>Film + photo day</td><td>Included in the build quote &middot; both Maryland farms</td></tr>
-      <tr><td>Hosting</td><td><span class="gold">$0 per month</span> &middot; same setup as the JFK 50 Mile race site I built</td></tr>
-      <tr><td>Maintenance</td><td>None required &middot; you update everything through the admin page</td></tr>
-    </tbody>
-  </table>
+    <div class="inner">
+        <div class="section-header">
+            <h2>The Work</h2>
+            <div class="divider"></div>
+            <p>Everything below is included, start to finish.</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <h3>Walker's Overlook</h3>
+                <p>Its own site on walkersoverlook.com. The tent, the hardwood floor, the walnut tree, the stone house, the vintage car, the mancave. Built around a wedding for 275.</p>
+                <p class="quiet">Opens on film that moves as you scroll.</p>
+            </div>
+            <div class="card">
+                <h3>Dulany's Overlook</h3>
+                <p>Its own site on dulanysoverlook.com, with its own look and its own voice. The barn, the bar, the rose garden, the woodland, and the 170 acres they sit on.</p>
+                <p class="quiet">A separate website, not a copy of the first.</p>
+            </div>
+            <div class="card">
+                <h3>The Hagerstown Venue</h3>
+                <p>A third site that stands alone and does not fall under The Overlooks at all, the way you described it. Its own name, its own look, its own front door.</p>
+                <p class="quiet">Built once the partnership is signed.</p>
+            </div>
+            <div class="card">
+                <h3>Logos</h3>
+                <p>You mentioned you never really landed on a logo. I will design options for each venue, so the site, the signs, and the Instagram posts finally match each other.</p>
+                <p class="quiet">Included in the price, not an extra.</p>
+            </div>
+            <div class="card">
+                <h3>Inquiries That Reach You</h3>
+                <p>A date-first inquiry form on each site that emails you the moment a couple sends it, and sends them a warm reply while they are still excited. Ready to hand off to Breeze whenever you want it to.</p>
+                <p class="quiet">Still just to you, the way you like it for now.</p>
+            </div>
+            <div class="card">
+                <h3>Google and the Cleanup</h3>
+                <p>Set up so each farm turns up for its own name and for Frederick County wedding searches. Every old link forwarded so nothing you have built gets lost, and the leftover Serenity Overlook mentions finally gone.</p>
+                <p class="quiet">Fixes Dulany's page showing Walker's address, too.</p>
+            </div>
+        </div>
+        <div class="section-cta" style="margin-top:3.5rem">
+            <a href="https://www.perkinsproduction.com/concepts/overlooks/walkers-farm.html">Walk Through Walker's</a>
+            <a href="https://www.perkinsproduction.com/concepts/overlooks/dulanys-farm.html">Walk Through Dulany's</a>
+            <p class="or">Both are already built and live. Scroll them on your phone.</p>
+        </div>
+    </div>
+</section>
+
+<section class="alt-bg">
+    <div class="inner">
+        <div class="section-header">
+            <h2>The Investment</h2>
+            <div class="divider"></div>
+            <p>Three ways to do this. Pick the one that fits.</p>
+        </div>
+        <div class="tiers">
+            <div class="tier">
+                <h3>One Venue First</h3>
+                <div class="price">$6,500</div>
+                <p class="per">one-time</p>
+                <ul>
+                    <li>Walker's or Dulany's, your pick</li>
+                    <li>Its own domain and its own look</li>
+                    <li>Logo options for that venue</li>
+                    <li>Inquiry form to your inbox</li>
+                    <li>Google setup, old links forwarded</li>
+                    <li>Hosting at $0 a month</li>
+                </ul>
+            </div>
+            <div class="tier recommended">
+                <div class="badge">Recommended</div>
+                <h3>Both Overlooks</h3>
+                <div class="price">$12,500</div>
+                <p class="per">one-time</p>
+                <ul>
+                    <li>Walker's and Dulany's, fully separated</li>
+                    <li>Both domains, two distinct identities</li>
+                    <li>Logo options for both venues</li>
+                    <li>Your photographers' images pulled into one consistent look</li>
+                    <li>Inquiry forms on both</li>
+                    <li>Google setup, redirects, Serenity cleanup</li>
+                    <li>A page you update yourselves</li>
+                </ul>
+            </div>
+            <div class="tier">
+                <h3>All Three</h3>
+                <div class="price">$17,500</div>
+                <p class="per">one-time</p>
+                <ul>
+                    <li>Everything in Both Overlooks</li>
+                    <li>The Hagerstown venue, standing alone</li>
+                    <li>Its own name, logo, and look</li>
+                    <li>Starts when the partnership is signed</li>
+                    <li>That third site billed when it begins</li>
+                </ul>
+            </div>
+        </div>
+        <p class="tier-note">Hosting is $0 a month on all of them, which is less than B12 is costing you today.</p>
+
+        <div class="math">
+            <h3>What It Has To Earn</h3>
+            <p>A Saturday at either farm is <strong>$9,500</strong>. Friday is $8,000, Sunday $7,000.</p>
+            <p>So <strong>Both Overlooks pays for itself with roughly one and a half extra Saturdays.</strong> Not every year. Once.</p>
+            <p>Everything after that is the part where you are busier.</p>
+        </div>
+    </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="num">04</span><span class="label">What it starts doing for you</span></div>
-  <h2>The site becomes your best salesperson</h2>
-  <div class="value">
-    <div class="v"><b>First reply wins.</b><span>Couples inquire with five venues in one sitting. Date-first inquiries land in your inbox instantly, and the couple gets a warm automatic reply while they are still on your site falling in love.</span></div>
-    <div class="v"><b>Each farm gets its own stage.</b><span>Walker's tent and walnut tree, Dulany's barn and rose garden: two distinct characters, each with a full page selling its own kind of wedding instead of sharing one crowded pitch.</span></div>
-    <div class="v"><b>Your pricing filters for serious couples.</b><span>Simple is best is already your philosophy. Publishing it beautifully means fewer tire-kicker calls and better-qualified tours.</span></div>
-    <div class="v"><b>Your best moments work around the clock.</b><span>The walnut tree, the mancave, Holly getting a bride down the aisle worry-free: the things your couples rave about become the first thing new couples see.</span></div>
-  </div>
+    <div class="inner">
+        <div class="section-header">
+            <h2>How It Goes</h2>
+            <div class="divider"></div>
+            <p>Built over your quiet season, live long before April.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="num">1</div>
+                <div>
+                    <h3>You Send Me Two Things</h3>
+                    <p>The sites you liked when you looked around, and the questionnaire that came with this. That is where I get the design direction and the details I still need.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="num">2</div>
+                <div>
+                    <h3>Photos and Logins, by November 21</h3>
+                    <p>Your photo library, a written OK from the photographers who are contributing, and the B12 and GoDaddy logins. This is the one date that matters. Everything after it waits on it.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="num">3</div>
+                <div>
+                    <h3>First Look in December</h3>
+                    <p>Both sites, real content, on your own phone. You tell me what is wrong and I fix it. Logo options come with this.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="num">4</div>
+                <div>
+                    <h3>Live in January</h3>
+                    <p>Both farms go live on their own addresses with every old link forwarded safely. That gives you February and March to show them off, and the whole booking season ahead when you open in April.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="alt-bg">
+    <div class="inner">
+        <div class="section-header">
+            <h2>The Fine Print</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="terms">
+            <p><strong>To book:</strong> a third to start, a third at the first look in December, a third at launch. On Both Overlooks that is $4,167 three times.</p>
+            <p><strong>This quote holds for:</strong> 30 days from the date on the cover.</p>
+            <p><strong>Photos:</strong> I will need a short written OK from each photographer who contributes, even just an email reply saying the venues can use their images on the websites. Photographers own their wedding photos even when it is your property in the frame, and venues get caught out on this more often than you would think. Every contributing photographer gets credit on the site, which is usually why they say yes.</p>
+            <p><strong>If photos run late:</strong> the schedule moves, the payment dates do not. Projects like this stall waiting on images more than anything else, which is why November 21 is in here on purpose.</p>
+            <p><strong>Revisions:</strong> two full rounds on each site are included, which is more than almost anyone uses. Past that it is $95 an hour.</p>
+            <p><strong>Hagerstown:</strong> quoted here so you have the number, but it does not start and is not billed until the partnership is signed and there is a name to build around.</p>
+            <p><strong>Usage:</strong> the sites and the logos are yours outright. Perkins Production may show the work in its portfolio.</p>
+        </div>
+    </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="num">05</span><span class="label">Timeline</span></div>
-  <h2>Live before engagement season peaks</h2>
-  <ul class="timeline">
-    <li><span class="wk">Week 1</span><span class="what">Walk both farms together, agree on the details, and shoot the first golden-hour film and photography.</span></li>
-    <li><span class="wk">Weeks 2 to 4</span><span class="what">Build all three pages, the date-first inquiry flow, and your admin page.</span></li>
-    <li><span class="wk">Week 5</span><span class="what">Review everything together, load final pricing and dates, and walk your team through updates.</span></li>
-    <li><span class="wk">Launch</span><span class="what">The new site goes live on your own address, with every old link and Google result forwarding safely, the same way I moved the JFK 50 Mile without losing a single visitor.</span></li>
-  </ul>
+    <div class="inner">
+        <div class="section-header">
+            <h2>Next Step</h2>
+            <div class="divider"></div>
+            <p>Send the questionnaire back and we can start this week.</p>
+        </div>
+        <div class="section-cta">
+            <a href="mailto:brice@perkinsproduction.com?subject=The%20Overlooks%20proposal">Let's Go</a>
+            <p class="or">Or call Brice at (240) 818-1955.</p>
+        </div>
+    </div>
 </section>
-
-<div class="next">
-  <h2>The next step is a walk around the farm</h2>
-  <p>Show me Walker's and Dulany's the way you'd show a couple. Tell me what the concept gets right and what it misses. Then I'll put a real quote together. No pressure either way.</p>
-  <a class="cta" href="mailto:brice@perkinsproduction.com">Reply to Brice</a>
-</div>
 
 <footer>
-  <div class="b">PERKINS PRODUCTION</div>
-  <div>Photo + Video + Design &middot; (240) 818-1955</div>
-  <div style="margin-top:8px;">Prepared September 2026 for The Overlooks</div>
+    <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkins Production"><defs><linearGradient id="gGpropFoot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b87a"/><stop offset="50%" stop-color="#c9a96e"/><stop offset="100%" stop-color="#b8944f"/></linearGradient></defs><g transform="translate(20,40)"><g stroke="url(#gGpropFoot)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="40" y="35" width="120" height="82" rx="6"/><circle cx="100" cy="41.5" r="0.9" fill="url(#gGpropFoot)" stroke="none"/><rect x="46" y="47" width="108" height="64" rx="3" opacity="0.45"/><circle cx="105" cy="79" r="24"/><circle cx="105" cy="79" r="18" opacity="0.85"/><circle cx="105" cy="79" r="12" opacity="0.7"/><circle cx="105" cy="79" r="5"/><path d="M102.6 76.2L102.6 81.8L107.4 79Z" fill="url(#gGpropFoot)" stroke="url(#gGpropFoot)" stroke-width="0.6"/><line x1="36" y1="120" x2="164" y2="120"/><path d="M36 120L164 120L172 138Q172 142 168 142L32 142Q28 142 28 138Z"/><rect x="86" y="134.5" width="28" height="4" rx="1" opacity="0.55"/></g></g><g transform="translate(240,0)"><text x="0" y="120" font-family="Cormorant Garamond,Georgia,serif" font-size="84" font-weight="600" letter-spacing="2" fill="#e8e8e8">PERKINS</text><line x1="0" y1="140" x2="420" y2="140" stroke="url(#gGpropFoot)" stroke-width="1.2"/><text x="0" y="180" font-family="Cormorant Garamond,Georgia,serif" font-size="22" font-weight="400" letter-spacing="14" fill="#999">PRODUCTION</text><line x1="0" y1="208" x2="20" y2="208" stroke="url(#gGpropFoot)" stroke-width="1.5"/><text x="30" y="212" font-family="Josefin Slab,Georgia,serif" font-size="11" font-weight="400" letter-spacing="3.5" fill="#666">PHOTO + VIDEO + DESIGN</text></g></svg>
+    <p>Perkins Production · Frederick, Maryland · (240) 818-1955</p>
 </footer>
 
-</div>
 </body>
 </html>
