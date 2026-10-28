@@ -119,6 +119,31 @@ section.alt-bg { background: var(--bg-secondary); }
     margin-right: 0.6rem; vertical-align: -1px;
 }
 
+/* Reference sites to react to */
+.refs { list-style: none; padding-left: 2.45rem; margin-bottom: 1.25rem; }
+.refs li {
+    display: flex; gap: 0.9rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    break-inside: avoid;
+}
+.refs li:last-child { border-bottom: none; }
+.refs .letter {
+    font-family: 'Josefin Slab', serif;
+    color: var(--text-accent); font-size: 0.95rem;
+    min-width: 1.1rem; flex-shrink: 0;
+}
+.refs .name { display: block; font-size: 1.02rem; }
+.refs a {
+    color: var(--text-accent); text-decoration: none;
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.82rem; letter-spacing: 1.5px;
+}
+.refs .why {
+    display: block; color: var(--text-secondary);
+    font-style: italic; font-size: 0.95rem; margin-top: 0.15rem;
+}
+
 /* Footer */
 footer { text-align: center; padding: 3.5rem 3rem; border-top: 1px solid var(--border-subtle); }
 footer svg { height: 45px; width: auto; opacity: 0.5; margin-bottom: 0.75rem; }
@@ -151,6 +176,10 @@ footer p {
     .inner { max-width: none; }
     .lines .line { border-bottom: 1px solid #b9b3a7; }
     .pick span::before { border-color: #8f7340; }
+    .refs li { border-bottom-color: #d8d3c9; }
+    .refs .letter, .refs a { color: #8f7340; }
+    .refs .name { color: #1a1a1a; }
+    .refs .why { color: #5f5b54; }
     .group-head { break-after: avoid; }
     section { break-inside: auto; }
     footer { border-top: 1px solid #d8d3c9; padding: 1.5rem 0 0; }
@@ -214,16 +243,24 @@ footer p {
             <div class="num">Part Two</div>
             <h2>The Look</h2>
             <div class="rule"></div>
-            <p>You said you would look around at some sites. This is where that goes.</p>
+            <p>I pulled five for you to react to, so you do not have to go hunting.</p>
         </div>
 
         <div class="q">
-            <div class="ask"><span class="n">5</span><p>Which sites did you like? Paste the links, and tell me what caught your eye about each.<span class="hint">It does not have to be a wedding venue. Any site you thought looked good counts.</span></p></div>
-            <div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div></div>
+            <div class="ask"><span class="n">5</span><p>Take a look at these five and tell me which feel right.<span class="hint">Each one opens a different way: with the land, with a mood, with a couple, or with film. They are different on purpose, so even "none of them" tells me something.</span></p></div>
+            <ul class="refs">
+                <li><span class="letter">A</span><div><span class="name">Blackberry Farm, Tennessee</span><a href="https://blackberryfarm.com/">blackberryfarm.com</a><span class="why">Leads with the land. A hillside at golden hour, quiet type, lots of room. A luxury resort, so think of it as the high bar.</span></div></li>
+                <li><span class="letter">B</span><div><span class="name">Standing Rock Farms, Ohio</span><a href="https://standingrockfarms.com/">standingrockfarms.com</a><span class="why">Leads with a mood. A barn venue like yours, opening on soft close-up details. Gentle and romantic.</span></div></li>
+                <li><span class="letter">C</span><div><span class="name">Mountain House Estate, California</span><a href="https://mountainhouseestate.com/">mountainhouseestate.com</a><span class="why">Leads with a real couple at the venue. Closest to what your photographers' wedding shots would look like up top.</span></div></li>
+                <li><span class="letter">D</span><div><span class="name">Walker's Overlook, the one I built</span><a href="https://www.perkinsproduction.com/concepts/overlooks/walkers-farm.html">perkinsproduction.com/concepts/overlooks/walkers-farm.html</a><span class="why">Leads with film that moves as you scroll. Try it on your phone.</span></div></li>
+                <li><span class="letter">E</span><div><span class="name">Dulany's Overlook, the one I built</span><a href="https://www.perkinsproduction.com/concepts/overlooks/dulanys-farm.html">perkinsproduction.com/concepts/overlooks/dulanys-farm.html</a><span class="why">Same idea as Walker's, with its own colors and its own feel.</span></div></li>
+            </ul>
+            <div class="pick"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>None of them</span></div>
+            <div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div>
         </div>
 
         <div class="q">
-            <div class="ask"><span class="n">6</span><p>Anything you saw that you hated?<span class="hint">Honestly more useful to me than the ones you liked.</span></p></div>
+            <div class="ask"><span class="n">6</span><p>Find any others on your own, or see anything you hated? Paste the links.<span class="hint">It does not have to be a wedding venue. And the ones you hated are honestly as useful to me as the ones you liked.</span></p></div>
             <div class="lines"><div class="line"></div><div class="line"></div></div>
         </div>
 
