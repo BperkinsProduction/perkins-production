@@ -8,11 +8,12 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.BeN9eb0E.css"></head>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.BpdiPA7M.css"></head>
 <body>
+<div class="env" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-  <div class="concept-ribbon">A <b>design concept</b> for Twelve West Detail, prepared by Perkins Production &middot; not the live website &middot; prices and photos are Chad's real ones (from his site and Facebook), the vehicle size examples are our guess for him to confirm &middot; <a href="/concepts/twelve-west-detail/proposal/" style="color:var(--white);font-weight:600">See the proposal</a></div>
+  <div class="concept-ribbon">A <b>design concept</b> for Twelve West Detail, prepared by Perkins Production &middot; not the live website &middot; prices and photos are Chad's real ones (from his site and Facebook), the opening film is made from his own Corvette photo, the vehicle size examples are our guess for him to confirm &middot; <a href="/concepts/twelve-west-detail/proposal/" style="color:var(--white);font-weight:600">See the proposal</a></div>
   <header class="top">
   <div class="wrap">
     <a href="#top" aria-label="Twelve West Detail home"><img src="/concepts/twelve-west-detail/img/logo.png" alt="Twelve West Detail"></a>
@@ -26,21 +27,48 @@
     </nav>
   </div>
 </header>
-  <section class="hero" id="top">
+  <section class="scrub-wrap" id="top" aria-label="Twelve West Detail, Walkersville, Maryland">
+  <div class="scrub-stage">
+    <div class="poster" aria-hidden="true"></div>
+    <video class="film" preload="none" muted playsinline aria-hidden="true" tabindex="-1" data-src="/concepts/twelve-west-detail/film/hero-scrub.mp4" data-poster="/concepts/twelve-west-detail/img/hero-poster.jpg" data-bytes="5525848"></video>
+    <div class="scrim" aria-hidden="true"></div>
+
+    <div class="band b1" data-band="0,0.28" data-entrance="drift">
+      <span class="label">Twelve West Detail, Walkersville MD</span>
+      <h1 class="split">Built under the lights.</h1>
+    </div>
+    <div class="band b2" data-band="0.32,0.60" data-entrance="blur">
+      <p class="big soft" aria-hidden="true">Hand washed. Hand finished. Every time.</p>
+      <p class="big sharp">Hand washed. Hand finished. Every time.</p>
+    </div>
+    <div class="band b3" data-band="0.66,1" data-entrance="rise">
+      <h2 class="split">Wax is dead.</h2>
+      <p class="sub">Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
+      <div class="ctas">
+        <a class="btn btn-blue" href="#quote">Build your quote</a>
+        <a class="btn btn-ghost" href="tel:3013045510">Call (301) 304-5510</a>
+      </div>
+    </div>
+
+    <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"></circle></svg>
+    <div class="cue" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<section class="static-hero" aria-label="Twelve West Detail, Walkersville, Maryland">
+  <img src="/concepts/twelve-west-detail/img/hero-ending.jpg" width="2400" height="1350" alt="A red Corvette Stingray under the LED lights in the Twelve West Detail bay" fetchpriority="high">
   <div class="wrap">
-    <span class="label">Walkersville, Maryland</span>
+    <span class="label">Walkersville, MD</span>
     <h1>Wax is <span>dead.</span></h1>
-    <p>Ceramic protection, full details and interior steam cleaning, finished by hand in our own bay on West Frederick Street. Every price is on this page.</p>
+    <p>Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
     <div class="ctas">
       <a class="btn btn-blue" href="#quote">Build your quote</a>
       <a class="btn btn-ghost" href="tel:3013045510">Call (301) 304-5510</a>
     </div>
   </div>
-  <figure>
-    <img src="/concepts/twelve-west-detail/img/hero-vette-wide.jpg" width="2400" height="1250" alt="A red Corvette Stingray just out of the Twelve West Detail bay" fetchpriority="high">
-    <div class="chips"><span>Ceramic coatings up to lifetime</span><span>Cars, trucks, RVs and classics</span><span>Mon to Sat by appointment</span></div>
-  </figure>
 </section>
+
+<script type="module">var e=document.querySelector(`.scrub-wrap`),t=e.querySelector(`.scrub-stage`),n=e.querySelector(`.film`),r=e.querySelector(`.poster`),i=e.querySelector(`.ring`),a=[...e.querySelectorAll(`.band`)].map(e=>{let[t,n]=e.dataset.band.split(`,`).map(Number);return{el:e,a:t,b:n,op:-1,k:-1,first:t===0,last:n===1}}),o=[`(max-width: 720px)`,`(orientation: portrait) and (max-width: 1024px)`,`(orientation: portrait) and (pointer: coarse)`,`(orientation: landscape) and (pointer: coarse) and (max-height: 560px)`,`(prefers-reduced-motion: reduce)`],s=(e,t,n)=>Math.min(n,Math.max(t,e)),c=(e,t,n)=>{let r=s((e-t)/(n-t),0,1);return r*r*(3-2*r)};function l(e){let t=e>>>0;return()=>(t=t*1664525+1013904223>>>0)/4294967296}e.querySelectorAll(`.split`).forEach((e,t)=>{let n=e.textContent,r=l(41+t*7),i=n.split(` `);e.setAttribute(`aria-label`,n),e.innerHTML=i.map((e,t)=>`<span class="w" aria-hidden="true" style="--th:${(t/i.length*.5+r()*.06).toFixed(3)}">${e}</span>`).join(` `)});function u(){let t=e.offsetHeight-innerHeight;return t<=0?0:s((scrollY-e.offsetTop)/t,0,1)}var d=!1,f=null,p=0;function m(e){if(n.duration){if(d&&performance.now()-p>300&&(d=!1,f=null),d){f=e;return}d=!0,p=performance.now(),n.currentTime=Math.min(e,n.duration-.04)}}n.addEventListener(`seeked`,()=>{if(d=!1,f!==null){let e=f;f=null,m(e)}}),n.addEventListener(`error`,()=>{d=!1,f=null,t.classList.add(`video-failed`)});var h=0,g=0;function _(e){for(let t of a){let{a:n,b:r}=t,i=Math.min(.03,(r-n)/3),a=(t.first?1:c(e,n,n+i))*(t.last?1:1-c(e,r-i,r)),o=s((e-n)/Math.min(.06,(r-n)*.35),0,1);t.first&&(o=Math.max(o,h)),Math.abs(a-t.op)>.008&&(t.op=a,t.el.style.opacity=a.toFixed(3),t.el.style.visibility=a<.01?`hidden`:`visible`),Math.abs(o-t.k)>.008&&(t.k=o,t.el.style.setProperty(`--k`,o.toFixed(3)))}}var v=0,y=0,b=null,x=0,S=!0;function C(e){let t=Math.min(100,e-(x||e));x=e,y+=(v-y)*(1-.8**(t/16.667)),y<v-.04?y=v-.04:y>v+.04&&(y=v+.04),g&&(h=s((e-g)/1100,0,1));let r=Math.abs(v-y)<5e-4&&(h>=1||!g);r&&(y=v),m(y*(n.duration||0)),_(y),r?(b=null,x=0):b=requestAnimationFrame(C)}function w(){b===null&&S&&(b=requestAnimationFrame(C))}function T(){v=u(),w()}new IntersectionObserver(([e])=>{S=e.isIntersecting,S&&(v=u(),w())}).observe(e);var E=!1,D=!1;function O(){if(D)return;D=!0;let e=n.dataset.poster;r.style.backgroundImage=`url('${e}')`;let t=new Image;t.onload=t.onerror=k,t.src=e,setTimeout(k,4e3),g=performance.now(),w()}function k(){E||(E=!0,A().catch(j))}async function A(){let e=new AbortController,r=setTimeout(()=>e.abort(),2e4),a=await fetch(n.dataset.src,{priority:`low`,signal:e.signal});if(!a.ok)throw Error(`film `+a.status);let o=Number(a.headers.get(`Content-Length`))||Number(n.dataset.bytes)||6e6,s=a.body.getReader(),c=[],l=0,d=0;for(;;){let{done:t,value:n}=await s.read();if(t)break;clearTimeout(r),r=setTimeout(()=>e.abort(),2e4),c.push(n),l+=n.length;let a=performance.now();a-d>100&&(d=a,i.style.setProperty(`--ld`,Math.round(126*(1-Math.min(1,l/o)))))}clearTimeout(r),i.style.setProperty(`--ld`,0),n.src=URL.createObjectURL(new Blob(c,{type:`video/mp4`})),n.load(),n.addEventListener(`canplay`,()=>{m(u()*n.duration),t.classList.add(`video-ready`)},{once:!0})}function j(){t.classList.add(`video-failed`)}var M=!1;function N(){M||(M=!0,O(),addEventListener(`scroll`,T,{passive:!0}),a.forEach(e=>{e.op=-1,e.k=-1}),_(u()),T())}function P(){M&&(M=!1,removeEventListener(`scroll`,T),b!==null&&(cancelAnimationFrame(b),b=null))}function F(){o.some(e=>matchMedia(e).matches)?P():N()}o.map(e=>matchMedia(e)).forEach(e=>e.addEventListener(`change`,F)),addEventListener(`resize`,T,{passive:!0}),F();</script>
   <div class="award">
   <div class="wrap">
     <div class="badge">
@@ -53,7 +81,7 @@
     </a>
   </div>
 </div>
-  <section id="packages">
+  <section id="packages" data-reveal>
   <div class="wrap">
     <span class="label">Packages</span>
     <h2>Pick your size. See your price.</h2>
@@ -139,14 +167,19 @@
     </div>
   </div>
 </section>
-  <section id="ceramic" style="padding-top:0">
+  <section id="ceramic" style="padding-top:0" data-reveal>
   <div class="wrap ceramic">
-    <figure><img src="/concepts/twelve-west-detail/img/closeup.jpg" alt="Light reflections in the red paint of a Ford F-150 King Ranch after polishing" loading="lazy"></figure>
+    <figure class="polish" id="polish">
+      <img src="/concepts/twelve-west-detail/img/closeup.jpg" alt="Light reflections in the red paint of a Ford F-150 King Ranch after polishing" loading="lazy">
+      <div class="haze" aria-hidden="true"><div class="haze-in"><img src="/concepts/twelve-west-detail/img/closeup.jpg" alt="" loading="lazy"></div></div>
+      <div class="lightbar" aria-hidden="true"></div>
+      <button type="button" class="hold" id="holdBtn"><span class="hold-ring" aria-hidden="true"></span><span class="hold-label">Press and hold to polish</span></button>
+    </figure>
     <div>
       <span class="label">Ceramic coating</span>
       <h2>Gloss that lasts for years.</h2>
       <p class="lede" style="margin-bottom:0">A ceramic coating bonds to your paint and keeps that just detailed gloss and water beading for years, not weeks. Washing gets easier, bugs and grime let go, and the paint stays protected.</p>
-      <div class="tiers">
+      <div class="tiers" id="tiers">
         <div class="tier"><div><b>2 to 3 year coating</b><br><span>Daily drivers, great first coating</span></div><em>from $775</em></div><div class="tier"><div><b>6+ year coating</b><br><span>For the vehicle you plan to keep</span></div><em>from $1,195</em></div><div class="tier"><div><b>Lifetime coating</b><br><span>Our top protection</span></div><em>from $1,600</em></div>
       </div>
       <p class="fine">Coating appointments hold your day with a 20% non refundable deposit, paid online when you book.</p>
@@ -154,7 +187,9 @@
     </div>
   </div>
 </section>
-  <section id="quote">
+
+<script type="module">var e=document.getElementById(`polish`),t=document.getElementById(`holdBtn`),n=t.querySelector(`.hold-label`),r=document.getElementById(`tiers`),i=1600,a=900,o=0,s=!1,c=!1,l=null,u=0,d=()=>e.style.setProperty(`--w`,e.clientWidth+70+`px`);d(),addEventListener(`resize`,d,{passive:!0});function f(){c=!0,o=1,s=!1,e.style.setProperty(`--p`,1),e.style.setProperty(`--done`,1),e.classList.add(`done`),n.textContent=`Polished. That is the gloss a coating keeps.`,r.classList.add(`lit`),setTimeout(()=>r.classList.add(`settled`),900)}function p(t){let n=Math.min(64,t-(u||t));if(u=t,o+=s?n/i:-n/a,o=Math.min(1,Math.max(0,o)),e.style.setProperty(`--p`,o.toFixed(4)),o>=1){f(),l=null,u=0;return}if(!s&&o<=0){l=null,u=0;return}l=requestAnimationFrame(p)}function m(e){c||(e&&e.pointerId!==void 0&&t.setPointerCapture(e.pointerId),s=!0,l===null&&(l=requestAnimationFrame(p)))}function h(){s=!1,!c&&l===null&&o>0&&(l=requestAnimationFrame(p))}t.addEventListener(`pointerdown`,e=>{e.preventDefault(),m(e)}),t.addEventListener(`pointerup`,h),t.addEventListener(`pointercancel`,h),t.addEventListener(`lostpointercapture`,h),t.addEventListener(`keydown`,e=>{(e.key===` `||e.key===`Enter`)&&!e.repeat&&(e.preventDefault(),m())}),t.addEventListener(`keyup`,e=>{(e.key===` `||e.key===`Enter`)&&h()}),t.addEventListener(`contextmenu`,e=>e.preventDefault());var g=matchMedia(`(prefers-reduced-motion: reduce)`);g.matches&&f(),g.addEventListener(`change`,e=>{e.matches&&f()});</script>
+  <section id="quote" data-reveal>
   <div class="wrap">
     <span class="label">Build your quote</span>
     <h2>Your price, then your day.</h2>
@@ -240,7 +275,7 @@
 </section>
 
 <script type="module" src="/concepts/twelve-west-detail/_astro/Quote.astro_astro_type_script_index_0_lang.pBjktrax.js"></script>
-  <section id="work">
+  <section id="work" data-reveal>
   <div class="wrap">
     <span class="label">Out of the bay</span>
     <h2>Recent work</h2>
@@ -263,7 +298,7 @@
 </section>
 
 <script type="module">var e=document.getElementById(`fbFeed`),t=document.getElementById(`fbGrid`),n=e=>e>=8?8:e>=4?4:e;function r(t){let n=document.createElement(`a`);n.href=t.link||e.dataset.page,n.target=`_blank`,n.rel=`noopener`;let r=document.createElement(`img`);return r.src=t.src,r.alt=t.alt,r.loading=`lazy`,r.width=t.width,r.height=t.height,n.appendChild(r),n}fetch(e.dataset.endpoint).then(e=>e.ok?e.json():{photos:[]}).then(i=>{i.photos&&i.photos.length&&(i.photos.slice(0,n(i.photos.length)).forEach(e=>t.appendChild(r(e))),e.hidden=!1)}).catch(()=>{});</script>
-  <section style="padding-top:0">
+  <section style="padding-top:0" data-reveal>
   <div class="wrap">
     <div class="specialty">
       <img src="/concepts/twelve-west-detail/img/rv.jpg" alt="A large motorhome detailed by Twelve West Detail" loading="lazy">
@@ -276,7 +311,7 @@
     </div>
   </div>
 </section>
-  <section id="visit" style="padding-top:0">
+  <section id="visit" style="padding-top:0" data-reveal>
   <div class="wrap">
     <span class="label">Visit</span>
     <h2>Find the bay.</h2>
@@ -311,5 +346,5 @@
   <a class="btn btn-blue" href="#quote">Build your quote</a>
 </div>
 
-</body>
+<script type="module">var e=document.querySelectorAll(`[data-reveal]`),t=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add(`in`),t.unobserve(e.target),setTimeout(()=>e.target.classList.add(`settled`),1400))})},{rootMargin:`0px 0px -12% 0px`,threshold:.08});e.forEach(e=>t.observe(e)),document.addEventListener(`visibilitychange`,()=>document.body.classList.toggle(`paused`,document.hidden));</script></body>
 </html>

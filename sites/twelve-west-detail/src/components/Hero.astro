@@ -1,19 +1,53 @@
 ---
+import { img, page } from '../lib/paths.js';
 import { shop } from '../data/shop.js';
-import { img } from '../lib/paths.js';
+
+// The film is scrubbed by scroll. Phones, upright tablets and reduced motion get the static hero.
+const film = page('film/hero-scrub.mp4');
+const poster = img('hero-poster.jpg');
+const ending = img('hero-ending.jpg');
 ---
-<section class="hero" id="top">
+<section class="scrub-wrap" id="top" aria-label={`${shop.name}, Walkersville, Maryland`}>
+  <div class="scrub-stage">
+    <div class="poster" aria-hidden="true"></div>
+    <video class="film" preload="none" muted playsinline aria-hidden="true" tabindex="-1" data-src={film} data-poster={poster} data-bytes="5525848"></video>
+    <div class="scrim" aria-hidden="true"></div>
+
+    <div class="band b1" data-band="0,0.28" data-entrance="drift">
+      <span class="label">Twelve West Detail, Walkersville MD</span>
+      <h1 class="split">Built under the lights.</h1>
+    </div>
+    <div class="band b2" data-band="0.32,0.60" data-entrance="blur">
+      <p class="big soft" aria-hidden="true">Hand washed. Hand finished. Every time.</p>
+      <p class="big sharp">Hand washed. Hand finished. Every time.</p>
+    </div>
+    <div class="band b3" data-band="0.66,1" data-entrance="rise">
+      <h2 class="split">Wax is dead.</h2>
+      <p class="sub">Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
+      <div class="ctas">
+        <a class="btn btn-blue" href="#quote">Build your quote</a>
+        <a class="btn btn-ghost" href={shop.phoneHref}>Call {shop.phone}</a>
+      </div>
+    </div>
+
+    <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/></svg>
+    <div class="cue" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<section class="static-hero" aria-label={`${shop.name}, Walkersville, Maryland`}>
+  <img src={ending} width="2400" height="1350" alt="A red Corvette Stingray under the LED lights in the Twelve West Detail bay" fetchpriority="high">
   <div class="wrap">
-    <span class="label">Walkersville, Maryland</span>
+    <span class="label">Walkersville, MD</span>
     <h1>Wax is <span>dead.</span></h1>
-    <p>Ceramic protection, full details and interior steam cleaning, finished by hand in our own bay on West Frederick Street. Every price is on this page.</p>
+    <p>Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
     <div class="ctas">
       <a class="btn btn-blue" href="#quote">Build your quote</a>
       <a class="btn btn-ghost" href={shop.phoneHref}>Call {shop.phone}</a>
     </div>
   </div>
-  <figure>
-    <img src={img("hero-vette-wide.jpg")} width="2400" height="1250" alt="A red Corvette Stingray just out of the Twelve West Detail bay" fetchpriority="high">
-    <div class="chips"><span>Ceramic coatings up to lifetime</span><span>Cars, trucks, RVs and classics</span><span>Mon to Sat by appointment</span></div>
-  </figure>
 </section>
+
+<script>
+  import "../scripts/scrub.js";
+</script>

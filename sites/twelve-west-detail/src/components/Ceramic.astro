@@ -2,14 +2,19 @@
 import { img } from '../lib/paths.js';
 import { coatings, depositRate, money } from '../data/prices.js';
 ---
-<section id="ceramic" style="padding-top:0">
+<section id="ceramic" style="padding-top:0" data-reveal>
   <div class="wrap ceramic">
-    <figure><img src={img("closeup.jpg")} alt="Light reflections in the red paint of a Ford F-150 King Ranch after polishing" loading="lazy"></figure>
+    <figure class="polish" id="polish">
+      <img src={img("closeup.jpg")} alt="Light reflections in the red paint of a Ford F-150 King Ranch after polishing" loading="lazy">
+      <div class="haze" aria-hidden="true"><div class="haze-in"><img src={img("closeup.jpg")} alt="" loading="lazy"></div></div>
+      <div class="lightbar" aria-hidden="true"></div>
+      <button type="button" class="hold" id="holdBtn"><span class="hold-ring" aria-hidden="true"></span><span class="hold-label">Press and hold to polish</span></button>
+    </figure>
     <div>
       <span class="label">Ceramic coating</span>
       <h2>Gloss that lasts for years.</h2>
       <p class="lede" style="margin-bottom:0">A ceramic coating bonds to your paint and keeps that just detailed gloss and water beading for years, not weeks. Washing gets easier, bugs and grime let go, and the paint stays protected.</p>
-      <div class="tiers">
+      <div class="tiers" id="tiers">
         {coatings.map((c) => (
           <div class="tier"><div><b>{c.name}</b><br><span>{c.blurb}</span></div><em>from {money(c.from)}</em></div>
         ))}
@@ -19,3 +24,7 @@ import { coatings, depositRate, money } from '../data/prices.js';
     </div>
   </div>
 </section>
+
+<script>
+  import "../scripts/polish.js";
+</script>

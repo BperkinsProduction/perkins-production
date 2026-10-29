@@ -2,6 +2,8 @@
 // yourPrice was confirmed by Brice on October 28, 2026, paid in the two parts below.
 export const agencyLines = [
   { label: 'Mobile website with your photos, logo and full price list', amount: 3000 },
+  { label: 'Scroll film of your bay, made from your own photo, with the shop cleaned up', amount: 1500 },
+  { label: 'Hold to polish feature for ceramic coatings', amount: 500 },
   { label: 'Vehicle size picker that reprices every package', amount: 750 },
   { label: 'Quote builder with add ons and included items', amount: 1500 },
   { label: 'Booking requests sent to your phone and email', amount: 1500 },

@@ -15,7 +15,7 @@ const washWax = service('wash-wax');
 const featuredAddons = ['pet', 'engine', 'headlight', 'shampoo'].map(addon);
 const addonPrice = (a) => (a.from ? 'from ' : '') + money(a.price) + (a.unit === 'per row' ? ' a row' : a.unit ? ' ' + a.unit : '');
 ---
-<section id="packages">
+<section id="packages" data-reveal>
   <div class="wrap">
     <span class="label">Packages</span>
     <h2>Pick your size. See your price.</h2>
