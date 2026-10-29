@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.BpdiPA7M.css"></head>
+<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.B70IM5Ld.css"></head>
 <body>
 <div class="env" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
@@ -30,11 +30,13 @@
   <section class="scrub-wrap" id="top" aria-label="Twelve West Detail, Walkersville, Maryland">
   <div class="scrub-stage">
     <div class="poster" aria-hidden="true"></div>
-    <video class="film" preload="none" muted playsinline aria-hidden="true" tabindex="-1" data-src="/concepts/twelve-west-detail/film/hero-scrub.mp4" data-poster="/concepts/twelve-west-detail/img/hero-poster.jpg" data-bytes="5525848"></video>
+    <video class="film" preload="none" muted playsinline aria-hidden="true" tabindex="-1" data-src="/concepts/twelve-west-detail/film/hero-scrub.mp4" data-poster="/concepts/twelve-west-detail/img/hero-poster.jpg" data-bytes="4930911"></video>
+    <canvas class="grade" aria-hidden="true"></canvas>
+    <div class="sign3d" aria-hidden="true" data-base="/concepts/twelve-west-detail/sign/"><img src="/concepts/twelve-west-detail/sign/s00.webp" alt="" width="1295" height="329" decoding="async"></div>
     <div class="scrim" aria-hidden="true"></div>
 
     <div class="band b1" data-band="0,0.28" data-entrance="drift">
-      <span class="label">Twelve West Detail, Walkersville MD</span>
+      <span class="label">Walkersville, Maryland</span>
       <h1 class="split">Built under the lights.</h1>
     </div>
     <div class="band b2" data-band="0.32,0.60" data-entrance="blur">
@@ -68,7 +70,7 @@
   </div>
 </section>
 
-<script type="module">var e=document.querySelector(`.scrub-wrap`),t=e.querySelector(`.scrub-stage`),n=e.querySelector(`.film`),r=e.querySelector(`.poster`),i=e.querySelector(`.ring`),a=[...e.querySelectorAll(`.band`)].map(e=>{let[t,n]=e.dataset.band.split(`,`).map(Number);return{el:e,a:t,b:n,op:-1,k:-1,first:t===0,last:n===1}}),o=[`(max-width: 720px)`,`(orientation: portrait) and (max-width: 1024px)`,`(orientation: portrait) and (pointer: coarse)`,`(orientation: landscape) and (pointer: coarse) and (max-height: 560px)`,`(prefers-reduced-motion: reduce)`],s=(e,t,n)=>Math.min(n,Math.max(t,e)),c=(e,t,n)=>{let r=s((e-t)/(n-t),0,1);return r*r*(3-2*r)};function l(e){let t=e>>>0;return()=>(t=t*1664525+1013904223>>>0)/4294967296}e.querySelectorAll(`.split`).forEach((e,t)=>{let n=e.textContent,r=l(41+t*7),i=n.split(` `);e.setAttribute(`aria-label`,n),e.innerHTML=i.map((e,t)=>`<span class="w" aria-hidden="true" style="--th:${(t/i.length*.5+r()*.06).toFixed(3)}">${e}</span>`).join(` `)});function u(){let t=e.offsetHeight-innerHeight;return t<=0?0:s((scrollY-e.offsetTop)/t,0,1)}var d=!1,f=null,p=0;function m(e){if(n.duration){if(d&&performance.now()-p>300&&(d=!1,f=null),d){f=e;return}d=!0,p=performance.now(),n.currentTime=Math.min(e,n.duration-.04)}}n.addEventListener(`seeked`,()=>{if(d=!1,f!==null){let e=f;f=null,m(e)}}),n.addEventListener(`error`,()=>{d=!1,f=null,t.classList.add(`video-failed`)});var h=0,g=0;function _(e){for(let t of a){let{a:n,b:r}=t,i=Math.min(.03,(r-n)/3),a=(t.first?1:c(e,n,n+i))*(t.last?1:1-c(e,r-i,r)),o=s((e-n)/Math.min(.06,(r-n)*.35),0,1);t.first&&(o=Math.max(o,h)),Math.abs(a-t.op)>.008&&(t.op=a,t.el.style.opacity=a.toFixed(3),t.el.style.visibility=a<.01?`hidden`:`visible`),Math.abs(o-t.k)>.008&&(t.k=o,t.el.style.setProperty(`--k`,o.toFixed(3)))}}var v=0,y=0,b=null,x=0,S=!0;function C(e){let t=Math.min(100,e-(x||e));x=e,y+=(v-y)*(1-.8**(t/16.667)),y<v-.04?y=v-.04:y>v+.04&&(y=v+.04),g&&(h=s((e-g)/1100,0,1));let r=Math.abs(v-y)<5e-4&&(h>=1||!g);r&&(y=v),m(y*(n.duration||0)),_(y),r?(b=null,x=0):b=requestAnimationFrame(C)}function w(){b===null&&S&&(b=requestAnimationFrame(C))}function T(){v=u(),w()}new IntersectionObserver(([e])=>{S=e.isIntersecting,S&&(v=u(),w())}).observe(e);var E=!1,D=!1;function O(){if(D)return;D=!0;let e=n.dataset.poster;r.style.backgroundImage=`url('${e}')`;let t=new Image;t.onload=t.onerror=k,t.src=e,setTimeout(k,4e3),g=performance.now(),w()}function k(){E||(E=!0,A().catch(j))}async function A(){let e=new AbortController,r=setTimeout(()=>e.abort(),2e4),a=await fetch(n.dataset.src,{priority:`low`,signal:e.signal});if(!a.ok)throw Error(`film `+a.status);let o=Number(a.headers.get(`Content-Length`))||Number(n.dataset.bytes)||6e6,s=a.body.getReader(),c=[],l=0,d=0;for(;;){let{done:t,value:n}=await s.read();if(t)break;clearTimeout(r),r=setTimeout(()=>e.abort(),2e4),c.push(n),l+=n.length;let a=performance.now();a-d>100&&(d=a,i.style.setProperty(`--ld`,Math.round(126*(1-Math.min(1,l/o)))))}clearTimeout(r),i.style.setProperty(`--ld`,0),n.src=URL.createObjectURL(new Blob(c,{type:`video/mp4`})),n.load(),n.addEventListener(`canplay`,()=>{m(u()*n.duration),t.classList.add(`video-ready`)},{once:!0})}function j(){t.classList.add(`video-failed`)}var M=!1;function N(){M||(M=!0,O(),addEventListener(`scroll`,T,{passive:!0}),a.forEach(e=>{e.op=-1,e.k=-1}),_(u()),T())}function P(){M&&(M=!1,removeEventListener(`scroll`,T),b!==null&&(cancelAnimationFrame(b),b=null))}function F(){o.some(e=>matchMedia(e).matches)?P():N()}o.map(e=>matchMedia(e)).forEach(e=>e.addEventListener(`change`,F)),addEventListener(`resize`,T,{passive:!0}),F();</script>
+<script type="module" src="/concepts/twelve-west-detail/_astro/Hero.astro_astro_type_script_index_0_lang._4VwCiJX.js"></script>
   <div class="award">
   <div class="wrap">
     <div class="badge">

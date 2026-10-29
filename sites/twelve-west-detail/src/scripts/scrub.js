@@ -1,3 +1,5 @@
+import { createPaintGrade } from './paint-grade.js';
+
 // The scroll-scrubbed hero film. Engine from the 10k websites standard: Blob fetch with a
 // loading ring, a leashed dt-normalized lerp that rests, gated seeks, DOM writes only on
 // change, and five live gates that hand phones and reduced motion the static hero.
@@ -7,6 +9,9 @@ const stage = wrap.querySelector('.scrub-stage');
 const video = wrap.querySelector('.film');
 const posterLayer = wrap.querySelector('.poster');
 const ring = wrap.querySelector('.ring');
+const gradeCanvas = wrap.querySelector('.grade');
+const sign = wrap.querySelector('.sign3d');
+const signImg = sign.querySelector('img');
 const bands = [...wrap.querySelectorAll('.band')].map((el) => {
   const [a, b] = el.dataset.band.split(',').map(Number);
   return { el, a, b, op: -1, k: -1, first: a === 0, last: b === 1 };
@@ -51,11 +56,49 @@ function requestSeek(t) {
   seekBusy = true; seekAt = performance.now();
   video.currentTime = Math.min(t, video.duration - 0.04);
 }
+let grade = null;
+const cleanAt = (p) => smoothstep(p, 0.04, 0.82);
+function drawGrade(force) { if (grade) grade.draw(cleanAt(shown), force); }
 video.addEventListener('seeked', () => {
+  drawGrade();
   seekBusy = false;
   if (pendingTime !== null) { const t = pendingTime; pendingTime = null; requestSeek(t); }
 });
 video.addEventListener('error', () => { seekBusy = false; pendingTime = null; stage.classList.add('video-failed'); });
+
+
+// The 3D sign rides on the painted sign in the film. Centers are in the film's own pixels
+// (1920 x 1080), measured from the footage. The rendered title sits at 48.9% across and
+// 45.9% down inside each Blender frame, and is drawn about twice the size of the painted lettering so it reads first.
+const SIGN_FRAMES = 24, SIGN_X = 641, SIGN_W = 640;
+const SIGN_TRACK = [[0, 196], [0.333, 186], [0.667, 170], [1, 149], [1.333, 126], [1.667, 101], [2, 77], [2.333, 51], [2.667, 28], [3, 4], [3.4, -25]];
+const signFrames = [];
+let signShown = -1, signFrameNow = -1, signOp = -1;
+function signY(t) {
+  for (let i = 1; i < SIGN_TRACK.length; i++) {
+    const [t1, y1] = SIGN_TRACK[i], [t0, y0] = SIGN_TRACK[i - 1];
+    if (t <= t1) return y0 + (y1 - y0) * ((t - t0) / (t1 - t0));
+  }
+  return -60;
+}
+function preloadSign() {
+  const base = sign.dataset.base;
+  for (let i = 0; i < SIGN_FRAMES; i++) { const im = new Image(); im.src = `${base}s${String(i).padStart(2, '0')}.webp`; signFrames.push(im.src); }
+}
+function updateSign(p, force) {
+  if (!force && Math.abs(p - signShown) < 0.0006) return;
+  signShown = p;
+  const W = stage.clientWidth, H = stage.clientHeight, dur = video.duration || 6.04;
+  const s = Math.max(W / 1920, H / 1080), ox = (W - 1920 * s) / 2, oy = (H - 1080 * s) / 2;
+  const t = p * dur, w = SIGN_W * s, h = w * 329 / 1295;
+  const x = ox + SIGN_X * s - w * 0.489, y = oy + signY(t) * s - h * 0.459;
+  sign.style.setProperty('--sw', w.toFixed(1) + 'px');
+  sign.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+  const op = 1 - smoothstep(t, 2.55, 3.05);
+  if (Math.abs(op - signOp) > 0.01) { signOp = op; sign.style.opacity = op.toFixed(3); }
+  const f = Math.round(clamp(p / 0.5, 0, 1) * (SIGN_FRAMES - 1));
+  if (f !== signFrameNow && signFrames[f]) { signFrameNow = f; signImg.src = signFrames[f]; }
+}
 
 // Band one assembles on its own after load, then holds.
 let loadK = 0, loadStart = 0;
@@ -85,6 +128,8 @@ function tick(now) {
   if (settled) shown = target;
   requestSeek(shown * (video.duration || 0));
   updateCaptions(shown);
+  drawGrade();
+  if (stage.classList.contains('video-ready')) updateSign(shown);
   if (settled) { rafId = null; lastTick = 0; }
   else rafId = requestAnimationFrame(tick);
 }
@@ -134,6 +179,14 @@ async function loadHeroBlob() {
   video.addEventListener('canplay', () => {
     requestSeek(heroProgress() * video.duration);
     stage.classList.add('video-ready');
+    updateSign(heroProgress(), true);
+    try { grade = createPaintGrade(gradeCanvas, video); } catch (e) { grade = null; }
+    if (grade) {
+      grade.resize();
+      addEventListener('resize', () => { grade.resize(); drawGrade(true); }, { passive: true });
+      drawGrade(true);
+      stage.classList.add('graded');
+    }
   }, { once: true });
 }
 function failVideo() { stage.classList.add('video-failed'); }
@@ -142,6 +195,7 @@ let scrubOn = false;
 function enableScrub() {
   if (scrubOn) return; scrubOn = true;
   initHeroOnce();
+  if (!signFrames.length) preloadSign();
   addEventListener('scroll', onScroll, { passive: true });
   bands.forEach((b) => { b.op = -1; b.k = -1; });
   updateCaptions(heroProgress());
@@ -155,5 +209,5 @@ function disableScrub() {
 function applyHeroMode() { if (GATES.some((q) => matchMedia(q).matches)) disableScrub(); else enableScrub(); }
 const MQLS = GATES.map((q) => matchMedia(q));
 MQLS.forEach((m) => m.addEventListener('change', applyHeroMode));
-addEventListener('resize', onScroll, { passive: true });
+addEventListener('resize', () => { onScroll(); if (stage.classList.contains('video-ready')) updateSign(shown, true); }, { passive: true });
 applyHeroMode();

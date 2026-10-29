@@ -33,11 +33,16 @@ Sampled from the bay: graphite walls, cool white tubes, gray epoxy floor, and th
 
 | Band | Range | Footage moment | Copy | Entrance |
 |---|---|---|---|---|
-| 1 | 0.00 to 0.28 | Ceiling tubes, camera starting down | Eyebrow "Twelve West Detail, Walkersville MD". Headline "Built under the lights." | Drift down, words fall into place with the camera |
+| 1 | 0.00 to 0.28 | Chad's wall sign, with the 3D sign riding on it, camera starting down | Eyebrow "Walkersville, Maryland". Headline "Built under the lights." | Drift down, words fall into place with the camera |
 | 2 | 0.32 to 0.60 | Shop wall and the car rising into frame | "Hand washed. Hand finished. Every time." | Blur to sharp, the focus arriving |
 | 3 | 0.66 to 1.00 | Camera settles on the Corvette | "Wax is dead." Sub "Ceramic protection, full details and interior steam cleaning. Every price is on this page." Buttons "Build your quote" and "Call (301) 304-5510" | Word by word rise into a staged settle |
 
 Hero height 420vh. Phones, tablets held upright, landscape phones and reduced motion get the static hero.
+
+## 4b. Hero extras
+
+- The 3D sign: Chad's "Twelve West Detail / Elevating the Standard" lettering rendered in Blender (`blender/sign.py`, 24 frames in `public/sign/`), tracked onto the painted sign in the film and swapped frame by frame with scroll so the letters turn. It fades out as the sign leaves the top of the frame.
+- The paint grade (`src/scripts/paint-grade.js`): a WebGL pass that touches only the red paint, dull and hazy at the top of the film, deep and glossy at the settle. Without WebGL the film plays ungraded.
 
 ## 5. Static hero
 
