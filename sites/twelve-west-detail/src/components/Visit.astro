@@ -1,0 +1,27 @@
+---
+import { shop } from '../data/shop.js';
+---
+<section id="visit" style="padding-top:0">
+  <div class="wrap">
+    <span class="label">Visit</span>
+    <h2>Find the bay.</h2>
+    <div class="visit">
+      <div class="card">
+        <span class="label" style="margin:0">Call or text</span>
+        <a class="big" href={shop.phoneHref}>{shop.phone}</a>
+        <span class="label" style="margin:0">Where</span>
+        <a class="big" href={shop.mapUrl} target="_blank" rel="noopener">{shop.street}<br>{shop.town}</a>
+        <div class="socials">
+          <a class="btn btn-ghost" href={shop.facebook} target="_blank" rel="noopener">Facebook</a>
+          <a class="btn btn-ghost" href={shop.instagram} target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="card hours">
+        <span class="label">Hours</span>
+        {shop.hours.map((h) => <div class="row"><span>{h.days}</span><span>{h.time}</span></div>)}
+        <p class="fine" style="margin-top:14px">Gift certificates available. Ask {shop.owner} when you book, or call the shop.</p>
+        <a class="btn btn-blue" href="#quote" style="margin-top:10px">Book a day</a>
+      </div>
+    </div>
+  </div>
+</section>

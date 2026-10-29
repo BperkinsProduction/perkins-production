@@ -1,0 +1,26 @@
+---
+import { img } from '../lib/paths.js';
+import { gallery, interiors } from '../data/photos.js';
+import { shop } from '../data/shop.js';
+---
+<section id="work">
+  <div class="wrap">
+    <span class="label">Out of the bay</span>
+    <h2>Recent work</h2>
+    <p class="lede">Every one of these was shot right after the detail, under our lights in Walkersville.</p>
+    <div class="gallery">
+      {gallery.map((p) => (
+        <figure class:list={['tall', { wide: p.wide }]}><img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption></figure>
+      ))}
+    </div>
+
+    <h3 class="inside-title">Inside, too.</h3>
+    <p class="lede" style="margin-bottom:1.2rem">Steam cleaned plastics, conditioned leather, shampooed carpets and seats. The part of the car you actually sit in.</p>
+    <div class="inside">
+      {interiors.map((p) => (
+        <figure><img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption></figure>
+      ))}
+    </div>
+    <p class="fine" style="margin-top:14px">Photos from <a href={shop.facebook} target="_blank" rel="noopener">{shop.name} on Facebook</a>. On the real site, adding new photos takes about a minute.</p>
+  </div>
+</section>

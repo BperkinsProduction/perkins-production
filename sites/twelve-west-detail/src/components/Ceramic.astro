@@ -1,0 +1,21 @@
+---
+import { img } from '../lib/paths.js';
+import { coatings, depositRate, money } from '../data/prices.js';
+---
+<section id="ceramic" style="padding-top:0">
+  <div class="wrap ceramic">
+    <figure><img src={img("closeup.jpg")} alt="Light reflections in the red paint of a Ford F-150 King Ranch after polishing" loading="lazy"></figure>
+    <div>
+      <span class="label">Ceramic coating</span>
+      <h2>Gloss that lasts for years.</h2>
+      <p class="lede" style="margin-bottom:0">A ceramic coating bonds to your paint and keeps that just detailed gloss and water beading for years, not weeks. Washing gets easier, bugs and grime let go, and the paint stays protected.</p>
+      <div class="tiers">
+        {coatings.map((c) => (
+          <div class="tier"><div><b>{c.name}</b><br><span>{c.blurb}</span></div><em>from {money(c.from)}</em></div>
+        ))}
+      </div>
+      <p class="fine">Coating appointments hold your day with a {depositRate * 100}% non refundable deposit, paid online when you book.</p>
+      <a class="btn btn-blue" href="#quote" data-pick={coatings[0].id}>Quote a coating</a>
+    </div>
+  </div>
+</section>

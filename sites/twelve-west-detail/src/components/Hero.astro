@@ -1,0 +1,19 @@
+---
+import { shop } from '../data/shop.js';
+import { img } from '../lib/paths.js';
+---
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="label">Walkersville, Maryland</span>
+    <h1>Wax is <span>dead.</span></h1>
+    <p>Ceramic protection, full details and interior steam cleaning, finished by hand in our own bay on West Frederick Street. Every price is on this page.</p>
+    <div class="ctas">
+      <a class="btn btn-blue" href="#quote">Build your quote</a>
+      <a class="btn btn-ghost" href={shop.phoneHref}>Call {shop.phone}</a>
+    </div>
+  </div>
+  <figure>
+    <img src={img("hero-vette-wide.jpg")} width="2400" height="1250" alt="A red Corvette Stingray just out of the Twelve West Detail bay" fetchpriority="high">
+    <div class="chips"><span>Ceramic coatings up to lifetime</span><span>Cars, trucks, RVs and classics</span><span>Mon to Sat by appointment</span></div>
+  </figure>
+</section>

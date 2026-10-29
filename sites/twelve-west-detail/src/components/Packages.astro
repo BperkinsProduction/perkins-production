@@ -1,0 +1,66 @@
+---
+import { sizes, defaultSize, packages, service, addon, money } from '../data/prices.js';
+
+// Side profile drawings for the four size buttons, smallest to largest.
+const bodies = [
+  { path: 'M6 20c0-3 1-5 5-6l8-6c2-1 4-2 7-2h10c3 0 5 1 7 3l5 5c4 0 8 1 9 3v3H6z', wheels: [16, 47] },
+  { path: 'M5 21v-6c0-2 1-3 3-3l6-6c1-1 3-2 5-2h18c2 0 4 1 5 2l6 6c5 0 10 1 11 4v5H5z', wheels: [16, 48] },
+  { path: 'M3 21v-8c0-1 1-2 2-2h4l5-7c1-1 2-1 3-1h15c1 0 2 1 2 2v7h24c2 0 3 1 3 3v6H3z', wheels: [14, 50] },
+  { path: 'M1 21V8c0-2 1-3 3-3h30c2 0 3 1 3 2v4h20c3 0 6 2 6 5v5H1z', wheels: [12, 24, 52] },
+];
+
+const intBase = service('int-base');
+const intDeluxe = service('int-deluxe');
+const washWax = service('wash-wax');
+const featuredAddons = ['pet', 'engine', 'headlight', 'shampoo'].map(addon);
+const addonPrice = (a) => (a.from ? 'from ' : '') + money(a.price) + (a.unit === 'per row' ? ' a row' : a.unit ? ' ' + a.unit : '');
+---
+<section id="packages">
+  <div class="wrap">
+    <span class="label">Packages</span>
+    <h2>Pick your size. See your price.</h2>
+    <p class="lede">Every package is priced by vehicle size. Tap yours and every price on this page updates.</p>
+
+    <div class="sizes" role="group" aria-label="Vehicle size">
+      {sizes.map((s, i) => (
+        <button class="size" data-size={i} aria-pressed={String(i === defaultSize)}>
+          <svg viewBox="0 0 64 28" fill="currentColor" aria-hidden="true"><path d={bodies[i].path}/>{bodies[i].wheels.map((x) => <circle cx={x} cy="21" r="4.5" fill="#07090b" stroke="currentColor" stroke-width="2"/>)}</svg>
+          <strong>{s.name}</strong><small>{s.examples}</small>
+        </button>
+      ))}
+    </div>
+
+    <div class="packages" id="pkgList">
+      {packages.map((p) => (
+        <div class:list={['pkg', { featured: p.tag }]} data-pkg={p.id} data-prices={p.prices.join(',')}>
+          {p.tag && <span class="tag">{p.tag}</span>}
+          <h3>{p.name}</h3>
+          <div class="price"><sup>$</sup><span data-price>{p.prices[defaultSize]}</span></div>
+          <div class="per" data-per>{sizes[defaultSize].name} vehicle</div>
+          <ul>{p.items.map((item) => <li>{item}</li>)}</ul>
+          <p class="note">{p.note ? `${p.note}. ` : ''}Pet hair removal not included.</p>
+          <a class:list={['btn', p.tag ? 'btn-blue' : 'btn-ghost']} href="#quote" data-pick={p.id}>Choose this</a>
+        </div>
+      ))}
+    </div>
+
+    <div class="more">
+      <div class="card">
+        <h3>Interior only</h3>
+        <div class="row"><span>{intBase.name}</span><span>from {money(intBase.from)}</span></div>
+        <div class="row"><span>{intDeluxe.name}</span><span>from {money(intDeluxe.from)}</span></div>
+        <p style="margin-top:8px">Deluxe adds compressed air in every crack, shampoo and extraction of carpets, mats and seats, and odor removal.</p>
+      </div>
+      <div class="card">
+        <h3>Wash and wax</h3>
+        <div class="row"><span>Hand wash, iron decon, carnauba wax</span><span>from {money(washWax.from)}</span></div>
+        <p style="margin-top:8px">Exterior only, non commercial vehicles. Platinum tire dressing and exterior glass included.</p>
+      </div>
+      <div class="card">
+        <h3>Add ons</h3>
+        {featuredAddons.map((a) => <div class="row"><span>{a.name}</span><span>{addonPrice(a)}</span></div>)}
+        <p style="margin-top:8px"><a href="#quote">See all of them in the quote builder</a></p>
+      </div>
+    </div>
+  </div>
+</section>

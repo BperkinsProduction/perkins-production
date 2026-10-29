@@ -1,0 +1,9 @@
+---
+import { shop, studio } from '../data/shop.js';
+import { img } from '../lib/paths.js';
+---
+<footer>
+  <img src={img("logo.png")} alt={shop.name}>
+  <div>{shop.street}, {shop.town} &middot; <a href={shop.phoneHref}>{shop.phone}</a></div>
+  <p class="credit">Design concept by <a href={studio.url}>{studio.name}</a> &middot; {studio.person} &middot; {studio.phone} &middot; {studio.email}</p>
+</footer>

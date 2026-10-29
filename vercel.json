@@ -130,6 +130,11 @@
       "permanent": false
     },
     {
+      "source": "/concepts/twelve-west-detail",
+      "destination": "/concepts/twelve-west-detail/",
+      "permanent": false
+    },
+    {
       "source": "/:site([Ff][Rr][Ee][Ss][Hh])",
       "destination": "/keep-it-fresh.html",
       "permanent": false
@@ -147,6 +152,26 @@
     {
       "source": "/:site([Kk][Ee][Ee][Pp]-?[Ii][Tt]-?[Ff][Rr][Ee][Ss][Hh])/",
       "destination": "/keep-it-fresh.html",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Tt][Ww][Ee][Ll][Vv][Ee]-?[Ww][Ee][Ss][Tt])",
+      "destination": "/concepts/twelve-west-detail/",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Tt][Ww][Ee][Ll][Vv][Ee]-?[Ww][Ee][Ss][Tt])/",
+      "destination": "/concepts/twelve-west-detail/",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Tt][Ww][Ee][Ll][Vv][Ee]-?[Ww][Ee][Ss][Tt])/:page(proposal|price|Proposal|Price)",
+      "destination": "/concepts/twelve-west-detail/proposal/",
+      "permanent": false
+    },
+    {
+      "source": "/:site([Tt][Ww][Ee][Ll][Vv][Ee]-?[Ww][Ee][Ss][Tt])/:page(proposal|price|Proposal|Price)/",
+      "destination": "/concepts/twelve-west-detail/proposal/",
       "permanent": false
     }
   ]

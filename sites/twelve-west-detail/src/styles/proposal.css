@@ -1,0 +1,146 @@
+  :root {
+    --canvas: #0B0A09;
+    --surface: #141210;
+    --surface-2: #1A1714;
+    --ink: #F4EFE7;
+    --muted: #B7ADA0;
+    --gold: #C8A86A;
+    --gold-bright: #DDC084;
+    --gold-ink: #17120B;
+    --rule: rgba(228, 207, 170, 0.17);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 740px; margin: 0 auto; padding: 64px 24px 96px; }
+  h1, h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 600;
+    line-height: 1.08;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(40px, 7vw, 62px); }
+  h2 { font-size: clamp(28px, 4.5vw, 38px); }
+  h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 23px; margin: 0 0 6px; }
+  p { max-width: 62ch; margin: 14px 0; }
+  .muted { color: var(--muted); }
+  a { color: var(--gold-bright); }
+
+  .eyebrow {
+    font-family: "Josefin Slab", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12.5px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+  .eyebrow .num { color: var(--muted); }
+
+  section { margin-top: 78px; }
+
+  /* Header */
+  .pp-logo { width: min(340px, 78%); height: auto; display: block; margin-bottom: 34px; }
+  .prepared {
+    display: flex; flex-wrap: wrap; gap: 12px 36px; margin-top: 26px;
+    font-size: 14px; color: var(--muted);
+  }
+  .prepared b { color: var(--ink); font-weight: 600; display: block; font-size: 15px; }
+  .si-chip {
+    background: #FFF; border-radius: 6px; padding: 8px 12px;
+    display: inline-block; margin-top: 26px;
+  }
+  .si-chip img { height: 40px; width: auto; display: block; }
+  .btn {
+    display: inline-block; background: var(--gold); color: var(--gold-ink);
+    text-decoration: none; font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 2px;
+    font-family: "Josefin Slab", Georgia, serif;
+    padding: 13px 26px; border-radius: 3px; margin-top: 30px;
+  }
+  .btn:hover { background: var(--gold-bright); }
+  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+  /* Shortfalls list */
+  .fault { display: grid; grid-template-columns: 22px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
+  .fault:first-of-type { border-top: 1px solid var(--rule); }
+  .fault .tick { color: var(--gold); font-family: "Cormorant Garamond", Georgia, serif; font-size: 19px; line-height: 1.5; }
+
+  /* Deliverable cards */
+  .gets { display: grid; gap: 14px; margin-top: 26px; }
+  .get {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 24px 26px;
+  }
+  .get p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .get .tag {
+    float: right; font-family: "Josefin Slab", Georgia, serif; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold);
+    border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; margin-left: 14px;
+  }
+
+  /* Cost + timeline rows */
+  .row { display: grid; grid-template-columns: 200px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; }
+  .row:first-of-type { border-top: 1px solid var(--rule); }
+  .row .k { font-family: "Josefin Slab", Georgia, serif; text-transform: uppercase; letter-spacing: 2px; font-size: 12.5px; color: var(--gold); padding-top: 3px; }
+  .row b { color: var(--ink); font-weight: 600; }
+  .row span { color: var(--muted); }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* Closing */
+  .close {
+    margin-top: 78px; background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold); border-radius: 6px; padding: 30px 32px;
+  }
+  .close p { margin: 10px 0 0; color: var(--muted); }
+  .close h2 { font-size: 30px; }
+
+  footer { margin-top: 70px; border-top: 1px solid var(--rule); padding-top: 26px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 30px; }
+  footer .gold { color: var(--gold); }
+
+  /* Find-it card */
+  .findit {
+    margin-top: 30px; background: var(--surface); border: 1px solid var(--gold);
+    border-radius: 8px; padding: 24px 26px; display: grid; grid-template-columns: 1fr auto;
+    gap: 24px; align-items: center;
+  }
+  .findit .k { font-family: "Josefin Slab", Georgia, serif; text-transform: uppercase; letter-spacing: 3px; font-size: 12px; color: var(--gold); }
+  .findit .big { display: block; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(24px, 4.6vw, 34px); color: var(--ink); text-decoration: none; line-height: 1.15; margin: 6px 0 4px; word-break: break-word; }
+  .findit .big:hover { color: var(--gold-bright); }
+  .findit p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+  .findit .btn { margin-top: 16px; }
+  .qr { text-align: center; }
+  .qr .qrsvg { width: 132px; height: 132px; display: block; border-radius: 6px; }
+  .qr span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
+  @media (max-width: 560px) { .findit { grid-template-columns: 1fr; } .qr { display: none; } }
+
+  /* Appraisal */
+  .val { margin-top: 24px; border-top: 1px solid var(--rule); }
+  .val .line { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; color: var(--muted); }
+  .val .line b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .val .total { color: var(--ink); }
+  .val .total b { text-decoration: line-through; text-decoration-color: rgba(221, 192, 132, 0.7); }
+  .yourprice {
+    margin-top: 22px; background: var(--surface); border: 1px solid var(--gold); border-radius: 8px;
+    padding: 22px 26px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;
+  }
+  .yourprice .k { font-family: "Josefin Slab", Georgia, serif; text-transform: uppercase; letter-spacing: 3px; font-size: 12.5px; color: var(--gold); }
+  .yourprice .amt { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(44px, 8vw, 60px); line-height: 1; color: var(--gold-bright); }
+  .yourprice p { flex-basis: 100%; margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+  .fine { font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .gets.two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) { .gets.two { grid-template-columns: 1fr; } }
+  .closebtns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .closebtns .btn { margin-top: 22px; }
+  .btn.ghost { background: transparent; color: var(--gold-bright); border: 1px solid var(--gold); }
+  .btn.ghost:hover { background: rgba(200, 168, 106, 0.12); }

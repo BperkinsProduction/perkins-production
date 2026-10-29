@@ -1,0 +1,88 @@
+<section id="quote">
+  <div class="wrap">
+    <span class="label">Build your quote</span>
+    <h2>Your price, then your day.</h2>
+    <p class="lede">Pick your size and service, add any extras, and send Chad a request. He texts back to confirm the time. No phone tag.</p>
+
+    <form class="builder" id="builder" novalidate>
+      <div>
+        <div class="step">
+          <h3><i>1</i>Vehicle size</h3>
+          <div class="choices" id="qSizes"></div>
+        </div>
+        <div class="step">
+          <h3><i>2</i>Service</h3>
+          <div id="qServices"></div>
+        </div>
+        <div class="step">
+          <h3><i>3</i>Add ons <small style="font-family:Inter;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400">(optional)</small></h3>
+          <div class="addons" id="qAddons"></div>
+        </div>
+        <div class="step">
+          <h3><i>4</i>Your day and details</h3>
+          <div class="fields">
+            <label class="f">Preferred day
+              <input type="date" id="fDate" required>
+            </label>
+            <label class="f">Drop off
+              <select id="fTime">
+                <option>Morning drop off</option>
+                <option>Midday drop off</option>
+                <option>Whatever works for Chad</option>
+              </select>
+            </label>
+            <label class="f full">Year, make and model
+              <input type="text" id="fCar" placeholder="2021 Ford F-150" autocomplete="off" required>
+            </label>
+            <label class="f">Your name
+              <input type="text" id="fName" autocomplete="name" required>
+            </label>
+            <label class="f">Mobile number
+              <input type="tel" id="fPhone" autocomplete="tel" placeholder="(301) 555-0100" required>
+            </label>
+            <label class="f full">Anything Chad should know?
+              <textarea id="fNotes" placeholder="Dog hair in the back seat, kids spilled a milkshake, getting it ready to sell..."></textarea>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary" aria-live="polite">
+        <h3>Your quote</h3>
+        <div class="lines" id="sumLines"></div>
+        <div class="total"><span id="sumLabel">Total</span><b id="sumTotal">$0</b></div>
+        <div class="deposit" id="sumDeposit"></div>
+        <p class="fine" id="sumFine">Final price is confirmed when Chad sees the vehicle. Heavily soiled vehicles may cost more.</p>
+        <button class="btn btn-blue" type="submit" id="sendBtn">Request this appointment</button>
+        <p class="err" id="err" role="alert"></p>
+      </aside>
+    </form>
+
+    <div class="result" id="result">
+      <div class="preview-flag"><b>PREVIEW ONLY, NOTHING WAS SENT.</b> This is a design concept. On the real site this request goes straight to Chad's phone and email, and coating deposits go through a card checkout.</div>
+      <div class="result-grid">
+        <div class="result-card">
+          <h3>What you'd see</h3>
+          <p style="margin-top:0;color:var(--white);font-size:1.15rem;font-family:Archivo;font-weight:800" id="rHead"></p>
+          <div class="lines" id="rLines"></div>
+          <div class="total"><span id="rLabel">Total</span><b id="rTotal"></b></div>
+          <p class="fine" id="rNext"></p>
+          <button class="btn btn-ghost" type="button" id="againBtn" style="width:100%;margin-top:8px">Start another quote</button>
+        </div>
+        <div class="result-card">
+          <h3>What lands on Chad's phone</h3>
+          <div class="phone">
+            <div class="who">New booking request &middot; twelvewestdetail.com</div>
+            <div class="bubble" id="rText"></div>
+            <div class="bubble me" id="rReply"></div>
+          </div>
+          <p class="fine">Everything he needs to say yes in one text: the vehicle, the service, the price and the day. No back and forth to figure out what someone wants.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "../scripts/quote.js";
+</script>

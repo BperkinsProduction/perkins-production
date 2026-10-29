@@ -1,0 +1,13 @@
+{
+  "name": "twelve-west-detail-concept",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 8772 --host 127.0.0.1"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  }
+}
