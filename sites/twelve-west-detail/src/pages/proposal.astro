@@ -2,7 +2,7 @@
 import { img, page } from '../lib/paths.js';
 import { packages, coatings, depositRate, addon, money } from '../data/prices.js';
 import { shop } from '../data/shop.js';
-import { agencyLines, agencyTotal, yourPrice, priceNote, dated } from '../data/appraisal.js';
+import { agencyLines, agencyTotal, yourPrice, payments, priceNote, dated } from '../data/appraisal.js';
 import '../styles/proposal.css';
 const cheapest = packages[0];
 const priciest = packages[packages.length - 1];
@@ -59,7 +59,7 @@ const priciest = packages[packages.length - 1];
     <div class="gets two">
       <div class="get">
         <h3>A website built for phones</h3>
-        <p>Your logo, your bay, your photos from the site and Facebook. Packages, ceramic coating, recent work, interiors, specialty vehicles, hours and directions, with a call button that stays at the bottom of the screen.</p>
+        <p>Your logo, your bay, your photos. New photos you post on Facebook show up on the site on their own, a few times a day. Packages, ceramic coating, specialty vehicles, hours and directions, with a call button that stays at the bottom of the screen.</p>
       </div>
       <div class="get">
         <h3>Prices that answer the question</h3>
@@ -95,7 +95,7 @@ const priciest = packages[packages.length - 1];
     <div class="yourprice">
       <span class="k">Your price, one time</span>
       <span class="amt">{money(yourPrice)}</span>
-      <p>{priceNote}</p>
+      <p>{payments.map((p, i) => <>{i > 0 && ', '}<b style="color:var(--ink)">{money(p.amount)}</b> {p.when.toLowerCase()}</>)}. {priceNote}</p>
     </div>
     <p class="fine">Typical prices are estimates for custom work from a small web agency. Hosted booking apps for detailers usually run $30 to $100 a month, and you still would not get your own price list working like this.</p>
 

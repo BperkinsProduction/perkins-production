@@ -8,6 +8,10 @@ import { shop } from '../data/shop.js';
     <span class="label">Out of the bay</span>
     <h2>Recent work</h2>
     <p class="lede">Every one of these was shot right after the detail, under our lights in Walkersville.</p>
+    <div class="fbfeed" id="fbFeed" data-endpoint="/api/facebook-photos?site=twelvewest" data-page={shop.facebook} hidden>
+      <h3 class="inside-title" style="margin-top:0">Just posted on Facebook</h3>
+      <div class="fbgrid" id="fbGrid"></div>
+    </div>
     <div class="gallery">
       {gallery.map((p) => (
         <figure class:list={['tall', { wide: p.wide }]}><img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption></figure>
@@ -21,6 +25,10 @@ import { shop } from '../data/shop.js';
         <figure><img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption></figure>
       ))}
     </div>
-    <p class="fine" style="margin-top:14px">Photos from <a href={shop.facebook} target="_blank" rel="noopener">{shop.name} on Facebook</a>. On the real site, adding new photos takes about a minute.</p>
+    <p class="fine" style="margin-top:14px">Photos from <a href={shop.facebook} target="_blank" rel="noopener">{shop.name} on Facebook</a>. Once Facebook is connected, new photos {shop.owner} posts there show up here on their own, a few times a day.</p>
   </div>
 </section>
+
+<script>
+  import "../scripts/facebook-feed.js";
+</script>

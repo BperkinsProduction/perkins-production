@@ -1,5 +1,6 @@
 ---
 import { shop } from '../data/shop.js';
+import FacebookIcon from './FacebookIcon.astro';
 ---
 <div class="award">
   <div class="wrap">
@@ -7,9 +8,9 @@ import { shop } from '../data/shop.js';
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="19" r="13"/><path d="M24 11l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="currentColor" stroke="none"/><path d="M16 29l-4 15 7-3 5 5 2-10M32 29l4 15-7-3-5 5"/></svg>
       <div><b>{shop.award.title}</b><span>{shop.award.detail}</span></div>
     </div>
-    <div class="badge">
-      <svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M27 44V27h6l1-7h-7v-4c0-2 .6-3.4 3.5-3.4H34V6.3C33.4 6.2 31.3 6 28.9 6 23.8 6 20 9.1 20 15v5h-6v7h6v17z"/></svg>
-      <div><b>{shop.followers} followers on Facebook</b><span>New work posted there and on Instagram</span></div>
-    </div>
+    <a class="badge" href={shop.reviews.url} target="_blank" rel="noopener">
+      <FacebookIcon />
+      <div><b>{shop.reviews.recommend} recommend on Facebook</b><span>{shop.reviews.count} reviews and {shop.followers} followers. Read them on Facebook</span></div>
+    </a>
   </div>
 </div>

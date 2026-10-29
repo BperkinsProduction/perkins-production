@@ -6,8 +6,8 @@ appraisal at `/concepts/twelve-west-detail/proposal/`. Astro turns these compone
 data files into plain HTML plus assets, which get copied into the website repository at
 `public/concepts/twelve-west-detail/`. The live server never runs Astro.
 
-Not published yet. The first publish needs Brice's go ahead, and the $2,000 price in
-`src/data/appraisal.js` is a recommendation he has not confirmed.
+Published October 28, 2026 at /twelvewest. Price confirmed by Brice: $5,000, paid $2,500 to start and $2,500 at launch, set in
+`src/data/appraisal.js`.
 
 ## Where to change things
 
@@ -32,6 +32,19 @@ npm install          # once
 npm run build        # builds into dist/
 npm run preview      # serves dist at http://127.0.0.1:8772/concepts/twelve-west-detail/
 ```
+
+## Facebook photo feed
+
+The "Just posted on Facebook" row above the gallery asks `/api/facebook-photos?site=twelvewest`
+(in `api/facebook-photos.js` at the repository root) for Chad's newest page photos. Vercel
+keeps each answer for six hours. It stays hidden until two environment variables are set
+in the perkinsproduction.com Vercel project:
+
+- `FB_PAGE_ID_TWELVEWEST`: 100063487360834
+- `FB_PAGE_TOKEN_TWELVEWEST`: a Page access token for Twelve West Detail, made by someone
+  Chad has added as a manager of the page
+
+If the token stops working, the row hides itself and the regular gallery shows.
 
 ## Photos
 
