@@ -71,7 +71,7 @@ main.stage { padding: 24px 28px 40px; min-width: 0; }
 .player video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: #000; }
 .player canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; touch-action: none; }
 .player.drawing canvas { cursor: crosshair; }
-.player .hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(10,10,10,0.82); border: 1px solid var(--line); padding: 6px 14px; font-family: var(--slab); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--ink2); pointer-events: none; transition: opacity 0.4s var(--ease); white-space: nowrap; }
+.player .hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: rgba(10,10,10,0.82); border: 1px solid var(--line); padding: 6px 14px; font-family: var(--slab); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--ink2); pointer-events: none; transition: opacity 0.4s var(--ease); max-width: 90%; text-align: center; }
 .player .big-play { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
 .player .big-play span { width: 76px; height: 76px; border-radius: 50%; border: 1px solid var(--gold); display: grid; place-items: center; background: rgba(10,10,10,0.5); }
 .player .big-play svg { width: 26px; height: 26px; fill: var(--gold); margin-left: 4px; }
@@ -175,7 +175,7 @@ footer.foot a { color: var(--ink2); text-decoration: none; }
   .mobile-pick select { width: 100%; background: var(--card); border: 1px solid var(--line); padding: 10px; font-family: var(--serif); font-size: 1.15rem; color: var(--ink); }
   main.stage { padding: 14px 16px 20px; }
   .stage-head h2 { font-size: 1.6rem; }
-  .player .hint { white-space: normal; width: 88%; text-align: center; letter-spacing: 1px; bottom: 8px; padding: 4px 10px; }
+  .player .hint { width: 88%; letter-spacing: 1px; bottom: 8px; padding: 4px 10px; }
   .controls { gap: 8px; flex-wrap: wrap; }
   .controls .scrub { flex-basis: 100%; order: -1; }
   aside.notes { border-left: 0; border-top: 1px solid var(--line); }
