@@ -6,6 +6,10 @@
     "api/upload.js": {
       "maxDuration": 30,
       "memory": 1024
+    },
+    "api/review.js": {
+      "maxDuration": 30,
+      "memory": 1024
     }
   },
   "rewrites": [
@@ -28,6 +32,10 @@
     {
       "source": "/admin/",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/review/:key",
+      "destination": "/review.html"
     }
   ],
   "headers": [
@@ -71,6 +79,32 @@
           "key": "Referrer-Policy",
           "value": "same-origin"
         },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/review/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/review.html",
+      "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow, noarchive"
