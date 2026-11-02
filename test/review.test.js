@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanDrawing, cleanManifest, foldEvents, projectForKey } from '../lib/review.js';
+import { cleanDrawing, cleanManifest, fingerprint, foldEvents, isReviewAdmin, projectForKey } from '../lib/review.js';
 
 const manifest = { title: 'T', client: 'C', videos: [{ id: 'a', title: 'A', versions: [{ v: 'v1', url: 'https://x.public.blob.vercel-storage.com/a.mp4' }] }] };
 
@@ -41,8 +41,15 @@ test('drawing points are clamped and colors limited', () => {
 });
 
 test('share keys resolve only exactly', () => {
-  process.env.REVIEW_KEYS = JSON.stringify({ abcdefghijklmnopqrstu: 'acme' });
+  process.env.REVIEW_KEYS = JSON.stringify({ [fingerprint('abcdefghijklmnopqrstu')]: 'acme' });
   assert.equal(projectForKey('abcdefghijklmnopqrstu'), 'acme');
   assert.equal(projectForKey('abcdefghijklmnopqrstv'), null);
   assert.equal(projectForKey('short'), null);
+});
+
+test('admin key is checked against its fingerprint', () => {
+  process.env.REVIEW_ADMIN_SHA256 = fingerprint('a-very-long-admin-key-for-tests');
+  assert.equal(isReviewAdmin({ headers: { 'x-review-admin': 'a-very-long-admin-key-for-tests' } }), true);
+  assert.equal(isReviewAdmin({ headers: { 'x-review-admin': 'a-very-long-admin-key-for-testz' } }), false);
+  assert.equal(isReviewAdmin({ headers: {} }), false);
 });
