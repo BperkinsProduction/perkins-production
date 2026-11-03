@@ -44,15 +44,26 @@ const AUTH_PREFIX = 'review-auth/';
 const bodyCache = new Map();
 // Events this instance just wrote, in case a listing a moment later does not show them yet.
 const justWritten = [];
+// Listing a folder is a metered Blob operation, so a recent listing is reused for a short while.
+const listCache = new Map();
+const ROOM_LIST_SECONDS = 30;
+const AUTH_LIST_SECONDS = 120;
 
-async function loadPrefix(prefix) {
-  const blobs = [];
-  let cursor;
-  do {
-    const page = await list({ prefix, cursor, limit: 1000 });
-    blobs.push(...page.blobs);
-    cursor = page.hasMore ? page.cursor : undefined;
-  } while (cursor);
+async function loadPrefix(prefix, maxAgeSeconds = 0) {
+  const cached = listCache.get(prefix);
+  let blobs;
+  if (cached && Date.now() - cached.at < maxAgeSeconds * 1000) {
+    blobs = cached.blobs;
+  } else {
+    blobs = [];
+    let cursor;
+    do {
+      const page = await list({ prefix, cursor, limit: 1000 });
+      blobs.push(...page.blobs);
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
+    listCache.set(prefix, { at: Date.now(), blobs });
+  }
 
   const events = await Promise.all(blobs.map(async blob => {
     if (bodyCache.has(blob.url)) return bodyCache.get(blob.url);
@@ -88,8 +99,10 @@ async function writeEvent(prefix, event) {
   return stamped;
 }
 
-const loadRoom = async slug => foldEvents(await loadPrefix(`review/${slug}/`));
-const loadAuth = async () => foldAuth(await loadPrefix(AUTH_PREFIX));
+// Writes always read fresh. Plain page loads may use a listing up to a few seconds old,
+// with anything this instance just wrote added on top.
+const loadRoom = async (slug, maxAge = 0) => foldEvents(await loadPrefix(`review/${slug}/`, maxAge));
+const loadAuth = async (maxAge = 0) => foldAuth(await loadPrefix(AUTH_PREFIX, maxAge));
 
 // A second, per-instance brake on password guessing, by network address.
 const attempts = new Map();
@@ -293,8 +306,9 @@ export default async function handler(req, res) {
   if (admin) {
     slug = isValidSlug(req.query.project) ? req.query.project : null;
   } else {
-    const { people } = await loadAuth();
-    me = personForSession(readSession(req), people);
+    const session = readSession(req);
+    const { people } = session ? await loadAuth(AUTH_LIST_SECONDS) : { people: new Map() };
+    me = personForSession(session, people);
     if (me) slug = me.projects.includes(req.query.project) ? req.query.project : me.projects[0];
   }
   if (!slug) {
@@ -303,7 +317,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const state = await loadRoom(slug);
+    const state = await loadRoom(slug, admin || req.query.fresh ? 0 : ROOM_LIST_SECONDS);
     if (!state.manifest) return res.status(404).json({ error: 'Nothing to review yet.' });
     return res.status(200).json({
       ...state,

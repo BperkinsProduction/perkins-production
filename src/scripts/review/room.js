@@ -51,18 +51,19 @@ import { $, api as call, toast } from './api.js';
   const approvalOf = (id, ver) => S.data.approvals[`${id}@${ver}`];
 
   // ---------- data ----------
-  async function api(method, body) {
+  async function api(method, body, fresh) {
     try {
-      return await call(method, body, S.project);
+      return await call(method, body, S.project, fresh);
     } catch (err) {
       if (err.signin && S.data) showGate('You were signed out. Sign in again to keep going.');
       throw err;
     }
   }
 
-  async function load(first) {
+  // After your own change, read fresh so it shows straight away.
+  async function load(first, fresh = false) {
     try {
-      S.data = await api('GET');
+      S.data = await api('GET', undefined, fresh);
     } catch (err) {
       if (first) {
         if (err.signin) { showGate(); return; }
@@ -275,7 +276,7 @@ import { $, api as call, toast } from './api.js';
       $('noteText').value = '';
       clearDrawing(); toggleDraw(false);
       S.filter = 'open';
-      await load();
+      await load(false, true);
       toast('Note posted. Brice will see it.');
     } catch (err) { toast(err.message); }
     S.posting = false; $('postBtn').disabled = false;
@@ -288,14 +289,14 @@ import { $, api as call, toast } from './api.js';
     try {
       await api('POST', { action: 'note', parent: id, text });
       S.replyOpen = null;
-      await load();
+      await load(false, true);
     } catch (err) { toast(err.message); btn.disabled = false; }
   }
 
   async function setStatus(id, status) {
     try {
       await api('POST', { action: 'status', note: id, status });
-      await load();
+      await load(false, true);
       if (status === 'done') toast('Marked done.');
     } catch (err) { toast(err.message); }
   }
@@ -309,7 +310,7 @@ import { $, api as call, toast } from './api.js';
     $('approveModal').hidden = true;
     try {
       await api('POST', { action, video: S.videoId, version: S.version });
-      await load();
+      await load(false, true);
       toast(action === 'approve' ? 'Approved. Thank you.' : 'Approval removed.');
     } catch (err) { toast(err.message); }
   }
@@ -534,7 +535,7 @@ import { $, api as call, toast } from './api.js';
   });
 
   // Keep notes fresh while the page is open.
-  setInterval(() => { if (document.visibilityState === 'visible' && S.data && !S.posting && !S.replyOpen && !$('noteText').value) load(); }, 20000);
+  setInterval(() => { if (document.visibilityState === 'visible' && S.data && !S.posting && !S.replyOpen && !$('noteText').value) load(); }, 90000);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.data) load(); });
 
   setPlayIcon();

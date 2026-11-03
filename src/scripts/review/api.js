@@ -3,8 +3,11 @@
 
 export const $ = id => document.getElementById(id);
 
-export async function api(method, body, project) {
-  const query = project ? `?project=${encodeURIComponent(project)}` : '';
+export async function api(method, body, project, fresh = false) {
+  const params = new URLSearchParams();
+  if (project) params.set('project', project);
+  if (fresh) params.set('fresh', '1');
+  const query = params.toString() ? `?${params}` : '';
   const res = await fetch(`/api/review${query}`, {
     method,
     headers: body ? { 'Content-Type': 'application/json' } : {},
