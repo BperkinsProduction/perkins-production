@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanDrawing, cleanManifest, fingerprint, foldEvents, isReviewAdmin, projectForKey } from '../lib/review.js';
+import { cleanDrawing, cleanManifest, fingerprint, foldEvents, isReviewAdmin } from '../lib/review.js';
 
 const manifest = { title: 'T', client: 'C', videos: [{ id: 'a', title: 'A', versions: [{ v: 'v1', url: 'https://x.public.blob.vercel-storage.com/a.mp4' }] }] };
 
@@ -38,13 +38,6 @@ test('drawing points are clamped and colors limited', () => {
   assert.deepEqual(d[0].p, [[1, 0], [0.5, 0.5]]);
   assert.equal(d[0].c, '#c9a96e');
   assert.equal(cleanDrawing([]), null);
-});
-
-test('share keys resolve only exactly', () => {
-  process.env.REVIEW_KEYS = JSON.stringify({ [fingerprint('abcdefghijklmnopqrstu')]: 'acme' });
-  assert.equal(projectForKey('abcdefghijklmnopqrstu'), 'acme');
-  assert.equal(projectForKey('abcdefghijklmnopqrstv'), null);
-  assert.equal(projectForKey('short'), null);
 });
 
 test('admin key is checked against its fingerprint', () => {

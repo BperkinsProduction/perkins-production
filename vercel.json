@@ -32,10 +32,6 @@
     {
       "source": "/admin/",
       "destination": "/admin.html"
-    },
-    {
-      "source": "/review/:key",
-      "destination": "/review.html"
     }
   ],
   "headers": [
@@ -86,7 +82,7 @@
       ]
     },
     {
-      "source": "/review/:path*",
+      "source": "/review/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -96,15 +92,6 @@
           "key": "Referrer-Policy",
           "value": "same-origin"
         },
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/review.html",
-      "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow, noarchive"

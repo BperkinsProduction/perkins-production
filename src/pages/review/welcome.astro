@@ -1,0 +1,88 @@
+---
+// First visit from an invite link: the person picks their own password.
+// The invite code rides in the #hash, so it never reaches a server log.
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+---
+<ReviewLayout title="Welcome | Perkins Review Room">
+    <section class="gate">
+        <form class="modal" id="welcomeForm" hidden>
+            <h3>Welcome</h3>
+            <div class="divider"></div>
+            <p id="welcomeLead">Choose a password for the Review Room. You will use it with your email each time you sign in.</p>
+            <label class="field"><span class="label">Email</span>
+                <input id="email" type="email" autocomplete="username" readonly></label>
+            <label class="field"><span class="label">New password</span>
+                <span class="pw"><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="200" required>
+                <button type="button" data-show="password">Show</button></span></label>
+            <label class="field"><span class="label">Type it again</span>
+                <input id="confirm" type="password" autocomplete="new-password" minlength="8" maxlength="200" required></label>
+            <div class="form-err" id="err" hidden></div>
+            <div class="actions"><button class="btn solid" type="submit" id="save">Save and start reviewing</button></div>
+            <p class="fine">At least 8 characters. A short sentence is easy to remember and hard to guess.</p>
+        </form>
+        <div class="modal" id="badLink" hidden>
+            <h3>Link expired</h3>
+            <div class="divider"></div>
+            <p id="badText">This invite link has expired or was already used. Ask Brice for a new one.</p>
+            <div class="actions"><a class="btn" href="/review/">Go to sign in</a></div>
+        </div>
+    </section>
+</ReviewLayout>
+
+<script>
+    import { api, $ } from '../../scripts/review/api.js';
+
+    const token = location.hash.slice(1);
+    // Take the code out of the address bar and history right away.
+    history.replaceState(null, '', location.pathname);
+
+    function showBad(message?: string) {
+        if (message) $('badText').textContent = message;
+        $('badLink').hidden = false;
+        $('welcomeForm').hidden = true;
+    }
+
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-show]')) {
+        button.addEventListener('click', () => {
+            const field = $(button.dataset.show!) as HTMLInputElement;
+            const show = field.type === 'password';
+            field.type = show ? 'text' : 'password';
+            ($('confirm') as HTMLInputElement).type = field.type;
+            button.textContent = show ? 'Hide' : 'Show';
+        });
+    }
+
+    if (!token) showBad();
+    else {
+        api('POST', { action: 'invite-check', token }).then(info => {
+            ($('email') as HTMLInputElement).value = info.email;
+            $('welcomeLead').textContent = info.returning
+                ? `Hi ${info.name}. Choose a new password for the Review Room. Your old one stops working.`
+                : `Hi ${info.name}. Choose a password for the Review Room. You will use it with your email each time you sign in.`;
+            $('welcomeForm').hidden = false;
+            setTimeout(() => $('password').focus(), 50);
+        }).catch(err => showBad(err.message));
+    }
+
+    $('welcomeForm').addEventListener('submit', async event => {
+        event.preventDefault();
+        const password = ($('password') as HTMLInputElement).value;
+        const err = $('err');
+        err.hidden = true;
+        if (password !== ($('confirm') as HTMLInputElement).value) {
+            err.textContent = 'The two passwords do not match.';
+            err.hidden = false;
+            return;
+        }
+        const save = $('save') as HTMLButtonElement;
+        save.disabled = true;
+        try {
+            await api('POST', { action: 'welcome', token, password });
+            location.replace('/review/');
+        } catch (error) {
+            err.textContent = (error as Error).message;
+            err.hidden = false;
+            save.disabled = false;
+        }
+    });
+</script>

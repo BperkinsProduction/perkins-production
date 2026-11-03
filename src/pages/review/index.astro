@@ -1,0 +1,121 @@
+---
+// The client Review Room. One static page: it asks the API who is signed in,
+// then shows either the sign-in form or that person's videos and notes.
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+---
+<ReviewLayout title="Review Room | Perkins Production">
+<section class="gate" id="gate" hidden>
+  <form class="modal" id="signinForm">
+    <h3>Review Room</h3>
+    <div class="divider"></div>
+    <p>Sign in with your email and the password you chose.</p>
+    <label class="field"><span class="label">Email</span>
+      <input id="signinEmail" type="email" autocomplete="username" required></label>
+    <label class="field"><span class="label">Password</span>
+      <span class="pw"><input id="signinPassword" type="password" autocomplete="current-password" maxlength="200" required>
+      <button type="button" id="showPassword">Show</button></span></label>
+    <div class="form-err" id="signinErr" hidden></div>
+    <div class="actions"><button class="btn solid" type="submit" id="signinBtn">Sign in</button></div>
+    <p class="fine">Forgot your password? <a href="mailto:brice@perkinsproduction.com?subject=Review%20Room%20password">Email Brice</a> and he will send you a new link.</p>
+  </form>
+</section>
+
+<div id="splash" class="splash"><div><h2>Loading</h2><p>Pulling up your videos.</p></div></div>
+
+<div class="room" id="room" hidden>
+  <aside class="videos">
+    <span class="label">Videos</span>
+    <div id="videoList"></div>
+    <p class="intro" id="intro" hidden></p>
+  </aside>
+
+  <div>
+    <div class="mobile-pick"><select id="mobilePick" aria-label="Choose a video"></select></div>
+    <main class="stage">
+      <div class="stage-head">
+        <div>
+          <h2 id="videoTitle"></h2>
+          <div class="sub" id="videoSub"></div>
+        </div>
+        <div class="versions" id="versions" aria-label="Versions"></div>
+      </div>
+
+      <div class="player" id="player">
+        <video id="video" playsinline preload="metadata"></video>
+        <canvas id="canvas"></canvas>
+        <div class="big-play" id="bigPlay"><span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
+        <div class="hint" id="hint">Click the video to leave a note at that moment</div>
+        <div class="err" id="vidErr" hidden>This video would not load. Try refreshing, or tell Brice.</div>
+      </div>
+
+      <div class="controls">
+        <button class="ic" id="playBtn" type="button" aria-label="Play"><svg viewBox="0 0 24 24" id="playIcon"><path d="M6 4l14 8-14 8z"/></svg></button>
+        <button class="ic" id="backBtn" type="button" aria-label="Back 5 seconds" title="Back 5 seconds"><svg viewBox="0 0 24 24"><path d="M11 6v12L2 12zM21 6v12l-9-6z"/></svg></button>
+        <button class="ic" id="fwdBtn" type="button" aria-label="Forward 5 seconds" title="Forward 5 seconds"><svg viewBox="0 0 24 24"><path d="M13 6v12l9-6zM3 6v12l9-6z"/></svg></button>
+        <div class="scrub" id="scrub" role="slider" aria-label="Seek" tabindex="0">
+          <div class="rail"></div><div class="buf" id="buf"></div><div class="fill" id="fill"></div>
+          <div id="marks"></div>
+          <div class="head" id="head"></div>
+        </div>
+        <span class="time" id="time">0:00 / 0:00</span>
+        <select id="speed" aria-label="Playback speed"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+        <button class="ic" id="fsBtn" type="button" aria-label="Full screen" title="Full screen"><svg viewBox="0 0 24 24"><path d="M3 3h7v2H5v5H3zM14 3h7v7h-2V5h-5zM3 14h2v5h5v2H3zM19 14h2v7h-7v-2h5z"/></svg></button>
+      </div>
+
+      <div class="changes" id="changes" hidden><b>What changed in this version</b><span id="changesText"></span></div>
+
+      <div class="composer" id="composer">
+        <div class="row">
+          <span class="at" id="composeAt">Note at 0:00</span>
+          <span class="tip" id="composeTip">The video pauses while you write.</span>
+        </div>
+        <textarea id="noteText" placeholder="What would you like changed here?" aria-label="Your note"></textarea>
+        <div class="foot">
+          <button class="btn quiet small" id="drawBtn" type="button">Draw on frame</button>
+          <div class="swatches" id="swatches" hidden></div>
+          <button class="btn quiet small" id="undoBtn" type="button" hidden>Undo</button>
+          <button class="btn quiet small" id="clearBtn" type="button" hidden>Clear</button>
+          <span class="grow"></span>
+          <button class="btn solid" id="postBtn" type="button">Post note</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <aside class="notes">
+    <div class="approve">
+      <span class="label">Sign off</span>
+      <div class="state" id="approveState"></div>
+      <div class="actions">
+        <button class="btn" id="approveBtn" type="button">Approve this version</button>
+        <button class="btn quiet small" id="unapproveBtn" type="button" hidden>Undo approval</button>
+      </div>
+    </div>
+    <div class="notes-head">
+      <span class="label" id="notesCount">Notes</span>
+      <div class="filters" id="filters">
+        <button type="button" data-f="open" class="on">Open</button>
+        <button type="button" data-f="done">Done</button>
+        <button type="button" data-f="all">All</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+</div>
+
+<div class="scrim" id="approveModal" hidden>
+  <div class="modal">
+    <h3>Approve</h3>
+    <div class="divider"></div>
+    <p id="approveText"></p>
+    <div class="actions">
+      <button class="btn quiet" id="approveCancel" type="button">Not yet</button>
+      <button class="btn solid" id="approveConfirm" type="button">Approve</button>
+    </div>
+  </div>
+</div>
+</ReviewLayout>
+
+<script>
+  import '../../scripts/review/room.js';
+</script>
