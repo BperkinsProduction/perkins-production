@@ -2,10 +2,11 @@
 
 Usage:
     /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup \
-        --python blender/sign.py -- <out_dir> [frames]
+        --python blender/sign.py -- <out_dir> [frames] [title|sub|both]
 
 Writes transparent PNGs sign-00.png ... so the page can swap frames as the visitor
-scrolls. The camera drifts down and looks up a little more each frame, matching the
+scrolls. Render "title" and "sub" separately so each line gets its own neon color
+on the page. The camera drifts down and looks up a little more each frame, matching the
 film, which tilts down past the sign toward the car.
 """
 import bpy, math, sys, os
@@ -13,6 +14,7 @@ import bpy, math, sys, os
 A = sys.argv[sys.argv.index("--") + 1:]
 OUT = A[0]
 FRAMES = int(A[1]) if len(A) > 1 else 24
+LAYER = A[2] if len(A) > 2 else "both"
 FONT = "/Library/Fonts/PermanentMarker-Regular.ttf"
 os.makedirs(OUT, exist_ok=True)
 
@@ -41,7 +43,7 @@ def mat(name, base, rough=0.3, metal=0.0, coat=0.0, emit=None, emit_strength=0.0
 
 blue = mat("blue", (0.005, 0.12, 0.62), rough=0.12, metal=0.55, coat=1.0, emit=(0.02, 0.32, 1.0), emit_strength=0.55)
 white = mat("white", (0.92, 0.95, 1.0), rough=0.3, emit=(0.75, 0.88, 1.0), emit_strength=0.25)
-silver = mat("silver", (0.80, 0.82, 0.86), rough=0.22, metal=1.0)
+tube = mat("tube", (0.95, 0.97, 1.0), rough=0.25, emit=(0.85, 0.93, 1.0), emit_strength=0.9)
 
 font = bpy.data.fonts.load(FONT)
 
@@ -60,11 +62,13 @@ def text(body, size, extrude, bevel, material, z=0.0, scale=1.0, y=0.0, offset=0
     o.data.materials.append(material)
     return o
 
-# The sign: glossy blue letters with the silver subtitle below.
+# The sign: glossy blue letters with the white tube subtitle below.
 title = text("TWELVE WEST DETAIL", 1.0, 0.11, 0.018, blue, z=0.35, y=-0.06)
-sub = text("ELEVATING THE STANDARD", 0.36, 0.05, 0.006, silver, z=-0.42, y=-0.03)
+sub = text("ELEVATING THE STANDARD", 0.36, 0.05, 0.006, tube, z=-0.42, y=-0.03)
 for o in (title, sub):
     o.rotation_euler[1] = math.radians(-5)        # the painted sign rises slightly to the right
+if LAYER == "title": sub.hide_render = True
+if LAYER == "sub": title.hide_render = True
 
 # Light: a soft key above the camera, a cool rim from behind, and a low fill so the
 # underside of the letters catches light when the camera looks up.

@@ -11,7 +11,7 @@ const posterLayer = wrap.querySelector('.poster');
 const ring = wrap.querySelector('.ring');
 const gradeCanvas = wrap.querySelector('.grade');
 const sign = wrap.querySelector('.sign3d');
-const signImg = sign.querySelector('img');
+const signImg = sign.querySelector('img.t'), tagImg = sign.querySelector('img.g');
 const bands = [...wrap.querySelectorAll('.band')].map((el) => {
   const [a, b] = el.dataset.band.split(',').map(Number);
   return { el, a, b, op: -1, k: -1, first: a === 0, last: b === 1 };
@@ -84,7 +84,7 @@ video.addEventListener('error', () => { seekBusy = false; pendingTime = null; st
 // 45.9% down inside each Blender frame, and is drawn about twice the size of the painted lettering so it reads first.
 const SIGN_FRAMES = 24, SIGN_X = 641, SIGN_W = 640;
 const SIGN_TRACK = [[0, 196], [0.333, 186], [0.667, 170], [1, 149], [1.333, 126], [1.667, 101], [2, 77], [2.333, 51], [2.667, 28], [3, 4], [3.4, -25]];
-const signFrames = [];
+const signFrames = [], tagFrames = [];
 let signShown = -1, signFrameNow = -1, signOp = -1;
 function signY(t) {
   for (let i = 1; i < SIGN_TRACK.length; i++) {
@@ -95,7 +95,11 @@ function signY(t) {
 }
 function preloadSign() {
   const base = sign.dataset.base;
-  for (let i = 0; i < SIGN_FRAMES; i++) { const im = new Image(); im.src = `${base}s${String(i).padStart(2, '0')}.webp`; signFrames.push(im.src); }
+  for (let i = 0; i < SIGN_FRAMES; i++) {
+    const n = String(i).padStart(2, '0');
+    const im = new Image(); im.src = `${base}s${n}.webp`; signFrames.push(im.src);
+    const tg = new Image(); tg.src = `${base}g${n}.webp`; tagFrames.push(tg.src);
+  }
 }
 function updateSign(p, force) {
   if (!force && Math.abs(p - signShown) < 0.0006) return;
@@ -109,7 +113,7 @@ function updateSign(p, force) {
   const op = 1 - smoothstep(t, 2.55, 3.05);
   if (Math.abs(op - signOp) > 0.01) { signOp = op; sign.style.opacity = op.toFixed(3); }
   const f = Math.round(clamp(p / 0.5, 0, 1) * (SIGN_FRAMES - 1));
-  if (f !== signFrameNow && signFrames[f]) { signFrameNow = f; signImg.src = signFrames[f]; }
+  if (f !== signFrameNow && signFrames[f]) { signFrameNow = f; signImg.src = signFrames[f]; tagImg.src = tagFrames[f]; }
 }
 
 // Band one assembles on its own after load, then holds.
