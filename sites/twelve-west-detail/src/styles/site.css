@@ -380,3 +380,10 @@
   .co-split b { font-family: var(--display); font-stretch: 125%; font-size: 1.7rem; color: var(--white); }
   .co-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
+  /* paint correction readout, bottom right of the film while the polish line runs */
+  .pc-meter { position: absolute; z-index: 3; right: max(16px, 4vw); bottom: 28px; display: flex; align-items: center; gap: 12px; padding: 9px 16px; border-radius: 999px; background: rgba(8,10,14,.62); border: 1px solid rgba(238,244,250,.16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; pointer-events: none; }
+  .pc-meter span { font: 500 .66rem var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .pc-meter b { font: 500 .95rem var(--mono); color: var(--white); min-width: 4ch; text-align: right; font-variant-numeric: tabular-nums; }
+  .pc-meter.full b { color: var(--blue); }
+  @media (max-height: 560px) { .pc-meter { display: none; } }
+

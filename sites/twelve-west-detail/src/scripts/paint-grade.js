@@ -1,19 +1,38 @@
-// Scroll-driven paint grade: only the car's red paint goes from dull and hazy at the top of the
-// film to deep and glossy at the bottom. Walls, doors and floor are left alone. WebGL, drawn only
-// when the frame or the scroll changes. Without WebGL the film just plays ungraded.
+// Scroll-driven paint correction: only the car's red paint changes. Ahead of a bright polish
+// line the paint is dull, hazy and gritty; behind it the paint is deep red with crisp
+// reflections. The line sweeps across the frame as the visitor scrolls, like a buffer pass.
+// Walls, doors and floor are left alone. Without WebGL the film just plays ungraded.
 
 const VERT = `attribute vec2 p; varying vec2 uv; uniform vec2 sc; uniform vec2 off;
 void main(){ uv = (p * 0.5 + 0.5) * sc + off; uv.y = 1.0 - uv.y; gl_Position = vec4(p, 0.0, 1.0); }`;
-const FRAG = `precision mediump float; varying vec2 uv; uniform sampler2D tex; uniform float clean;
+const FRAG = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+varying vec2 uv; uniform sampler2D tex; uniform float clean;
+float grain(vec2 q){ return fract(sin(dot(floor(q), vec2(12.9898, 78.233))) * 43758.5453); }
 void main(){
   vec3 c = texture2D(tex, uv).rgb;
   float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
   float sat = (mx - mn) / (mx + 0.0001);
-  float red = smoothstep(0.18, 0.42, c.r - max(c.g, c.b)) * smoothstep(0.35, 0.6, sat);
-  vec3 gray = vec3(dot(c, vec3(0.299, 0.587, 0.114)));
-  vec3 dull = mix(c, gray, 0.5) * 0.8 + vec3(0.07, 0.065, 0.06);
-  vec3 vivid = clamp(mix(gray, c, 1.18) * 1.05, 0.0, 1.0);
-  gl_FragColor = vec4(mix(c, mix(dull, vivid, clean), red), 1.0);
+  float red = smoothstep(0.14, 0.38, c.r - max(c.g, c.b)) * smoothstep(0.3, 0.55, sat);
+  float lum = dot(c, vec3(0.299, 0.587, 0.114));
+  vec3 gray = vec3(lum);
+  // Dull: faded, milky and flat, highlights knocked down, a little grit.
+  vec3 dull = mix(c, gray, 0.42);
+  dull = mix(dull, vec3(0.70, 0.58, 0.57), 0.16);
+  dull = mix(vec3(0.36), dull, 0.76);
+  dull += (grain(uv * vec2(900.0, 506.0)) - 0.5) * 0.06;
+  // Shine: rich red, more contrast, reflections pushed brighter.
+  vec3 shine = clamp(mix(gray, c, 1.32) * 1.03 + smoothstep(0.5, 0.95, lum) * 0.28, 0.0, 1.0);
+  // The polish line runs on a slight diagonal and travels left to right.
+  float x = uv.x + (uv.y - 0.5) * 0.22;
+  float edge = mix(-0.18, 1.18, clean);
+  float done = 1.0 - smoothstep(edge - 0.035, edge + 0.035, x);
+  float glint = exp(-pow((x - edge) / 0.018, 2.0));
+  vec3 car = mix(dull, shine, done) + vec3(1.0, 0.94, 0.9) * glint * 0.85;
+  gl_FragColor = vec4(mix(c, clamp(car, 0.0, 1.0), red), 1.0);
 }`;
 
 export function createPaintGrade(canvas, video) {

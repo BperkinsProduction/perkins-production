@@ -57,7 +57,19 @@ function requestSeek(t) {
   video.currentTime = Math.min(t, video.duration - 0.04);
 }
 let grade = null;
-const cleanAt = (p) => smoothstep(p, 0.04, 0.82);
+// The polish line starts once the car is in view and finishes just before "Wax is dead." settles.
+const cleanAt = (p) => clamp((p - 0.08) / 0.7, 0, 1);
+const meter = wrap.querySelector('.pc-meter');
+const meterNum = meter ? meter.querySelector('b') : null;
+let meterText = '', meterAt = 0, meterOp = -1;
+function updateMeter(p, now) {
+  if (!meter || !grade) return;
+  const op = smoothstep(p, 0.05, 0.1) * (1 - smoothstep(p, 0.84, 0.9));
+  if (Math.abs(op - meterOp) > 0.01) { meterOp = op; meter.style.opacity = op.toFixed(3); }
+  if (now - meterAt < 90 && p < 0.99) return;
+  const pct = Math.round(cleanAt(p) * 100) + '%';
+  if (pct !== meterText) { meterText = pct; meterAt = now; meterNum.textContent = pct; meter.classList.toggle('full', pct === '100%'); }
+}
 function drawGrade(force) { if (grade) grade.draw(cleanAt(shown), force); }
 video.addEventListener('seeked', () => {
   drawGrade();
@@ -129,6 +141,7 @@ function tick(now) {
   requestSeek(shown * (video.duration || 0));
   updateCaptions(shown);
   drawGrade();
+  updateMeter(shown, now);
   if (stage.classList.contains('video-ready')) updateSign(shown);
   if (settled) { rafId = null; lastTick = 0; }
   else rafId = requestAnimationFrame(tick);
