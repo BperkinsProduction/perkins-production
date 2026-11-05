@@ -1,0 +1,89 @@
+---
+// One link for the whole team: each person types their email and picks a password.
+// The link code rides in the #hash, so it never reaches a server log.
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+---
+<ReviewLayout title="Welcome | Perkins Review Room">
+    <section class="gate">
+        <form class="modal" id="joinForm" hidden>
+            <h3>Welcome</h3>
+            <div class="divider"></div>
+            <p>Type the email Brice has for you and choose a password. You will use them each time you sign in.</p>
+            <label class="field"><span class="label">Email</span>
+                <input id="email" type="email" autocomplete="username" required></label>
+            <label class="field"><span class="label">New password</span>
+                <span class="pw"><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="200" required>
+                <button type="button" data-show="password">Show</button></span></label>
+            <label class="field"><span class="label">Type it again</span>
+                <input id="confirm" type="password" autocomplete="new-password" minlength="8" maxlength="200" required></label>
+            <div class="form-err" id="err" hidden></div>
+            <div class="actions"><button class="btn solid" type="submit" id="save">Save and start reviewing</button></div>
+            <p class="fine">At least 8 characters. A short sentence is easy to remember and hard to guess. Already chose one? <a href="/review/">Sign in</a>.</p>
+        </form>
+        <div class="modal" id="badLink" hidden>
+            <h3>Link expired</h3>
+            <div class="divider"></div>
+            <p id="badText">This link has expired. Ask Brice for a new one.</p>
+            <div class="actions"><a class="btn" href="/review/">Go to sign in</a></div>
+        </div>
+    </section>
+</ReviewLayout>
+
+<script>
+    import { api, $ } from '../../scripts/review/api.js';
+
+    // Keep the code for this visit but take it out of the address bar.
+    const token = location.hash.slice(1) || sessionStorage.getItem('pp_team') || '';
+    if (location.hash) {
+        try { sessionStorage.setItem('pp_team', token); } catch {}
+        history.replaceState(null, '', location.pathname);
+    }
+
+    function showBad(message?: string) {
+        if (message) $('badText').textContent = message;
+        $('badLink').hidden = false;
+        $('joinForm').hidden = true;
+    }
+
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-show]')) {
+        button.addEventListener('click', () => {
+            const field = $(button.dataset.show!) as HTMLInputElement;
+            const show = field.type === 'password';
+            field.type = show ? 'text' : 'password';
+            ($('confirm') as HTMLInputElement).type = field.type;
+            button.textContent = show ? 'Hide' : 'Show';
+        });
+    }
+
+    if (!token) showBad();
+    else {
+        api('POST', { action: 'team-check', token }).then(() => {
+            $('joinForm').hidden = false;
+            setTimeout(() => $('email').focus(), 50);
+        }).catch(err => showBad(err.message));
+    }
+
+    $('joinForm').addEventListener('submit', async event => {
+        event.preventDefault();
+        const email = ($('email') as HTMLInputElement).value;
+        const password = ($('password') as HTMLInputElement).value;
+        const err = $('err');
+        err.hidden = true;
+        if (password !== ($('confirm') as HTMLInputElement).value) {
+            err.textContent = 'The two passwords do not match.';
+            err.hidden = false;
+            return;
+        }
+        const save = $('save') as HTMLButtonElement;
+        save.disabled = true;
+        try {
+            await api('POST', { action: 'join', token, email, password });
+            try { sessionStorage.removeItem('pp_team'); } catch {}
+            location.replace('/review/');
+        } catch (error) {
+            err.textContent = (error as Error).message;
+            err.hidden = false;
+            save.disabled = false;
+        }
+    });
+</script>

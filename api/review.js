@@ -29,10 +29,12 @@ import {
   personByEmail,
   personByInvite,
   personForSession,
+  personForTeamLink,
   publicPerson,
   readSession,
   sessionCookie,
   sha256,
+  teamLinkByToken,
   verifyPassword,
 } from '../lib/review-auth.js';
 
@@ -166,7 +168,7 @@ async function accountAction(req, res, action, body) {
     res.setHeader('Retry-After', '900');
     return res.status(429).json({ error: 'Too many tries. Wait 15 minutes and try again.' });
   }
-  const { people, fails } = await loadAuth();
+  const { people, fails, teamLinks } = await loadAuth();
   const expired = 'This invite link has expired or was already used. Ask Brice for a new one.';
 
   if (action === 'invite-check') {
@@ -182,6 +184,31 @@ async function accountAction(req, res, action, body) {
     if (problem) return res.status(400).json({ error: problem });
     const password = await writeEvent(AUTH_PREFIX, {
       type: 'password', person: person.id, id: newId(), hash: await hashPassword(body.password), invite: person.invite.id,
+    });
+    person.password = { id: password.id, hash: password.hash, at: password.at };
+    return signIn(req, res, person);
+  }
+
+  if (action === 'team-check') {
+    const link = teamLinkByToken(teamLinks, body.token);
+    if (!link) return res.status(404).json({ error: 'This link has expired. Ask Brice for a new one.' });
+    return res.status(200).json({ ok: true });
+  }
+
+  if (action === 'join') {
+    const link = teamLinkByToken(teamLinks, body.token);
+    if (!link) return res.status(404).json({ error: 'This link has expired. Ask Brice for a new one.' });
+    const person = personForTeamLink(people, link, cleanEmail(body.email));
+    if (!person) {
+      await burnTime(body.password);
+      return res.status(403).json({ error: 'That email is not on the list for this room, or it already has a password. If you set one before, go to sign in.' });
+    }
+    const problem = passwordProblem(body.password, person.email);
+    if (problem) return res.status(400).json({ error: problem });
+    // Retire their personal invite too, so only the password they just chose works.
+    const password = await writeEvent(AUTH_PREFIX, {
+      type: 'password', person: person.id, id: newId(), hash: await hashPassword(body.password),
+      invite: person.invite?.id, teamlink: link.id,
     });
     person.password = { id: password.id, hash: password.hash, at: password.at };
     return signIn(req, res, person);
@@ -212,6 +239,14 @@ async function accountAction(req, res, action, body) {
 // Brice's tools: add people, send invites, switch someone off.
 async function peopleAction(res, action, body) {
   const { people } = await loadAuth();
+
+  if (action === 'teamlink') {
+    if (!isValidSlug(body.project)) return res.status(400).json({ error: 'Which room?' });
+    const token = newInviteToken();
+    const expires = new Date(Date.now() + INVITE_DAYS * 86400 * 1000).toISOString();
+    await writeEvent(AUTH_PREFIX, { type: 'teamlink', id: newId(), project: body.project, tokenHash: sha256(token), expires });
+    return res.status(200).json({ ok: true, token, expires });
+  }
 
   if (action === 'person') {
     const details = cleanPerson(body);
@@ -287,11 +322,11 @@ export default async function handler(req, res) {
 
   const action = body.action;
 
-  if (req.method === 'POST' && ['signin', 'welcome', 'invite-check', 'signout'].includes(action)) {
+  if (req.method === 'POST' && ['signin', 'welcome', 'invite-check', 'team-check', 'join', 'signout'].includes(action)) {
     return accountAction(req, res, action, body);
   }
 
-  if (admin && req.method === 'POST' && ['person', 'invite', 'disable', 'enable'].includes(action)) {
+  if (admin && req.method === 'POST' && ['person', 'invite', 'teamlink', 'disable', 'enable'].includes(action)) {
     return peopleAction(res, action, body);
   }
 

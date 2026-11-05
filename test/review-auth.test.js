@@ -9,6 +9,8 @@ import {
   passwordProblem,
   personByInvite,
   personForSession,
+  personForTeamLink,
+  teamLinkByToken,
   publicPerson,
   readSession,
   sha256,
@@ -84,4 +86,24 @@ test('the people list never carries the hash', () => {
   const shown = publicPerson(people.get('p1'));
   assert.equal(JSON.stringify(shown).includes('secret-hash'), false);
   assert.equal(shown.lastSignIn.device, 'Safari on iPhone');
+});
+
+test('a team link sets a first password for people on that room only', () => {
+  const token = 'z'.repeat(32);
+  const future = new Date(Date.now() + 86400000).toISOString();
+  const link = { type: 'teamlink', id: 't1', project: 'se', tokenHash: sha256(token), expires: future, at: '1' };
+  const outsider = { type: 'person', person: 'p2', email: 'sam@example.com', name: 'Sam', role: 'client', projects: ['other'], at: '0' };
+  let { people, teamLinks } = foldAuth([doug, outsider, link]);
+  const found = teamLinkByToken(teamLinks, token);
+  assert.equal(found?.id, 't1');
+  assert.equal(teamLinkByToken(teamLinks, 'q'.repeat(32)), null);
+  assert.equal(personForTeamLink(people, found, 'doug@example.com')?.id, 'p1');
+  assert.equal(personForTeamLink(people, found, 'sam@example.com'), null, 'not on this room');
+  assert.equal(personForTeamLink(people, found, 'nobody@example.com'), null);
+
+  ({ people, teamLinks } = foldAuth([doug, link, { type: 'password', person: 'p1', id: 'w1', hash: 'h', teamlink: 't1', at: '2' }]));
+  assert.equal(personForTeamLink(people, teamLinkByToken(teamLinks, token), 'doug@example.com'), null, 'cannot reset a set password');
+
+  ({ teamLinks } = foldAuth([{ ...link, expires: '2020-01-01T00:00:00Z' }]));
+  assert.equal(teamLinkByToken(teamLinks, token), null, 'expired');
 });
