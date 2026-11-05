@@ -106,8 +106,13 @@ function updateSign(p, force) {
   signShown = p;
   const W = stage.clientWidth, H = stage.clientHeight, dur = video.duration || 6.04;
   const s = Math.max(W / 1920, H / 1080), ox = (W - 1920 * s) / 2, oy = (H - 1080 * s) / 2;
-  const t = p * dur, w = SIGN_W * s, h = w * 329 / 1295;
-  const x = ox + SIGN_X * s - w * 0.489, y = oy + signY(t) * s - h * 0.459;
+  const t = p * dur, tw = SIGN_W * s;
+  // On open the sign hangs centered over the page, then glides onto the painted sign as the scroll starts.
+  const cw = Math.min(W * 0.52, 820), k = smoothstep(t, 0.08, 0.95);
+  const w = cw + (tw - cw) * k, h = w * 329 / 1295;
+  const cx = W / 2, cy = H * 0.3;
+  const sx = ox + SIGN_X * s, sy = oy + signY(t) * s;
+  const x = cx + (sx - cx) * k - w * 0.489, y = cy + (sy - cy) * k - h * 0.459;
   sign.style.setProperty('--sw', w.toFixed(1) + 'px');
   sign.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
   const op = 1 - smoothstep(t, 2.55, 3.05);
