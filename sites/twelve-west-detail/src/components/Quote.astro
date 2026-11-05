@@ -4,32 +4,32 @@ const pct = depositRate * 100;
 ---
 <section id="quote" data-reveal>
   <div class="wrap">
-    <span class="label">Book it</span>
+    <span class="label">Build your quote</span>
     <h2>Your price, then your day.</h2>
-    <p class="lede">Your pick carries down from the packages. Add any extras, choose an open drop off time, and hold it with half down. No phone tag.</p>
+    <p class="lede">Pick your size and service, add any extras, choose an open drop off time, and hold it with half down. No phone tag.</p>
 
     <form class="builder" id="builder" novalidate>
       <div>
-        <div class="step pick" id="pickStep">
-          <h3><i>1</i>Your detail</h3>
-          <div class="pick-row">
-            <label class="f">Vehicle size<select id="qSize"></select></label>
-            <label class="f">Service<select id="qService"></select></label>
-          </div>
-          <p class="fine"><a href="#packages">Compare what each package includes</a></p>
+        <div class="step">
+          <h3><i>1</i>Vehicle size</h3>
+          <div class="choices" id="qSizes"></div>
         </div>
         <div class="step">
-          <h3><i>2</i>Add ons <small style="font-family:Inter;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400">(optional)</small></h3>
+          <h3><i>2</i>Service</h3>
+          <div id="qServices"></div>
+        </div>
+        <div class="step">
+          <h3><i>3</i>Add ons <small style="font-family:Inter;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400">(optional)</small></h3>
           <div class="addons" id="qAddons"></div>
         </div>
         <div class="step">
-          <h3><i>3</i>Pick your day and drop off</h3>
+          <h3><i>4</i>Pick your day and drop off</h3>
           <div class="days" id="qDays" role="radiogroup" aria-label="Day"></div>
           <div class="slots" id="qSlots" role="radiogroup" aria-label="Drop off time"></div>
           <p class="fine" id="slotNote"></p>
         </div>
         <div class="step">
-          <h3><i>4</i>Your details</h3>
+          <h3><i>5</i>Your details</h3>
           <div class="fields">
             <label class="f full">Year, make and model
               <input type="text" id="fCar" placeholder="2021 Ford F-150" autocomplete="off" required>

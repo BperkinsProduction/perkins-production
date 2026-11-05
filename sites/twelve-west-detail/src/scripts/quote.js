@@ -19,31 +19,35 @@ function updatePackageCards() {
 function setSize(i) {
   state.size = i;
   document.querySelectorAll('.size').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.size === i)));
-  $('qSize').value = String(i);
+  const r = document.querySelector('input[name=qsize][value="' + i + '"]');
+  if (r) r.checked = true;
   updatePackageCards();
   renderServices();
   update();
 }
 document.querySelectorAll('.size').forEach((b) => b.addEventListener('click', () => setSize(+b.dataset.size)));
 
-// The booking form keeps the pick as two menus. The cards above are where people compare.
-$('qSize').innerHTML = sizes.map((s, i) => '<option value="' + i + '">' + s.name + '</option>').join('');
-$('qSize').value = String(state.size);
-$('qSize').addEventListener('change', (e) => setSize(+e.target.value));
+$('qSizes').innerHTML = sizes.map((s, i) =>
+  '<label class="choice"><input type="radio" name="qsize" value="' + i + '"' + (i === state.size ? ' checked' : '') + '><span><b>' + s.name + '</b><small>' + s.examples + '</small></span></label>'
+).join('');
+$('qSizes').addEventListener('change', (e) => setSize(+e.target.value));
 
-const opt = (id, label) => '<option value="' + id + '"' + (state.service === id ? ' selected' : '') + '>' + label + '</option>';
+function choice(id, name, sub) {
+  return '<label class="choice"><input type="radio" name="qservice" value="' + id + '"' + (state.service === id ? ' checked' : '') + '><span><b>' + name + '</b><small>' + sub + '</small></span></label>';
+}
+
 function renderServices() {
-  let html = '<optgroup label="Detail packages">' +
-    packages.map((p) => opt(p.id, p.name.replace('The ', '') + ', ' + money(p.prices[state.size]))).join('') + '</optgroup>';
+  let html = '<div class="group-name">Detail packages</div><div class="choices">' +
+    packages.map((p) => choice(p.id, p.name.replace('The ', ''), money(p.prices[state.size]))).join('') + '</div>';
   const groups = {};
   otherServices.forEach((o) => { (groups[o.group] = groups[o.group] || []).push(o); });
   Object.keys(groups).forEach((g) => {
-    html += '<optgroup label="' + g + '">' +
-      groups[g].map((o) => opt(o.id, o.name + ', ' + (o.call ? 'priced by ' + shop.owner : 'from ' + money(o.from)))).join('') + '</optgroup>';
+    html += '<div class="group-name">' + g + '</div><div class="choices">' +
+      groups[g].map((o) => choice(o.id, o.name, o.call ? o.sub + ', priced by ' + shop.owner : 'from ' + money(o.from))).join('') + '</div>';
   });
-  $('qService').innerHTML = html;
+  $('qServices').innerHTML = html;
 }
-$('qService').addEventListener('change', (e) => { state.service = e.target.value; renderAddons(); update(); });
+$('qServices').addEventListener('change', (e) => { state.service = e.target.value; renderAddons(); update(); });
 
 function renderAddons() {
   $('qAddons').innerHTML = addons.map((a) => {
@@ -143,10 +147,6 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   state.service = a.dataset.pick;
   renderServices(); renderAddons(); update(); showBuilder();
-  // A short glow on the pick so it is clear the choice came along.
-  const step = $('pickStep');
-  step.classList.add('flash');
-  setTimeout(() => step.classList.remove('flash'), 1400);
 });
 
 // Scheduling: the next two weeks, closed days greyed out, drop-off times per day.

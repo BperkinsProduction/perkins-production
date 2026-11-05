@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.D94zT6Eg.css"></head>
+<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.PWvJ9ZAl.css"></head>
 <body>
 <div class="env" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
@@ -23,7 +23,7 @@
       <a href="#work">Our Work</a>
       <a href="#visit">Visit</a>
       <a class="fb" href="https://www.facebook.com/TwelveWestDetail" target="_blank" rel="noopener" aria-label="Twelve West Detail on Facebook"><svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M27 44V27h6l1-7h-7v-4c0-2 .6-3.4 3.5-3.4H34V6.3C33.4 6.2 31.3 6 28.9 6 23.8 6 20 9.1 20 15v5h-6v7h6v17z"></path></svg></a>
-      <a class="btn btn-blue" href="#packages">Build your quote</a>
+      <a class="btn btn-blue" href="#quote">Build your quote</a>
     </nav>
   </div>
 </header>
@@ -47,7 +47,7 @@
       <h2 class="split">Wax is dead.</h2>
       <p class="sub">Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
       <div class="ctas">
-        <a class="btn btn-blue" href="#packages">Build your quote</a>
+        <a class="btn btn-blue" href="#quote">Build your quote</a>
         <a class="btn btn-ghost" href="tel:3013045510">Call (301) 304-5510</a>
       </div>
     </div>
@@ -65,7 +65,7 @@
     <h1>Wax is <span>dead.</span></h1>
     <p>Ceramic protection, full details and interior steam cleaning. Every price is on this page.</p>
     <div class="ctas">
-      <a class="btn btn-blue" href="#packages">Build your quote</a>
+      <a class="btn btn-blue" href="#quote">Build your quote</a>
       <a class="btn btn-ghost" href="tel:3013045510">Call (301) 304-5510</a>
     </div>
   </div>
@@ -88,7 +88,7 @@
   <div class="wrap">
     <span class="label">Packages</span>
     <h2>Pick your size. See your price.</h2>
-    <p class="lede">Every package is priced by vehicle size. Tap yours, then choose a package to book it.</p>
+    <p class="lede">Every package is priced by vehicle size. Tap yours and every price on this page updates.</p>
 
     <div class="sizes" role="group" aria-label="Vehicle size">
       <button class="size" data-size="0" aria-pressed="false">
@@ -153,19 +153,19 @@
     <div class="more">
       <div class="card">
         <h3>Interior only</h3>
-        <a class="row pickrow" href="#quote" data-pick="int-base"><span>Baseline Interior</span><span>from $150</span></a>
-        <a class="row pickrow" href="#quote" data-pick="int-deluxe"><span>Deluxe Interior</span><span>from $275</span></a>
+        <div class="row"><span>Baseline Interior</span><span>from $150</span></div>
+        <div class="row"><span>Deluxe Interior</span><span>from $275</span></div>
         <p style="margin-top:8px">Deluxe adds compressed air in every crack, shampoo and extraction of carpets, mats and seats, and odor removal.</p>
       </div>
       <div class="card">
         <h3>Wash and wax</h3>
-        <a class="row pickrow" href="#quote" data-pick="wash-wax"><span>Hand wash, iron decon, carnauba wax</span><span>from $175</span></a>
+        <div class="row"><span>Hand wash, iron decon, carnauba wax</span><span>from $175</span></div>
         <p style="margin-top:8px">Exterior only, non commercial vehicles. Platinum tire dressing and exterior glass included.</p>
       </div>
       <div class="card">
         <h3>Add ons</h3>
         <div class="row"><span>Pet hair or sand removal</span><span>from $99</span></div><div class="row"><span>Engine bay cleaning</span><span>$60</span></div><div class="row"><span>Headlight restoration</span><span>$40 each</span></div><div class="row"><span>Seat shampooing</span><span>$60 a row</span></div>
-        <p style="margin-top:8px"><a href="#quote">Add any of them when you book</a></p>
+        <p style="margin-top:8px"><a href="#quote">See all of them in the quote builder</a></p>
       </div>
     </div>
   </div>
@@ -194,32 +194,32 @@
 <script type="module">var e=document.getElementById(`polish`),t=document.getElementById(`holdBtn`),n=t.querySelector(`.hold-label`),r=document.getElementById(`tiers`),i=1600,a=900,o=0,s=!1,c=!1,l=null,u=0,d=()=>e.style.setProperty(`--w`,e.clientWidth+70+`px`);d(),addEventListener(`resize`,d,{passive:!0});function f(){c=!0,o=1,s=!1,e.style.setProperty(`--p`,1),e.style.setProperty(`--done`,1),e.classList.add(`done`),n.textContent=`Polished. That is the gloss a coating keeps.`,r.classList.add(`lit`),setTimeout(()=>r.classList.add(`settled`),900)}function p(t){let n=Math.min(64,t-(u||t));if(u=t,o+=s?n/i:-n/a,o=Math.min(1,Math.max(0,o)),e.style.setProperty(`--p`,o.toFixed(4)),o>=1){f(),l=null,u=0;return}if(!s&&o<=0){l=null,u=0;return}l=requestAnimationFrame(p)}function m(e){c||(e&&e.pointerId!==void 0&&t.setPointerCapture(e.pointerId),s=!0,l===null&&(l=requestAnimationFrame(p)))}function h(){s=!1,!c&&l===null&&o>0&&(l=requestAnimationFrame(p))}t.addEventListener(`pointerdown`,e=>{e.preventDefault(),m(e)}),t.addEventListener(`pointerup`,h),t.addEventListener(`pointercancel`,h),t.addEventListener(`lostpointercapture`,h),t.addEventListener(`keydown`,e=>{(e.key===` `||e.key===`Enter`)&&!e.repeat&&(e.preventDefault(),m())}),t.addEventListener(`keyup`,e=>{(e.key===` `||e.key===`Enter`)&&h()}),t.addEventListener(`contextmenu`,e=>e.preventDefault());var g=matchMedia(`(prefers-reduced-motion: reduce)`);g.matches&&f(),g.addEventListener(`change`,e=>{e.matches&&f()});</script>
   <section id="quote" data-reveal>
   <div class="wrap">
-    <span class="label">Book it</span>
+    <span class="label">Build your quote</span>
     <h2>Your price, then your day.</h2>
-    <p class="lede">Your pick carries down from the packages. Add any extras, choose an open drop off time, and hold it with half down. No phone tag.</p>
+    <p class="lede">Pick your size and service, add any extras, choose an open drop off time, and hold it with half down. No phone tag.</p>
 
     <form class="builder" id="builder" novalidate>
       <div>
-        <div class="step pick" id="pickStep">
-          <h3><i>1</i>Your detail</h3>
-          <div class="pick-row">
-            <label class="f">Vehicle size<select id="qSize"></select></label>
-            <label class="f">Service<select id="qService"></select></label>
-          </div>
-          <p class="fine"><a href="#packages">Compare what each package includes</a></p>
+        <div class="step">
+          <h3><i>1</i>Vehicle size</h3>
+          <div class="choices" id="qSizes"></div>
         </div>
         <div class="step">
-          <h3><i>2</i>Add ons <small style="font-family:Inter;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400">(optional)</small></h3>
+          <h3><i>2</i>Service</h3>
+          <div id="qServices"></div>
+        </div>
+        <div class="step">
+          <h3><i>3</i>Add ons <small style="font-family:Inter;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400">(optional)</small></h3>
           <div class="addons" id="qAddons"></div>
         </div>
         <div class="step">
-          <h3><i>3</i>Pick your day and drop off</h3>
+          <h3><i>4</i>Pick your day and drop off</h3>
           <div class="days" id="qDays" role="radiogroup" aria-label="Day"></div>
           <div class="slots" id="qSlots" role="radiogroup" aria-label="Drop off time"></div>
           <p class="fine" id="slotNote"></p>
         </div>
         <div class="step">
-          <h3><i>4</i>Your details</h3>
+          <h3><i>5</i>Your details</h3>
           <div class="fields">
             <label class="f full">Year, make and model
               <input type="text" id="fCar" placeholder="2021 Ford F-150" autocomplete="off" required>
@@ -291,7 +291,7 @@
   </div>
 </section>
 
-<script type="module" src="/concepts/twelve-west-detail/_astro/Quote.astro_astro_type_script_index_0_lang.AzyhucL-.js"></script>
+<script type="module" src="/concepts/twelve-west-detail/_astro/Quote.astro_astro_type_script_index_0_lang.KU0OjFp4.js"></script>
   <section id="work" data-reveal>
   <div class="wrap">
     <span class="label">Out of the bay</span>
@@ -360,7 +360,7 @@
 </footer>
   <div class="mbar">
   <a class="btn btn-ghost" href="tel:3013045510">Call</a>
-  <a class="btn btn-blue" href="#packages">Build your quote</a>
+  <a class="btn btn-blue" href="#quote">Build your quote</a>
 </div>
 
 <script type="module">var e=document.querySelectorAll(`[data-reveal]`),t=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add(`in`),t.unobserve(e.target),setTimeout(()=>e.target.classList.add(`settled`),1400))})},{rootMargin:`0px 0px -12% 0px`,threshold:.08});e.forEach(e=>t.observe(e)),document.addEventListener(`visibilitychange`,()=>document.body.classList.toggle(`paused`,document.hidden));</script></body>
