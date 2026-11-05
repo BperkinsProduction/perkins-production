@@ -1,8 +1,12 @@
+---
+import { depositRate } from '../data/prices.js';
+const pct = depositRate * 100;
+---
 <section id="quote" data-reveal>
   <div class="wrap">
     <span class="label">Build your quote</span>
     <h2>Your price, then your day.</h2>
-    <p class="lede">Pick your size and service, add any extras, and send Chad a request. He texts back to confirm the time. No phone tag.</p>
+    <p class="lede">Pick your size and service, add any extras, choose an open drop off time, and hold it with half down. No phone tag.</p>
 
     <form class="builder" id="builder" novalidate>
       <div>
@@ -19,18 +23,14 @@
           <div class="addons" id="qAddons"></div>
         </div>
         <div class="step">
-          <h3><i>4</i>Your day and details</h3>
+          <h3><i>4</i>Pick your day and drop off</h3>
+          <div class="days" id="qDays" role="radiogroup" aria-label="Day"></div>
+          <div class="slots" id="qSlots" role="radiogroup" aria-label="Drop off time"></div>
+          <p class="fine" id="slotNote"></p>
+        </div>
+        <div class="step">
+          <h3><i>5</i>Your details</h3>
           <div class="fields">
-            <label class="f">Preferred day
-              <input type="date" id="fDate" required>
-            </label>
-            <label class="f">Drop off
-              <select id="fTime">
-                <option>Morning drop off</option>
-                <option>Midday drop off</option>
-                <option>Whatever works for Chad</option>
-              </select>
-            </label>
             <label class="f full">Year, make and model
               <input type="text" id="fCar" placeholder="2021 Ford F-150" autocomplete="off" required>
             </label>
@@ -53,13 +53,31 @@
         <div class="total"><span id="sumLabel">Total</span><b id="sumTotal">$0</b></div>
         <div class="deposit" id="sumDeposit"></div>
         <p class="fine" id="sumFine">Final price is confirmed when Chad sees the vehicle. Heavily soiled vehicles may cost more.</p>
-        <button class="btn btn-blue" type="submit" id="sendBtn">Request this appointment</button>
+        <button class="btn btn-blue" type="submit" id="sendBtn">Book this appointment</button>
         <p class="err" id="err" role="alert"></p>
       </aside>
     </form>
 
+    <div class="checkout" id="checkout" hidden>
+      <div class="preview-flag"><b>PREVIEW ONLY, NO CARD IS CHARGED.</b> On the real site, Square's secure card checkout opens here. This demo never asks for card details.</div>
+      <div class="co-card">
+        <span class="label">Hold your day</span>
+        <h3 id="coHead"></h3>
+        <div class="lines" id="coLines"></div>
+        <div class="co-split">
+          <div><span>Due today, {pct}%</span><b id="coNow"></b></div>
+          <div><span id="coLaterLabel">Due at pickup</span><b id="coLater"></b></div>
+        </div>
+        <div class="co-actions">
+          <button class="btn btn-blue" type="button" id="payBtn">Pay deposit</button>
+          <button class="btn btn-ghost" type="button" id="coBack">Change something</button>
+        </div>
+        <p class="fine">Card payments run through Square. Chad gets the booking and the deposit at the same time.</p>
+      </div>
+    </div>
+
     <div class="result" id="result">
-      <div class="preview-flag"><b>PREVIEW ONLY, NOTHING WAS SENT.</b> This is a design concept. On the real site this request goes straight to Chad's phone and email, and coating deposits go through a card checkout.</div>
+      <div class="preview-flag"><b>PREVIEW ONLY, NOTHING WAS SENT OR CHARGED.</b> This is a design concept. On the real site the booking and the deposit go straight to Chad, and the time slot is taken off the calendar.</div>
       <div class="result-grid">
         <div class="result-card">
           <h3>What you'd see</h3>
@@ -72,11 +90,11 @@
         <div class="result-card">
           <h3>What lands on Chad's phone</h3>
           <div class="phone">
-            <div class="who">New booking request &middot; twelvewestdetail.com</div>
+            <div class="who">New booking &middot; twelvewestdetail.com</div>
             <div class="bubble" id="rText"></div>
             <div class="bubble me" id="rReply"></div>
           </div>
-          <p class="fine">Everything he needs to say yes in one text: the vehicle, the service, the price and the day. No back and forth to figure out what someone wants.</p>
+          <p class="fine">The booking arrives already paid for: the vehicle, the service, the price, the day and the time, with half the money in. No back and forth.</p>
         </div>
       </div>
     </div>

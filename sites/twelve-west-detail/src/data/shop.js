@@ -19,6 +19,13 @@ export const shop = {
   ],
   // Day numbers the booking form refuses (0 is Sunday).
   closedDays: [0],
+  // Drop-off times offered online, and how far ahead people can book.
+  // Services listed in fullDay take the whole day, so only the first drop-off is offered.
+  schedule: {
+    slots: ['8:00 AM', '10:30 AM', '1:00 PM'],
+    fullDay: ['coat-3', 'coat-6', 'coat-life', 'platinum-plus'],
+    daysAhead: 14,
+  },
 };
 
 // Perkins Production credit and contact, for the concept footer and the appraisal.

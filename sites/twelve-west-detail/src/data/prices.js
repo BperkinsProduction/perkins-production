@@ -46,8 +46,9 @@ export const otherServices = [
   { group: 'Something else', id: 'specialty', name: 'Specialty vehicle', call: true, sub: 'RV, trailer, bike, classic' },
 ];
 
-// Coating deposit, as a share of the quote.
-export const depositRate = 0.2;
+// Share of the quote paid by card when someone books. The rest is due at pickup.
+// Services Chad prices by text (call: true) take no deposit until he sends a price.
+export const depositRate = 0.5;
 
 // "included" lists the services that already cover this add on.
 // "qty" offers a quantity menu, "unit" is shown after the price.
