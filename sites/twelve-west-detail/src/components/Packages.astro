@@ -19,7 +19,7 @@ const addonPrice = (a) => (a.from ? 'from ' : '') + money(a.price) + (a.unit ===
   <div class="wrap">
     <span class="label">Packages</span>
     <h2>Pick your size. See your price.</h2>
-    <p class="lede">Every package is priced by vehicle size. Tap yours and every price on this page updates.</p>
+    <p class="lede">Every package is priced by vehicle size. Tap yours, then choose a package to book it.</p>
 
     <div class="sizes" role="group" aria-label="Vehicle size">
       {sizes.map((s, i) => (
@@ -47,19 +47,19 @@ const addonPrice = (a) => (a.from ? 'from ' : '') + money(a.price) + (a.unit ===
     <div class="more">
       <div class="card">
         <h3>Interior only</h3>
-        <div class="row"><span>{intBase.name}</span><span>from {money(intBase.from)}</span></div>
-        <div class="row"><span>{intDeluxe.name}</span><span>from {money(intDeluxe.from)}</span></div>
+        <a class="row pickrow" href="#quote" data-pick={intBase.id}><span>{intBase.name}</span><span>from {money(intBase.from)}</span></a>
+        <a class="row pickrow" href="#quote" data-pick={intDeluxe.id}><span>{intDeluxe.name}</span><span>from {money(intDeluxe.from)}</span></a>
         <p style="margin-top:8px">Deluxe adds compressed air in every crack, shampoo and extraction of carpets, mats and seats, and odor removal.</p>
       </div>
       <div class="card">
         <h3>Wash and wax</h3>
-        <div class="row"><span>Hand wash, iron decon, carnauba wax</span><span>from {money(washWax.from)}</span></div>
+        <a class="row pickrow" href="#quote" data-pick={washWax.id}><span>Hand wash, iron decon, carnauba wax</span><span>from {money(washWax.from)}</span></a>
         <p style="margin-top:8px">Exterior only, non commercial vehicles. Platinum tire dressing and exterior glass included.</p>
       </div>
       <div class="card">
         <h3>Add ons</h3>
         {featuredAddons.map((a) => <div class="row"><span>{a.name}</span><span>{addonPrice(a)}</span></div>)}
-        <p style="margin-top:8px"><a href="#quote">See all of them in the quote builder</a></p>
+        <p style="margin-top:8px"><a href="#quote">Add any of them when you book</a></p>
       </div>
     </div>
   </div>

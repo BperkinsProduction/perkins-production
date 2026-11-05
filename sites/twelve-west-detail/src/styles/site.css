@@ -151,6 +151,10 @@
   .row { display: flex; justify-content: space-between; gap: 12px; font-size: .9rem; padding: 6px 0; border-top: 1px solid rgba(255,255,255,.05); }
   .row span:last-child { color: var(--white); font-weight: 600; white-space: nowrap; }
   .more p { font-size: .86rem; color: var(--muted); margin: 0; }
+  a.pickrow { color: var(--text); text-decoration: none; border-radius: 6px; transition: background .2s, color .2s; }
+  a.pickrow span:first-child::after { content: " \2192"; color: var(--blue); opacity: 0; transition: opacity .2s; }
+  a.pickrow:hover, a.pickrow:focus-visible { background: rgba(30,167,238,.08); color: var(--white); }
+  a.pickrow:hover span:first-child::after, a.pickrow:focus-visible span:first-child::after { opacity: 1; }
   @media (max-width: 860px) { .more { grid-template-columns: 1fr; } }
 
   /* ceramic */
@@ -198,6 +202,14 @@
   .choice input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
   .group-name { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 14px 0 8px; font-weight: 600; }
   .group-name:first-child { margin-top: 0; }
+  .pick-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; }
+  .builder > *, .pick-row > * { min-width: 0; }
+  .pick select { text-overflow: ellipsis; }
+  .pick .fine { margin: 10px 0 0; }
+  .pick .fine a { color: var(--blue); }
+  .step.pick.flash { border-color: var(--blue); box-shadow: 0 0 0 4px var(--accent-muted, rgba(30,167,238,.22)); transition: border-color .3s, box-shadow .3s; }
+  .step.pick { transition: border-color 1.2s, box-shadow 1.2s; }
+  @media (max-width: 560px) { .pick-row { grid-template-columns: 1fr; } }
   .addons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .addon { display: flex; align-items: center; gap: 10px; background: var(--panel-2); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .86rem; cursor: pointer; }
   .addon input[type=checkbox] { accent-color: var(--blue); width: 18px; height: 18px; flex: none; }
