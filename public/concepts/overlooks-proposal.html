@@ -288,6 +288,41 @@ footer p {
     color: var(--text-secondary);
 }
 
+/* Black Friday offer. A script at the bottom hides it after Friday, November 27. */
+[hidden] { display: none !important; }
+.bf-band {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: var(--text-accent);
+    color: var(--bg-primary);
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    padding: 0.85rem 1.25rem;
+}
+.bf-band s { opacity: 0.6; }
+.bf-band strong { font-weight: 700; }
+.bf-band .go { white-space: nowrap; border-bottom: 1px solid currentColor; margin-left: 0.5rem; }
+.tier .was {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    margin-right: 0.4rem;
+}
+.tier .deal {
+    color: var(--text-accent-light);
+    font-family: 'Josefin Slab', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
 @media screen and (max-width: 768px) {
     section, .cover { padding: 4rem 1.5rem; }
     .cover h1 { font-size: 2rem; letter-spacing: 4px; }
@@ -308,6 +343,7 @@ footer p {
 </style>
 </head>
 <body>
+<a class="bf-band" href="#investment" data-bf="deal">Black Friday &middot; Both Overlooks <s>$12,500</s> <strong>$8,750</strong> &middot; 30% off when you say go by Friday, November&nbsp;27 <span class="go">See the price</span></a>
 
 <div class="cover">
     <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkins Production"><defs><linearGradient id="gGprop" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b87a"/><stop offset="50%" stop-color="#c9a96e"/><stop offset="100%" stop-color="#b8944f"/></linearGradient></defs><g transform="translate(20,40)"><g stroke="url(#gGprop)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="40" y="35" width="120" height="82" rx="6"/><circle cx="100" cy="41.5" r="0.9" fill="url(#gGprop)" stroke="none"/><rect x="46" y="47" width="108" height="64" rx="3" opacity="0.45"/><g opacity="0.7"><rect x="49.5" y="51" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="57" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="63" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="69" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="75" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="81" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="87" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="93" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="99" width="4.5" height="3.2" rx="0.6"/><rect x="49.5" y="105" width="4.5" height="3.2" rx="0.6"/></g><circle cx="105" cy="79" r="24"/><circle cx="105" cy="79" r="18" opacity="0.85"/><circle cx="105" cy="79" r="12" opacity="0.7"/><circle cx="105" cy="79" r="5"/><path d="M102.6 76.2L102.6 81.8L107.4 79Z" fill="url(#gGprop)" stroke="url(#gGprop)" stroke-width="0.6"/><path d="M88 70A22 22 0 0 1 99 60" stroke="#fff" stroke-width="1.2" opacity="0.5"/><line x1="36" y1="120" x2="164" y2="120"/><path d="M36 120L164 120L172 138Q172 142 168 142L32 142Q28 142 28 138Z"/><line x1="50" y1="126" x2="150" y2="126" opacity="0.35"/><line x1="48" y1="130" x2="152" y2="130" opacity="0.35"/><rect x="86" y="134.5" width="28" height="4" rx="1" opacity="0.55"/><line x1="92" y1="142" x2="108" y2="142" opacity="0.6" stroke-width="1.8"/></g></g><g transform="translate(240,0)"><text x="0" y="120" font-family="Cormorant Garamond,Georgia,serif" font-size="84" font-weight="600" letter-spacing="2" fill="#e8e8e8">PERKINS</text><line x1="0" y1="140" x2="420" y2="140" stroke="url(#gGprop)" stroke-width="1.2"/><text x="0" y="180" font-family="Cormorant Garamond,Georgia,serif" font-size="22" font-weight="400" letter-spacing="14" fill="#999">PRODUCTION</text><line x1="0" y1="208" x2="20" y2="208" stroke="url(#gGprop)" stroke-width="1.5"/><text x="30" y="212" font-family="Josefin Slab,Georgia,serif" font-size="11" font-weight="400" letter-spacing="3.5" fill="#666">PHOTO + VIDEO + DESIGN</text></g></svg>
@@ -315,7 +351,7 @@ footer p {
     <h1>Three Venues, Three Sites</h1>
     <div class="divider"></div>
     <p class="prepared">Walker's Overlook and Dulany's Overlook, finally separated, each on the address you already own. Plus the Hagerstown venue when the partnership is ready.</p>
-    <p class="date">October 28, 2026</p>
+    <p class="date">October 28, 2026 &middot; <span style="white-space: nowrap">Updated November 9</span></p>
 </div>
 
 <section class="alt-bg">
@@ -386,7 +422,7 @@ footer p {
     </div>
 </section>
 
-<section class="alt-bg">
+<section class="alt-bg" id="investment">
     <div class="inner">
         <div class="section-header">
             <h2>The Investment</h2>
@@ -410,7 +446,9 @@ footer p {
             <div class="tier recommended">
                 <div class="badge">Recommended</div>
                 <h3>Both Overlooks</h3>
-                <div class="price">$12,500</div>
+                <div class="price" data-bf="deal"><span class="was">$12,500</span>$8,750</div>
+                <p class="deal" data-bf="deal">Black Friday, through Nov&nbsp;27</p>
+                <div class="price" data-bf="regular" hidden>$12,500</div>
                 <p class="per">one-time</p>
                 <ul>
                     <li>Walker's and Dulany's, fully separated</li>
@@ -441,6 +479,7 @@ footer p {
             <h3>What It Has To Earn</h3>
             <p>A Saturday at either farm is <strong>$9,500</strong>. Friday is $8,000, Sunday $7,000.</p>
             <p>So <strong>Both Overlooks pays for itself with roughly one and a half extra Saturdays.</strong> Not every year. Once.</p>
+            <p data-bf="deal">At the Black Friday price of $8,750, <strong>it pays for itself with less than one Saturday.</strong></p>
             <p>Everything after that is the part where you are busier.</p>
         </div>
     </div>
@@ -493,8 +532,8 @@ footer p {
             <div class="divider"></div>
         </div>
         <div class="terms">
-            <p><strong>To book:</strong> a third to start, a third at the first look in December, a third at launch. On Both Overlooks that is $4,167 three times.</p>
-            <p><strong>This quote holds for:</strong> 30 days from the date on the cover.</p>
+            <p><strong>To book:</strong> a third to start, a third at the first look in December, a third at launch. On Both Overlooks that is $4,167 three times.<span data-bf="deal"> At the Black Friday price it is $2,917, $2,917, and $2,916.</span></p>
+            <p><strong>This quote holds for:</strong> 30 days from October 28, so through Friday, November 27.<span data-bf="deal"> The Black Friday price needs your go-ahead by that day too.</span></p>
             <p><strong>Photos:</strong> I will need a short written OK from each photographer who contributes, even just an email reply saying the venues can use their images on the websites. Photographers own their wedding photos even when it is your property in the frame, and venues get caught out on this more often than you would think. Every contributing photographer gets credit on the site, which is usually why they say yes.</p>
             <p><strong>If photos run late:</strong> the schedule moves, the payment dates do not. Projects like this stall waiting on images more than anything else, which is why November 21 is in here on purpose.</p>
             <p><strong>Revisions:</strong> two full rounds on each site are included, which is more than almost anyone uses. Past that it is $95 an hour.</p>
@@ -522,6 +561,14 @@ footer p {
     <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perkins Production"><defs><linearGradient id="gGpropFoot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4b87a"/><stop offset="50%" stop-color="#c9a96e"/><stop offset="100%" stop-color="#b8944f"/></linearGradient></defs><g transform="translate(20,40)"><g stroke="url(#gGpropFoot)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="40" y="35" width="120" height="82" rx="6"/><circle cx="100" cy="41.5" r="0.9" fill="url(#gGpropFoot)" stroke="none"/><rect x="46" y="47" width="108" height="64" rx="3" opacity="0.45"/><circle cx="105" cy="79" r="24"/><circle cx="105" cy="79" r="18" opacity="0.85"/><circle cx="105" cy="79" r="12" opacity="0.7"/><circle cx="105" cy="79" r="5"/><path d="M102.6 76.2L102.6 81.8L107.4 79Z" fill="url(#gGpropFoot)" stroke="url(#gGpropFoot)" stroke-width="0.6"/><line x1="36" y1="120" x2="164" y2="120"/><path d="M36 120L164 120L172 138Q172 142 168 142L32 142Q28 142 28 138Z"/><rect x="86" y="134.5" width="28" height="4" rx="1" opacity="0.55"/></g></g><g transform="translate(240,0)"><text x="0" y="120" font-family="Cormorant Garamond,Georgia,serif" font-size="84" font-weight="600" letter-spacing="2" fill="#e8e8e8">PERKINS</text><line x1="0" y1="140" x2="420" y2="140" stroke="url(#gGpropFoot)" stroke-width="1.2"/><text x="0" y="180" font-family="Cormorant Garamond,Georgia,serif" font-size="22" font-weight="400" letter-spacing="14" fill="#999">PRODUCTION</text><line x1="0" y1="208" x2="20" y2="208" stroke="url(#gGpropFoot)" stroke-width="1.5"/><text x="30" y="212" font-family="Josefin Slab,Georgia,serif" font-size="11" font-weight="400" letter-spacing="3.5" fill="#666">PHOTO + VIDEO + DESIGN</text></g></svg>
     <p>Perkins Production · Frederick, Maryland · (240) 818-1955</p>
 </footer>
+
+<script>
+  // The Black Friday offer ends at midnight Eastern, the end of Friday, November 27, 2026.
+  if (Date.now() >= Date.parse('2026-11-28T05:00:00Z')) {
+    document.querySelectorAll('[data-bf="deal"]').forEach(function (el) { el.hidden = true; });
+    document.querySelectorAll('[data-bf="regular"]').forEach(function (el) { el.hidden = false; });
+  }
+</script>
 
 </body>
 </html>
