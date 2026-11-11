@@ -2,6 +2,7 @@
 // Every price comes from src/data/prices.js, the same file the page is built from.
 import { sizes, defaultSize, packages, otherServices, addons, depositRate, money } from '../data/prices.js';
 import { shop } from '../data/shop.js';
+import { findSize, onlyMake } from '../data/vehicles.js';
 
 const SIZES = sizes.map((s) => s.name);
 const state = { size: defaultSize, service: 'platinum', addons: {}, day: '', slot: '' };
@@ -26,6 +27,26 @@ function setSize(i) {
   update();
 }
 document.querySelectorAll('.size').forEach((b) => b.addEventListener('click', () => setSize(+b.dataset.size)));
+
+// Type your car: the size is picked for them, every finder on the page agrees, and the
+// car carries into the booking form so they do not type it twice.
+const finders = [...document.querySelectorAll('[data-finder]')];
+let carTyped = false;
+function runFinder(text, from) {
+  const hit = findSize(text);
+  finders.forEach((f) => {
+    if (f !== from) f.value = text;
+    const out = f.parentElement.querySelector('.finder-out');
+    out.classList.toggle('hit', !!hit);
+    if (!text.trim()) out.textContent = '';
+    else if (hit) out.innerHTML = 'That is ' + (/^[AEIOUX]/.test(SIZES[hit.size]) ? 'an' : 'a') + ' <b>' + SIZES[hit.size] + '</b>. Every price is set for ' + SIZES[hit.size] + '.';
+    else if (text.trim().length < 3) out.textContent = '';
+    else out.textContent = onlyMake(text) ? 'Add the model too, like Camry, Tahoe or F-150.' : 'Not on our list yet. Pick the closest size, and ' + shop.owner + ' confirms it when he sees it.';
+  });
+  if (hit && hit.size !== state.size) setSize(hit.size);
+  if (!carTyped) $('fCar').value = text;
+}
+finders.forEach((f) => f.addEventListener('input', () => runFinder(f.value, f)));
 
 $('qSizes').innerHTML = sizes.map((s, i) =>
   '<label class="choice"><input type="radio" name="qsize" value="' + i + '"' + (i === state.size ? ' checked' : '') + '><span><b>' + s.name + '</b><small>' + s.examples + '</small></span></label>'
@@ -189,6 +210,32 @@ $('qSlots').addEventListener('click', (e) => {
   $('err').textContent = '';
 });
 
+$('fCar').addEventListener('input', () => { carTyped = true; });
+
+// Photos with the booking. In the demo they stay on this device; on the real site they go
+// to Chad with the booking.
+const MAX_SHOTS = 4;
+let shots = [];
+function renderShots() {
+  const add = $('shots').querySelector('.shot-add');
+  $('shots').querySelectorAll('.shot').forEach((el) => el.remove());
+  shots.forEach((sh, i) => {
+    const el = document.createElement('div');
+    el.className = 'shot';
+    el.innerHTML = '<img alt="Your photo ' + (i + 1) + '"><button type="button" aria-label="Remove photo ' + (i + 1) + '">&times;</button>';
+    el.querySelector('img').src = sh.url;
+    el.querySelector('button').addEventListener('click', () => { URL.revokeObjectURL(sh.url); shots.splice(i, 1); renderShots(); });
+    $('shots').insertBefore(el, add);
+  });
+  add.hidden = shots.length >= MAX_SHOTS;
+}
+$('fPhotos').addEventListener('change', (e) => {
+  [...e.target.files].filter((f) => f.type.startsWith('image/')).slice(0, MAX_SHOTS - shots.length)
+    .forEach((f) => shots.push({ url: URL.createObjectURL(f) }));
+  e.target.value = '';
+  renderShots();
+});
+
 let pending = null;
 $('builder').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -218,6 +265,31 @@ $('builder').addEventListener('submit', (e) => {
 $('coBack').addEventListener('click', () => { $('checkout').hidden = true; $('builder').style.display = ''; });
 $('payBtn').addEventListener('click', () => finish(true));
 
+// The texts the customer gets without Chad typing any of them.
+function renderTexts(paid, q, first, day) {
+  const dayName = parseDay(state.day).toLocaleDateString('en-US', { weekday: 'long' });
+  const left = money(q.total - q.deposit) + (q.from ? ' or so' : '');
+  const items = paid ? [
+    ['Right away', 'Twelve West Detail: You are booked, ' + first + '. ' + day + ', drop off ' + state.slot + '. ' + money(q.deposit) + ' deposit received. 12 W Frederick St, Unit B, Walkersville.'],
+    ['Day before, 5 PM', 'Reminder: ' + q.svcName + ' tomorrow, drop off ' + state.slot + '. Need to move it? Tap to pick a new time.'],
+    ['When it is done', 'Your car is ready, ' + first + '! ' + left + ' left to pay. Pay here or at pickup.'],
+    ['8 weeks later', 'Hey ' + first + ', it has been about 8 weeks. Time to keep that shine up? Book your next one in a tap.'],
+  ] : [
+    ['Right away', 'Twelve West Detail: Got your request, ' + first + '. ' + shop.owner + ' will text your price for ' + day + ' shortly.'],
+    ['After ' + shop.owner + ' prices it', 'Your price is ready. Tap to see it and hold ' + day + ' with ' + depositRate * 100 + '% down.'],
+    ['Day before, 5 PM', 'Reminder: you are booked for tomorrow, drop off ' + state.slot + '. Need to move it? Tap to pick a new time.'],
+    ['8 weeks later', 'Hey ' + first + ', it has been about 8 weeks. Time to keep that shine up? Book your next one in a tap.'],
+  ];
+  $('rTexts').innerHTML = '';
+  items.forEach(([when, text]) => {
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="when"></span><div class="bubble"></div>';
+    li.querySelector('.when').textContent = when;
+    li.querySelector('.bubble').textContent = text;
+    $('rTexts').appendChild(li);
+  });
+}
+
 function finish(paid) {
   const { q, name, phone, car, notes } = pending;
   const day = parseDay(state.day).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
@@ -231,7 +303,15 @@ function finish(paid) {
   $('rText').textContent = (paid ? 'BOOKED and ' + money(q.deposit) + ' deposit paid (preview)\n' : 'Price request\n') +
     name + ', ' + prettyPhone(phone) + '\n' + car + ' (' + SIZES[state.size] + ')\n' + q.svcName + (extras ? '\n+ ' + extras : '') +
     '\n' + (q.call ? 'Needs your price' + (q.total ? ', add ons ' + money(q.total) : '') : totalLabel(q) + ': ' + money(q.total) + ', ' + money(q.total - q.deposit) + ' at pickup') +
-    '\n' + day + ', drop off ' + state.slot + (notes ? '\nNote: "' + notes + '"' : '');
+    '\n' + day + ', drop off ' + state.slot + (notes ? '\nNote: "' + notes + '"' : '') +
+    (shots.length ? '\n' + shots.length + (shots.length > 1 ? ' photos' : ' photo') + ' attached' : '');
+  if (shots.length) {
+    const pics = document.createElement('div');
+    pics.className = 'pics';
+    shots.forEach((sh) => { const im = document.createElement('img'); im.src = sh.url; im.alt = ''; pics.appendChild(im); });
+    $('rText').appendChild(pics);
+  }
+  renderTexts(paid, q, first, day);
   $('rReply').textContent = paid ? 'Thanks ' + first + '! See you ' + parseDay(state.day).toLocaleDateString('en-US', { weekday: 'long' }) + ' at ' + state.slot + '.' : 'Hey ' + first + ', I can do that for you. Sending your price now.';
   $('builder').style.display = 'none';
   $('checkout').hidden = true;

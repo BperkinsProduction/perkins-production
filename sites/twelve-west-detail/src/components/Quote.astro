@@ -1,5 +1,6 @@
 ---
 import { depositRate } from '../data/prices.js';
+import { shop } from '../data/shop.js';
 const pct = depositRate * 100;
 ---
 <section id="quote" data-reveal>
@@ -13,6 +14,11 @@ const pct = depositRate * 100;
         <div class="step">
           <h3><i>1</i>Vehicle size</h3>
           <div class="choices" id="qSizes"></div>
+          <div class="finder">
+            <label for="carFind2">Not sure? Type your car</label>
+            <input type="text" id="carFind2" data-finder placeholder="2019 Chevy Tahoe" autocomplete="off" spellcheck="false">
+            <p class="finder-out" aria-live="polite"></p>
+          </div>
         </div>
         <div class="step">
           <h3><i>2</i>Service</h3>
@@ -43,6 +49,14 @@ const pct = depositRate * 100;
             <label class="f full">Anything Chad should know?
               <textarea id="fNotes" placeholder="Dog hair in the back seat, kids spilled a milkshake, getting it ready to sell..."></textarea>
             </label>
+            <div class="f full photos">
+              <span>Photos <small>(optional, up to 4)</small></span>
+              <div class="shots" id="shots">
+                <label class="shot-add" for="fPhotos"><span aria-hidden="true">+</span>Add photos</label>
+              </div>
+              <input type="file" id="fPhotos" accept="image/*" multiple hidden>
+              <p class="fine">Snap the back seat, the scratch, the dog hair. {shop.owner} sees it before he confirms your price.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -95,6 +109,11 @@ const pct = depositRate * 100;
             <div class="bubble me" id="rReply"></div>
           </div>
           <p class="fine">The booking arrives already paid for: the vehicle, the service, the price, the day and the time, with half the money in. No back and forth.</p>
+        </div>
+        <div class="result-card texts">
+          <h3>Texts your customer gets, on their own</h3>
+          <ol class="timeline" id="rTexts"></ol>
+          <p class="fine">Sent automatically from the shop's number. {shop.owner} only taps one button: "Ready."</p>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.1dBxSnr-.css"></head>
+<link rel="stylesheet" href="/concepts/twelve-west-detail/_astro/index.Do8ECecl.css"></head>
 <body>
 <div class="env" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
@@ -111,6 +111,11 @@
           <strong>XL</strong><small>Three row XL, vans and heavy duty. Suburban, Super Duty</small>
         </button>
     </div>
+    <div class="finder">
+      <label for="carFind">Not sure? Type your car</label>
+      <input type="text" id="carFind" data-finder placeholder="2019 Chevy Tahoe" autocomplete="off" spellcheck="false">
+      <p class="finder-out" aria-live="polite"></p>
+    </div>
 
     <div class="packages" id="pkgList">
       <div class="pkg" data-pkg="ceramic-wash" data-prices="85,95,105,115">
@@ -209,6 +214,11 @@
         <div class="step">
           <h3><i>1</i>Vehicle size</h3>
           <div class="choices" id="qSizes"></div>
+          <div class="finder">
+            <label for="carFind2">Not sure? Type your car</label>
+            <input type="text" id="carFind2" data-finder placeholder="2019 Chevy Tahoe" autocomplete="off" spellcheck="false">
+            <p class="finder-out" aria-live="polite"></p>
+          </div>
         </div>
         <div class="step">
           <h3><i>2</i>Service</h3>
@@ -239,6 +249,14 @@
             <label class="f full">Anything Chad should know?
               <textarea id="fNotes" placeholder="Dog hair in the back seat, kids spilled a milkshake, getting it ready to sell..."></textarea>
             </label>
+            <div class="f full photos">
+              <span>Photos <small>(optional, up to 4)</small></span>
+              <div class="shots" id="shots">
+                <label class="shot-add" for="fPhotos"><span aria-hidden="true">+</span>Add photos</label>
+              </div>
+              <input type="file" id="fPhotos" accept="image/*" multiple hidden>
+              <p class="fine">Snap the back seat, the scratch, the dog hair. Chad sees it before he confirms your price.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -292,12 +310,17 @@
           </div>
           <p class="fine">The booking arrives already paid for: the vehicle, the service, the price, the day and the time, with half the money in. No back and forth.</p>
         </div>
+        <div class="result-card texts">
+          <h3>Texts your customer gets, on their own</h3>
+          <ol class="timeline" id="rTexts"></ol>
+          <p class="fine">Sent automatically from the shop's number. Chad only taps one button: "Ready."</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<script type="module" src="/concepts/twelve-west-detail/_astro/Quote.astro_astro_type_script_index_0_lang.KU0OjFp4.js"></script>
+<script type="module" src="/concepts/twelve-west-detail/_astro/Quote.astro_astro_type_script_index_0_lang.ULOYbVrL.js"></script>
   <section id="work" data-reveal>
   <div class="wrap">
     <span class="label">Out of the bay</span>

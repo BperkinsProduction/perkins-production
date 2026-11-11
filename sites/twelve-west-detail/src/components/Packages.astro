@@ -29,6 +29,11 @@ const addonPrice = (a) => (a.from ? 'from ' : '') + money(a.price) + (a.unit ===
         </button>
       ))}
     </div>
+    <div class="finder">
+      <label for="carFind">Not sure? Type your car</label>
+      <input type="text" id="carFind" data-finder placeholder="2019 Chevy Tahoe" autocomplete="off" spellcheck="false">
+      <p class="finder-out" aria-live="polite"></p>
+    </div>
 
     <div class="packages" id="pkgList">
       {packages.map((p) => (
