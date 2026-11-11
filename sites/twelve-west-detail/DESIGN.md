@@ -54,7 +54,8 @@ On phones the ending frame is cropped taller and starts with dull paint. A sidew
 
 1. Award strip: Best of the Best 2020, 100% recommend on Facebook.
 2. Packages: size picker, five package cards as spec sheets with mono prices.
-3. Ceramic coating, with the one interactive moment: **hold to polish.** Press and hold the paint photo and a light bar sweeps it from hazy to glossy. Letting go early eases back. Finishing lights up the three coating tiers in turn.
+3. Paint correction: the **inspection light** (`src/scripts/inspect.js`). The hood sits in the dark and the pointer is a handheld light; Before shows swirl marks ringing the light, After Chad shows one clean reflection. It drifts on its own until someone moves it.
+4. Ceramic coating, with the one interactive moment: **hold to polish.** Press and hold the paint photo and a light bar sweeps it from hazy to glossy. Letting go early eases back. Finishing lights up the three coating tiers in turn. Below it, **water beading** (`src/scripts/beading.js`): rain on bare paint sheets out, rain on coated paint beads and rolls off.
 4. Quote builder and booking preview (unchanged behavior).
 5. Recent work gallery, Facebook feed row, interiors.
 6. Specialty vehicles.

@@ -1,0 +1,25 @@
+---
+import { img } from '../lib/paths.js';
+import { shop } from '../data/shop.js';
+---
+<section id="inspect" class="inspect" data-reveal>
+  <div class="wrap">
+    <span class="label">Paint correction</span>
+    <h2>Under the light, nothing hides.</h2>
+    <p class="lede">Detailers check paint with an inspection light. Move it across the hood. Those rings of fine scratches are swirl marks, left by car washes and dirty towels. Then see the same paint after {shop.owner} corrects it.</p>
+
+    <div class="ins-panel" id="insPanel" data-src={img('paint-panel.jpg')}>
+      <canvas aria-hidden="true"></canvas>
+      <div class="ins-modes" role="group" aria-label="Paint condition">
+        <button type="button" data-mode="0" aria-pressed="true">Before</button>
+        <button type="button" data-mode="1" aria-pressed="false">After {shop.owner}</button>
+      </div>
+      <p class="ins-read" aria-live="polite">Swirl marks and fine scratches</p>
+      <p class="ins-hint" aria-hidden="true">move the light</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "../scripts/inspect.js";
+</script>

@@ -23,8 +23,17 @@ import { coatings, depositRate, money } from '../data/prices.js';
       <a class="btn btn-blue" href="#quote" data-pick={coatings[0].id}>Quote a coating</a>
     </div>
   </div>
+  <div class="wrap">
+    <div class="beads" id="beads">
+      <canvas aria-hidden="true"></canvas>
+      <span class="bead-tag l">Bare paint</span>
+      <span class="bead-tag r">Ceramic coated</span>
+    </div>
+    <p class="fine bead-cap">Same paint, same rain. Bare paint holds water in flat sheets that dry into spots. Coated paint pulls it into beads that roll off and take the dirt with them.</p>
+  </div>
 </section>
 
 <script>
   import "../scripts/polish.js";
+  import "../scripts/beading.js";
 </script>

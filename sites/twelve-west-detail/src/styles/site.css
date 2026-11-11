@@ -193,6 +193,29 @@
   .more p { font-size: .86rem; color: var(--muted); margin: 0; }
   @media (max-width: 860px) { .more { grid-template-columns: 1fr; } }
 
+  /* inspection light: the paint in the dark, lit by the pointer */
+  .inspect { padding-top: 0; }
+  .ins-panel { position: relative; aspect-ratio: 16 / 8; border-radius: var(--radius); overflow: hidden; background: #050608; border: 1px solid var(--line); cursor: none; touch-action: pan-y; }
+  .ins-panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .ins-modes { position: absolute; left: 16px; top: 16px; display: flex; padding: 4px; gap: 4px; border-radius: 999px; background: rgba(8,10,14,.7); border: 1px solid rgba(238,244,250,.16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: auto; }
+  .ins-modes button { border: 0; border-radius: 999px; padding: 8px 16px; background: transparent; color: var(--muted); font: 500 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s; }
+  .ins-modes button[aria-pressed=true] { background: var(--blue); color: #021018; }
+  .ins-modes button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .ins-read { position: absolute; right: 16px; bottom: 14px; margin: 0; font: 500 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #ffb4a8; pointer-events: none; transition: color .4s; }
+  .ins-panel.after .ins-read { color: var(--blue); }
+  .ins-hint { position: absolute; left: 16px; bottom: 14px; margin: 0; font: 500 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); pointer-events: none; transition: opacity .5s; }
+  .ins-hint.gone { opacity: 0; }
+  @media (max-width: 720px) { .ins-panel { aspect-ratio: 4 / 4.6; cursor: auto; } .ins-read { left: 16px; right: auto; bottom: 40px; } .ins-hint::before { content: "Tap or drag to "; } .ins-hint { text-transform: none; letter-spacing: .04em; } }
+  @media (hover: none) { .ins-panel { cursor: auto; } }
+
+  /* water beading: bare paint next to coated paint */
+  .beads { position: relative; margin-top: clamp(40px, 6vw, 72px); height: clamp(240px, 30vw, 340px); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  .beads canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .bead-tag { position: absolute; top: 14px; padding: 7px 12px; border-radius: 999px; background: rgba(8,10,14,.66); border: 1px solid rgba(238,244,250,.18); color: var(--white); font: 500 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .bead-tag.l { left: 14px; }
+  .bead-tag.r { right: 14px; color: var(--blue); }
+  .bead-cap { max-width: 640px; margin: 12px 0 0; }
+
   /* ceramic */
   .ceramic { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
   .ceramic figure { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; }
