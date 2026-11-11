@@ -78,6 +78,12 @@
   .scrub-stage.video-ready .sign3d img.t { animation: neonon 1.6s linear both, neonhum 5s 1.6s ease-in-out infinite; }
   .scrub-stage.video-ready .sign3d img.g { animation: neonon 1.4s .7s linear both, neonhum 6.5s 2.1s ease-in-out infinite reverse; }
   .scrub-stage.video-ready .sign3d::after { animation: neonwash 1.6s linear both, neonhum 5s 1.6s ease-in-out infinite; }
+  .ph-sign img.t { filter: brightness(1.4) saturate(1.15) drop-shadow(0 0 1px rgba(235,248,255,1)) drop-shadow(0 0 4px rgba(82,189,244,.95)) drop-shadow(0 0 12px rgba(30,167,238,.85)) drop-shadow(0 0 28px rgba(30,167,238,.55)); }
+  .ph-sign img.g { filter: brightness(.88) contrast(1.15) drop-shadow(0 0 .5px rgba(255,255,255,.9)) drop-shadow(0 0 4px rgba(215,236,255,.55)) drop-shadow(0 0 10px rgba(170,210,255,.35)); }
+  @media (prefers-reduced-motion: no-preference) {
+    .ph-sign img.t { animation: neonon 1.6s .3s linear both, neonhum 5s 1.9s ease-in-out infinite; }
+    .ph-sign img.g { animation: neonon 1.4s 1s linear both, neonhum 6.5s 2.4s ease-in-out infinite reverse; }
+  }
   @keyframes neonon { 0% { opacity: 0; } 8% { opacity: .9; } 12% { opacity: .1; } 20% { opacity: .85; } 24% { opacity: .2; } 30% { opacity: 1; } 34% { opacity: .55; } 40%, 100% { opacity: 1; } }
   @keyframes neonwash { 0%, 28% { opacity: 0; } 40% { opacity: .7; } 100% { opacity: 1; } }
   @keyframes neonhum { 0%, 100% { opacity: 1; } 47% { opacity: 1; } 48% { opacity: .82; } 49% { opacity: 1; } 70% { opacity: .94; } }
@@ -112,7 +118,23 @@
   @media (max-height: 560px) { .cue, .ring { display: none; } }
 
   .static-hero { display: none; position: relative; padding: 0 0 clamp(36px, 8vw, 64px); }
-  .static-hero img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+  /* phone hero: a taller crop of the finished car that the visitor polishes with a thumb */
+  .ph-stage { position: relative; aspect-ratio: 4 / 4.4; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent); mask-image: linear-gradient(180deg, #000 74%, transparent); }
+  .ph-stage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 60%; }
+  .ph-grade { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .4s; }
+  .ph-stage.graded .ph-grade { opacity: 1; }
+  .ph-sign { position: absolute; left: 50%; top: 9%; width: 86%; transform: translateX(-51%); pointer-events: none; }
+  .ph-sign::before { content: ""; position: absolute; inset: -40% -10%; background: radial-gradient(ellipse 50% 50% at 50% 46%, rgba(6,10,16,.78) 30%, rgba(6,10,16,.45) 58%, rgba(6,10,16,0) 78%); }
+  .ph-sign img { position: relative; z-index: 2; display: block; width: 100%; height: auto; }
+  .ph-sign img.g { position: absolute; left: 0; top: 0; }
+  .ph-hint { position: absolute; left: 50%; top: 52%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; padding: 10px 16px 10px 12px; border-radius: 999px; background: rgba(8,10,14,.68); border: 1px solid rgba(238,244,250,.22); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--white); font: 500 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; pointer-events: none; transition: opacity .5s var(--ease); }
+  .ph-hint.gone { opacity: 0; }
+  .ph-hand { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--tube); box-shadow: 0 0 10px rgba(238,244,250,.6); animation: phswipe 1.8s var(--ease-soft) infinite; }
+  @keyframes phswipe { 0% { transform: translateX(-6px); opacity: .3; } 50% { transform: translateX(8px); opacity: 1; } 100% { transform: translateX(-6px); opacity: .3; } }
+  .ph-stage .ph-meter { right: 12px; bottom: auto; top: 12px; padding: 7px 12px; opacity: 1; }
+  .ph-stage .ph-meter span { font-size: .58rem; }
+  .ph-stage .ph-meter b { font-size: .82rem; }
+  .ph-stage:not(.graded) .ph-hint, .ph-stage:not(.graded) .ph-meter { display: none; }
   .static-hero .wrap { margin-top: -12vw; position: relative; }
   .static-hero h1 { font-size: clamp(2.6rem, 12vw, 5rem); font-weight: 900; text-transform: uppercase; line-height: .9; color: var(--white); margin: 0 0 1rem; }
   .static-hero h1 span { color: var(--blue); }

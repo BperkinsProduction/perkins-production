@@ -48,6 +48,8 @@ Hero height 420vh. Phones, tablets held upright, landscape phones and reduced mo
 
 The ending frame of the film with band 3's copy over it, buttons included.
 
+On phones the ending frame is cropped taller and starts with dull paint. A sideways thumb drag moves the polish line across the car (same shader as the film, `src/scripts/phone-polish.js`), with the Paint correction meter and the neon sign at the top. Up and down swipes still scroll the page. Without WebGL it is the plain finished photo.
+
 ## 6. Below the hero
 
 1. Award strip: Best of the Best 2020, 100% recommend on Facebook.

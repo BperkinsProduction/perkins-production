@@ -2,6 +2,7 @@
 // line the paint is dull, hazy and gritty; behind it the paint is deep red with crisp
 // reflections. The line sweeps across the frame as the visitor scrolls, like a buffer pass.
 // Walls, doors and floor are left alone. Without WebGL the film just plays ungraded.
+// The source can be the film or a still photo (the phone hero polishes the ending frame).
 
 const VERT = `attribute vec2 p; varying vec2 uv; uniform vec2 sc; uniform vec2 off;
 void main(){ uv = (p * 0.5 + 0.5) * sc + off; uv.y = 1.0 - uv.y; gl_Position = vec4(p, 0.0, 1.0); }`;
@@ -35,7 +36,8 @@ void main(){
   gl_FragColor = vec4(mix(c, clamp(car, 0.0, 1.0), red), 1.0);
 }`;
 
-export function createPaintGrade(canvas, video) {
+export function createPaintGrade(canvas, video, pos = [0.5, 0.5]) {
+  const still = !('videoWidth' in video);
   const gl = canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false });
   if (!gl) return null;
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
@@ -58,18 +60,21 @@ export function createPaintGrade(canvas, video) {
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     gl.viewport(0, 0, w, h);
-    const va = (video.videoWidth || 16) / (video.videoHeight || 9), ca = w / h;
+    const vw = still ? video.naturalWidth : video.videoWidth, vh = still ? video.naturalHeight : video.videoHeight;
+    const va = (vw || 16) / (vh || 9), ca = w / h;
     let sx = 1, sy = 1;
     if (ca > va) sy = va / ca; else sx = ca / va;
-    gl.uniform2f(uSc, sx, sy); gl.uniform2f(uOff, (1 - sx) / 2, (1 - sy) / 2);
+    gl.uniform2f(uSc, sx, sy); gl.uniform2f(uOff, (1 - sx) * pos[0], (1 - sy) * pos[1]);
   }
   let last = -1, lastClean = -1;
   function draw(clean, force) {
-    if (video.readyState < 2) return;
-    const t = video.currentTime;
+    if (still ? !video.complete || !video.naturalWidth : video.readyState < 2) return;
+    const t = still ? 0 : video.currentTime;
     if (!force && t === last && Math.abs(clean - lastClean) < 0.004) return;
+    // A still only needs uploading once.
+    const upload = !still || last === -1;
     last = t; lastClean = clean;
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);
+    if (upload) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);
     gl.uniform1f(uClean, clean);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
