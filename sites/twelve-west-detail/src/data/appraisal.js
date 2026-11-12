@@ -4,7 +4,6 @@ export const agencyLines = [
   { label: 'Mobile website with your photos, logo and full price list', amount: 3000 },
   { label: 'Scroll film of your bay, made from your own photo, with the shop cleaned up', amount: 1500 },
   { label: 'Hold to polish feature for ceramic coatings', amount: 500 },
-  { label: 'Inspection light and water beading demos that show your work', amount: 1000 },
   { label: 'Vehicle size picker that reprices every package', amount: 750 },
   { label: 'Quote builder with add ons and included items', amount: 1500 },
   { label: 'Online booking calendar with open drop off times', amount: 2000 },
