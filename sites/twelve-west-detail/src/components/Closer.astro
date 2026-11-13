@@ -1,0 +1,31 @@
+---
+import { page } from '../lib/paths.js';
+import { shop } from '../data/shop.js';
+---
+<section class="closer" id="closer" aria-labelledby="closerTitle">
+  <div class="wrap">
+    <h2 id="closerTitle" class="sr-only">{shop.name}</h2>
+    <div class="csign" aria-hidden="true">
+      <img class="t" src={page('sign/s12.webp')} alt="" width="1295" height="329" loading="lazy" decoding="async">
+      <img class="g" src={page('sign/g12.webp')} alt="" width="1295" height="329" loading="lazy" decoding="async">
+    </div>
+    <p class="closer-line">The lights are on. Bring it in.</p>
+    <div class="ctas">
+      <a class="btn btn-blue" href="#quote">Book your detail</a>
+      <a class="btn btn-ghost" href={shop.phoneHref}>Call {shop.phone}</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // The sign flickers on the first time it comes into view, like the one in the hero.
+  const closer = document.getElementById('closer');
+  if (closer) {
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      closer.classList.add('on');
+      io.disconnect();
+    }, { threshold: 0.35 });
+    io.observe(closer);
+  }
+</script>

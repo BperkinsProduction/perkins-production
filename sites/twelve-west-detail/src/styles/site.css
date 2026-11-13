@@ -406,8 +406,9 @@
 
   /* entrances: the section heading gets a tube line that draws across, then the content rises in */
   [data-reveal] h2 { position: relative; padding-bottom: .5rem; }
-  [data-reveal] h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: min(220px, 40%); height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--tube), rgba(238,244,250,0)); box-shadow: 0 0 14px rgba(238,244,250,.45); transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease) .15s; }
-  [data-reveal].in h2::after { transform: scaleX(1); }
+  /* each heading's underline is a small blue neon tube: it draws across and flickers on, then hums like the sign */
+  [data-reveal] h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: min(220px, 40%); height: 3px; border-radius: 3px; background: linear-gradient(90deg, #e6f6ff, #7fd0f7 30%, var(--blue) 70%, rgba(30,167,238,0)); box-shadow: 0 0 4px rgba(127,208,247,.95), 0 0 12px rgba(30,167,238,.75), 0 0 28px rgba(30,167,238,.4); transform: scaleX(0); transform-origin: left; opacity: 0; transition: transform 1.1s var(--ease) .15s; }
+  [data-reveal].in h2::after { transform: scaleX(1); opacity: 1; animation: neonon 1.3s .2s linear both, neonhum 7s 2s ease-in-out infinite; }
   [data-reveal] .wrap > * { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   [data-reveal].in .wrap > * { opacity: 1; transform: none; }
   [data-reveal].in .wrap > *:nth-child(2) { transition-delay: .08s; }
@@ -423,7 +424,8 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; transition-delay: 0s !important; }
     [data-reveal] .wrap > *, [data-reveal] .wrap.ceramic > * { opacity: 1 !important; transform: none !important; }
-    [data-reveal] h2::after { transform: none !important; }
+    [data-reveal] h2::after { transform: none !important; opacity: 1 !important; }
+    .closer .csign img, .closer .csign::after { opacity: 1 !important; }
   }
   @media (pointer: coarse) { .btn { min-height: 44px; } }
 
@@ -472,3 +474,31 @@
   .pc-meter.full b { color: var(--blue); }
   @media (max-height: 560px) { .pc-meter { display: none; } }
 
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* featured package: a slow reflection passes over it now and then, and every card sweeps when the size changes */
+  .pkg.featured { box-shadow: 0 0 0 1px rgba(30,167,238,.18), 0 18px 50px -20px rgba(30,167,238,.35); }
+  .pkg.featured::after { animation: sweep 8s 2s var(--ease-soft) infinite; }
+  .pkg.swept::after { animation: sweep1 .9s var(--ease) both; }
+  @keyframes sweep { 0% { transform: translateX(-60%); opacity: 0; } 3% { opacity: 1; } 16% { transform: translateX(60%); opacity: 1; } 19%, 100% { transform: translateX(60%); opacity: 0; } }
+  @keyframes sweep1 { 0% { transform: translateX(-60%); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(60%); opacity: 0; } }
+  .price span[data-price] { font-variant-numeric: tabular-nums; display: inline-block; transition: color .5s var(--ease), text-shadow .5s var(--ease); }
+  .price.rolling span[data-price] { color: #bfe8ff; text-shadow: 0 0 18px rgba(30,167,238,.55); }
+
+  /* closing sign: the page ends the way it opens */
+  .closer { position: relative; text-align: center; padding: clamp(70px, 11vw, 140px) 0 clamp(60px, 8vw, 100px); overflow: hidden; border-top: 1px solid var(--line); background: radial-gradient(ellipse 60% 55% at 50% 38%, #0d1620, var(--bg) 70%); }
+  .closer::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 120px); pointer-events: none; }
+  .csign { position: relative; width: min(860px, 92%); margin: 0 auto; }
+  @media (max-width: 560px) { .csign { width: 104%; margin-left: -2%; } }
+  .csign::after { content: ""; position: absolute; inset: -60% -20%; background: radial-gradient(ellipse 46% 40% at 50% 48%, rgba(30,167,238,.28), rgba(30,167,238,.08) 50%, rgba(30,167,238,0) 72%); mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+  .csign img { position: relative; z-index: 1; width: 100%; height: auto; opacity: 0; }
+  .csign img.t { filter: brightness(1.4) saturate(1.15) drop-shadow(0 0 1.5px rgba(235,248,255,1)) drop-shadow(0 0 6px rgba(82,189,244,.95)) drop-shadow(0 0 18px rgba(30,167,238,.85)) drop-shadow(0 0 42px rgba(30,167,238,.55)); }
+  .csign img.g { position: absolute; left: 0; top: 0; z-index: 2; filter: brightness(.88) contrast(1.15) drop-shadow(0 0 .5px rgba(255,255,255,.9)) drop-shadow(0 0 5px rgba(215,236,255,.55)) drop-shadow(0 0 16px rgba(170,210,255,.35)); }
+  .closer.on .csign img.t { animation: neonon 1.6s linear both, neonhum 5s 1.6s ease-in-out infinite; }
+  .closer.on .csign img.g { animation: neonon 1.4s .7s linear both, neonhum 6.5s 2.1s ease-in-out infinite reverse; }
+  .closer.on .csign::after { animation: neonwash 1.6s linear both, neonhum 5s 1.6s ease-in-out infinite; }
+  .closer-line { position: relative; font: 800 clamp(1.05rem, 2.2vw, 1.4rem)/1.3 var(--display); font-stretch: 125%; text-transform: uppercase; letter-spacing: .06em; color: var(--white); text-wrap: balance; margin: clamp(18px, 3vw, 34px) 0 22px; opacity: 0; transform: translateY(14px); transition: opacity .9s var(--ease) 1.4s, transform .9s var(--ease) 1.4s; }
+  .closer .ctas { position: relative; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; opacity: 0; transform: translateY(14px); transition: opacity .9s var(--ease) 1.6s, transform .9s var(--ease) 1.6s; }
+  .closer.on .closer-line, .closer.on .ctas { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .closer-line, .closer .ctas { opacity: 1 !important; transform: none !important; } }

@@ -9,11 +9,33 @@ const state = { size: defaultSize, service: 'platinum', addons: {}, day: '', slo
 const $ = (id) => document.getElementById(id);
 
 // Package cards are built into the page; switching size only changes their prices.
+// The numbers roll to the new price like a counter, and a reflection sweeps each card.
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function roll(el, to) {
+  const from = +el.textContent || to;
+  cancelAnimationFrame(el._roll);
+  if (calm || from === to) { el.textContent = to; return; }
+  const box = el.parentNode, t0 = performance.now(), ms = 650;
+  box.classList.add('rolling');
+  const step = (now) => {
+    const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(from + (to - from) * e);
+    if (k < 1) el._roll = requestAnimationFrame(step); else box.classList.remove('rolling');
+  };
+  el._roll = requestAnimationFrame(step);
+}
 function updatePackageCards() {
-  document.querySelectorAll('[data-pkg]').forEach((card) => {
+  document.querySelectorAll('[data-pkg]').forEach((card, n) => {
     const prices = card.dataset.prices.split(',');
-    card.querySelector('[data-price]').textContent = prices[state.size];
+    roll(card.querySelector('[data-price]'), +prices[state.size]);
     card.querySelector('[data-per]').textContent = SIZES[state.size] + ' vehicle';
+    if (calm) return;
+    card.classList.remove('swept');
+    clearTimeout(card._sweep);
+    card._sweep = setTimeout(() => {
+      void card.offsetWidth; card.classList.add('swept');
+      card._sweep = setTimeout(() => card.classList.remove('swept'), 1000);
+    }, n * 70);
   });
 }
 

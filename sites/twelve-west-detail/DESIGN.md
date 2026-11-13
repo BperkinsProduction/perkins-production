@@ -76,3 +76,8 @@ Blob fetch with loading ring, dt normalized lerp with a leash, gated seeks, DOM 
 ## 9. Copy gate
 
 Zero em dashes, zero stock words (leverage, seamless, empower, unlock, robust, actionable, data-driven, solutions), and no AI tells, before anyone sees it.
+
+## Neon carried down the page (Nov 13, 2026)
+- Each section heading's underline is a small blue neon tube. It draws across, flickers on with the sign's neonon keyframes, then hums.
+- Closing sign (src/components/Closer.astro) sits between Visit and the footer: the frontmost sign frame (s12 and g12) flickers on the first time it is in view, then "The lights are on. Bring it in." with Book your detail and Call.
+- Package prices roll to the new number when the size changes (roll() in quote.js), with a short blue glow, and a reflection sweeps across each card in turn. The Most Popular card gets a slow sweep every 8 seconds. Reduced motion skips all of it.
