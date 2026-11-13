@@ -86,3 +86,8 @@ Zero em dashes, zero stock words (leverage, seamless, empower, unlock, robust, a
 - Two blocks of five: a big featured photo with four beside it, the M3 on the left, then the red F-150 on the right. Set with "feature" in src/data/photos.js; "viewerOnly" keeps a photo out of the grid but in the viewer.
 - Hovering any photo sends a light reflection across it.
 - Every photo, inside ones too, opens a full screen viewer (src/scripts/viewer.js, a native dialog): arrows, arrow keys, swipe, Escape or a backdrop tap to close, counter, neighbours preload. "See all 15 photos" opens it at the first one.
+
+## Speed, link preview, counting numbers (Nov 13, 2026)
+- Photos are served as WebP at 480, 720 and 960 wide from public/img/w through src/components/Photo.astro, which picks the size the screen needs. The JPEGs stay as the masters. Photo weight for the page went from about 5.3 MB to 2.3 MB. New photos need the three copies made too.
+- Link preview: public/img/share.jpg (1200 by 630, the neon sign over the Corvette) with og and twitter tags in the layout and on the proposal, so a texted link shows a picture card.
+- The award strip numbers (100%, 30 reviews, 3.5K followers) count up the first time the strip scrolls into view. They are real numbers from his Facebook page; the page holds the final values.

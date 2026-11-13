@@ -2,10 +2,14 @@
 import { img } from '../lib/paths.js';
 import { gallery, interiors } from '../data/photos.js';
 import { shop } from '../data/shop.js';
+import Photo from './Photo.astro';
 
 // One list for the full screen viewer: every outside photo, then the inside ones.
-const viewer = [...gallery, ...interiors].map((p) => ({ src: img(p.file), alt: p.alt, caption: p.caption }));
-const at = (p) => viewer.findIndex((v) => v.src === img(p.file));
+const big = (file) => img('w/' + file.replace(/\.jpg$/, '') + '-960.webp');
+const viewer = [...gallery, ...interiors].map((p) => ({ src: big(p.file), alt: p.alt, caption: p.caption }));
+const at = (p) => viewer.findIndex((v) => v.src === big(p.file));
+// How wide each photo shows, so the browser picks the right copy.
+const tileSizes = (p) => (p.feature ? '(max-width: 860px) calc(100vw - 32px), 585px' : '(max-width: 860px) calc(50vw - 21px), 290px');
 const open = (p) => `Open ${p.caption} full size`;
 ---
 <section id="work" data-reveal>
@@ -20,7 +24,7 @@ const open = (p) => `Open ${p.caption} full size`;
     <div class="gallery">
       {gallery.filter((p) => !p.viewerOnly).map((p) => (
         <figure class:list={[p.feature && `feat ${p.feature}`]}>
-          <img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption>
+          <Photo file={p.file} alt={p.alt} sizes={tileSizes(p)} /><figcaption>{p.caption}</figcaption>
           <button class="gopen" type="button" data-view={at(p)} aria-label={open(p)}></button>
         </figure>
       ))}
@@ -31,7 +35,7 @@ const open = (p) => `Open ${p.caption} full size`;
     <div class="inside">
       {interiors.map((p) => (
         <figure>
-          <img src={img(p.file)} alt={p.alt} loading="lazy"><figcaption>{p.caption}</figcaption>
+          <Photo file={p.file} alt={p.alt} sizes="(max-width: 760px) calc(50vw - 21px), 290px" /><figcaption>{p.caption}</figcaption>
           <button class="gopen" type="button" data-view={at(p)} aria-label={open(p)}></button>
         </figure>
       ))}

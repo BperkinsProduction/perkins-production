@@ -1,0 +1,10 @@
+---
+// A photo served as WebP at the width the screen needs. The copies live in public/img/w,
+// made from the full JPEGs at 480, 720 and 960 wide (the originals are about 975 wide).
+import { img } from '../lib/paths.js';
+interface Props { file: string; alt: string; sizes: string; eager?: boolean }
+const { file, alt, sizes, eager } = Astro.props;
+const name = file.replace(/\.jpg$/, '');
+const at = (w: number) => img(`w/${name}-${w}.webp`);
+---
+<img src={at(960)} srcset={`${at(480)} 480w, ${at(720)} 720w, ${at(960)} 960w`} sizes={sizes} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" width="975" height="1300">

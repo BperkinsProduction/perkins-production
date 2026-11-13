@@ -370,6 +370,7 @@
   .award .badge svg { width: 44px; height: 44px; flex: none; color: var(--blue); }
   .award b { display: block; font-family: 'Archivo', sans-serif; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; }
   .award span { font-size: .84rem; color: var(--muted); }
+  .award span[data-count] { font: inherit; color: inherit; font-variant-numeric: tabular-nums; }
   .award a.badge { text-decoration: none; }
   .award a.badge:hover b { color: var(--blue); }
 

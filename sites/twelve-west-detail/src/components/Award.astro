@@ -1,6 +1,15 @@
 ---
 import { shop } from '../data/shop.js';
 import FacebookIcon from './FacebookIcon.astro';
+
+// Numbers that count up when the strip scrolls into view. The real value is in the page,
+// so without the script (or with reduced motion) it simply shows.
+const count = (text: string) => {
+  const m = String(text).match(/^([\d.]+)(.*)$/);
+  return m ? { value: m[1], suffix: m[2], dp: (m[1].split('.')[1] || '').length } : null;
+};
+const rec = count(shop.reviews.recommend);
+const fol = count(shop.followers);
 ---
 <div class="award">
   <div class="wrap">
@@ -10,7 +19,30 @@ import FacebookIcon from './FacebookIcon.astro';
     </div>
     <a class="badge" href={shop.reviews.url} target="_blank" rel="noopener">
       <FacebookIcon />
-      <div><b>{shop.reviews.recommend} recommend on Facebook</b><span>{shop.reviews.count} reviews and {shop.followers} followers. Read them on Facebook</span></div>
+      <div><b><span data-count={rec?.value} data-suffix={rec?.suffix} data-dp={rec?.dp}>{shop.reviews.recommend}</span> recommend on Facebook</b><span><span data-count={shop.reviews.count}>{shop.reviews.count}</span> reviews and <span data-count={fol?.value} data-suffix={fol?.suffix} data-dp={fol?.dp}>{shop.followers}</span> followers. Read them on Facebook</span></div>
     </a>
   </div>
 </div>
+
+<script>
+  const nums = [...document.querySelectorAll('.award [data-count]')] as HTMLElement[];
+  const strip = document.querySelector('.award');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const show = (el: HTMLElement, v: number) => { el.textContent = v.toFixed(+(el.dataset.dp || 0)) + (el.dataset.suffix || ''); };
+  // Only count if the strip starts off screen, so nobody sees a number jump back to zero.
+  if (strip && !calm && strip.getBoundingClientRect().top > innerHeight) {
+    nums.forEach((el) => show(el, 0));
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now(), ms = 1400;
+      const step = (now: number) => {
+        const k = Math.min(1, (now - t0) / ms), ease = 1 - Math.pow(1 - k, 4);
+        nums.forEach((el) => show(el, +el.dataset.count! * ease));
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    io.observe(strip);
+  }
+</script>

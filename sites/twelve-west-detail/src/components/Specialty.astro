@@ -1,10 +1,10 @@
 ---
-import { img } from '../lib/paths.js';
+import Photo from './Photo.astro';
 ---
 <section style="padding-top:0" data-reveal>
   <div class="wrap">
     <div class="specialty">
-      <img src={img("rv.jpg")} alt="A large motorhome detailed by Twelve West Detail" loading="lazy">
+      <Photo file="rv.jpg" alt="A large motorhome detailed by Twelve West Detail" sizes="(max-width: 1212px) calc(100vw - 32px), 1180px" />
       <div>
         <span class="label">Specialty vehicles</span>
         <h2>RVs, trailers, bikes and classics.</h2>
