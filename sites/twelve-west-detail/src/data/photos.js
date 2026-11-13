@@ -1,17 +1,19 @@
 // Photos from Chad's website and Facebook page, in the order they appear.
-// "wide" makes a gallery photo span two columns and two rows.
+// "feature" makes a gallery photo the big one in its block, on the left or the right.
+// Every photo, inside ones too, opens in the full screen viewer.
 export const gallery = [
-  { file: 'fb-m3-front.jpg', caption: 'BMW M3', alt: 'White BMW M3 after a detail', wide: true },
+  { file: 'fb-m3-front.jpg', caption: 'BMW M3', alt: 'White BMW M3 after a detail', feature: 'left' },
   { file: 'bmw.jpg', caption: 'BMW', alt: 'Blue BMW SUV after a detail' },
   { file: 'range.jpg', caption: 'Range Rover', alt: 'White Range Rover after a full detail' },
   { file: 'fb-ram.jpg', caption: 'Ram Heavy Duty', alt: 'Gray Ram heavy duty pickup after a detail' },
   { file: 'fb-tahoe.jpg', caption: 'Chevy Tahoe', alt: 'Black Chevy Tahoe after a detail' },
-  { file: 'f150.jpg', caption: 'F-150 King Ranch', alt: 'Red Ford F-150 King Ranch after a detail' },
+  { file: 'f150.jpg', caption: 'F-150 King Ranch', alt: 'Red Ford F-150 King Ranch after a detail', feature: 'right' },
   { file: 'tesla.jpg', caption: 'Tesla Model 3', alt: 'Blue Tesla Model 3 after a detail' },
   { file: 'super-duty.jpg', caption: 'Ford Super Duty', alt: 'Two tone Ford Super Duty after a detail' },
   { file: 'fb-scion.jpg', caption: 'Scion tC', alt: 'Black Scion tC after a detail' },
   { file: 'truck.jpg', caption: 'GMC Sierra', alt: 'Black GMC pickup after a detail' },
-  { file: 'fb-m3-side.jpg', caption: 'BMW M3', alt: 'White BMW M3 from the side after a detail' },
+  // In the full screen viewer only; the grid already leads with this M3.
+  { file: 'fb-m3-side.jpg', caption: 'BMW M3', alt: 'White BMW M3 from the side after a detail', viewerOnly: true },
 ];
 
 export const interiors = [

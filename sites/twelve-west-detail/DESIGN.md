@@ -81,3 +81,8 @@ Zero em dashes, zero stock words (leverage, seamless, empower, unlock, robust, a
 - Each section heading's underline is a small blue neon tube. It draws across, flickers on with the sign's neonon keyframes, then hums.
 - Closing sign (src/components/Closer.astro) sits between Visit and the footer: the frontmost sign frame (s12 and g12) flickers on the first time it is in view, then "The lights are on. Bring it in." with Book your detail and Call.
 - Package prices roll to the new number when the size changes (roll() in quote.js), with a short blue glow, and a reflection sweeps across each card in turn. The Most Popular card gets a slow sweep every 8 seconds. Reduced motion skips all of it.
+
+## Gallery (Nov 13, 2026)
+- Two blocks of five: a big featured photo with four beside it, the M3 on the left, then the red F-150 on the right. Set with "feature" in src/data/photos.js; "viewerOnly" keeps a photo out of the grid but in the viewer.
+- Hovering any photo sends a light reflection across it.
+- Every photo, inside ones too, opens a full screen viewer (src/scripts/viewer.js, a native dialog): arrows, arrow keys, swipe, Escape or a backdrop tap to close, counter, neighbours preload. "See all 15 photos" opens it at the first one.
